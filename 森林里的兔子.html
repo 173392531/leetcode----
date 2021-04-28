@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 方法一：贪心
+<!-- 必看链接： -->
+  作者：LeetCode-Solution
+  链接：https://leetcode-cn.com/problems/rabbits-in-forest/solution/sen-lin-zhong-de-tu-zi-by-leetcode-solut-kvla/
+  来源：力扣（LeetCode）
+  著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。 -->
+  <script>
+    var numRabbits_tanxin = function (answers) {
+      const count = new Map();
+      for (const y of answers) {
+        count.set(y, (count.get(y) || 0) + 1);
+      }
+      let ans = 0;
+      for (const [y, x] of count.entries()) {
+        ans += Math.ceil(x / (y + 1)) * (y + 1);
+      }
+      return ans;
+    };
+
+    // 作者：LeetCode-Solution
+    // 链接：https://leetcode-cn.com/problems/rabbits-in-forest/solution/sen-lin-zhong-de-tu-zi-by-leetcode-solut-kvla/
+   
+    var numRabbits_map = function (answers) {
+      let map = new Map(), res = 0;
+      for (let a of answers) {
+        if (a == 0) {
+          res++;
+        } else if (!map.has(a)) {
+          res += (1 + a);
+          // 记录下有多少其余的兔子
+          map.set(a, a);
+        } else {
+          // 如果数字典里有a，那么就将a的数量减一
+          map.set(a, map.get(a) - 1);
+          // 数值到了0就直接删除
+          if (map.get(a) == 0) {
+            map.delete(a);
+          }
+        }
+      }
+      return res;
+    };
+// 要想使得兔子数量最小，那么尽量将报同样数量的视为同一颜色，
+// 但为了不矛盾，需要使用map记录对应颜色兔子最大的出现次数
+// 报0的兔子一定是独一无二的直接++
+  </script>
+</body>
+
+</html>

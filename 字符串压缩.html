@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 字符串压缩。利用字符重复出现的次数，编写一种方法，
+    实现基本的字符串压缩功能。比如，字符串aabcccccaaa会变为a2b1c5a3。
+    若“压缩”后的字符串没有变短，则返回原先的字符串。你可以假设字符串中只包含大小写英文字母（a至z）。
+
+    示例1:
+    输入："aabcccccaaa"
+    输出："a2b1c5a3"
+
+    示例2:
+    输入："abbccd"
+    输出："abbccd"
+    解释："abbccd"压缩后为"a1b2c2d1"，比原字符串长度更长。 -->
+  <script>
+    var compressString = function (S) {
+      let count = 1;
+      let str = new String();
+      for (let i = 1; i < S.length + 1; i++) {
+        if (S[i - 1] === S[i]) {
+          count++
+        } else {
+          str += S.slice(i - 1, i) + count
+          count = 1
+        }
+      }
+      return S.length > str.length ? str : S
+    };
+
+// 作者：yutingbai
+// 链接：https://leetcode-cn.com/problems/compress-string-lcci/solution/20200316ya-suo-zi-fu-chuan-by-yutingbai/
+  </script>
+</body>
+
+</html>

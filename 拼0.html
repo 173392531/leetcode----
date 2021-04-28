@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+  // 拼接一串数字，如该数字不满11位则在其前面拼接0直至满11位
+    
+    var x=21152111
+    x=x.toString()
+    x=x.split('')
+    // console.log(x.length)
+    while(x.length<11){
+      x.unshift('0')
+    }
+    x=x.join('')
+    console.log(x);
+  </script>
+</body>
+</html>

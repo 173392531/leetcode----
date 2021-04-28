@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    // 双指针法
+    var getIntersectionNode = function (headA, headB) {
+    if (!headA || !headB) return null;
+    let pA = headA,
+        pB = headB;
+    while (pA !== pB) {
+        pA = pA === null ? headB : pA.next;
+        pB = pB === null ? headA : pB.next;
+    }
+    return pA;
+};
+
+//  暴力遍历法
+// var getIntersectionNode = function (headA, headB) {
+//     if (!headA || !headB) return null;
+//     let pA = headA;
+//     while (pA) {
+//         let pB = headB;
+//         while (pB) {
+//             if (pA === pB) return pA;
+//             pB = pB.next;
+//         }
+//         pA = pA.next;
+//     }
+// };
+
+
+
+// 哈希表法
+// var getIntersectionNode = function (headA, headB) {
+//     if (!headA || !headB) return null;
+//     const hashmap = new Map();
+//     let pA = headA;
+//     while (pA) {
+//         hashmap.set(pA, 1);
+//         pA = pA.next;
+//     }
+//     let pB = headB;
+//     while (pB) {
+//         if (hashmap.has(pB)) return pB;
+//         pB = pB.next;
+//     }
+// };
+
+// 作者：suukii
+// 链接：https://leetcode-cn.com/problems/intersection-of-two-linked-lists/solution/160xiang-jiao-lian-biao-shuang-zhi-zhen-ha-xi-biao/
+
+  </script>
+</body>
+</html>

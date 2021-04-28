@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 给你一个长度为 n 的整数数组，请你判断在 最多 改变 1 个元素的情况下，该数组能否变成一个非递减数列。
+
+我们是这样定义一个非递减数列的： 对于数组中任意的 i (0 <= i <= n-2)，总满足 nums[i] <= nums[i + 1]。
+
+ 
+
+示例 1:
+
+输入: nums = [4,2,3]
+输出: true
+解释: 你可以通过把第一个4变成1来使得它成为一个非递减数列。
+示例 2:
+
+输入: nums = [4,2,1]
+输出: false
+解释: 你不能在只改变一个元素的情况下将其变为非递减数列。
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/non-decreasing-array
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+  <script>
+
+  var checkPossibility = function(nums) {
+      const n = nums.length;
+      for (let i = 0; i < n - 1; ++i) {
+        // console.log(i);
+          const x = nums[i], y = nums[i + 1];
+          if (x > y) {
+              nums[i] = y;
+              if (isSorted(nums)) {
+                  return true;
+              }
+              nums[i] = x; // 复原
+              nums[i + 1] = x; //将下一位赋值为x，看此时数列是否递增，如果这样还不管用那就无计可施了
+              return isSorted(nums);
+          }
+      }
+      return true;
+  };
+
+  const isSorted = (nums) => {
+      const n = nums.length;
+      for (let i = 1; i < n; ++i) {
+          if (nums[i - 1] > nums[i]) {
+              return false;
+          }
+      }
+      return true;
+  }
+console.log(checkPossibility([1,2,3,4,9,2]));
+// 作者：LeetCode-Solution
+// 链接：https://leetcode-cn.com/problems/non-decreasing-array/solution/fei-di-jian-shu-lie-by-leetcode-solution-zdsm/
+
+  // console.log([4,2,1]);
+  // let b=[4,2,1].splice(0,1)
+  // console.log(b);
+  </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+    var search = function (nums, target) {
+      // 1. 构造哈希表hash value为出现的次数
+      const hash = Object.create(null)
+
+      for (const num of nums) hash[num] ? hash[num]++ : (hash[num] = 1)
+
+      return hash[target] || 0
+
+      // 2. 双端指针队列 向中心收敛 利用有序这一条件 Time: O(n) Space: O(1) 
+      // let l = 0, r = nums.length - 1
+
+      // while (nums[l] < target) l++
+      // while (nums[r] > target) r--
+
+      // return r - l >= 0 ? r - l + 1 : 0
+    };
+
+// 作者：floretpig
+// 链接：https://leetcode-cn.com/problems/zai-pai-xu-shu-zu-zhong-cha-zhao-shu-zi-lcof/solution/ha-xi-shuang-duan-zhi-zhen-you-ya-shi-xi-hzdw/
+
+
+  </script>
+</body>
+
+</html>

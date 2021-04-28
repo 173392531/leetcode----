@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 给定两个字符串形式的非负整数 num1 和num2 ，计算它们的和。
+
+提示：
+num1 和num2 的长度都小于 5100
+num1 和num2 都只包含数字 0-9
+num1 和num2 都不包含任何前导零
+你不能使用任何內建 BigInteger 库， 也不能直接将输入的字符串转换为整数形式
+
+链接：https://leetcode-cn.com/problems/add-strings -->
+  <script>
+    let ans = 0;
+    let sum = [];
+    var addStrings = function(num1, num2) {
+      // 抠出字符串的末尾位
+        let num1Last = num1.slice(-1);
+        let num2Last = num2.slice(-1);
+      // 对末尾位相加的算法
+        function add(a,b){
+            const sumNow = +a + +b + ans;
+            ans = sumNow > 9 ? 1 : 0;
+            return sumNow % 10 | 0;
+        }
+        // 在sum中加入这个末尾的数字
+        sum.unshift(add(num1Last,num2Last));
+        
+        // 取截出末尾后剩下的字符串
+        let statusNum1 = num1.slice(0,num1.length - 1);
+        let statusNum2 = num2.slice(0,num2.length - 1);
+
+        // 判断截出末尾后剩下的字符串是否为空，即可知是否全部计算到了
+        if(statusNum1 === '' && statusNum2 === ''){
+            const res = ans ? ans + sum.join('') : sum.join('');
+            ans = 0;
+            sum = [];
+            return res;
+        }else{
+            return addStrings(!statusNum1 ? '0' : statusNum1 , !statusNum2 ? '0' : statusNum2);
+        }
+    };
+    console.log(addStrings('2135','5145'));
+// 作者：jjwee
+// 链接：https://leetcode-cn.com/problems/add-strings/solution/bu-bian-li-jiu-bu-bian-li-chao-94-by-jjwee/
+
+  </script>
+</body>
+</html>

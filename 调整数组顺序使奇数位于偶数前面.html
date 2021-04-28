@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+    * @param {number[]} nums
+    * @return {number[]}
+    */
+    var exchange = function(nums) {
+      //num & 1即num转为2进制后除了num的最后一位外，其他位置零，最后一位不变
+      
+    // 解法一：分治思想 空间换时间 分为奇偶两部分 再合并merge odd-even 且可以保证原来的顺序关系
+    const odd = [], even = []
+
+    for (const num of nums) 
+        num & 1 ? odd.push(num) : even.push(num)
+    
+    return odd.concat(even)
+
+// 作者：floretpig
+// 链接：https://leetcode-cn.com/problems/diao-zheng-shu-zu-shun-xu-shi-qi-shu-wei-yu-ou-shu-qian-mian-lcof/solution/fen-zhi-shuang-zhi-zhen-you-ya-shi-xian-ypuig/
+
+    };
+    console.log(exchange([1,4,3,5,8,11,20,21]));
+  </script>
+</body>
+</html>

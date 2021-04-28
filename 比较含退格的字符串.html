@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 自己的解法
+    var backspaceCompare = function(S, T) {
+      function getCompare(cs1){
+      let clip=[]
+      // let cs1=cs.split('')
+      // console.log(cs1);
+      for(let i=0;i<cs1.length;i++){
+        // console.log(cs1[0]);
+        if(cs1[i] === '#'){
+          clip.pop()
+          // console.log(clip);
+        }else
+        clip.push(cs1[i])
+        // console.log(clip);
+      }
+      return clip.join('')
+    }
+    return getCompare(S)===getCompare(T)
+  };
+  // 性能更优
+//   var backspaceCompare = function(S, T) {
+//     var c = (s, a = []) => {
+//         for(var i = 0; i < s.length; i++) 
+//             s[i] === '#' ? a.pop() : a.push(s[i])
+//         return a.join('')
+//     }
+//     return c(S) === c(T)
+// };
+
+  console.log (backspaceCompare('jczx#z','jczz'));
+  </script>
+</body>
+</html>

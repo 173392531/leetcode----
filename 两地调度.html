@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 公司计划面试 2N 人。第 i 人飞往 A 市的费用为 costs[i][0]，飞往 B 市的费用为 costs[i][1]。
+
+  返回将每个人都飞到某座城市的最低费用，要求每个城市都有 N 人抵达。
+
+  示例：
+
+  输入：[[10,20],[30,200],[400,50],[30,20]]
+  输出：110
+  解释：
+  第一个人去 A 市，费用为 10。
+  第二个人去 A 市，费用为 30。
+  第三个人去 B 市，费用为 50。
+  第四个人去 B 市，费用为 20。
+
+  最低总费用为 10 + 30 + 50 + 20 = 110，每个城市都有一半的人在面试。
+
+  来源：力扣（LeetCode）
+  链接：https://leetcode-cn.com/problems/two-city-scheduling
+  著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+  <script>
+    // 参考官方题解：
+    // 1.先假设全部飞到B市的话（并没有真的飞！！不是先到B再从B到A），
+    // 再选择N人转飞到A市，那么这N个人的多花了price_A - price_B 的费用
+    // 2.因此最优的方案是，选出 
+    // price_A - price_B 最小的 NN 个人，让他们飞往 A 市，其余人飞往 B 市
+    var twoCitySchedCost = function (costs) {
+      // price_A - price_B升序,选前N人去A市
+      const sortCosts = costs.sort((a, b) => (a[0] - a[1]) - (b[0] - b[1]));
+      // 切割sortCosts数组，求前一半数组去A市的花费
+      const toACosts = sortCosts.splice(0, sortCosts.length / 2).reduce(((accumulator, b) => accumulator + b[0]), 0);
+      // 求sortCost剩下的后一半数组去B市的花费
+      const toBCosts = sortCosts.reduce(((accumulator, b) => accumulator + b[1]), 0);
+      return toACosts + toBCosts
+    };
+    twoCitySchedCost([[10, 20], [30, 200], [400, 50], [30, 20]])
+
+// 作者：ahua-x
+// 链接：https://leetcode-cn.com/problems/two-city-scheduling/solution/can-kao-guan-fang-ti-jie-de-tan-xin-suan-fa-shi-yo/
+
+  </script>
+</body>
+
+</html>

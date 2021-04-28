@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 输入一棵二叉树的根节点，判断该树是不是平衡二叉树。如果某二叉树中任意节点的左右子树的深度相差不超过1，那么它就是一棵平衡二叉树。
+
+ 
+
+示例 1:
+
+给定二叉树 [3,9,20,null,null,15,7]
+
+    3
+   / \
+  9  20
+    /  \
+   15   7
+返回 true 。
+
+示例 2:
+
+给定二叉树 [1,2,2,3,3,null,null,4,4]
+
+       1
+      / \
+     2   2
+    / \
+   3   3
+  / \
+ 4   4
+
+
+链接：https://leetcode-cn.com/problems/ping-heng-er-cha-shu-lcof
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+
+  <!-- 思路
+    要验证一颗二叉树是否为平衡二叉树，只需要它的左子树是平衡二叉树，
+    右子树是平衡二叉树，并且左右子树的深度差小于 2
+
+    创建深度计算函数
+
+    检测传入的树
+    如果为空，返回0
+    如果不为空，递归调用深度计算函数，分别计算左右子树的深度，
+    将两个深度中的最大值 +1 作为结果返回
+    创建平衡判断函数
+
+    使用深度计算函数计算左右子树的深度
+    计算深度差
+    递归调用平衡判断函数，判断左右子树是否是平衡
+    如果深度差小于 2，且左右子树都平衡，返回 true
+    否则返回 false   -->
+  <script>
+    /**
+ * 平衡判断函数
+ */
+    var isBalanced = function (root) {
+      if (!root) {
+        return true
+      }
+      // 计算左子树和右子树的深度差
+      // 判断左右子树是否平衡
+      return Math.abs(depth(root.left) - depth(root.right)) < 2 && isBalanced(root.left) && isBalanced(root.right)
+    };
+
+    /**
+     * 深度计算函数
+     */
+    var depth = function (root) {
+      if (!root) {
+        return 0
+      }
+      else {
+        // 取左右子树中深度比较大的值作为返回结果 +1
+        return Math.max(depth(root.left), depth(root.right)) + 1
+      }
+    }
+
+// 作者：Mazan
+// 链接：https://leetcode-cn.com/problems/ping-heng-er-cha-shu-lcof/solution/cong-shang-xiang-xia-lu-cong-xia-wang-sh-w8tt/
+
+
+// 或者解法2：
+// if (!root) return true
+
+// const depth = node => {
+//     if (!node) return 0
+//     return Math.max(depth(node.left), depth(node.right)) + 1
+// }
+
+// const left = depth(root.left), right = depth(root.right)
+
+// return Math.abs(left - right) < 2 && isBalanced(root.left) && isBalanced(root.right)
+
+// 作者：floretpig
+// 链接：https://leetcode-cn.com/problems/ping-heng-er-cha-shu-lcof/solution/zi-shang-er-xia-zi-di-xiang-shang-you-ya-kj8i/
+
+  </script>
+</body>
+
+</html>

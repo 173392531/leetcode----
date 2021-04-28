@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 给定一个包含 [0, n] 中 n 个数的数组 nums ，
+    找出 [0, n] 这个范围内没有出现在数组中的那个数。
+进阶：
+你能否实现线性时间复杂度、仅使用额外常数空间的算法解决此问题?
+链接：https://leetcode-cn.com/problems/missing-number -->
+
+  <!-- 1,2,3...n等差数列的和 n*(1 + n) / 2
+  传入数组长度与1到n等差数列都为n，多0，
+  少一个数。返回 少得数 = 1到n等差数列和 - 传入数组和-->
+  <script>
+  var missingNumber = function(nums, l = nums.length) {
+      return ((l + l * l)/2) - nums.reduce((p, v) => p + v, 0)
+  };
+  console.log(missingNumber([3,0,1,4,5,2]));
+  
+// 作者：mantoufan
+// 链接：https://leetcode-cn.com/problems/missing-number/solution/ha-xi-biao-deng-chai-shu-lie-1xing-dai-ma-chao-98-/
+
+
+  </script>
+</body>
+</html>

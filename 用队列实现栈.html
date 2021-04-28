@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 题目意思是用队列实现栈: 就是用 先入先出 实现 先入后出
+
+只能使用push 和 shift 方法,别一上来就pop
+
+如: queue = [1, 2, 3, 4]
+
+现要出队, 即把 `1` 删了
+
+先弄个中间队列 : queue1 = []
+
+把queue 中,元素一个个加入queue1, 直到queue中只剩一个
+
+queue = [4]        // 只剩一个,即 栈顶
+queue1 = [1, 2, 3]
+
+再对queue进行一次shift 删掉队尾 就相当于 出栈了
+
+删完再把queue1 中的放回queue, 
+
+queue = [1, 2, 3]
+queue1 = []
+
+完成了一次出栈, 下次出栈重复上述
+
+作者：shetia
+链接：https://leetcode-cn.com/problems/implement-stack-using-queues/solution/kan-qing-ti-mu-yong-dui-lie-shi-xian-zhan-by-sheti/ -->
+  <script>
+      /**
+     * Initialize your data structure here.
+     */
+    var MyStack = function() {
+      // 队列 先进先出 push shift
+      this.queue = []
+    };
+
+    /**
+     * Push element x onto stack. 
+     * @param {number} x
+     * @return {void}
+     */
+    MyStack.prototype.push = function(x) {
+      this.queue.push(x)
+    };
+
+    /**
+     * Removes the element on top of the stack and returns that element.
+     * @return {number}
+     */
+    MyStack.prototype.pop = function() {
+      let queue1 = []
+      while(this.queue.length > 1){  // 大于一个就把 前面的放到另一个队列中, input只留一个
+        queue1.push(this.queue.shift())
+      }
+      let res = this.queue.shift()
+      while(queue1.length){           // 删掉栈顶之后, 又把元素放回队列
+        this.queue.push(queue1.shift())
+      }
+      return res
+    };
+
+    /**
+     * Get the top element.
+     * @return {number}
+     */
+    MyStack.prototype.top = function() {
+      return this.queue[this.queue.length - 1]
+    };
+
+    /**
+     * Returns whether the stack is empty.
+     * @return {boolean}
+     */
+    MyStack.prototype.empty = function() {
+      return !this.queue.length
+    };
+
+    /**
+     * Your MyStack object will be instantiated and called as such:
+     * var obj = new MyStack()
+     * obj.push(x)
+     * var param_2 = obj.pop()
+     * var param_3 = obj.top()
+     * var param_4 = obj.empty()
+     */
+
+// 作者：shetia
+// 链接：https://leetcode-cn.com/problems/implement-stack-using-queues/solution/kan-qing-ti-mu-yong-dui-lie-shi-xian-zhan-by-sheti/
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 自己的做法：
+    // var s="sasdzxxd"
+    // console.log(s.split('').join(''));
+    var removeDuplicates = function(S) {
+      function findsame(s){
+        for(let i=0;i<s.length;i++){
+          if(s[i]==s[i+1]){
+            s.splice(i,2)
+            return findsame(s)
+          }
+        }
+        return s
+      }
+      let s=S.split('')
+      return findsame(s).join('')
+    };
+
+    // 力扣大神做法：
+    var removeDuplicatesLcood = function(S) {
+      // 创建临时栈
+      let stock = [];
+      // 遍历字符串
+      for(let item of S){
+          // 相邻两者相等
+          if(stock[stock.length - 1] === item){
+              // 弹出栈顶
+              stock.pop();
+          }else{
+              // 压入栈
+              stock.push(item);
+          }
+      }
+      return stock.join("");
+  };
+
+// 作者：demigodliu
+// 链接：https://leetcode-cn.com/problems/remove-all-adjacent-duplicates-in-string/solution/tu-jie-guan-fang-tui-jian-ti-jie-shan-ch-x8iz/
+
+    console.log(removeDuplicates("abbaca"));
+  </script>
+</body>
+</html>

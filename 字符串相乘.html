@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 给定两个以字符串形式表示的非负整数 num1 和 num2，返回 num1 和 num2 的乘积，
+    它们的乘积也表示为字符串形式。
+
+示例 1:
+
+输入: num1 = "2", num2 = "3"
+输出: "6"
+示例 2:
+
+输入: num1 = "123", num2 = "456"
+输出: "56088"
+
+链接：https://leetcode-cn.com/problems/multiply-strings
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+
+  <!-- 0乘以任何数 = 0
+两数相乘，乘积的长度一定 <= 两数长度之和
+被乘数的一位 与 乘数的每一位相乘，乘积不会超过 9 x 9 = 81，不超过两位
+每次只考虑两位，乘积 与 个位 相加
+个位保留余数
+十位保留取整，取整直接舍弃小数点，用0 |效率，高于parseInt,作用均为向下取整
+while循环，删除多余的0
+
+链接：https://leetcode-cn.com/problems/multiply-strings/solution/dao-xu-xun-huan-12xing-dai-ma-chao-94-by-mantoufan/ -->
+  <script>
+    var multiply = function(num1, num2) {
+      if (num1 === '0' || num2 === '0') {
+          return '0'
+      }
+      var l1 = num1.length, l2 = num2.length, p = new Array(l1 + l2).fill(0)
+      for (var i = l1; i--;) {
+          for (var j = l2; j--;) {
+            console.log(j);
+            // 从3开始的j，此时的j已经减一变成了2，i+j+1=6
+              var tmp = num1[i] * num2[j] + p[i + j + 1]
+              p[i + j + 1] = tmp % 10
+              p[i + j] += 0 | tmp / 10
+          } 
+      }
+      while(p[0] === 0) {
+          p.shift()
+      }
+      return p.join('')
+  };
+console.log(multiply("123","456"));
+// 作者：mantoufan
+// 链接：https://leetcode-cn.com/problems/multiply-strings/solution/dao-xu-xun-huan-12xing-dai-ma-chao-94-by-mantoufan/
+  </script>
+</body>
+</html>

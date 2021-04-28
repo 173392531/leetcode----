@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 我的解法：
+    var my_validMountainArray = function (arr) {
+      if (arr.length < 3) return false
+      for (var i = 0; i < arr.length; i++) {
+        if (arr[0] >= arr[1]) return false
+        if (arr[i] == arr[i + 1]) return false
+        if (arr[i + 1] < arr[i]) {
+          for (let j = i + 1; j < arr.length; j++) {
+            if (arr[j + 1] >= arr[j]) return false
+            else continue
+          }
+          return true
+        }
+      }
+      return false
+    };
+
+    // leetcode解法，扫描至最后一位
+    var validMountainArray = function (arr) {
+      const N = arr.length;
+      let i = 0;
+      // 递增扫描
+      while (i + 1 < N && arr[i] < arr[i + 1]) {
+        i++;
+      }
+      // 最高点不能是数组的第一个位置或最后一个位置
+      if (i === 0 || i === N - 1) {
+        return false;
+      }
+      // 递减扫描
+      while (i + 1 < N && arr[i] > arr[i + 1]) {
+        i++;
+      }
+      // 看是否扫描到了最后一位
+      return i === N - 1;
+    };
+
+// 作者：LeetCode-Solution
+// 链接：https://leetcode-cn.com/problems/valid-mountain-array/solution/you-xiao-de-shan-mai-shu-zu-by-leetcode-solution/
+
+  </script>
+</body>
+
+</html>

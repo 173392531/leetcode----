@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!--  给定字符串J 代表石头中宝石的类型，和字符串 S代表你拥有的石头。 
+    S 中每个字符代表了一种你拥有的石头的类型，你想知道你拥有的石头中有多少是宝石。
+J 中的字母不重复，J 和 S中的所有字符都是字母。字母区分大小写，因此"a"和"A"是不同类型的石头。
+
+示例 1:
+
+输入: J = "aA", S = "aAAbbbb"
+输出: 3
+示例 2:
+
+输入: J = "z", S = "ZZ"
+输出: 0
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/jewels-and-stones -->
+  <script>
+    var numJewelsInStones = function(jewels, stones) {
+    let js=jewels.split('')
+    let st=stones.split('')
+    let num=0
+    for(let i=0;i<js.length;i++){
+        for(let j=0;j<st.length;j++){
+            if(js[i]==st[j])
+            num++
+        }
+    }
+    return num
+};
+
+
+// var numJewelsInStones = function(J, S) {
+//   let count = 0
+//   for(let i = 0;i<J.length;i++){
+//     count += S.split(J[i]).length - 1
+//   }
+//   return count
+// };
+
+// 作者：sparks42-8
+// 链接：https://leetcode-cn.com/problems/jewels-and-stones/solution/split-pan-duan-zi-fu-zai-zi-fu-chuan-zhong-chu-xia/
+
+  </script>
+</body>
+</html>

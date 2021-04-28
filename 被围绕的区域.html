@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 给你一个 m x n 的矩阵 board ，由若干字符 'X' 和 'O' ，找到所有被 'X' 围绕的区域，并将这些区域里所有的 'O' 用 'X' 填充。
+
+
+示例 1：
+
+
+输入：board = [["X","X","X","X"],["X","O","O","X"],["X","X","O","X"],["X","O","X","X"]]
+输出：[["X","X","X","X"],["X","X","X","X"],["X","X","X","X"],["X","O","X","X"]]
+解释：被围绕的区间不会存在于边界上，换句话说，任何边界上的 'O' 都不会被填充为 'X'。 
+任何不在边界上，或不与边界上的 'O' 相连的 'O' 最终都会被填充为 'X'。
+如果两个元素在水平或垂直方向相邻，则称它们是“相连”的。
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/surrounded-regions -->
+  <!-- 如果把 X 看作海水，把 O 看作陆地，被海水包围的区域就是岛屿。没被海水包围的陆地，与边界有连通，不是岛屿。题目要把岛屿沉了，变成海水。
+
+判断是否为岛屿比较困难，但找出非岛屿比较简单——凡是与边界有联系的 O，标记为 NO，表示非岛屿。这个找的过程可以用 DFS 或 BFS。
+
+所以非岛屿被标记为 NO，最后将它们恢复为 O，其余的 O，变成X。
+
+链接：https://leetcode-cn.com/problems/surrounded-regions/solution/130-bei-wei-rao-de-qu-yu-bfs-by-hyj8/ -->
+  <script>
+   const solve = (board) => {
+    const m = board.length;
+    if (m == 0) return;         // [] 情况的特判
+    const n = board[0].length;
+    const dfs = (i, j) => {
+      if (i < 0 || i == m || j < 0 || j == n) return; // 越界了
+      if (board[i][j] == "O") { // 遇到O，染为NO      
+        board[i][j] = "NO";                    
+        dfs(i + 1, j);          // 对四个方向的邻居进行dfs
+        dfs(i - 1, j);
+        dfs(i, j + 1);
+        dfs(i, j - 1);
+      }
+    };
+    for (let i = 0; i < m; i++) {
+      for (let j = 0; j < n; j++) {
+        if (i == 0 || i == m - 1 || j == 0 || j == n - 1) {
+          if (board[i][j] == "O") dfs(i, j); // 从最外层的O，开始DFS
+        }
+      }
+    }
+    for (let i = 0; i < m; i++) {
+      for (let j = 0; j < n; j++) {
+        if (board[i][j] === "NO") board[i][j] = "O";     // 恢复为O
+        else if (board[i][j] === "O") board[i][j] = "X"; // O变为X
+      }
+    }
+    return board
+  };
+  var b=[["X","X","X","X"],["X","O","O","X"],["X","X","O","X"],["X","O","X","X"]]
+  console.log(solve(b));
+// 作者：xiao_ben_zhu
+// 链接：https://leetcode-cn.com/problems/surrounded-regions/solution/130-bei-wei-rao-de-qu-yu-bfs-by-hyj8/
+  </script>
+</body>
+</html>

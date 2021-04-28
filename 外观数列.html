@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 给定一个正整数 n ，输出外观数列的第 n 项。
+
+「外观数列」是一个整数序列，从数字 1 开始，序列中的每一项都是对前一项的描述。
+
+你可以将其视作是由递归公式定义的数字字符串序列：
+
+countAndSay(1) = "1"
+countAndSay(n) 是对 countAndSay(n-1) 的描述，然后转换成另一个数字字符串。
+前五项如下：
+
+1.     1
+2.     11
+3.     21
+4.     1211
+5.     111221
+第一项是数字 1 
+描述前一项，这个数是 1 即 “ 一 个 1 ”，记作 "11"
+描述前一项，这个数是 11 即 “ 二 个 1 ” ，记作 "21"
+描述前一项，这个数是 21 即 “ 一 个 2 + 一 个 1 ” ，记作 "1211"
+描述前一项，这个数是 1211 即 “ 一 个 1 + 一 个 2 + 二 个 1 ” ，记作 "111221"
+要 描述 一个数字字符串，首先要将字符串分割为 最小 数量的组，每个组都由连续的最多 相同字符 组成。然后对于每个组，先描述字符的数量，然后描述字符，形成一个描述组。要将描述转换为数字字符串，先将每组中的字符数量用数字替换，再将所有描述组连接起来。
+
+示例 1：
+
+输入：n = 1
+输出："1"
+解释：这是一个基本样例。
+示例 2：
+
+输入：n = 4
+输出："1211"
+解释：
+countAndSay(1) = "1"
+countAndSay(2) = 读 "1" = 一 个 1 = "11"
+countAndSay(3) = 读 "11" = 二 个 1 = "21"
+countAndSay(4) = 读 "21" = 一 个 2 + 一 个 1 = "12" + "11" = "1211"
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/count-and-say
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+  <script>
+    var countAndSay = function (n) {
+      if (n == 1) {
+        return n.toString()
+      }
+      var tempArr = countAndSay(n - 1).match(/(\d)\1*/g)  // 该正则进行相同分组，调用match方法得出接下来用的数组
+      // \1* 表示第一个子项（每个小括号表示一个子项）重复0次或者多次。和数值1本身没啥关系。这个是为了把连续的值找出来
+      var result = ""
+      tempArr.forEach((item) => {              // 循环上面得到的数组，然后取每个的长度（题里说的几个），还有第一个数字（题里说的哪个数）
+        var lth = item.length.toString()
+        var num = item.substring(0, 1)
+        result = result + lth + num
+      })
+      return result   //最后返回结果
+    };
+
+
+//链接：https://leetcode-cn.com/problems/count-and-say/solution/jsdi-gui-jie-jue-by-wo-shi-gao-xiao-de/
+
+  </script>
+</body>
+
+</html>

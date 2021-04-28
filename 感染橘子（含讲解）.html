@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 在给定的网格中，每个单元格可以有以下三个值之一：
+
+值 0 代表空单元格；
+值 1 代表新鲜橘子；
+值 2 代表腐烂的橘子。
+每分钟，任何与腐烂的橘子（在 4 个正方向上）相邻的新鲜橘子都会腐烂。
+
+返回直到单元格中没有新鲜橘子为止所必须经过的最小分钟数。如果不可能，返回 -1。
+示例1：
+输入：[[2,1,1],[1,1,0],[0,1,1]]
+输出：4
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/rotting-oranges
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+  <script>
+    /**
+    * @param {number[][]} grid
+    * @return {number}
+    */
+    var orangesRotting = function (grid) {
+      // 设定一个存放感染橘子的队列
+      let q = [];
+      // 遍历新鲜橘子个数，感染所有橘子并记下感染数，以比较最后是否有剩余橘子
+      let newFresh = 0;
+      let minutes = 0;
+      // Push rotten oranges to the stack and count fresh oranges
+      for (let i = 0; i < grid.length; i++) {
+        for (let j = 0; j < grid[i].length; j++) {
+          if (grid[i][j] === 2) q.push([i, j]);
+          if (grid[i][j] === 1) newFresh++;
+        }
+      }
+
+      while (q.length && newFresh) {
+        // 设置下一分钟的队列
+        let newQ = []; // queue for next minute
+        while (q.length) {
+          let badOrange = q.shift();
+          let newRottens = infectOthers(grid, badOrange[0], badOrange[1], newQ);
+          newFresh -= newRottens;
+        }
+        minutes++;
+        // 赋值当下计算得来的腐烂橘子给队列
+        q = newQ;
+      }
+      if (newFresh !== 0) return -1;
+      return minutes;
+    };
+
+    // Infect surrounding oranges
+    // Return the number of newly infected oranges
+    var infectOthers = function (grid, i, j, q) {
+      let infected = 0;
+      if (i > 0 && grid[i - 1][j] === 1) {
+        grid[i - 1][j]++;
+        infected++;
+        q.push([i - 1, j]);
+      }
+      if (j > 0 && grid[i][j - 1] === 1) {
+        grid[i][j - 1]++;
+        infected++;
+        q.push([i, j - 1]);
+      }
+      if (i < grid.length - 1 && grid[i + 1][j] === 1) {
+        grid[i + 1][j]++;
+        infected++;
+        q.push([i + 1, j]);
+      }
+      if (j < grid[0].length - 1 && grid[i][j + 1] === 1) {
+        grid[i][j + 1]++;
+        infected++;
+        q.push([i, j + 1]);
+      }
+
+      return infected;
+    }
+// 作者：raptazure
+// 链接：https://leetcode-cn.com/problems/rotting-oranges/solution/javascript-bfsfang-fa-jie-xi-su-du-kuai-yu-9157-by/
+  </script>
+</body>
+</html>

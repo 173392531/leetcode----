@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function infthree() {
+            var arr = [];
+            for (var i = 0; i < 5; i++) {
+                var arrNum = parseInt(Math.random() * 100) + 1;
+                var flag = true;
+                for (var j = 0; j <= arr.length; j++) {
+                    if (arrNum == arr[j]) {
+                        flag = false;
+                        break;
+                    }
+                }
+                if (flag) {
+                    arr.push(arrNum);
+                } else {
+                    i--;
+                }
+            }
+            console.log(arr);
+        }
+        infthree();
+    </script>
+</body>
+
+</html>

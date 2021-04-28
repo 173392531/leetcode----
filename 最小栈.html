@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 设计一个支持 push ，pop ，top 操作，并能在常数时间内检索到最小元素的栈。
+
+  push(x) —— 将元素 x 推入栈中。
+  pop() —— 删除栈顶的元素。
+  top() —— 获取栈顶元素。
+  getMin() —— 检索栈中的最小元素。
+   
+  示例:
+
+  输入：
+  ["MinStack","push","push","push","getMin","pop","top","getMin"]
+  [[],[-2],[0],[-3],[],[],[],[]]
+
+  输出：
+  [null,null,null,null,-3,null,0,-2]
+
+  解释：
+  MinStack minStack = new MinStack();
+  minStack.push(-2);
+  minStack.push(0);
+  minStack.push(-3);
+  minStack.getMin();   返回 -3.
+  minStack.pop();
+  minStack.top();      返回 0.
+  minStack.getMin();   返回 -2.
+
+  来源：力扣（LeetCode）
+  链接：https://leetcode-cn.com/problems/min-stack
+  著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+
+
+  <!-- 按照上面的思路，我们只需要设计一个数据结构，使得每个元素 a 与其相应的最小值 m 时刻保持一一对应。因此我们可以使用一个辅助栈，与元素栈同步插入与删除，用于存储与每个元素对应的最小值。
+
+  当一个元素要入栈时，我们取当前辅助栈的栈顶存储的最小值，与当前元素比较得出最小值，将这个最小值插入辅助栈中；
+
+  当一个元素要出栈时，我们把辅助栈的栈顶元素也一并弹出；
+
+  在任意一个时刻，栈内元素的最小值就存储在辅助栈的栈顶元素中。
+
+
+链接：https://leetcode-cn.com/problems/min-stack/solution/zui-xiao-zhan-by-leetcode-solution/ -->
+  <script>
+    var MinStack = function() {
+      this.x_stack = [];
+      this.min_stack = [Infinity];
+  };
+
+  MinStack.prototype.push = function(x) {
+      this.x_stack.push(x);
+      this.min_stack.push(Math.min(this.min_stack[this.min_stack.length - 1], x));
+  };
+
+  MinStack.prototype.pop = function() {
+      this.x_stack.pop();
+      this.min_stack.pop();
+  };
+
+  MinStack.prototype.top = function() {
+      return this.x_stack[this.x_stack.length - 1];
+  };
+
+  MinStack.prototype.getMin = function() {
+      return this.min_stack[this.min_stack.length - 1];
+  };
+
+// 作者：LeetCode-Solution
+// 链接：https://leetcode-cn.com/problems/min-stack/solution/zui-xiao-zhan-by-leetcode-solution/
+
+  </script>
+</body>
+</html>

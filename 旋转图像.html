@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!--  给定一个 n × n 的二维矩阵 matrix 表示一个图像。请你将图像顺时针旋转 90 度。
+
+你必须在 原地 旋转图像，这意味着你需要直接修改输入的二维矩阵。请不要 使用另一个矩阵来旋转图像。
+输入：matrix = [[1,2,3],[4,5,6],[7,8,9]]
+输出：[[7,4,1],[8,5,2],[9,6,3]]
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/rotate-image-->
+  <script>
+    // 倒序垂直扫描 + 队列
+    var rotate = function (matrix) {
+      let n = matrix.length, queue = []
+      for (let i = 0; i < n; i++)
+        for (let j = 0; j < n; j++)
+          queue.push(matrix[i][j])
+      for (let j = n; j--;)
+        for (let i = 0; i < n; i++)
+          matrix[i][j] = queue.shift()
+      return matrix
+    };
+    console.log(rotate([[1, 2, 3], [4, 5, 6], [7, 8, 9]]));
+// 作者：mantoufan
+// 链接：https://leetcode-cn.com/problems/rotate-image/solution/luo-xuan-kao-bei-xuan-zhuan-fan-zhuan-7x-5v91/
+
+
+// 拷贝方法
+// var rotate = function(matrix) {
+//     let n = matrix.length, m = Array.from({length: n}, _ => Array(n))
+//     for(let i = 0; i < n; i++)
+//         for(let j = 0; j < n; j++)
+//             m[j][n - 1 - i] = matrix[i][j]
+//     for(let i = 0; i < n; i++)
+//         for(let j = 0; j < n; j++)
+//             matrix[i][j] = m[i][j]
+// };
+
+// 作者：mantoufan
+// 链接：https://leetcode-cn.com/problems/rotate-image/solution/luo-xuan-kao-bei-xuan-zhuan-fan-zhuan-7x-5v91/
+
+  </script>
+</body>
+
+</html>

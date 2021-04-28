@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- js去掉数组中无效的值，比如null，undefined，empty -->
+    <script>
+        // 方法一。直接使用filter就能搞定了
+        var arr = [1, 2, null, undefined, 9];
+        arr = arr.filter(Boolean);
+        
+        // 方法二。null，undefined，empty这些在if里面都是空值。所以可以if判断。
+        var arr = [1, 2, null, undefined, 9];
+        let newArr = []
+        arr.forEach(item => {
+            if (item) {
+                newArr.push(item)
+            }
+        })
+    </script>
+</body>
+
+</html>

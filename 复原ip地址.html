@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 给定一个只包含数字的字符串，用以表示一个 IP 地址，返回所有可能从 s 获得的 有效 IP 地址 。你可以按任何顺序返回答案。
+
+  有效 IP 地址 正好由四个整数（每个整数位于 0 到 255 之间组成，且不能含有前导 0），整数之间用 '.' 分隔。
+
+  例如："0.1.2.201" 和 "192.168.1.1" 是 有效 IP 地址，但是 "0.011.255.245"、"192.168.1.312" 和 "192.168@1.1" 是 无效 IP 地址。
+
+  示例 1：
+
+  输入：s = "25525511135"
+  输出：["255.255.11.135","255.255.111.35"]
+  示例 2：
+
+  输入：s = "0000"
+  输出：["0.0.0.0"]
+  示例 3：
+
+  输入：s = "1111"
+  输出：["1.1.1.1"]
+  示例 4：
+
+  输入：s = "010010"
+  输出：["0.10.0.10","0.100.1.0"]
+  示例 5：
+
+  输入：s = "101023"
+  输出：["1.0.10.23","1.0.102.3","10.1.0.23","10.10.2.3","101.0.2.3"]
+
+  来源：力扣（LeetCode）
+  链接：https://leetcode-cn.com/problems/restore-ip-addresses
+  著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+  <!-- 剪枝的条件：
+    1.划分的ip地址的段数>4
+    2.第一个字符为0并且字符的长度>1的情况下需要剪枝，比如某一位上的IP地址为02，012就不符合
+    3.某一位上的ip地址>255
+
+    * 需要注意的细节点，在ip地址的最后一位上没有. ,具体的代码实现为path+str+(num===3? '':'.')  -->
+  <script>
+    /**
+   * @param {string} s
+   * @return {string[]}
+   */
+    var restoreIpAddresses = function (s) {
+      let res = [];
+      dfs(s, 0, 0, '');
+      return res;
+      // string要修饰的字符串，pointer为指针，num为储存的断点数组个数，path为已经剪好枝叶的半成品数组
+      function dfs(string, pointer, num, path) {
+        if (num > 4) return;
+        //当前已经划分为4段（num从0~3，所以退出条件为4）并且已经搜索到string地址的最后一位则存入结果
+        if (num === 4 && pointer === string.length) {
+          res.push(path);
+        }
+        for (let i = 1; i < 4; i++) {
+          let str = string.substring(pointer, pointer + i);
+          if (str[0] === '0' && str.length > 1 || Number(str) > 255) return;
+          // 当来到这步是num保存的是上一次的3，但是实际上num会加一并递归结束回溯，所以在此加上最后一个.
+          dfs(string, pointer + i, num + 1, path + str + (num === 3 ? '' : '.'));
+        }
+      }
+    };
+    console.log(restoreIpAddresses("25525511215"));
+// 作者：lisa-6
+// 链接：https://leetcode-cn.com/problems/restore-ip-addresses/solution/93fu-zhi-ipdi-zhi-dfsjian-zhi-by-lisa-6/
+
+  </script>
+</body>
+
+</html>

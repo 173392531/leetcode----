@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 请实现一个函数，把字符串 s 中的每个空格替换成"%20"。
+
+ 
+
+示例 1：
+
+输入：s = "We are happy."
+输出："We%20are%20happy." -->
+
+  <!-- 但是我们清楚，这些肯定都不是被考察的目的，我们需要做的，就是如何在手动实现的过程中，尽量的减少复杂度！
+
+因为 JSJS 中字符串无法被修改，一旦给字符串变量重新赋值，就要花费时间和空间去重新新建一个字符串，从而增加了复杂度！
+
+所以我们这里采用数组来进行操作，流程如下：
+
+将字符串转换为数组，然后统计其中的空格数量。
+根据空格数量和原有字符串有效字符长度，计算出刚好存放替换后的字符长度的数组。
+创建两个指针，一个指数组末尾，一个指字符串有效位的末尾，实现原地修改。
+值得注意的是：数组遍历，一定要从后往前遍历，避免从前往后，造成字符被修改，导致错误！
+
+作者：demigodliu
+链接：https://leetcode-cn.com/problems/ti-huan-kong-ge-lcof/solution/tu-jie-guan-fang-tui-jian-ti-jie-ti-huan-3l74/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。 -->
+  <script>
+    var replaceSpace = function(s) {
+    s = s.split("");
+    let oldLen = s.length;
+    let spaceCount = 0;
+    for (let i = 0; i < oldLen; i++) {
+        if (s[i] === ' ') spaceCount++;
+    }
+    s.length += spaceCount * 2;
+    for (let i = oldLen - 1, j = s.length - 1; i >= 0; i--, j--) {
+        if (s[i] !== ' ') s[j] = s[i];
+        else {
+            s[j - 2] = '%';
+            s[j - 1] = '2';
+            s[j] = '0';
+            j -= 2;
+        }
+    }
+    return s.join('');
+  };
+
+  // 或者：
+  // return s = s.split(' ').join("%20");
+
+
+// 作者：demigodliu
+// 链接：https://leetcode-cn.com/problems/ti-huan-kong-ge-lcof/solution/tu-jie-guan-fang-tui-jian-ti-jie-ti-huan-3l74/
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 给定一个范围在  1 ≤ a[i] ≤ n ( n = 数组大小 ) 的
+     整型数组，数组中的元素一些出现了两次，另一些只出现一次。
+找到所有在 [1, n] 范围之间没有出现在数组中的数字。
+您能在不使用额外空间且时间复杂度为O(n)的情况下完成这个任务吗? 
+你可以假定返回的数组不算在额外空间内。 -->
+  <!-- 输入:
+[4,3,2,7,8,2,3,1]
+
+输出:
+[5,6] -->
+  <script>
+    var findDisappearedNumbers = function (nums) {
+      let i = 0;
+      while (i < nums.length) {
+        // 当前数字本就出现在理应的位置上，跳过，不用换。
+        if (nums[i] == i + 1) {
+          i++;
+          continue;
+        }
+        const idealIdx = nums[i] - 1;
+        // 当前数字理应出现的位置上，已经存在当前数字，跳过，不用换。
+        if (nums[i] == nums[idealIdx]) {
+          i++;
+          continue;
+        }
+        [nums[idealIdx], nums[i]] = [nums[i], nums[idealIdx]];
+      }
+      const res = [];
+      // 再次遍历，如果当前位置没对应正确的数，如上图索引 4、5，则将对应的 5、6 加入 res。
+      for (let i = 0; i < nums.length; i++) {
+        if (nums[i] != i + 1) {
+          res.push(i + 1);
+        }
+      }
+      return res;
+    };
+
+// 链接：https://leetcode-cn.com/problems/find-all-numbers-disappeared-in-an-array/solution/shou-hua-tu-jie-jiao-huan-shu-zi-zai-ci-kzicg/
+
+  </script>
+</body>
+
+</html>

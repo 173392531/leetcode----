@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 在杨辉三角中，每个数是它左上方和右上方的数的和。
+
+    示例:
+
+    输入: 5
+    输出:
+    [
+        [1],
+        [1,1],
+      [1,2,1],
+      [1,3,3,1],
+    [1,4,6,4,1]
+    ]
+
+    来源：力扣（LeetCode）
+    链接：https://leetcode-cn.com/problems/pascals-triangle -->
+  <script>
+    var generate = function(numRows) {
+        const ret = [];
+        for (let i = 0; i < numRows; i++) {
+            const row = new Array(i + 1).fill(1);
+            for (let j = 1; j < row.length - 1; j++) {
+                row[j] = ret[i - 1][j - 1] + ret[i - 1][j];
+            }
+            ret.push(row);
+        }
+        return ret;
+    };
+    console.log(generate(18));
+// 作者：LeetCode-Solution
+// 链接：https://leetcode-cn.com/problems/pascals-triangle/solution/yang-hui-san-jiao-by-leetcode-solution-lew9/
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 给定一个二叉搜索树和一个目标结果，如果 BST 中存在两个元素且它们的和等于给定的目标结果，则返回 true。
+
+    案例 1:
+
+    输入: 
+        5
+      / \
+      3   6
+    / \   \
+    2   4   7
+
+    Target = 9
+
+    输出: True
+     
+
+    案例 2:
+
+    输入: 
+        5
+      / \
+      3   6
+    / \   \
+    2   4   7
+
+    Target = 28
+
+    输出: False   -->
+  <script>
+    /**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+    /**
+     * @param {TreeNode} root
+     * @param {number} k
+     * @return {boolean}
+     */
+    var findTarget = function (root, k) {
+      let set = new Set()
+      var diff = function (node) {
+        if (node === null) {
+          return false
+        }
+        if (set.has(k - node.val)) { // 判断是否存在满足条件的值
+          return true
+        }
+        set.add(node.val) // 将节点值存入 set 中
+        return diff(node.left) || diff(node.right) // 只要存在 true 即可
+      }
+      return diff(root)
+    };
+
+// 作者：cchroot-liu
+// 链接：https://leetcode-cn.com/problems/two-sum-iv-input-is-a-bst/solution/qian-xu-di-gui-set-cun-chu-pan-duan-by-cchroot-9/
+
+  </script>
+</body>
+
+</html>
