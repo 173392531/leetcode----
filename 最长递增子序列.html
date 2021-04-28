@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
   <!-- 给你一个整数数组 nums ，找到其中最长严格递增子序列的长度。
 
@@ -35,21 +37,21 @@
  * @param {number[]} nums
  * @return {number}
  */
-var lengthOfLIS = function(nums) {
-let len = nums.length 
-if(len<1) return 0
-const dp = []
-dp[0] = 1
-for(let i = 1;i<len;i++){
-    dp[i] = 1          
-    for(let j = i-1;j>=0;j--){
-        if(nums[i]>nums[j]){
-          dp[i] = Math.max(dp[i],dp[j]+1)
+    var lengthOfLIS = function (nums) {
+      let len = nums.length
+      if (len < 1) return 0
+      const dp = []
+      dp[0] = 1
+      for (let i = 1; i < len; i++) {
+        dp[i] = 1
+        for (let j = i - 1; j >= 0; j--) {
+          if (nums[i] > nums[j]) {
+            dp[i] = Math.max(dp[i], dp[j] + 1)
+          }
         }
-    }
-}
-return Math.max(...dp)
-};
+      }
+      return Math.max(...dp)
+    };
 // 代码链接
 // 作者：xiao-min-s
 // 链接：https://leetcode-cn.com/problems/longest-increasing-subsequence/solution/ji-jian-de-dong-tai-gui-hua-by-xiao-min-s9yqn/
@@ -58,6 +60,37 @@ return Math.max(...dp)
 // 作者：liweiwei1419
 // 链接：https://leetcode-cn.com/problems/longest-increasing-subsequence/solution/dong-tai-gui-hua-er-fen-cha-zhao-tan-xin-suan-fa-p/
 
+
+// 贪心+二分法：
+var lengthOfLIS = function(nums) {
+    let len = 1, n = nums.length
+    if (n === 0) return 0
+    let d = []
+    d[len] = nums[0]
+    for (let i = 1; i < n; ++i) {
+        if (nums[i] > d[len]) {
+            d[++len] = nums[i];
+        } else {
+            let l = 1, r = len, pos = 0; // 如果找不到说明所有的数都比 nums[i] 大，此时要更新 d[1]，所以这里将 pos 设为 0
+            while (l <= r) {
+                let mid = (l + r) >> 1;
+                if (d[mid] < nums[i]) {
+                    pos = mid;
+                    l = mid + 1;
+                } else {
+                    r = mid - 1;
+                }
+            }
+            d[pos + 1] = nums[i];
+        }
+    }
+    return len;
+};
+
+// 作者：zn_
+// 链接：https://leetcode-cn.com/problems/longest-increasing-subsequence/solution/liang-chong-jie-ti-fang-fa-chao-99-by-zn-9712/
+
   </script>
 </body>
+
 </html>
