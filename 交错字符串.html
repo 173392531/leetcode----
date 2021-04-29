@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+        给定三个字符串 s1、s2、s3，请你帮忙验证 s3 是否是由 s1 和 s2 交错 组成的。
+
+        两个字符串 s 和 t 交错 的定义与过程如下，其中每个字符串都会被分割成若干 非空 子字符串：
+
+        s = s1 + s2 + ... + sn
+        t = t1 + t2 + ... + tm
+        |n - m| <= 1
+        交错 是 s1 + t1 + s2 + t2 + s3 + t3 + ... 或者 t1 + s1 + t2 + s2 + t3 + s3 + ...
+        提示：a + b 意味着字符串 a 和 b 连接。
+
+        
+
+        示例 1：
+
+
+        输入：s1 = "aabcc", s2 = "dbbca", s3 = "aadbbcbcac"
+        输出：true
+        示例 2：
+
+        输入：s1 = "aabcc", s2 = "dbbca", s3 = "aadbbbaccc"
+        输出：false -->
+
+    <!-- 可以把计算结果保存到备忘录，遇到相同子问题时，返回备忘录中的缓存值，避免重复地递归调用。
+            备忘录可以是二维数组，也可以是哈希表（key 要包含 i、j 来达到唯一性）。
+            对前面代码略加改动即可，改成动态规划也可以。能用动态规划的一定能用递归，加入记忆化也很容易，有的题目动态规划好入手，有的不好入手，或者边界情况比较难确定。DFS+记忆化是一个不错的保底思路，时间复杂度和DP是一样的。
+
+
+        作者：xiao_ben_zhu
+        链接：https://leetcode-cn.com/problems/interleaving-string/solution/shou-hua-tu-jie-dfshui-su-dfsji-yi-hua-by-hyj8/ -->
+    <script>
+        const isInterleave = (s1, s2, s3) => {
+            if (s1.length + s2.length != s3.length) return false;
+
+            const memo = new Array(s1.length + 1);
+            for (let i = 0; i < memo.length; i++) {
+                memo[i] = new Array(s2.length + 1);
+            }
+
+            const check = (i, j, k) => {
+                if (memo[i][j] != null) return memo[i][j];
+
+                if (k == s3.length) return memo[i][j] = true;
+
+                let isValid = false;
+
+                if (i < s1.length && s1[i] == s3[k]) {
+                    isValid = check(i + 1, j, k + 1);
+                }
+                if (j < s2.length && s2[j] == s3[k]) {
+                    isValid = isValid || check(i, j + 1, k + 1);
+                }
+                return memo[i][j] = isValid;
+            };
+
+            return check(0, 0, 0);
+        };
+
+
+
+
+        // 作者：xiao_ben_zhu
+        // 链接：https://leetcode-cn.com/problems/interleaving-string/solution/shou-hua-tu-jie-dfshui-su-dfsji-yi-hua-by-hyj8/
+
+
+        const isNeed = (s1, s2, s3) => {
+            if (s1.length + s2.length != s3.length) return false
+            const memo = new Array(s1.length + 1)
+            for (let i = 0; i < memo.length; i++) {
+                memo[i] = new Array(s2.length + 1)
+            }
+            const check = (i, j, k) => {
+                if (memo[i][j] != null) return memo[i][j]
+                if (k == s3.length) return memo[i][j] = true
+                let isValid = false
+                if (i < s1.length && s1[i] == s3[k]) {
+                    isValid = check(i + 1, j, k + 1)
+                }
+                if (j < s2.length && s2[j] == s3[k]) {
+                    isValid = isValid || check(i, j + 1, k + 1)
+                }
+                return memo[i][j] = isValid
+            }
+            return check(0, 0, 0);
+        }
+    </script>
+</body>
+
+</html>
