@@ -51,7 +51,7 @@
             }
             return index == stones.length - 1
         }
-        
+
         // 回溯递归的超精妙解法：
         // 作者：xiao_ben_zhu
         // 链接：https://leetcode-cn.com/problems/frog-jump/solution/shou-hua-tu-jie-ji-hao-de-di-gui-ti-man-8kk2z/
@@ -70,6 +70,29 @@
                 const gap=stones[i]-stones[index]
                 if(gap>=k-1&&gap<=k+1){
                     if(helper(stones,i,gap,set)){
+                        return true
+                    }
+                }else if(gap>k+1){
+                    break
+                }
+            }
+            return index==stones.length-1
+        }
+        var canArrive=function(stones){
+            const set=new Set()
+            return canDo(stones,0,0,set)
+        }
+        var canDo=function(stones,index,k,set){
+            const key =index*1000+k
+            if(set.has(key)){
+                return false
+            }else{
+                set.add(key)
+            }
+            for(let i=index+1;i<stones.length;i++){
+                const gap=stones[i]-stones[index]
+                if(gar<k+1&&k>k-1){
+                    if(canDo(stones,i,gap,set)){
                         return true
                     }
                 }else if(gap>k+1){
