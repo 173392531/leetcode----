@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 给你一个正整数 n ，生成一个包含 1 到 n2 所有元素，且元素按顺时针顺序螺旋排列的 n x n 正方形矩阵 matrix 。
+
+    示例 1：
+
+    输入：n = 3
+    输出：[[1,2,3],[8,9,4],[7,6,5]]
+    示例 2：
+
+    输入：n = 1
+    输出：[[1]]
+
+    来源：力扣（LeetCode）
+    链接：https://leetcode-cn.com/problems/spiral-matrix-ii
+    著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+    <script>
+
+        var generateMatrix = function (n) {
+            const matrix = new Array(n);
+            for (let i = 0; i < n; i++) {
+                matrix[i] = new Array(n);
+            }
+            let num = 1;
+            let left = 0, right = n - 1, top = 0, bottom = n - 1;
+            while (num <= n * n) {
+                for (let i = left; i <= right; i++) {
+                    matrix[top][i] = num
+                    num++
+                }
+                top++;
+                for (let i = top; i <= bottom; i++) {
+                    matrix[i][right] = num
+                    num++;
+                }
+                right--;
+                for (let i = right; i >= left; i--) {
+                    matrix[bottom][i] = num
+                    num++;
+                }
+                bottom--;
+                for (let i = bottom; i >= top; i--) {
+                    matrix[i][left] = num
+                    num++;
+                }
+                left++;
+            }
+            return matrix;
+        };
+
+        // 作者：xiao_ben_zhu
+        // 链接：https://leetcode-cn.com/problems/spiral-matrix-ii/solution/ru-guo-ni-yuan-yi-yi-ceng-yi-ceng-yi-cen-cm9h/
+
+        console.log(generateMatrix(7))
+    </script>
+</body>
+
+</html>

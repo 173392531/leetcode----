@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为 “Start” ）。
+
+    机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish” ）。
+
+    问总共有多少条不同的路径？
+
+    来源：力扣（LeetCode）
+    链接：https://leetcode-cn.com/problems/unique-paths
+    著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+    <script>
+        var uniquePaths = function (m, n) {
+            const f = new Array(m).fill(0).map(() => new Array(n).fill(0));
+            for (let i = 0; i < m; i++) {
+                f[i][0] = 1;
+            }
+            for (let j = 0; j < n; j++) {
+                f[0][j] = 1;
+            }
+            for (let i = 1; i < m; i++) {
+                for (let j = 1; j < n; j++) {
+                    f[i][j] = f[i - 1][j] + f[i][j - 1];
+                }
+            }
+            return f[m - 1][n - 1];
+        };
+
+        // 作者：LeetCode - Solution
+        // 链接：https://leetcode-cn.com/problems/unique-paths/solution/bu-tong-lu-jing-by-leetcode-solution-hzjf/
+        var uniqueWay=function(m,n){
+            const dp=new Array(m).fill(0).map(()=>new Array(n).fill(0))
+            for(let i=0;i<m;i++){
+                dp[i][0]=1
+            }
+            for(let j=0;j<n;j++){
+                dp[0][j]=1
+            }
+            for(let i=1;i<m;i++){
+                for(let j=1;j<n;j++){
+                    dp[i][j]=dp[i-1][j]+dp[i][j-1]
+                }
+            }
+            return dp[m-1][n-1]
+        }
+    </script>
+</body>
+
+</html>
