@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const solveSudoku = (board) => {
+            const hasConflit = (r, c, val) => {  // 判断是否有行列和框框的冲突
+                for (let i = 0; i < 9; i++) {
+                    if (board[i][c] == val || board[r][i] == val) { // 行或列里有冲突
+                        return true;
+                    }
+                }
+                const subRowStart = Math.floor(r / 3) * 3; // 对于小框，行有三种起始索引 0、3、6
+                const subColStart = Math.floor(c / 3) * 3; // 对于小框，列有三种起始索引 0、3、6
+                for (let i = 0; i < 3; i++) {              // 遍历所在的小框
+                    for (let j = 0; j < 3; j++) {
+                        if (val == board[subRowStart + i][subColStart + j]) { // 发现了重复数
+                            return true;
+                        }
+                    }
+                }
+                return false; // 没有发生冲突
+            };
+
+            const fill = (i, j) => {
+                if (j == 9) { // 列越界，说明填完了一行，填下一行的第一格
+                    i++;
+                    j = 0;
+                    if (i == 9) return true; // 都填完了，返回true
+                }
+                if (board[i][j] != ".") return fill(i, j + 1); // 不是空白格，递归填下一格
+
+                for (let num = 1; num <= 9; num++) {           // 枚举出当前格的所有可填的选择
+                    if (hasConflit(i, j, String(num))) continue; // 如果存在冲突，跳过这个选择
+                    board[i][j] = String(num);                   // 作出一个选择
+                    if (fill(i, j + 1)) return true; // 如果基于它，填下一格，最后可以解出数独，直接返回true
+                    board[i][j] = ".";               // 如果基于它，填下一格，填1-9都不行，回溯，恢复为空白格
+                }
+                return false; // 尝试了1-9，每个都往下递归，都不能做完，返回false
+            };
+
+            fill(0, 0); // 从第一个格子开始填
+            return board;
+        };
+
+        // 作者：xiao_ben_zhu
+        // 链接：https://leetcode-cn.com/problems/sudoku-solver/solution/shou-hua-tu-jie-jie-shu-du-hui-su-suan-fa-sudoku-s/
+
+        const solveSudoku = (board) => {
+            const rows = new Array(9);    // 存放每一行对应的可选数集
+            const cols = new Array(9);    // 存放每一列对应的可选数集
+            const blocks = new Array(9);  // 存放每一框对应的可选数集
+            const options = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+            for (let i = 0; i < 9; i++) { // 集合的初始化
+                rows[i] = new Set(options);
+                cols[i] = new Set(options);
+                blocks[i] = new Set(options);
+            }
+
+            const getBlockIndex = (i, j) => { // 根据坐标，获取所在的小框的索引
+                return (i / 3 | 0) * 3 + j / 3 | 0;  // |0 是向下取整
+            };
+
+            for (let i = 0; i < 9; i++) {    // 根据现有的已填的数字，更新set们
+                for (let j = 0; j < 9; j++) {
+                    if (board[i][j] != ".") {
+                        rows[i].delete(board[i][j]); // 当前行出现过这个数字，这个数字就不能在这一行出现，删除该选项
+                        cols[j].delete(board[i][j]);
+                        blocks[getBlockIndex(i, j)].delete(board[i][j]);
+                    }
+                }
+            }
+
+            const fill = (i, j) => {
+                if (j == 9) {     // 列越界，就填下一行
+                    i++;
+                    j = 0;
+                    if (i == 9) return true;  // 都填完了 返回true
+                }
+                if (board[i][j] != ".") return fill(i, j + 1); // 如果不是空白格，递归填下一格
+
+                const blockIndex = getBlockIndex(i, j); // 获取所在小框的索引
+
+                for (let num = 1; num <= 9; num++) {    // 枚举出所有选择：1-9
+                    const s = String(num);
+                    // 当前选择必须在三个set中都存在，如果有一个不存在，就说明发生了冲突，跳过该选择
+                    if (!rows[i].has(s) || !cols[j].has(s) || !blocks[blockIndex].has(s)) continue;
+
+                    board[i][j] = s;    // 作出选择
+                    rows[i].delete(s);  // 更新set们，删掉这个可填选项
+                    cols[j].delete(s);
+                    blocks[blockIndex].delete(s);
+
+                    if (fill(i, j + 1)) return true; // 如果基于当前选择，填下一个，最后可解出数独，直接返回真
+                    // 基于当前选择，填下一个，怎么填都不行，回溯，恢复为空白格
+                    board[i][j] = ".";
+                    rows[i].add(s);     // set们，将之前删掉的当前数字，加回来
+                    cols[j].add(s);
+                    blocks[blockIndex].add(s);
+                }
+                return false;  // 尝试了1-9，每个都往下递归，都不能做完，返回false
+            };
+
+            fill(0, 0);  // 填格子的起点
+            return board;
+        };
+
+        // 作者：xiao_ben_zhu
+        // 链接：https://leetcode-cn.com/problems/sudoku-solver/solution/shou-hua-tu-jie-jie-shu-du-hui-su-suan-fa-sudoku-s/
+
+        const solveSudoku = (board) => {
+            const rows = new Array(9)
+            const cols = new Array(9)
+            const blocks = new Array(9)
+            const options = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+            for (let i = 0; i < 9; i++) {
+                rows[i] = new Set(options)
+                cols[i] = new Set(options)
+                blocks[i] = new Set(options)
+            }
+            const getBlockIndex = (i, j) => {
+                return (i / 3 | 0) * 3 + j / 3 | 0
+            }
+            for (let i = 0; i < 9; i++) {
+                for (let j = 0; j < 9; j++) {
+                    if (board[i][j] != '.') {
+                        rows.delete(board[i][j])
+                        cols.delete(board[i][j])
+                        blocks[getBlockIndex(i, j)].delete(board[i][j])
+                    }
+                }
+            }
+            const fill = (i, j) => {
+                if (j = 9) {
+                    i++
+                    j = 0;
+                    if (i == 9) return true
+                }
+                if (board[i][j] != '.') return fill(i, j + 1)
+                const blockIndex = getBlockIndex(i, j)
+                for (let num = 1; num <= 9; num++) {
+                    const s = String(num)
+                    if (!rows[i].has(s) || !cols[j].has(s) || !blocks[blockIndex].has(s)) continue
+                    board[i][j] = s
+                    rows[i].delete(s)
+                    cols[j].delete(s)
+                    blocks[blockIndex].delete(s)
+                    if (fill(i, j + 1)) return true
+                    board[i][j] = '.'
+                    rows[i].add(s)
+                    cols[j].add(s)
+                    blocks[blockIndex].add(s)
+                }
+                return false
+            }
+            fill(0, 0)
+            return board
+        }
+    </script>
+</body>
+
+</html>
