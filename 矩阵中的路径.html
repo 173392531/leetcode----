@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 给定一个 m x n 二维字符网格 board 和一个字符串单词 word 。
+        如果 word 存在于网格中，返回 true ；否则，返回 false 。
+        单词必须按照字母顺序，通过相邻的单元格内的字母构成，
+        其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。
+        同一个单元格内的字母不允许被重复使用。
+        例如，在下面的 3×4 的矩阵中包含单词 "ABCCED"（单词中的字母已标出）。
+
+
+    链接：https://leetcode-cn.com/problems/ju-zhen-zhong-de-lu-jing-lcof
+    著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+    <script>
+        var exist = function (board, word) {
+            var row = board.length;
+            var col = board[0].length;
+            var dfs = function (i, j, board, word, index) {
+                if (i < 0 || i >= row || j < 0 || j > col || board[i][j] !== word[index]) return false; // 判断不符合条件
+                if (index === word.length - 1) return true;  // word遍历完了
+                var tmp = board[i][j];  // 记录到board的值
+                board[i][j] = '-'      // 锁上，因为后续的递归是4个方向上的，无法保证上一个方向的值
+                var res = dfs(i - 1, j, board, word, index + 1) || dfs(i + 1, j, board, word, index + 1) || dfs(i, j - 1, board, word, index + 1) || dfs(i, j + 1, board, word, index + 1);
+                board[i][j] = tmp;   // 恢复现场
+                return res;
+
+            }
+            // 遍历整个board，找到初始位置点
+            for (var i = 0; i < row; i++) {
+                for (var j = 0; j < col; j++) {
+                    if (dfs(i, j, board, word, 0)) return true;
+                }
+            }
+            // 没找到
+            return false
+        };
+
+// 作者：user3502je
+// 链接：https://leetcode-cn.com/problems/ju-zhen-zhong-de-lu-jing-lcof/solution/dfssuan-fa-by-user3502je/
+
+var exist=function(board,word){
+    var row =board.length;
+    var col=board[0].length
+    var dfs=function(i,j,board,word,index){
+        if(i<0  || i>=row || j<0 || j>col || board!==word[index])return false
+        if(index===word.length-1)return true
+        var tmp=board[i][j]
+        board[i][j]='-'
+        var res=dfs(i-1,j,board,word,index+1) || dfs(i+1,j,board,word,index+1) ||  dfs(i-1,j,board,word,index+1)  ||dfs(i,j-1,board,word,index+1)|| dfs(i,j+1,board,word,index+1)
+        board[i][j]=tmp
+        return res
+    }
+    for(let i=0;i<row;i++){
+        for(let j=0;i<col;j++){
+            if(dfs(i,j,board,word,0))return true
+        }
+    }
+    return false
+}
+    </script>
+</body>
+
+</html>
