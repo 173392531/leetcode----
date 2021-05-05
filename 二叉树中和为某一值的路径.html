@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 输入一棵二叉树和一个整数，打印出二叉树中节点值的和为输入整数的所有路径。
+    从树的根节点开始往下一直到叶节点所经过的节点形成一条路径。
+
+  示例:
+  给定如下二叉树，以及目标和 target = 22，
+
+                5
+              / \
+              4   8
+            /   / \
+            11  13  4
+          /  \    / \
+          7    2  5   1
+  返回:
+
+  [
+    [5,4,11,2],
+    [5,8,4,5]
+  ]
+
+  来源：力扣（LeetCode）
+  链接：https://leetcode-cn.com/problems/er-cha-shu-zhong-he-wei-mou-yi-zhi-de-lu-jing-lcof
+  著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+  <script>
+    var pathSum = function (root, sum) {
+      // 思路一：递归实现
+      if (!root) return []
+
+      const res = [], calcSum = a => a.reduce((p, c) => p + c)
+
+      const DFS = (node, prev) => {
+        if (!node.left && !node.right && calcSum(prev) === sum) res.push(prev)
+
+        node.left && DFS(node.left, [...prev, node.left.val])
+        node.right && DFS(node.right, [...prev, node.right.val])
+      }
+
+      DFS(root, [root.val])
+
+      return res
+
+      // 思路人：stack 栈实现
+      if (!root) return []
+
+      const res = [], calcSum = a => a.reduce((p, c) => p + c), stack = [[root, [root.val]]]
+
+      while (stack.length) {
+        const [node, prev] = stack.pop()
+
+        if (!node.left && !node.right && calcSum(prev) === sum) res.push(prev)
+
+        node.right && stack.push([node.right, [...prev, node.right.val]])
+        node.left && stack.push([node.left, [...prev, node.left.val]])
+
+      }
+
+      return res
+
+    };
+
+    // 作者：floretpig
+    // 链接：https://leetcode-cn.com/problems/er-cha-shu-zhong-he-wei-mou-yi-zhi-de-lu-jing-lcof/solution/you-ya-shi-xian-qiu-er-cha-shu-lu-jing-b-okoh/
+
+
+
+      // res存储结果，stack存储一条路径
+      // dfs中压入路径，并计算值
+      // 到叶子节点，满足条件放入res中
+      // 遍历后，弹出路径的所有节点回溯
+    var pathSum = function (root, sum) {
+      var res = [],stack = [];
+      function dfs(r, sum) {
+        if (r == null) return;
+        sum -= r.val;
+        stack.push(r.val);
+        if (r.left == null && r.right == null && sum == 0) res.push([...stack]);
+        dfs(r.left, sum);
+        dfs(r.right, sum);
+        stack.pop();
+      }
+      dfs(root, sum);
+      return res
+    };
+
+// 作者：xing-he-6p
+// 链接：https://leetcode-cn.com/problems/er-cha-shu-zhong-he-wei-mou-yi-zhi-de-lu-jing-lcof/solution/ji-bai-96-by-xing-he-6b-8gdw/
+
+  </script>
+</body>
+
+</html>

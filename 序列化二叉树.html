@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 请实现两个函数，分别用来序列化和反序列化二叉树。
+
+  示例: 
+
+  你可以将以下二叉树：
+
+      1
+    / \
+    2   3
+      / \
+      4   5
+
+  序列化为 "[1,2,3,null,null,4,5]"
+
+  来源：力扣（LeetCode）
+  链接：https://leetcode-cn.com/problems/xu-lie-hua-er-cha-shu-lcof
+  著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+  <script>
+    
+    // 序列化的代码
+    const serialize = (root) => {
+      if (root == null) {                  // 遍历到 null 节点
+        return 'X';
+      }
+      const left = serialize(root.left);   // 左子树的序列化结果
+      const right = serialize(root.right); // 右子树的序列化结果
+      return root.val + ',' + left + ',' + right; // 按  根,左,右  拼接字符串
+    };
+
+    // 作者：xiao_ben_zhu
+    // 链接：https://leetcode-cn.com/problems/xu-lie-hua-er-cha-shu-lcof/solution/shou-hua-tu-jie-dfshe-bfsliang-chong-jie-fa-er-cha/
+
+
+    // 反序列化的代码
+    const deserialize = (data) => {
+      const list = data.split(',');   // split成数组
+
+      const buildTree = (list) => {   // 基于list构建当前子树
+        const rootVal = list.shift(); // 弹出首项，获取它的“数据”
+        if (rootVal == "X") {         // 是X，返回null节点
+          return null;
+        }
+        const root = new TreeNode(rootVal); // 不是X，则创建节点
+        root.left = buildTree(list);        // 递归构建左子树
+        root.right = buildTree(list);       // 递归构建右子树
+        return root;                        // 返回当前构建好的root
+      };
+
+      return buildTree(list); // 构建的入口
+    };
+
+  // 作者：xiao_ben_zhu
+  // 链接：https://leetcode-cn.com/problems/xu-lie-hua-er-cha-shu-lcof/solution/shou-hua-tu-jie-dfshe-bfsliang-chong-jie-fa-er-cha/
+
+  </script>
+</body>
+
+</html>

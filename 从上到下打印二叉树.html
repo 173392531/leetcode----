@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 从上到下打印出二叉树的每个节点，同一层的节点按照从左到右的顺序打印。
+
+  例如:
+  给定二叉树: [3,9,20,null,null,15,7],
+
+     3
+    / \
+    9  20
+      /  \
+     15   7
+  返回：
+
+  [3,9,20,15,7]
+
+  来源：力扣（LeetCode）
+  链接：https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-lcof
+  著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+  <script>
+    var levelOrder = function (root) {
+      if (!root) return []
+
+      const queue = [root], res = []
+      
+      while (queue.length) {
+        const node = queue.shift()
+
+        res.push(node.val)
+
+        node.left && queue.push(node.left)
+        node.right && queue.push(node.right)
+      }
+
+      return res
+    };
+
+// 作者：floretpig
+// 链接：https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-lcof/solution/bfsyou-ya-shi-xian-cong-shang-dao-xia-da-2r85/
+
+  </script>
+</body>
+
+</html>

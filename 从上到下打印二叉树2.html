@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 从上到下按层打印二叉树，同一层的节点按从左到右的顺序打印，每一层打印到一行。
+
+  例如:
+  给定二叉树: [3,9,20,null,null,15,7],
+
+      3
+    / \
+    9  20
+      /  \
+    15   7
+  返回其层次遍历结果：
+
+  [
+    [3],
+    [9,20],
+    [15,7]
+  ]
+
+  来源：力扣（LeetCode）
+  链接：https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-ii-lcof
+  著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+  <script>
+    var levelOrder = function (root) {
+      /*  实现BFS 构造队列queue实现 */
+      if (!root) return []
+
+      const queue = [[root, 0]], res = []
+
+      while (queue.length) {
+        const [node, level] = queue.shift()
+
+        // 判断当前层是否已经初始化设置 [] 若无则初始化一下
+        if (!res[level]) res[level] = []
+        res[level].push(node.val)
+
+        node.left && queue.push([node.left, level + 1])
+        node.right && queue.push([node.right, level + 1])
+      }
+
+      return res
+    };
+
+// 作者：floretpig
+// 链接：https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-ii-lcof/solution/bsfgou-zao-dui-lie-you-ya-shi-xian-da-yi-88ea/
+
+  </script>
+</body>
+
+</html>
