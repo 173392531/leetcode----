@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 输入一个字符串，打印出该字符串中字符的所有排列。
+    你可以以任意顺序返回这个字符串数组，但里面不能有重复元素。
+
+    示例:
+
+    输入：s = "abc"
+    输出：["abc","acb","bac","bca","cab","cba"]
+
+    来源：力扣（LeetCode）
+    链接：https://leetcode-cn.com/problems/zi-fu-chuan-de-pai-lie-lcof
+    著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+    <script>
+        var permutation = function (s) {
+            const res = new Set()
+            const visit = {}
+            function dfs(path) {
+                if (path.length === s.length) return res.add(path)
+                for (let i = 0; i < s.length; i++) {
+                    if (visit[i]) continue
+                    visit[i] = true
+                    dfs(path + s[i])
+                    visit[i] = false
+                }
+            }
+            dfs('')
+            return [...res]
+        };
+
+
+        // 作者：panzuki
+        // 链接：https://leetcode-cn.com/problems/zi-fu-chuan-de-pai-lie-lcof/solution/javascript-hui-su-fa-by-menteceso/
+
+        var permutation = function (s) {
+            const visit = {}
+            const res = new Set()
+            function dfs(path) {
+                if (path.length === s.length) return res.add(path)
+                for (let i = 0; i < s.length; i++) {
+                    if (visit[i]) continue
+                    visit[i] = true
+                    dfs(path + s[i])
+                    visit[i] = false
+                }
+            }
+            dfs('')
+            return [...res]
+        }
+    </script>
+</body>
+
+</html>

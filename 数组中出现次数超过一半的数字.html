@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。
+    你可以假设数组是非空的，并且给定的数组总是存在多数元素。
+
+    示例 1:
+
+    输入: [1, 2, 3, 2, 2, 2, 5, 4, 2]
+    输出: 2
+
+    来源：力扣（LeetCode）
+    链接：https://leetcode-cn.com/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof
+    著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+
+    <!-- 不同候选人的选票之间，可以一一抵消。
+        若当前胜利者存在多张选票时，不同的候选人的票，只能抵消一张当前胜利者的票。
+        若当前双方的选票被抵消为零，下一次抽出的候选人，将作为暂时的胜利者领先。
+
+        作者：demigodliu
+        链接：https://leetcode-cn.com/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof/solution/mo-er-tou-piao-shu-zu-zhong-chu-xian-ci-8xbnz/
+        来源：力扣（LeetCode）
+        著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。 -->
+    <script>
+        // 投票抵消思想
+        var majorityElement = function (nums) {
+            let ans = 0, count = 0;
+            for (let i = 0; i < nums.length; i++) {
+                if (!count) {
+                    ans = nums[i];
+                    count++;
+                } else {
+                    count += nums[i] === ans ? 1 : -1;
+                }
+            }
+            return ans;
+        };
+
+// 作者：demigodliu
+// 链接：https://leetcode-cn.com/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof/solution/mo-er-tou-piao-shu-zu-zhong-chu-xian-ci-8xbnz/
+
+    </script>
+</body>
+
+</html>
