@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 输入整数数组 arr ，找出其中最小的 k 个数。
+    例如，输入4、5、1、6、2、7、3、8这8个数字，
+    则最小的4个数字是1、2、3、4。
+
+  示例 1：
+
+  输入：arr = [3,2,1], k = 2
+  输出：[1,2] 或者 [2,1]
+  示例 2：
+
+  输入：arr = [0,1,2,1], k = 1
+  输出：[0]
+
+  来源：力扣（LeetCode）
+  链接：https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof
+  著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+  <script>
+    var getLeastNumbers = function (arr, k) {
+      return arr.sort((a, b) => a - b).slice(0, k);
+    };
+
+    // 作者：xin-tan
+    // 链接：https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/solution/chao-quan-3chong-jie-fa-zhi-jie-pai-xu-zui-da-dui-/
+
+    var getLeastNumbers = function (arr, k) {
+      let len = arr.length
+      if (!len || !k) return []
+      let start = 0
+      let end = len - 1
+      // 寻找一次标杆元素的位置
+      let index = quikSort(arr, start, end)
+      // 如果标杆元素的位置不等于 K
+      while (index !== k - 1) {
+        if (index > k - 1) {
+          // 如果上一次查找，标杆元素位置大于目标位置
+          end = index - 1
+          index = quikSort(arr, start, end)
+        } else {
+          // 如果上一次查找，标杆元素位置小于目标位置
+          start = index + 1
+          index = quikSort(arr, start, end)
+        }
+      }
+      return arr.slice(0, index + 1)
+    };
+
+    function quikSort(arr, left, right) {
+      let pivot = arr[left]
+      while (left < right) {
+        while (left < right && arr[right] >= pivot) right--
+        arr[left] = arr[right]
+        while (left < right && arr[left] < pivot) left++
+        arr[right] = arr[left]
+      }
+      arr[left] = pivot
+      return left
+    }
+
+// 作者：_tank_
+// 链接：https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/solution/javascript-pai-xu-kuai-pai-si-wei-zui-xiao-dui-san/
+
+  </script>
+</body>
+
+</html>
