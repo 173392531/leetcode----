@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 输入一个整数 n ，求1～n这n个整数的十进制表示中1出现的次数。
+    例如，输入12，1～12这些整数中包含1 的数字有1、10、11和12，1一共出现了5次。
+
+    示例 1：
+
+    输入：n = 12
+    输出：5
+    示例 2：
+
+    输入：n = 13
+    输出：6
+
+    来源：力扣（LeetCode）
+    链接：https://leetcode-cn.com/problems/1nzheng-shu-zhong-1chu-xian-de-ci-shu-lcof
+    著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+    <script>
+        var countDigitOne = function (n) {
+            // 排除个位结果
+            if (n == 0) return 0;
+            if (n < 10) return 1;
+            // 转为字符串，从最高位开始算起
+            let str = n.toString();
+            let res = 0;
+            // 计算最高位有几个1，例如129，则有29 + 1个百位为1的数，否则就是10的str.length-1次方个百位为1的数
+            if (str[0] != '1') {
+                res = Math.pow(10, str.length - 1);
+            } else {
+                res = n - Math.pow(10, str.length - 1) + 1;
+            }
+            // 计算剩余的数
+            //如果当前位大于一，则为（该位前面的数 + 1 ） * 位数
+            //例如：129，十位数就是 （ 1 + 1 ）* 10 ，个位就是 （ 12 + 1 ）* 1， 以此类推
+            //如果当前位等于一，则为（该位前面的数） * 位数 + 该位后面的数 + 1
+            //如果当前位小于一，则为（该位前面的数） * 位数
+            for (let i = 1; i < str.length; i++) {
+                let temp = Number(str[i]);
+                if (temp > 1) {
+                    res += (Number(str.substring(0, i)) + 1) * Math.pow(10, str.length - 1 - i);
+                } else if (temp == 1) {
+                    res += Number(str.substring(0, i)) * Math.pow(10, str.length - 1 - i) + Number(str.substr(i + 1)) + 1;
+                }
+                else {
+                    res += Number(str.substring(0, i)) * Math.pow(10, str.length - 1 - i);
+                }
+            }
+            return res
+
+        };
+
+// 作者：a-mao-da-ma
+// 链接：https://leetcode-cn.com/problems/1nzheng-shu-zhong-1chu-xian-de-ci-shu-lcof/solution/1nzheng-shu-zhong-1chu-xian-de-ci-shu-by-a-mao-da-/
+
+    </script>
+</body>
+
+</html>

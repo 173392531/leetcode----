@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 输入一个非负整数数组，把数组里所有数字拼接起来排成一个数，打印能拼接出的所有数字中最小的一个。
+
+    示例 1:
+
+    输入: [10,2]
+    输出: "102"
+    示例 2:
+
+    输入: [3,30,34,5,9]
+    输出: "3033459"
+
+    来源：力扣（LeetCode）
+    链接：https://leetcode-cn.com/problems/ba-shu-zu-pai-cheng-zui-xiao-de-shu-lcof
+    著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+
+    <!-- sort内部原理：
+        例如：
+
+        var arr = [1, 5, 4, 2];
+        sort()方法的比较逻辑为：
+        第一轮：1和5比，1和4比，1和2比
+        第二轮：5和4比，5和2比
+        第三轮：4和2比
+
+        其次，sort()方法会接受一个比较函数compare(a, b)，该函数要比较两个值，然后返回一个用于说明这两个值的相对顺序的数字。
+
+        最后，永远要记住一句话，凡是返回1或者大于0的正数的时候就要交换位置。（内部实现）
+
+        例如：
+
+        var arr = [1, 5, 4, 2];
+        现在要进行升序排列，从左到右的数组项关系最终应该为： a < b < c < d
+        所以只要在当a大于b的时候去交换它们的位置就好了：
+
+        if(a > b ) {
+            return 1;
+        }
+        简化后：
+
+        // 升序
+        return a - b;
+        // 倒序
+        return b - a; -->
+    <script>
+        // 快排：
+        var minNumber = function (nums) {
+            if (nums.length < 2) return nums.join('');
+            return quickSort(nums, 0, nums.length - 1).join('');
+        };
+        function quickSort(nums, start, end) {
+            const index = partition(nums, start, end);
+            if (start < index - 1) quickSort(nums, start, index - 1);
+            if (index < end) quickSort(nums, index, end);
+            return nums;
+        }
+        function partition(nums, l, r) {
+            const p = nums[l + r >> 1];
+            while (l <= r) {
+                while ('' + nums[l] + p < '' + p + nums[l]) l++;
+                while ('' + nums[r] + p > '' + p + nums[r]) r--;
+                if (l <= r) {
+                    [nums[l], nums[r]] = [nums[r], nums[l]];
+                    l++;
+                    r--;
+                }
+            }
+            return l;
+        }
+
+        // 作者：hyde-5
+        // 链接：https://leetcode-cn.com/problems/ba-shu-zu-pai-cheng-zui-xiao-de-shu-lcof/solution/kuai-su-pai-xu-he-nei-zhi-han-shu-liang-hlac2/
+
+        
+        // 内置排序：
+        var minNumber = function (nums) {
+            return nums.sort((a, b) => ('' + a + b) - ('' + b + a)).join('');
+        }
+
+// 作者：hyde-5
+// 链接：https://leetcode-cn.com/problems/ba-shu-zu-pai-cheng-zui-xiao-de-shu-lcof/solution/kuai-su-pai-xu-he-nei-zhi-han-shu-liang-hlac2/
+
+    </script>
+</body>
+
+</html>
