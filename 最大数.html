@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 比较 ab 与 ba的大小，按降序排列；
+        再将数组转化为字符串。 -->
+    <script>
+        var largestNumber = function (nums) {
+            nums = nums.sort((a, b) => {
+                let S1 = `${a}${b}`;
+                let S2 = `${b}${a}`;
+                return S2 - S1;
+            });
+            return nums[0] ? nums.join('') : '0';
+        };
+
+// 作者：caoyq0521
+// 链接：https://leetcode-cn.com/problems/largest-number/solution/zui-da-shu-by-caoyq0521/
+
+    </script>
+</body>
+
+</html>
