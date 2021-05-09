@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 从扑克牌中随机抽5张牌，判断是不是一个顺子，即这5张牌是不是连续的。
+    2～10为数字本身，A为1，J为11，Q为12，K为13，而大、小王为 0 ，可以看成任意数字。A 不能视为 14。
+
+
+  示例 1:
+
+  输入: [1,2,3,4,5]
+  输出: True
+   
+
+  示例 2:
+
+  输入: [0,0,1,2,5]
+  输出: True
+
+  来源：力扣（LeetCode）
+  链接：https://leetcode-cn.com/problems/bu-ke-pai-zhong-de-shun-zi-lcof
+  著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+  <script>
+    var isStraight = function (nums) {
+      /* 
+         分治思想 五张牌构成顺子的充分条件需要满足
+         1. 不重复 使用Set去重
+         2. max - min < 5 最大牌值 减去 最小牌值 小于5 且跳过大小王
+      */
+      const set = new Set()
+      let min = 14, max = 0 // ⚠️ min和max的初始值是两个边界值[0, 13]
+
+      for (const num of nums) {
+        // 遇到大小王 跳过
+        if (!num) continue
+        // 遇到重复则直接 返回false
+        if (set.has(num)) return false
+        set.add(num)
+        // 迭代更新 min和max 以及set
+        min = Math.min(min, num)
+        max = Math.max(max, num)
+      }
+      return max - min < 5
+    };
+
+// 作者：floretpig
+// 链接：https://leetcode-cn.com/problems/bu-ke-pai-zhong-de-shun-zi-lcof/solution/you-ya-shi-xian-qiu-bu-ke-pai-zhong-de-s-c5kl/
+
+  </script>
+</body>
+
+</html>
