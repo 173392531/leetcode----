@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 给定一个非空字符串 s 和一个包含非空单词的列表 wordDict，
+    判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。
+
+  说明：
+
+  拆分时可以重复使用字典中的单词。
+  你可以假设字典中没有重复的单词。
+  示例 1：
+
+  输入: s = "leetcode", wordDict = ["leet", "code"]
+  输出: true
+  解释: 返回 true 因为 "leetcode" 可以被拆分成 "leet code"。
+  示例 2：
+
+  输入: s = "applepenapple", wordDict = ["apple", "pen"]
+  输出: true
+  解释: 返回 true 因为 "applepenapple" 可以被拆分成 "apple pen apple"。
+       注意你可以重复使用字典中的单词。
+  示例 3：
+
+  输入: s = "catsandog", wordDict = ["cats", "dog", "sand", "and", "cat"]
+  输出: false
+
+  来源：力扣（LeetCode）
+  链接：https://leetcode-cn.com/problems/word-break
+  著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+  <script>
+    var wordBreak = function (s, wordDict) {
+      const wordSet = new Set(wordDict);
+      const len = s.length;
+      const dp = new Array(len + 1).fill(false);
+      dp[0] = true;
+      for (let i = 1; i <= len; i++) {
+        for (let j = i - 1; j >= 0; j--) {
+          if (dp[i] == true) break;
+          if (dp[j] == false) continue;
+          const suffix = s.slice(j, i);
+          if (wordSet.has(suffix) && dp[j] == true) {
+            dp[i] = true;
+            break;
+          }
+        }
+      }
+      return dp[s.length];
+    };
+
+
+    // 作者：xiao_ben_zhu
+    // 链接：https://leetcode-cn.com/problems/word-break/solution/shou-hui-tu-jie-san-chong-fang-fa-dfs-bfs-dong-tai/
+
+
+    // DFS
+    const wordBreaks = (s, wordDict) => {
+      const len = s.length;
+      const wordSet = new Set(wordDict);
+      const memo = new Array(len);
+
+      const canBreak = (start) => {
+        if (start == len) return true;
+        console.log(memo);
+        if (memo[start] !== undefined) return memo[start]; // memo中有，就用memo中的
+
+        for (let i = start + 1; i <= len; i++) {
+          const prefix = s.slice(start, i);
+          if (wordSet.has(prefix) && canBreak(i)) {
+            // 从13开始返抄
+            console.log(i);
+            memo[start] = true; // 当前递归的结果存一下
+            return true;
+          }
+        }
+        memo[start] = false; // 当前递归的结果存一下
+        return false;
+      };
+      return canBreak(0);
+    };
+    console.log(wordBreaks('applepenapple', ["apple", "pen"]));
+  // 作者：xiao_ben_zhu
+  // 链接：https://leetcode-cn.com/problems/word-break/solution/shou-hui-tu-jie-san-chong-fang-fa-dfs-bfs-dong-tai/
+
+  </script>
+</body>
+
+</html>

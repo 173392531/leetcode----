@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    const exist = (board, word) => {
+      const m = board.length;
+      const n = board[0].length;
+      const used = new Array(m);    // 二维矩阵used，存放bool值
+      for (let i = 0; i < m; i++) {
+        used[i] = new Array(n);
+      }
+      // canFind 判断当前点是否是目标路径上的点
+      const canFind = (row, col, i) => { // row col 当前点的坐标，i当前考察的word字符索引
+        if (i == word.length) {        // 递归的出口 i越界了就返回true
+          return true;
+        }
+        if (row < 0 || row >= m || col < 0 || col >= n) { // 当前点越界 返回false
+          return false;
+        }
+        if (used[row][col] || board[row][col] != word[i]) { // 当前点已经访问过，或，非目标点
+          return false;
+        }
+        // 排除掉所有false的情况，当前点暂时没毛病，可以继续递归考察
+        used[row][col] = true;  // 记录一下当前点被访问了
+        // canFindRest：基于当前选择的点[row,col]，能否找到剩余字符的路径。
+        const canFindRest = canFind(row + 1, col, i + 1) || canFind(row - 1, col, i + 1) ||
+          canFind(row, col + 1, i + 1) || canFind(row, col - 1, i + 1);
+
+        if (canFindRest) { // 基于当前点[row,col]，可以为剩下的字符找到路径
+          return true;
+        }
+        used[row][col] = false; // 不能为剩下字符找到路径，返回false，撤销当前点的访问状态
+        return false;
+      };
+
+      for (let i = 0; i < m; i++) { // 遍历找起点，作为递归入口
+        for (let j = 0; j < n; j++) {
+          if (board[i][j] == word[0] && canFind(i, j, 0)) { // 找到起点且递归结果为真，找到目标路径
+            return true;
+          }
+        }
+      }
+      return false; // 怎么样都没有返回true，则返回false
+    };
+
+    // 作者：xiao_ben_zhu
+    // 链接：https://leetcode-cn.com/problems/word-search/solution/shou-hua-tu-jie-79-dan-ci-sou-suo-dfs-si-lu-de-cha/
+
+    var exist = function (board, word) {
+      for (let i = 0; i < board.length; i++) {
+        for (let j = 0; j < board[0].length; j++) {
+          if (dfs(board, word, i, j, 0)) {
+            return true
+          }
+        }
+      }
+      return false
+      function dfs(board, word, i, j, k) {
+        // 递归的base case
+        if (i < 0 || j < 0 || i >= board.length || j >= board[0].length || board[i][j] !== word[k]) {
+          return false
+        }
+        if (k === word.length - 1) {
+          return true
+        }
+        board[i][j] = '' // 标记下已经查找过的
+        // !上下左右 每次进去 k+1==>表示 走了多少步
+        let res = dfs(board, word, i - 1, j, k + 1) || dfs(board, word, i + 1, j, k + 1) || dfs(board, word, i, j - 1, k + 1) || dfs(board, word, i, j + 1, k + 1)
+        // 撤销
+        board[i][j] = word[k]
+        return res
+      }
+    };
+
+// 作者：gang-feng
+// 链接：https://leetcode-cn.com/problems/word-search/solution/kan-bu-dong-ni-da-wo-by-gang-feng-tbge/
+
+  </script>
+</body>
+
+</html>
