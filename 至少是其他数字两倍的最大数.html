@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var dominantIndex = function (nums) {
+      let f = 0, s = 0;
+
+      for (let n of nums) {
+        if (n > f) {
+          s = f;
+          f = n;
+        } else if (n > s) {
+          s = n;
+        }
+      }
+
+      if (2 * s > f) return -1;
+
+      return nums.indexOf(f);
+    }
+
+// 作者：wanyuxuan
+// 链接：https://leetcode-cn.com/problems/largest-number-at-least-twice-of-others/solution/pai-xu-he-fei-pai-xu-de-liang-chong-jie-fa-by-wany/
+
+  </script>
+</body>
+
+</html>
