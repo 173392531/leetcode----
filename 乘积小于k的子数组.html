@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 给定一个正整数数组 nums。
+
+    找出该数组内乘积小于 k 的连续的子数组的个数。
+
+    示例 1:
+
+    输入: nums = [10,5,2,6], k = 100
+    输出: 8
+    解释: 8个乘积小于100的子数组分别为: [10], [5], [2], [6], [10,5], [5,2], [2,6], [5,2,6]。
+    需要注意的是 [10,5,2] 并不是乘积小于100的子数组。
+
+    来源：力扣（LeetCode）
+    链接：https://leetcode-cn.com/problems/subarray-product-less-than-k  -->
+    <script>
+        // 右指针每增加一位，以右指针为首增加子数组，
+        // [5,2]加6，增加[6]、[2,6]、[5,2,6]，个数即为R - L+ 1
+        var numSubarrayProductLessThanK = function (nums, k) {
+            if (k <= 1) return 0
+            let count = 0
+            let L = R = 0, mul = 1
+            while (R < nums.length) {
+                mul = mul * nums[R]
+                while (mul >= k) {
+                    mul = mul / nums[L++]
+                }
+                count += R - L + 1
+                R++
+            }
+            return count
+        };
+
+        // 作者：eskimo6666
+        // 链接：https://leetcode-cn.com/problems/subarray-product-less-than-k/solution/cheng-ji-xiao-yu-kde-zi-shu-zu-by-eskimo6666/
+
+
+
+        // 因为都是正整数，乘一个数或除一个数乘积保证单调变化，所以可以用窗口法
+        // 还有一个关键约束条件：连续子数组。所以在窗口中加一个数的时候，增加的连续子数组数为 j-i+1
+        // 比如 目前的数组是 [1,2,3],准备把 4 加到窗口中，从后往前看可以组成的 “连续” 子数组为 [4,3],[4,3,2],
+        // [4,3,2,1]，也就是说原来数组中有几个数，新增加一个数，就会增加几个连续子数组。
+        // 在窗口中，如果整体乘积大于 k ，除掉窗口中的第一个数，如果小于，向前移动
+
+
+        // 链接：https://leetcode-cn.com/problems/subarray-product-less-than-k/solution/hua-dong-chuang-kou-xiang-jie-by-jack-108/
+        var numSubarrayProductLessThanK = function (nums, k) {
+            let mul = 1
+            let count = 0
+            for (let i = 0, j = 0; i < nums.length && j < nums.length;) {
+                let tmp = mul * nums[j]
+                if (tmp < k) {
+                    mul = tmp
+                    count += j - i + 1
+                    j++
+                }
+                else {
+                    mul /= nums[i]
+                    i++
+                }
+            }
+            return count
+        };
+
+// 作者：jack-108
+// 链接：https://leetcode-cn.com/problems/subarray-product-less-than-k/solution/hua-dong-chuang-kou-xiang-jie-by-jack-108/
+
+    </script>
+</body>
+
+</html>
