@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 给你一份工作时间表 hours，上面记录着某一位员工每天的工作小时数。
+  我们认为当员工一天中的工作小时数大于 8 小时的时候，那么这一天就是「劳累的一天」。
+  所谓「表现良好的时间段」，意味在这段时间内，「劳累的天数」是严格 大于「不劳累的天数」。
+  请你返回「表现良好时间段」的最大长度。
+
+  示例 1：
+
+  输入：hours = [9,9,6,0,6,6,9]
+  输出：3
+  解释：最长的表现良好时间段是 [9,9,6]。
+
+  链接：https://leetcode-cn.com/problems/longest-well-performing-interval -->
+  <script>
+    var longestWPI = function (hours) {
+      let preSum = new Array(hours.length + 1).fill(0)
+      for (let i = 1; i <= hours.length; i++) {
+        if (hours[i - 1] > 8) preSum[i] = preSum[i - 1] + 1
+        else preSum[i] = preSum[i - 1] - 1
+      }
+      let max = 0
+      for (let i = 0; i < preSum.length - 1; i++) {
+        for (let j = i + 1; j < preSum.length; j++) {
+          if (preSum[j] - preSum[i] > 0) {
+            max = Math.max(max, j - i)
+          }
+        }
+      }
+      return max
+    };
+
+    // 作者：muyids
+    // 链接：https://leetcode-cn.com/problems/longest-well-performing-interval/solution/qian-zhui-he-dan-diao-zhan-by-muyids/
+
+    var longestWPI = function (hours) {
+      // 前缀和
+      let preSum = new Array(hours.length + 1).fill(0)
+      for (let i = 0; i < hours.length; i++) {
+        if (hours[i] > 8) preSum[i + 1] = preSum[i] + 1
+        else preSum[i + 1] = preSum[i] - 1
+      }
+
+      // 单减栈
+      let stack = []
+      stack.push(0)
+      for (let i = 1; i < preSum.length; i++) {
+        if (preSum[stack[stack.length - 1]] > preSum[i]) stack.push(i)
+      }
+
+      // 从右到左求最大跨度
+      let max = 0
+      for (let i = preSum.length - 1; i > max; i--) {
+        while (stack.length > 0 && preSum[stack[stack.length - 1]] < preSum[i]) {
+          max = Math.max(max, i - stack.pop())
+        }
+      }
+      return max
+    };
+
+// 作者：muyids
+// 链接：https://leetcode-cn.com/problems/longest-well-performing-interval/solution/qian-zhui-he-dan-diao-zhan-by-muyids/
+
+  </script>
+</body>
+
+</html>
