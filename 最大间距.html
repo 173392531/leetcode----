@@ -76,6 +76,7 @@
             const d = Math.max(1, Math.floor(maxVal - minVal) / (n - 1));
             console.log(d)
             // debugger
+            // 算出桶的个数，即在这个间距下一定能将所有值涵盖在该桶数目下
             const bucketSize = Math.floor((maxVal - minVal) / d) + 1;
             console.log(bucketSize)
             const bucket = new Array(bucketSize).fill(0).map(x => new Array(2).fill(0));
@@ -89,8 +90,12 @@
             for (let i = 0; i < n; i++) {
                 const idx = Math.floor((nums[i] - minVal) / d);
                 if (bucket[idx][0] === -1) {
+                    // 该桶中没有任何其他值
                     bucket[idx][0] = bucket[idx][1] = nums[i];
+                    console.log(bucket);
+                    // debugger
                 } else {
+                    // 桶中有了值，就要对该值进行判断，其是大还是小
                     bucket[idx][0] = Math.min(bucket[idx][0], nums[i]);
                     bucket[idx][1] = Math.max(bucket[idx][1], nums[i]);
                 }
@@ -103,6 +108,7 @@
                     continue;
                 }
                 if (prev != -1) {
+                    // 找出桶之间的差值（大桶的最小值减去小桶的最大值）
                     ret = Math.max(ret, bucket[i][0] - bucket[prev][1]);
                 }
                 prev = i;
