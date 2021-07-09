@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 数组中占比超过一半的元素称之为主要元素。给你一个 整数 数组，找出其中的主要元素。
+        若没有，返回 -1 。请设计时间复杂度为 O(N) 、空间复杂度为 O(1) 的解决方案。
+
+        示例 1：
+
+        输入：[1,2,5,9,5,9,5,5,5]
+        输出：5
+        示例 2：
+
+        输入：[3,2]
+        输出：-1
+        示例 3：
+
+        输入：[2,2,1,1,1,2,2]
+        输出：2
+
+        来源：力扣（LeetCode）
+        链接：https://leetcode-cn.com/problems/find-majority-element-lcci
+        著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+    <script>
+        // 投票算法，分成元素最多的和剩余的，两两抵消
+        var majorEl = function (nums) {
+            let flatNum = -1;
+            let count = 0;
+            for (const num of nums) {
+                if (count === 0) {
+                    flatNum = num
+                }
+                if (num === flatNum) {
+                    count++
+                } else {
+                    count--
+                }
+            }
+            count = 0;
+            const length = nums.length
+            for (const num of nums) {
+                if (num === flatNum) {
+                    count++
+                }
+            }
+            return count * 2 > length ? flatNum : -1
+        }
+        // map存储法
+        var majorEl=function(nums){
+            if(nums.length===1)return nums[0]
+            let map=new Map(),max=-Infinity,len=nums.length/2
+            for(let i=0;i<nums.length;i++){
+                const curr=nums[i]
+                map.set(curr,map.has(curr)?map.get(curr)+1:1)
+                max=Math.max(max,map.get(curr));
+                if(max>len){
+                    return curr
+                }
+            }
+            return -1
+        }
+    </script>
+</body>
+
+</html>
