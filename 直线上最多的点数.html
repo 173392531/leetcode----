@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 给你一个数组 points ，其中 points[i] = [xi, yi] 表示 X-Y 平面上的一个点。
+        求最多有多少个点在同一条直线上。
+
+        示例 1：
+
+
+        输入：points = [[1,1],[2,2],[3,3]]
+        输出：3
+        示例 2：
+
+        输入：points = [[1,1],[3,2],[5,3],[4,1],[2,3],[1,4]]
+        输出：4
+
+        来源：力扣（LeetCode）
+        链接：https://leetcode-cn.com/problems/max-points-on-a-line
+        著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+        
+    <!-- 先排序数组，先将两个点 a, b 加入数组，
+    再计算 a, b 两点的斜率 (xa - xb) / (ya - yb)
+    判断之后的第三个点 c 和 a 或 b 的斜率是否一样
+    一样则继续加入数组，
+    不一样则停止加入 c，判断后一个点
+    依照这个思路进行 dfs 过程。 -->
+    <script>
+        var maxPoints = function (points) {
+            points.sort((a, b) => a[0] - b[0]);
+            console.log(points);
+            let max = 1;
+            const dfs = (startIndex, selected) => {
+                max = Math.max(max, selected.length); // 更新最大值
+                for (let i = startIndex; i < points.length; ++i) {
+                    if (selected.length < 2) { // 若当前数组元素小于2个，则无法计算斜率，继续无脑添加：）
+                        selected.push(points[i]);
+                        dfs(i + 1, selected);
+                        selected.pop(); // 注意需要回溯一下，考虑不添加这个点的情况
+                    } else {
+                        const curK = (selected[0][0] - selected[1][0]) / (selected[0][1] - selected[1][1]); /* 当前数组中直线的斜率 */
+                        const thisK = (selected[0][0] - points[i][0]) / (selected[0][1] - points[i][1]); /* 新的点与数组中任一点的斜率 */
+                        if (curK === thisK) { /* 若新的点在直线上 */
+                            selected.push(points[i]);
+                            dfs(i + 1, selected);
+                            selected.pop(); /* 回溯一下 */
+                        }
+                    }
+                }
+            }
+            dfs(0, []);
+            return max;
+        };
+
+// 作者：cyphernull
+// 链接：https://leetcode-cn.com/problems/max-points-on-a-line/solution/js-jian-dan-dfs-si-lu-by-cyphernull-najf/
+
+    </script>
+</body>
+
+</html>
