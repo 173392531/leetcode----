@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 给定 N 个人的出生年份和死亡年份，第 i 个人的出生年份为 birth[i]，死亡年份为 death[i]，
+        实现一个方法以计算生存人数最多的年份。
+        你可以假设所有人都出生于 1900 年至 2000 年（含 1900 和 2000 ）之间。
+        如果一个人在某一年的任意时期处于生存状态，那么他应该被纳入那一年的统计中。
+        例如，生于 1908 年、死于 1909 年的人应当被列入 1908 年和 1909 年的计数。
+        如果有多个年份生存人数相同且均为最大值，输出其中最小的年份。
+
+        输入：
+        birth = {1900, 1901, 1950}
+        death = {1948, 1951, 2000}
+        输出： 1901
+
+        来源：力扣（LeetCode）
+        链接：https://leetcode-cn.com/problems/living-people-lcci
+        著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+    <script>
+        var maxAliveYear = function (birth, death) {
+            let add = new Array(101).fill(0),
+                diff = new Array(101).fill(0),
+                max = 0,
+                ret = -1;
+            //统计对应年份的出生人数和死亡人数
+            for (let i = 0; i < birth.length; i++) {
+                add[birth[i] - 1900]++;
+                diff[death[i] - 1900]++;
+            }
+            //动态规划，累加得总出生和总死亡人数
+            for (let i = 1; i < add.length; i++) {
+                add[i] = add[i] + add[i - 1];
+                diff[i] = diff[i] + diff[i - 1];
+            }
+            //做差求最大值（题目指出出生年和死亡的人数都算是当年的存活人数）
+            for (let i = 0; i < add.length; i++) {
+                if (i == 0 && max < add[i]) {
+                    max = add[i];
+                    ret = 0;
+                }
+                if (i != 0 && max < add[i] - diff[i - 1]) {
+                    max = add[i] - diff[i - 1];
+                    ret = i;
+                }
+            }
+            return ret + 1900;
+        };
+
+        // 作者：oppeuro
+        // 链接：https://leetcode-cn.com/problems/living-people-lcci/solution/jscong-ling-yi-ge-jiao-du-li-jie-wen-ti-by-oppeuro/
+
+
+        var maxLiveNum=function(){
+            let add=new Array(101).fill(0),
+            diff=new Array(101).fill(0),
+            max=0,ret=-1;
+            for(let i=0;i<birth.length;i++){
+                add[birth[i]-1900]++;
+                diff[death[i]-1900]++;
+            }
+            for(let i=1;i<add.length;i++){
+                add[i]=add[i]+add[i-1]
+                diff[i]=diff[i]+diff[i-1]
+            }
+            for(let i=0;i<add.length;i++){
+                if(i==0 && max<add[i]){
+                    max=add[i];
+                    ret=0;
+                }
+                if(i!=0 && max<add[i]-diff[i-1]){
+                    max=add[i]-diff[i-1]
+                    ret=i;
+                }
+            }
+            return ret+1900
+        }
+        var maxAliveYear = function (birth, death) {
+            //arr为辅助数组，num为当前存活人数最多的年份的存活人数，min为最小的存活人数最多的年份，minBirth为出生时间中的最小值（为了减小arr的内存浪费）
+            let arr = [], num = 0, min = 0, minBirth = birth[0];
+            for (let i = 1; i < birth.length; i++) {//寻找出生时间的最小值
+                if (birth[i] < minBirth) minBirth = birth[i];
+            }
+            for (let i = 0; i < birth.length; i++) {
+                for (let j = birth[i] - minBirth; j <= death[i] - minBirth; j++) {
+                    if (arr[j] == undefined) arr[j] = 0;
+                    arr[j]++;
+                    if (arr[j] > num) {
+                        num = arr[j];
+                        min = j;
+                    } else if (arr[j] == num) {
+                        if (j < min) min = j;
+                    }
+                }
+            }
+            return min + minBirth;
+        };
+    // 作者：tang_chao_li_zi
+    // 链接：https://leetcode-cn.com/problems/living-people-lcci/solution/zhi-xing-yong-shi-he-nei-cun-xiao-hao-du-ji-bai-li/
+
+    </script>
+</body>
+
+</html>
