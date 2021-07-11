@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 给定一个方阵，其中每个单元(像素)非黑即白。设计一个算法，找出 4 条边皆为黑色像素的最大子方阵。
+    返回一个数组 [r, c, size] ，其中 r, c 分别代表子方阵左上角的行号和列号，size 是子方阵的边长。
+    若有多个满足条件的子方阵，返回 r 最小的，若 r 相同，返回 c 最小的子方阵。若无满足条件的子方阵，返回空数组。
+
+    示例 1:
+
+    输入:
+    [
+       [1,0,1],
+       [0,0,1],
+       [0,0,1]
+    ]
+    输出: [1,0,2]
+    解释: 输入中 0 代表黑色，1 代表白色，标粗的元素即为满足条件的最大子方阵
+    示例 2:
+
+    输入:
+    [
+       [0,1,1],
+       [1,0,1],
+       [1,1,0]
+    ]
+    输出: [0,0,1]
+
+    来源：力扣（LeetCode）
+    链接：https://leetcode-cn.com/problems/max-black-square-lcci
+    著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+    <!-- 使用dp数组存储每个点的所构成的长和宽，因为是正方形所以取其最小值进行遍历。
+        只要遍历的最小值range大于之前保存的最大边且满足另外两边（横向和纵向）
+        都等于range即dp[i - range + 1][j][0] >= range && dp[i][j - range + 1][1] >= range，便更新所求的最大边。
+
+    作者：oppeuro
+    链接：https://leetcode-cn.com/problems/max-black-square-lcci/solution/js-dong-tai-gui-hua-by-oppeuro/ -->
+    <script>
+        /**
+         * @param {number[][]} matrix
+         * @return {number[]}
+         */
+        var findSquare = function (matrix) {
+            let dp = new Array(matrix.length),
+                size = 0,
+                x = 0,
+                y = 0;
+            //初始化dp数组
+            for (let i = 0; i < matrix.length; i++) {
+                dp[i] = [];
+                for (let j = 0; j < matrix[i].length; j++) {
+                    if (matrix[i][j] == 0) {
+                        dp[i][j] = [1, 1]
+                        if (size == 0) {
+                            size = 1;
+                            x = i;
+                            y = j;
+                        }
+                    } else {
+                        dp[i][j] = [0, 0]
+                    }
+                }
+            }
+            for (let i = 1; i < matrix.length; i++) {
+                if (matrix[i][0] == 0) {
+                    dp[i][0][1] = Math.max(1, dp[i - 1][0][1] + 1);
+                }
+            }
+            for (let i = 1; i < matrix[0].length; i++) {
+                if (matrix[0][i] == 0) {
+                    dp[0][i][0] = Math.max(1, dp[0][i - 1][0] + 1);
+                }
+            }
+            for (let i = 1; i < matrix.length; i++) {
+                for (let j = 1; j < matrix[i].length; j++) {
+                    if (matrix[i][j] == 0) {
+                        dp[i][j][0] = Math.max(1, dp[i][j - 1][0] + 1);
+                        dp[i][j][1] = Math.max(1, dp[i - 1][j][1] + 1);
+                        let range = Math.min(dp[i][j][0], dp[i][j][1]);
+                        for (; range > size; range--) {
+                            if (dp[i - range + 1][j][0] >= range && dp[i][j - range + 1][1] >= range) {
+                                size = range;
+                                x = i - range + 1;
+                                y = j - range + 1;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            return size == 0 ? [] : [x, y, size];
+        }
+
+// 作者：oppeuro
+// 链接：https://leetcode-cn.com/problems/max-black-square-lcci/solution/js-dong-tai-gui-hua-by-oppeuro/
+
+    var findS=function(matrix){
+        let dp=new Array(matrix.length),
+        size=0,
+        x=0,
+        y=0;
+        // 初始化dp数组
+        for(let i=0;i<maxtrix.length;i++){
+            dp[i]=[];
+            for(let i=0;j<maxtrix[i].length;j++){
+                if(matrix[i][j]==0){
+                    dp[i][j]=[1,1]
+                    if(size==0){
+                        size=1;
+                        x=i;
+                        y=j;
+                    }
+                }else{
+                    dp[i][j]=[0,0]
+                }
+            }
+        }
+        for(let i=1;i<matrix.length;i++){
+            if(matrix[i][0]==0){
+                dp[i][0][1]=Math.max(1,dp[i-1][0][1]+1);
+            }
+        }
+        for(let i=1;i<matrix[0].length;i++){
+            if(matrix[0][i]==0){
+                dp[0][i][0]=Math.max(1,dp[0][i-1][0]+1);
+            }
+        }
+        for(let i=1;i<maxtrix.length;i++){
+            for(let j=1;j<matrix[i].length;j++){
+                if(matrix[i][j]==0){
+                    dp[i][j][0]=Math.max(1,dp[i][j-1][0]+1)
+                    dp[i][j][1]=Math.max(1,dp[i-1][j][1]+1)
+                    let range=Math.min(dp[i][j][0],dp[i][j][1])
+                    for(;range>size;range--){
+                        if(dp[i-range+1][j][0]>=range && dp[i][j-range+1][1]>=range){
+                            size=range;
+                            x=i-range+1;
+                            y=j-range+1;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return size==0?[]:[x,y,size]
+    }
+    </script>
+</body>
+
+</html>
