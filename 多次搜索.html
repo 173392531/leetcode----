@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 给定一个较长字符串big和一个包含较短字符串的数组smalls，设计一个方法，
+        根据smalls中的每一个较短字符串，对big进行搜索。
+        输出smalls中的字符串在big里出现的所有位置positions，其中positions[i]为smalls[i]出现的所有位置。
+
+    示例：
+
+    输入：
+    big = "mississippi"
+    smalls = ["is","ppi","hi","sis","i","ssippi"]
+    输出： [[1,4],[8],[],[3],[1,4,7,10],[5]]
+
+    来源：力扣（LeetCode）
+    链接：https://leetcode-cn.com/problems/multi-search-lcci
+    著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+    <script>
+        // 1.双层for循环法
+        var multiSearch = function (big, smalls) {
+            let res = [];
+
+            for (let i = 0; i < smalls.length; i++) {
+                res[i] = [];
+
+                const cur = smalls[i];
+                if (!cur) continue;
+                const l = cur.length;
+
+                for (j = 0; j <= big.length - l; j++) {
+                    const cs = big.slice(j, j + l);
+                    if (cs === cur) {
+                        res[i].push(j);
+                    }
+                }
+            }
+            return res;
+        };
+
+        // 作者：7yue
+        // 链接：https://leetcode-cn.com/problems/multi-search-lcci/solution/10-xing-dai-ma-by-7yue-ttnv/
+
+        // 2.前缀二叉树法
+        function TreeNode(val) {
+            this.val = val || null
+            this.children = {}
+        }
+
+        /**
+         * @param {string} big
+         * @param {string[]} smalls
+         * @return {number[][]}
+         */
+        var multiSearch = function (big, smalls) {
+            const res = smalls.map(() => [])
+            if (!big) {
+                return res
+            }
+            let Tree = new TreeNode()
+            let now;
+            smalls.forEach((small, index) => {
+                now = Tree;
+                for (let i = 0; i < small.length; i++) {
+                    // 如果子项有small，直接把子项的值赋给now，如果没有则在子项新建tree
+                    if (!now.children[small[i]]) {
+                        now.children[small[i]] = new TreeNode(small[i])
+                    }
+                    now = now.children[small[i]]
+                }
+                now.children['last'] = index
+            })
+
+            for (let i = 0; i < big.length; i++) {
+                let now = Tree;
+                for (let j = i; j < big.length; j++) {
+                    // 如果now的子项没有当前项，直接break，切换到下一个i
+                    if (!now.children[big[j]]) {
+                        break
+                    }
+                    // 如果有i则把子项赋给now
+                    now = now.children[big[j]]
+                    if (now.children.last !== undefined) {
+                        res[now.children.last].push(i)
+                    }
+                }
+            }
+            return res
+        };
+
+// 作者：xiaoranzife
+// 链接：https://leetcode-cn.com/problems/multi-search-lcci/solution/tong-guo-smallsgou-jian-trieshu-bian-li-nazbr/
+
+    </script>
+</body>
+
+</html>
