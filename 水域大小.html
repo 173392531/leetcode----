@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 你有一个用于表示一片土地的整数矩阵land，该矩阵中每个点的值代表对应地点的海拔高度。
+        若值为0则表示水域。由垂直、水平或对角连接的水域为池塘。池塘的大小是指相连接的水域的个数。
+        编写一个方法来计算矩阵中所有池塘的大小，返回值需要从小到大排序。
+
+        输入：
+        [
+        [0,2,1,0],
+        [0,1,0,1],
+        [1,1,0,1],
+        [0,1,0,1]
+        ]
+        输出： [1,2,4]
+
+    来源：力扣（LeetCode）
+    链接：https://leetcode-cn.com/problems/pond-sizes-lcci
+    著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+    <script>
+        /**
+         * @param {number[][]} land
+         * @return {number[]}
+         */
+        let res
+        let area
+        var pondSizes = function (land) {
+            res = []
+            for (let i = 0; i < land.length; i++) {
+                for (let j = 0; j < land[0].length; j++) {
+                    if (land[i][j] == 0) {
+                        area = 0
+                        dfs(land, i, j)
+                        res.push(area)
+                    }
+                }
+            }
+            return res.sort((a, b) => (a - b))
+        };
+
+        function dfs(land, i, j) {
+            if (i < 0 || j < 0 || i >= land.length || j >= land[0].length) return
+            if (land[i][j] == 0) {
+                land[i][j] = 1
+                area++
+                dfs(land, i - 1, j)
+                dfs(land, i + 1, j)
+                dfs(land, i, j - 1)
+                dfs(land, i, j + 1)
+                dfs(land, i - 1, j - 1)
+                dfs(land, i - 1, j + 1)
+                dfs(land, i + 1, j - 1)
+                dfs(land, i + 1, j + 1)
+            }
+        }
+
+// 作者：malin-code
+// 链接：https://leetcode-cn.com/problems/pond-sizes-lcci/solution/si-lu-qing-xi-jiao-wo-di-yi-dfszhuan-lian-by-mal-5/
+
+    </script>
+</body>
+
+</html>
