@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 输出字符串中最长连续重复字符 -->
+    <script>
+        var str = 'aaaaaaassssssssdddddccccccccccccccccccc'
+        function sameWord(str) {
+            let l = 0, r = 0, ref = '', num = 0;
+            while (r <= str.length) {
+                if (str[l] == str[r]) {
+                    r++
+                } else {
+                    if (r - l > num) {
+                        num = r - l
+                        ref = str[l]
+                    }
+                    l = r
+                    r++
+                }
+            }
+            return {
+                num: num,
+                ref: ref
+            }
+        }
+        console.log(sameWord(str))
+    </script>
+</body>
+
+</html>

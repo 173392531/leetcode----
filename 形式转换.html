@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 转换数组的形式[1, 2, 3, [4, 5]]要变为这样的对象：
+        // {
+        //     chidren: [
+        //         {
+        //             value: 1
+        //         },
+        //         {
+        //             value: 2
+        //         },
+        //         {
+        //             value: 3
+        //         },
+        //         {
+        //             children: [
+        //                 {
+        //                     {
+        //                         value: 4
+        //                     },
+        //                     {
+        //                         value: 5
+        //                     }
+        //                 }
+        //             ]
+        //         }
+        //     ]
+        // }
+
+        // 测试数组
+        var arr = [1, 2, 3, [4, 5], [[[6], 7, 8], 9], 10];
+
+        function convert(item) {
+            if (typeof item == 'number') {
+                // 如果传进来的参数是数字
+                return {
+                    value: item
+                };
+            } else if (Array.isArray(item)) {
+                // 如果传进来的参数是数组
+                return {
+                    children: item.map(_item => convert(_item))
+                };
+            }
+        }
+        
+        var o = convert(arr);
+        console.log(o);
+    </script>
+</body>
+</html>

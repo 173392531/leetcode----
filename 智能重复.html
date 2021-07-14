@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 试编写“智能重复”smartRepeat函数，实现：
+        // 将3[abc]变为abcabcabc
+        // 将3[2[a]2[b]]变为aabbaabbaabb  
+        // 将2[1[a]3[b]2[3[c]4[d]]]变为abbbcccddddcccddddabbbcccddddcccdddd
+
+        function smartRepeat(templateStr) {
+            // 指针
+            var index = 0;
+            // 栈1，存放数字
+            var stack1 = [];
+            // 栈2，存放临时字符串
+            var stack2 = [];
+            // 剩余部分
+            var rest = templateStr;
+
+            while (index < templateStr.length - 1) {
+                // 剩余部分
+                rest = templateStr.substring(index);
+
+                // 看当前剩余部分是不是以数字和[开头
+                if (/^\d+\[/.test(rest)) {
+                    // 得到这个数字
+                    let times = Number(rest.match(/^(\d+)\[/)[1]);
+                    // 就把数字压栈，把空字符串压栈
+                    stack1.push(times);
+                    stack2.push('');
+                    // 让指针后移，times这个数字是多少位就后移多少位加1位。
+                    // 为什么要加1呢？加的1位是[。
+                    index += times.toString().length + 1;
+                } else if (/^\w+\]/.test(rest)) {
+                    // 如果这个字符是字母，那么此时就把栈顶这项改为这个字母
+                    let word = rest.match(/^(\w+)\]/)[1];
+                    stack2[stack2.length - 1] = word;
+                    // 让指针后移，word这个词语是多少位就后移多少位
+                    index += word.length;
+                } else if (rest[0] == ']') {
+                    // 如果这个字符是]，那么就①将stack1弹栈，②stack2弹栈，③把字符串栈的新栈顶的元素重复刚刚弹出的那个字符串指定次数拼接到新栈顶上。
+                    let times = stack1.pop();
+                    let word = stack2.pop();
+                    // repeat是ES6的方法，比如'a'.repeat(3)得到'aaa'
+                    stack2[stack2.length - 1] += word.repeat(times);
+                    index++;
+                }
+
+                console.log(index, stack1, stack2);
+            }
+
+            // while结束之后，stack1和stack2中肯定还剩余1项。返回栈2中剩下的这一项，重复栈1中剩下的这1项次数，组成的这个字符串。如果剩的个数不对，那就是用户的问题，方括号没有闭合。
+            return stack2[0].repeat(stack1[0]);
+        }
+
+        var result = smartRepeat('3[2[3[a]1[b]]4[d]]');
+        console.log(result);
+    </script>
+</body>
+
+</html>
