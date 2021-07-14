@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var combinationSum = function (candidates, target) {
+            const ans = [];
+            const dfs = (target, combine, idx) => {
+                if (idx === candidates.length) {
+                    return;
+                }
+                if (target === 0) {
+                    ans.push(combine);
+                    return;
+                }
+                // 不吸纳任何数，先直接跳过
+                dfs(target, combine, idx + 1);
+                // 选择当前数
+                if (target - candidates[idx] >= 0) {
+                    dfs(target - candidates[idx], [...combine, candidates[idx]], idx);
+                }
+            }
+            dfs(target, [], 0);
+            return ans;
+        };
+
+    // 作者：LeetCode-Solution
+    // 链接：https://leetcode-cn.com/problems/combination-sum/solution/zu-he-zong-he-by-leetcode-solution/
+
+    </script>
+</body>
+
+</html>

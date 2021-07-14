@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var bestSeqAtIndex = function (height, weight) {
+            let data = [];
+            height.forEach((height, index) => {
+                data.push({ height: height, weight: weight[index] });
+            });
+            data.sort((a, b) => a.height - b.height || b.weight - a.weight);
+            let dp=[1]
+            for (let i = 1; i < data.length; i++){
+                dp[i] = 1
+                for (let j = 0; j < i; j++) {
+                    data[i].weight > data[j].weight && (dp[i] = Math.max(dp[i], dp[j] + 1))
+                }
+            }
+            return Math.max(...dp)
+        };
+
+        // 个人解法：排序+动归
+
+        var bestSeqAtIndexS = function (height, weight) {
+            //在上面的人要比下面的人矮一点且轻一点w
+            //从上往下数（height，weight）中height.weight都是升序
+            //那我们就可以先将（height，weight）以height升序排序
+            //然后再从排序后的结果中去找weight的最长升序子序列就是答案了
+            let data = [];
+            let dp = [];
+            for (let i = 0; i < height.length; i++) {
+                let item = {
+                    height: height[i],
+                    weight: weight[i]
+                };
+                data.push(item);
+            }
+            //上面的人要比下面的人矮一点且轻一点 是严格<的
+            //所以对于身高相同的人，我们不能让体重小的排在前面，不然的话，这2个身高相同的人都会加入到weight的最长上升子序列中
+            //从而不符合题意
+            data.sort((a, b) => {
+                if (a.height === b.height) {
+                    return b.weight - a.weight;
+                }
+                return a.height - b.height;
+            });
+            // 利用二分法获取weight的最长上升子序列
+            let res = 0;
+            for (let index in data) {
+                let w = data[index].weight;
+                let i = 0;
+                let j = res;
+                while (i < j) {
+                    debugger;
+                    console.log('i',i)
+                    console.log('j',j)
+                    let m = Math.floor((i + j) / 2);
+                    console.log('m',m)
+                    console.log('w',w)
+                    if (dp[m] < w) {
+                        i = m + 1;
+                    } else {
+                        j = m;
+                    }
+                }
+                //这里注意二分的扣边界
+                //跳出循环时必有dp[i-1]<w, dp[i]如果有则dp[i]>w,dp[i]没有的话就会走j===res的情况
+                dp[i] = w; //更新相同长度的最小末尾
+                console.log(dp)
+                if (j === res) res++;//如果是插入末尾，则找到个更长的，长度加1
+            }
+            return res;
+        };
+
+        console.log(bestSeqAtIndex([65,70,56,75,60,68],[100,150,200,190,95,110]))
+// 作者：caiji-2
+// 链接：https://leetcode-cn.com/problems/circus-tower-lcci/solution/ben-zhi-shang-huan-shi-qiu-zui-chang-shang-sheng-z/
+
+    </script>
+</body>
+
+</html>

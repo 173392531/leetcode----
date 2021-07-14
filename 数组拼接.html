@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 将所有子数组各取一个值任意排序 -->
+    <script>
+        function arrayClip(arr) {
+            const path=[],arg=[]
+            const temp=Array.from({length:arr.length},()=>Array(arr[0].length).fill(false))
+            const td=new Array(arr.length).fill(false)
+            function dfs(arr,path,temp,arg,td) {
+                if(path.length==3){
+                    arg.push((Array.from(path)).join(''))
+                    return
+                }
+                for(let i=0;i<arr.length;i++){
+                    for(let j=0;j<arr[i].length;j++){
+                        if(temp[i][j]==true || td[i]==true){
+                            continue
+                        }
+                        path.push(arr[i][j])
+                        temp[i][j]=true
+                        td[i]=true
+                        dfs(arr,path,temp,arg,td)
+                        path.pop()
+                        temp[i][j]=false
+                        td[i]=false
+                    }
+                }
+            }
+            dfs(arr,path,temp,arg,td);
+            return arg;
+        }
+        console.log(arrayClip([[1,2],[3,4],[5,6]]))
+    </script>
+</body>
+</html>
