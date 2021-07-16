@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var change = function (amount, coins) {
+            if (amount === 0) return 1;
+
+            const dp = [1].concat(Array(amount).fill(0));
+
+            for (let j = 0; j < coins.length; j++) {
+                for (let i = 1; i < amount + 1; i++) {
+                    if (i - coins[j] >= 0) {
+                        dp[i] = dp[i] + dp[i - coins[j]];
+                    }
+                }
+            }
+            return dp[dp.length - 1];
+        };
+
+        // 作者：fe - lucifer
+        // 链接：https://leetcode-cn.com/problems/coin-lcci/solution/pythonjsdong-tai-gui-hua-he-zhu-zhan-518-ling-qian/
+
+    </script>
+</body>
+
+</html>

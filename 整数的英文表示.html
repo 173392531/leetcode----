@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 给定一个整数，打印该整数的英文描述。
+
+    示例 1:
+
+    输入: 123
+    输出: "One Hundred Twenty Three"
+    示例 2:
+
+    输入: 12345
+    输出: "Twelve Thousand Three Hundred Forty Five"
+    示例 3:
+
+    输入: 1234567
+    输出: "One Million Two Hundred Thirty Four Thousand Five Hundred Sixty Seven"
+    示例 4:
+
+    输入: 1234567891
+    输出: "One Billion Two Hundred Thirty Four Million Five Hundred Sixty Seven Thousand Eight Hundred Ninety One"
+
+    来源：力扣（LeetCode）
+    链接：https://leetcode-cn.com/problems/english-int-lcci
+    著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+    <script>
+
+        var map = {
+            "0": "Zero",
+            "1": "One",
+            "2": "Two",
+            "3": "Three",
+            "4": "Four",
+            "5": "Five",
+            "6": "Six",
+            "7": "Seven",
+            "8": "Eight",
+            "9": "Nine",
+            "10": "Ten",
+            "11": "Eleven",
+            "12": "Twelve",
+            "13": "Thirteen",
+            "14": "Fourteen",
+            "15": "Fifteen",
+            "16": "Sixteen",
+            "17": "Seventeen",
+            "18": "Eighteen",
+            "19": "Nineteen",
+            "20": "Twenty",
+            "30": "Thirty",
+            "40": "Forty",
+            "50": "Fifty",
+            "60": "Sixty",
+            "70": "Seventy",
+            "80": "Eighty",
+            "90": "Ninety",
+        };
+
+
+        var numberToWords = function (num) {
+            // 结果字符串
+            var str = '';
+
+            num = num + '';
+
+            if (num == '0') {
+                return 'Zero';
+            }
+
+            // 删除前驱0
+            if (num[0] == '0') {
+                num = num.replace(/\b(0+)/gi, "");
+            }
+
+            // 丈量字符串长度
+            var length = num.length;
+
+            if (length == 0) {
+                return '';
+            }
+            // 长度是3，按100-999处理
+            if (length == 3) {
+                str = numberToWords(num[0]);
+                str += ' ' + "Hundred";
+                str += ' ' + numberToWords(num.slice(1, num.length));
+                return str.trim();
+            }
+            // 1000 - 99万9999
+            else if (length >= 4 && length <= 6) {
+                str = numberToWords(num.slice(0, num.length - 3));
+                str += ' ' + "Thousand";
+                str += ' ' + numberToWords(num.slice(num.length - 3, num.length));
+                return str.trim();
+            }
+            // 100万 - 9亿99999999
+            else if (length >= 7 && length <= 9) {
+                str = numberToWords(num.slice(0, num.length - 6));
+                str += ' ' + "Million";
+                str += ' ' + numberToWords(num.slice(num.length - 6, num.length));
+                return str.trim();
+            }
+            // 10亿及以上
+            else if (length >= 10) {
+                str = numberToWords(num.slice(0, num.length - 9));
+                str += ' ' + "Billion";
+                str += ' ' + numberToWords(num.slice(num.length - 9, num.length));
+                return str.trim();
+            }
+
+            // 如果是2位及以下
+            // 直接匹配，如有结果则返回
+            if (map[num]) {
+                str = map[num];
+            }
+            // 如无结果说明是类似于64这样的形式，取60的叫法+4的叫法
+            else {
+                str = map[num[0] + '0'] + ' ' + map[num[1]];
+            }
+
+            return str.trim();
+        };
+
+// 作者：zkcoc
+// 链接：https://leetcode-cn.com/problems/english-int-lcci/solution/javascriptdi-gui-by-zkcoc/
+
+    </script>
+</body>
+
+</html>

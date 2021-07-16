@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var solveNQueens = function (n) {
+            //创建一个n * n的二维数组并将所有元素设置为'.'
+            const board = new Array(n).fill('.').map(x => new Array(n).fill('.'));
+            const res = []; //结果数组
+            function isValid(row, col) {    //判断能否将第row行第col列设置为皇后
+                //遍历[0, row - 1]行所出现的皇后位置
+                for (let i = 0; i < row; i++) {
+                    for (let j = 0; j < n; j++) {
+                        if (board[i][j] == 'Q' && (j == col || i + j === row + col || i - j === row - col)) {
+                            return false;
+                            /* 
+                                j == col 代表当前位置与 已设置的皇后在同一列
+                                i + j === row + col 代表当前位置与 已设置的皇后在同一副对角线
+                                i - j === row - col 代表当前位置与 已设置的皇后在同一主对角线
+                            */
+                        }
+                    }
+                }
+                return true;
+            };
+            function helper(row) {
+                if (row == n) { //递归出口
+                    const stringsBoard = board.slice(); //拷贝一份条件成立的结果
+                    for (let i = 0; i < n; i++) {
+                        stringsBoard[i] = stringsBoard[i].join(''); //每一行拼成字符串
+                    }
+                    res.push(stringsBoard);
+                    return;
+                }
+                for (let col = 0; col < n; col++) {  //col是列，row是行
+                    if (isValid(row, col)) {
+                        board[row][col] = 'Q';  //满足条件，当前位置赋值为皇后
+                        helper(row + 1);        //继续选择向下递归
+                        board[row][col] = '.';  //递归结束，无论是否成立都要恢复为点，并进行后一列为皇后进行递归
+                    }
+                }
+            };
+            helper(0);
+            return res;
+        };
+
+        // 作者：chen-ke-jie-ryan
+        // 链接：https://leetcode-cn.com/problems/eight-queens-lcci/solution/di-gui-hui-su-fa-zhu-shi-xiang-xi-by-chen-ke-jie-r/
+
+    </script>
+</body>
+
+</html>

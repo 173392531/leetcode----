@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 编写一个函数，不用临时变量，直接交换numbers = [a, b]中a与b的值。
+        示例：
+
+        输入: numbers = [1,2]
+        输出: [2,1] -->
+    <script>
+        // 加减法 a=b-a;b=b-a;a=b+a （要考虑溢出问题）
+        // 数组反转 numbers.reverse(); （取巧！！！）
+        // es6新特性 [a,b]=[b,a]
+        // y = [x, x = y][0]
+        // 异或 a=a^b;b=a^b;a=a^b;
+        var swapNumbers = function (numbers) {
+            numbers[0] = numbers[1] - numbers[0];
+            numbers[1] = numbers[1] - numbers[0];
+            numbers[0] = numbers[1] + numbers[0];
+            return numbers
+        };
+
+        // 作者：ji-jue-hai-no
+        // 链接：https://leetcode-cn.com/problems/swap-numbers-lcci/solution/wu-chong-jie-fa-by-ji-jue-hai-no/
+
+    </script>
+</body>
+
+</html>
