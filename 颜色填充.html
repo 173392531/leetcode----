@@ -30,7 +30,7 @@
         链接：https://leetcode-cn.com/problems/color-fill-lcci -->
     <script>
         // dfs
-        const dfs = (image, sr, sc, newColor) => {
+        const setC = (image, sr, sc, newColor) => {
             // 1. 设置初始颜色值
             const oldColor = image[sr][sc];
 
@@ -71,7 +71,7 @@
             return image;
         };
 
-        console.log(dfs(
+        console.log(setC(
             [
                 [1, 1, 1],
                 [1, 1, 0],
