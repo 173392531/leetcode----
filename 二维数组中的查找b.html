@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 收缩法
+        var searchMatrix = function (matrix, target) {
+            if (!matrix || matrix.length == 0 || matrix[0].length == 0) {
+                return false;
+            }
+
+            let rows = matrix.length;
+            let cols = matrix[0].length;
+            let r = 0;
+            let c = cols - 1;
+
+            while (r < rows && c >= 0) {
+                let right_top = matrix[r][c];
+                if (target == right_top) {
+                    return true;
+                }
+                else if (target < right_top) {
+                    c--;
+                }
+                else {
+                    r++;
+                }
+            }
+            return false;
+
+        };
+
+        // 作者：mqqgd
+        // 链接：https://leetcode-cn.com/problems/sorted-matrix-search-lcci/solution/pai-xu-ju-zhen-cha-zhao-er-wei-shu-zu-zh-h0tu/
+
+        // 二分法
+        var searchMatrix = function (matrix, target) {
+            var N = matrix.length
+            if (!N) return 0;
+            var M = matrix[0].length
+            for (let i = 0; i < N; i++) {
+                if (matrix[i][0] > target) {
+                    break
+                }
+                var left = 0, right = M - 1;
+                while (left <= right) {
+                    var mid = (right + left) >> 1;
+                    var midVal = matrix[i][mid]
+                    if (target == midVal || target == matrix[i][left] || target == matrix[i][right]) {
+                        return true
+                    }
+                    if (left + 1 == right) {
+                        break;
+                    }
+                    if (target > midVal) {
+                        left++;
+                    } else {
+                        right--;
+                    }
+                }
+            }
+            return false;
+        };
+
+        // 作者：zo11o
+        // 链接：https://leetcode-cn.com/problems/sorted-matrix-search-lcci/solution/javascript-er-fen-fa-by-zo11o-4ase/
+    </script>
+</body>
+
+</html>
