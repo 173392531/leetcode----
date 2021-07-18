@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 三步问题。有个小孩正在上楼梯，楼梯有n阶台阶，小孩一次可以上1阶、2阶或3阶。
+        实现一种方法，计算小孩有多少种上楼梯的方式。结果可能很大，你需要对结果模1000000007。
+
+        示例1:
+
+        输入：n = 3 
+        输出：4
+        说明: 有四种走法
+        示例2:
+
+        输入：n = 5
+        输出：13
+
+        来源：力扣（LeetCode）
+        链接：https://leetcode-cn.com/problems/three-steps-problem-lcci
+        著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+    <script>
+
+        // 递归
+        var waysToStep = function (n) {
+            let m = 1e9 + 7
+            let dp = [0, 1, 2, 4]
+            for (let i = 4; i < n + 1; i++) {
+                dp[i] = (dp[i - 1] + dp[i - 2] + dp[i - 3]) % m
+            }
+            return dp[n]
+        };
+
+        // 优化空间
+        var waysToStep = function (n) {
+            if (n < 3) return n
+            let cur = 4
+            let one = 1
+            let two = 2
+            let three = 4
+            for (let i = 4; i <= n; i++) {
+                cur = (one + two + three) % 1000000007
+                one = two
+                two = three
+                three = cur
+            }
+            return cur
+        };
+
+    </script>
+</body>
+
+</html>
