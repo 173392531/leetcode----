@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 给定一棵二叉树，其中每个节点都含有一个整数数值(该值或正或负)。
+        设计一个算法，打印节点数值总和等于某个给定值的所有路径的数量。
+        注意，路径不一定非得从二叉树的根节点或叶节点开始或结束，但是其方向必须向下(只能从父节点指向子节点方向)。
+
+    示例:
+    给定如下二叉树，以及目标和 sum = 22，
+
+                5
+                / \
+                4   8
+            /   / \
+            11  13  4
+            /  \    / \
+            7    2  5   1
+    返回:
+
+    3
+    解释：和为 22 的路径有：[5,4,11,2], [5,8,4,5], [4,11,7]
+
+    来源：力扣（LeetCode）
+    链接：https://leetcode-cn.com/problems/paths-with-sum-lcci
+    著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+    <script>
+        // 定义一个函数helper，用于计算，当节点A为根节点的时候，和为sum的路径个数。即一定从A开始的路径。
+        // helper(root, sum) 计算了必须从根节点root开始的路径条数。
+        // 递归调用pathSum(root.right, sum) + pathSum(root.left, sum)
+
+
+        var pathSum = function (root, sum) {
+            if (!root) return 0;
+            return helper(root, sum) + pathSum(root.right, sum) + pathSum(root.left, sum);
+
+            //以root 为根节点的时候，和为sum 的路径条数
+            function helper(root, sum) {
+                if (!root) return 0;
+                if (root.val === sum) return 1 + helper(root.left, sum - root.val) + helper(root.right, sum - root.val);
+                return helper(root.left, sum - root.val) + helper(root.right, sum - root.val);
+            }
+
+        };
+
+// 作者：IamLIFI
+// 链接：https://leetcode-cn.com/problems/paths-with-sum-lcci/solution/hui-su-by-iamlifi/
+
+    </script>
+</body>
+
+</html>
