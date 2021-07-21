@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 字符串有三种编辑操作:插入一个字符、删除一个字符或者替换一个字符。 
+        给定两个字符串，编写一个函数判定它们是否只需要一次(或者零次)编辑。
+
+        示例 1:
+
+        输入: 
+        first = "pale"
+        second = "ple"
+        输出: True
+         
+
+        示例 2:
+
+        输入: 
+        first = "pales"
+        second = "pal"
+        输出: False
+
+        来源：力扣（LeetCode）
+        链接：https://leetcode-cn.com/problems/one-away-lcci
+        著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+    <script>
+        // 自己的解法：
+        var oneEditAway = function (first, second) {
+            let l1 = 0, l2 = 0, flag = 0, bol = false;
+            function isOnce(l1, l2, flag) {
+                while (l1 < first.length || l2 < second.length) {
+                    if (first[l1] != second[l2]) {
+                        flag++
+                        if (flag > 1) return
+                        isOnce(l1 + 1, l2, flag)
+                        isOnce(l1, l2 + 1, flag)
+                        isOnce(l1 + 1, l2 + 1, flag)
+                    } else {
+                        l1++
+                        l2++
+                    }
+                }
+                bol = true
+            }
+            isOnce(l1, l2, flag)
+            return bol
+        };
+        console.log(oneEditAway('palo', 'pale'))
+
+
+
+        var oneEditAway = function (first, second) {
+            if (Math.abs(first.length - second.length) > 1) return false;
+            let i = 0;
+            let j = 0;
+            let edit = false;
+            while (i < first.length && j < second.length) {
+                if (first.charAt(i) === second.charAt(j)) {
+                    i++;
+                    j++;
+                } else {
+                    if (!edit) {
+                        if (first.length === second.length) {
+                            i++;
+                            j++;
+                        } else if (first.length < second.length) {
+                            j++;
+                        } else {
+                            i++;
+                        }
+                        edit = true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        };
+
+        // 作者：tou - fa - yi - jiu - xiao - sa
+        // 链接：https://leetcode-cn.com/problems/one-away-lcci/solution/shuang-zhi-zhen-bian-li-shi-jian-fu-za-d-vwrc/
+
+    </script>
+</body>
+
+</html>

@@ -36,8 +36,26 @@
       return S.length > str.length ? str : S
     };
 
-// 作者：yutingbai
-// 链接：https://leetcode-cn.com/problems/compress-string-lcci/solution/20200316ya-suo-zi-fu-chuan-by-yutingbai/
+    // 作者：yutingbai
+    // 链接：https://leetcode-cn.com/problems/compress-string-lcci/solution/20200316ya-suo-zi-fu-chuan-by-yutingbai/
+    
+    // 自己的解法
+    var compressString = function (S) {
+      let res = [], str = '', num = 0
+      for (let i = 0; i <= S.length; i++) {
+        if (res[0] != S[i]) {
+          if (num != 0) {
+            str += res.pop() + '' + num
+          }
+          res.push(S[i]);
+          num = 1
+        } else {
+          num++
+        }
+      }
+      let result = str.length >= S.length ? S : str
+      return result
+    };
   </script>
 </body>
 

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 给你一幅由 N × N 矩阵表示的图像，其中每个像素的大小为 4 字节。请你设计一种算法，将图像旋转 90 度。
+
+        不占用额外内存空间能否做到？
+
+         
+
+        示例 1:
+
+        给定 matrix = 
+        [
+        [1,2,3],
+        [4,5,6],
+        [7,8,9]
+        ],
+
+        原地旋转输入矩阵，使其变为:
+        [
+        [7,4,1],
+        [8,5,2],
+        [9,6,3]
+        ]
+        示例 2:
+
+        给定 matrix =
+        [
+        [ 5, 1, 9,11],
+        [ 2, 4, 8,10],
+        [13, 3, 6, 7],
+        [15,14,12,16]
+        ], 
+
+        原地旋转输入矩阵，使其变为:
+        [
+        [15,13, 2, 5],
+        [14, 3, 4, 1],
+        [12, 6, 8, 9],
+        [16, 7,10,11]
+        ]
+
+        来源：力扣（LeetCode）
+        链接：https://leetcode-cn.com/problems/rotate-matrix-lcci
+        著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+    <!-- 一、倒序倒置法
+
+        1 2 3
+        4 5 6
+        7 8 9
+
+        1.将矩阵转置
+
+        1 4 7
+        2 5 8
+        3 6 9
+
+        2.将每一行row倒序reverse 
+
+        7 4 1
+        8 5 2
+        9 6 3
+
+        作者：ofeii
+        链接：https://leetcode-cn.com/problems/rotate-matrix-lcci/solution/chun-zhao-si-yue-ep07rotate-xuan-zhuan-ju-zhen-jav/ -->
+    <script>
+        //一、倒序倒置法
+
+        let rotate = (matrix) => {
+            for (let i = 0; i < matrix.length; i++) {
+                for (let j = i; j < matrix[i].length; j++) {
+                    [matrix[i][j], matrix[j][i]] = [matrix[j][i], matrix[i][j]]
+                }
+            }
+            matrix.forEach(row => row.reverse())
+        };
+
+        // 作者：ofeii
+        // 链接：https://leetcode-cn.com/problems/rotate-matrix-lcci/solution/chun-zhao-si-yue-ep07rotate-xuan-zhuan-ju-zhen-jav/
+
+        // 转换截取法
+
+        var rotate2 = function (matrix) {
+            const length = matrix.length;
+
+            // 先向原数组末尾添加数字
+            for (let i = length - 1; i >= 0; i--) {
+                for (let j = 0; j < length; j++) {
+                    matrix[j].push(matrix[i][j]);
+                }
+            }
+            
+            // 再截掉原有的数字
+            for (let i = 0; i < length; i++) {
+                matrix[i].splice(0, length);
+            }
+            return matrix
+        };
+
+// 作者：gatsby-23
+// 链接：https://leetcode-cn.com/problems/rotate-matrix-lcci/solution/javascripttong-su-yi-dong-zhu-shi-xiang-jin-yi-k-3/
+
+console.log(rotate2([
+  [1,2,3],
+  [4,5,6],
+  [7,8,9]
+]))
+    </script>
+</body>
+
+</html>
