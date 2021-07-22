@@ -50,8 +50,25 @@
       return max - min < 5
     };
 
-// 作者：floretpig
-// 链接：https://leetcode-cn.com/problems/bu-ke-pai-zhong-de-shun-zi-lcof/solution/you-ya-shi-xian-qiu-bu-ke-pai-zhong-de-s-c5kl/
+    // 作者：floretpig
+    // 链接：https://leetcode-cn.com/problems/bu-ke-pai-zhong-de-shun-zi-lcof/solution/you-ya-shi-xian-qiu-bu-ke-pai-zhong-de-s-c5kl/
+
+    // 排序法
+    var isStraight = function (nums) {
+      // 先将 nums 从小到大进行排序，再把数组中的 0 去掉
+      nums = nums.sort((a, b) => a - b).filter(item => item !== 0)
+      // 找出数组中的最大数与最小数，分别在数组的头和尾，判断它们的差是否超过 4，超过则说明不是连续的
+      if (nums[nums.length - 1] - nums[0] > 4) return false
+
+      // 遍历数组找出是否有重复的数字，因为涉及到 i + 1，所以遍历长度是 数组长度-1
+      for (let i = 0; i < nums.length - 1; i++) {
+        if (nums[i] === nums[i + 1]) return false
+      }
+      return true
+    };
+
+// 作者：welnee
+// 链接：https://leetcode-cn.com/problems/bu-ke-pai-zhong-de-shun-zi-lcof/solution/jie-shi-xiang-xi-luo-ji-qing-xi-qiang-li-dyff/
 
   </script>
 </body>
