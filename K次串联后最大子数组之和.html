@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 给你一个整数数组 arr 和一个整数 k。
+        首先，我们要对该数组进行修改，即把原数组 arr 重复 k 次。
+        举个例子，如果 arr = [1, 2] 且 k = 3，那么修改后的数组就是 [1, 2, 1, 2, 1, 2]。
+        然后，请你返回修改后的数组中的最大的子数组之和。
+        注意，子数组长度可以是 0，在这种情况下它的总和也是 0。
+        由于 结果可能会很大，所以需要 模（mod） 10^9 + 7 后再返回。 
+
+        示例 1：
+
+        输入：arr = [1,2], k = 3
+        输出：9
+        示例 2：
+
+        输入：arr = [1,-2,1], k = 5
+        输出：2
+        示例 3：
+
+        输入：arr = [-1,-2], k = 7
+        输出：0
+
+        来源：力扣（LeetCode）
+        链接：https://leetcode-cn.com/problems/k-concatenation-maximum-sum
+        著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+    <script>
+        var kConcatenationMaxSum = function (arr, k) {
+            let len = arr.length, arrSum = 0;
+            //res最后的结果
+            let tempSum = 0, res = 0;
+            // 拼接最少两个数组为一整体
+            let loopCount = Math.min(2, k) * len;
+            //数组总和
+            for (let i = 0; i < len; ++i) arrSum += arr[i];
+            console.log(arrSum);
+
+            // [1,-2,1,1,-2,1]
+            for (let i = 0; i < loopCount; ++i) {
+                // 取值
+                let val = arr[i % len];
+                // 判断带上此值后，这几项的和是否大于零，此时虽然更新不了res，但却能为下一次累加的连续性做好保证
+                tempSum = tempSum + val > 0 ? tempSum + val : 0;
+                res = Math.max(res, tempSum);
+            }
+            // arrSum > 0就证明都要，这时res === arrSum
+            if (arrSum > 0) {
+                while (k-- > 2) {
+                    res = (res + arrSum);
+                }
+            }
+            return res % 1000000007;
+        };
+        // console.log(kConcatenationMaxSum([1, -2, 3], 3));
+
+        // 作者：lmt_1024
+        // 链接：https://leetcode-cn.com/problems/k-concatenation-maximum-sum/solution/bie-ren-de-ban-yun-gong-by-lmt_1024-vq6t/
+
+        var kConcatenationMaxSum = function (arr, k) {
+            let right = 0;
+            let left = 0;
+            let toLeftSum = 0;
+            let toRightSum = 0;
+            let max = 0;
+            for (let l = 0, len = arr.length - 1, curMax = 0, r = len; l <= len; ++l, --r) {
+                toRightSum += arr[l]
+                toLeftSum += arr[r]
+                curMax = Math.max(0, curMax + arr[l])
+                max = Math.max(max, curMax)
+                left = Math.max(left, toLeftSum)
+                right = Math.max(right, toRightSum)
+            }
+            if (k === 1) {
+                return max % 1000000007;
+            } else if (toRightSum <= 0) {
+                return Math.max(left + right, max) % 1000000007
+            } else {
+                return Math.max(toRightSum * (k - 2) + left + right, max) % 1000000007
+            }
+        };
+
+
+        // 作者：caimao
+        // 链接：https://leetcode-cn.com/problems/k-concatenation-maximum-sum/solution/dpyi-ci-bian-li-by-caimao/
+
+        var kConcatenationMaxSum1 = function (arr, k) {
+            let len1 = arr.length, arrSum=0
+            for (let s of arr) {
+                arrSum += s
+            }
+            let temp = 0, res = 0
+            let loopT = Math.min(k, 2) * len1
+            for (let i = 0; i < loopT; i++) {
+                temp += arr[i % len1]
+                if (temp > 0) {
+                    res = Math.max(res, temp)
+                } else {
+                    temp = 0
+                }
+            }
+            let result = 0
+            if (arrSum > 0) {
+                while (k-- > 2) {
+                    res = (res + arrSum)
+                }
+            }
+            return res % 1000000007
+        }
+        console.log(kConcatenationMaxSum1([3, -2, 1], 3));
+    </script>
+</body>
+
+</html>
