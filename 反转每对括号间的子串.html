@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 给出一个字符串 s（仅含有小写英文字母和括号）。
+        请你按照从括号内到外的顺序，逐层反转每对匹配括号中的字符串，并返回最终的结果。
+        注意，您的结果中 不应 包含任何括号。
+
+        示例 1：
+
+        输入：s = "(abcd)"
+        输出："dcba"
+        示例 2：
+
+        输入：s = "(u(love)i)"
+        输出："iloveu"
+        解释：先反转子字符串 "love" ，然后反转整个字符串。
+        示例 3：
+
+        输入：s = "(ed(et(oc))el)"
+        输出："leetcode"
+        解释：先反转子字符串 "oc" ，接着反转 "etco" ，然后反转整个字符串。
+        示例 4：
+
+        输入：s = "a(bcdefghijkl(mno)p)q"
+        输出："apmnolkjihgfedcbq"
+
+        来源：力扣（LeetCode）
+        链接：https://leetcode-cn.com/problems/reverse-substrings-between-each-pair-of-parentheses
+        著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+    <script>
+        var reverseParentheses = function (s) {
+            let stack = []; // 栈 存放结果
+            for (let i of s) { // 对s中的每一个字符进行处理
+                if (i !== ')') stack.push(i); // 没有遇到 ）一直入栈即可
+                else { // 遇到 ）将反转一波 如下
+                    let temp = []; // 暂存该括号内的字符
+                    while (stack.length) {
+                        let cur = stack.pop();
+                        if (cur === '(') break; // 遇到（ ，这波反转结束啦
+                        else temp.push(cur);
+                    }
+                    stack.push(...temp); // 将反转后的 这批字符 重新入栈
+                }
+            }
+            return stack.join('');
+        };
+
+        // 作者：bzxspkcm
+        // 链接：https://leetcode-cn.com/problems/reverse-substrings-between-each-pair-of-parentheses/solution/js1190fan-zhuan-mei-dui-gua-hao-jian-de-zd9ns/
+
+        var reverse = function (s) {
+            let stack = []
+            for (let i = 0; i < s.length; i++) {
+                if (s[i] !== ')') {
+                    stack.push(s[i])
+                } else {
+                    let temp = []
+                    while (stack.length) {
+                        let cur = stack.pop()
+                        if (cur === '(') break
+                        else temp.push(cur)
+                    }
+                    stack.push(...temp)
+                }
+            }
+            return stack.join('')
+        }
+    </script>
+</body>
+
+</html>
