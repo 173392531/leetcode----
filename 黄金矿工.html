@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!--你要开发一座金矿，地质勘测学家已经探明了这座金矿中的资源分布，
+        并用大小为 m * n 的网格 grid 进行了标注。
+        每个单元格中的整数就表示这一单元格中的黄金数量；如果该单元格是空的，那么就是 0。
+        为了使收益最大化，矿工需要按以下规则来开采黄金：
+        每当矿工进入一个单元，就会收集该单元格中的所有黄金。
+        矿工每次可以从当前位置向上下左右四个方向走。
+        每个单元格只能被开采（进入）一次。
+        不得开采（进入）黄金数目为 0 的单元格。
+        矿工可以从网格中 任意一个 有黄金的单元格出发或者是停止。
+         
+        示例 1：
+
+        输入：grid = [[0,6,0],[5,8,7],[0,9,0]]
+        输出：24
+        解释：
+        [[0,6,0],
+        [5,8,7],
+        [0,9,0]]
+        一种收集最多黄金的路线是：9 -> 8 -> 7。
+
+        示例 2：
+
+        输入：grid = [[1,0,7],[2,0,6],[3,4,5],[0,3,0],[9,0,20]]
+        输出：28
+        解释：
+        [[1,0,7],
+        [2,0,6],
+        [3,4,5],
+        [0,3,0],
+        [9,0,20]]
+        一种收集最多黄金的路线是：1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7。
+
+        来源：力扣（LeetCode）
+        链接：https://leetcode-cn.com/problems/path-with-maximum-gold -->
+    <script>
+        var getMaximumGold = function (grid) {
+            let ans = 0;
+            if (grid.length === 0) return ans;
+            let rowLimit = grid.length, colLimit = grid[0].length;
+            // 递归函数
+            function backtrack(count, row, col) {
+                ans = Math.max(ans, count);
+                // 回溯上下左右四个方位
+                let ways = [
+                    [-1, 0],
+                    [1, 0],
+                    [0, -1],
+                    [0, 1]
+                ];
+                for (let i = 0; i < 4; i++) {
+                    let crow = row + ways[i][0],
+                        ccol = col + ways[i][1];
+                    if (crow < 0 || ccol < 0 || crow >= rowLimit || ccol >= colLimit || grid[crow][ccol] === 0) {
+                        continue;
+                    }
+                    let temp = grid[crow][ccol];
+                    grid[crow][ccol] = 0;
+                    backtrack(count + temp, crow, ccol);
+                    // 如果函数执行完了找不到合适的路径，就要回溯
+                    grid[crow][ccol] = temp;
+                }
+            };
+            // 递归开始的入口
+            for (let i = 0; i < rowLimit; i++) {
+                for (let j = 0; j < colLimit; j++) {
+                    if (grid[i][j] === 0) continue;
+                    let remember = grid[i][j];
+                    grid[i][j] = 0;
+                    backtrack(remember, i, j);
+                    grid[i][j] = remember;
+                }
+            }
+            return ans;
+        };
+
+        // 作者：ignore_express
+        // 链接：https://leetcode-cn.com/problems/path-with-maximum-gold/solution/js-hui-su-si-lu-zhi-guan-by-ignore_express/
+
+        var maxL = function (grid) {
+            let ans = 0;
+            if (grid.length === 0) return ans;
+            const Row = grid.length, Col = grid[0].length;
+
+            function dfs(res, row, col) {
+                ans = Math.max(ans, res)
+                const path = [
+                    [-1, 0],
+                    [1, 0],
+                    [0, -1],
+                    [0, 1]
+                ]
+                for (let i = 0; i < 4; i++) {
+                    let ccol = col + path[i][0], rrow = row + path[i][1]
+                    if (ccol >= Col || rrow >= Row || ccol < 0 || rrow < 0 || grid[rrow][ccol] == 0) continue
+                    let temp = grid[rrow][ccol]
+                    grid[rrow][ccol] = 0
+                    dfs(res + temp, rrow, ccol)
+                    grid[rrow][ccol] = temp
+                }
+            }
+            for (let i = 0; i < grid.length; i++) {
+                for (let j = 0; j < grid[0].length; j++) {
+                    let now = grid[i][j]
+                    if (now == 0) continue
+                    grid[i][j] = 0
+                    dfs(now, i, j)
+                    grid[i][j] = now
+                }
+            }
+            return ans
+        }
+    </script>
+</body>
+
+</html>
