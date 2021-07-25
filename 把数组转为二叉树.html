@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function TreeNode(val) {
+            this.val = val;
+            this.left = this.right = null;
+        }
+        const createTree = (arr) => { // 创建二叉树
+            let tree = new TreeNode(arr[0])
+            let Nodes = [tree]
+            let i = 1
+            for (let node of Nodes) {
+                node.left = new TreeNode(arr[i])
+                Nodes.push(node.left)
+                i += 1
+                if (i == arr.length) return tree
+                node.right = new TreeNode(arr[i])
+                Nodes.push(node.right)
+                i += 1
+                if (i == arr.length) return tree
+            }
+        }
+        console.log(createTree(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']));
+        console.log(createTree([1, 2, 3, 4, 5, 6, 7, 8, 9]));
+
+        let tree={
+            a:null,
+            b:null
+        }
+        let node=[tree]
+        node.push(tree.a={
+            c:null,
+            d:null
+        })
+        console.log(tree);
+        // 作者：xiao_ben_zhu
+        // 链接：https://leetcode-cn.com/problems/xu-lie-hua-er-cha-shu-lcof/solution/shou-hua-tu-jie-dfshe-bfsliang-chong-jie-fa-er-cha/
+
+    </script>
+</body>
+
+</html>

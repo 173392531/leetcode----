@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var Array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        var Tree = createTree(Array);
+        console.log(Tree);
+        // 构造一个节点 
+        function Node(nodeData, left, right) {
+            this.val = nodeData;
+            this.left = left;
+            this.right = right;
+        }
+        // 每次取中点作为根节点,向左和向右递归 
+        function createTree(array) {
+            if (array.length <= 0) {
+                return null;
+            } else {
+                var mid = parseInt(array.length / 2);
+                var node = new Node(array[mid], null, null);
+                var leftArray = array.slice(0, mid);
+                var rightArray = array.slice(mid + 1, array.length);
+                node.left = createTree(leftArray);
+                node.right = createTree(rightArray);
+                return node;
+            }
+        }
+    </script>
+</body>
+
+</html>

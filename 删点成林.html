@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 给出二叉树的根节点 root，树上每个节点都有一个不同的值。
+        如果节点值在 to_delete 中出现，我们就把该节点从树上删去，最后得到一个森林（一些不相交的树构成的集合）。
+        返回森林中的每棵树。你可以按任意顺序组织答案。
+
+        示例：
+
+        输入：root = [1,2,3,4,5,6,7], to_delete = [3,5]
+        输出：[[1,2,null,4],[6],[7]]
+
+        来源：力扣（LeetCode）
+        链接：https://leetcode-cn.com/problems/delete-nodes-and-return-forest
+        著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+    <script>
+        var delNodes = function (root, to_delete) {
+
+            let result = [];
+            let needDelete = new Set(to_delete);
+            if (!needDelete.has(root.val)) {
+                result.push(root);
+            }
+
+            tools(root, needDelete, { left: root });
+            return result;
+
+            function tools(node, needDelete, p) {
+                if (!node) return;
+                if (needDelete.has(node.val)) {
+                    node.left && !needDelete.has(node.left.val) && result.push(node.left)
+                    node.right && !needDelete.has(node.right.val) && result.push(node.right);
+                }
+                node.left && tools(node.left, needDelete, node);
+                node.right && tools(node.right, needDelete, node);
+                if (needDelete.has(node.val)) {
+                    node === p.left ? p.left = null : p.right = null;
+                }
+            }
+        };
+
+        // 作者：wanyan
+        // 链接：https://leetcode-cn.com/problems/delete-nodes-and-return-forest/solution/javascriptjie-fa-by-wanyan/
+
+
+        function TreeNode(val) {
+            this.val = val;
+            this.left = this.right = null;
+        }
+        const createTree = (arr) => { // 创建二叉树
+            let tree = new TreeNode(arr[0])
+            let Nodes = [tree]
+            let i = 1
+            for (let node of Nodes) {
+                node.left = new TreeNode(arr[i])
+                Nodes.push(node.left)
+                i += 1
+                if (i == arr.length) return tree
+                node.right = new TreeNode(arr[i])
+                Nodes.push(node.right)
+                i += 1
+                if (i == arr.length) return tree
+            }
+        }
+        // dfs递归
+        var delNodes = function (root, to_delete) {
+            const dfs = (root) => {
+                if (root === null) {
+                    return true
+                }
+                let left = dfs(root.left) //左节点是否需要被删除
+                let right = dfs(root.right) //右节点是否需要被删除
+                let rootDeleted = set.has(root.val)
+                //如果该节点需要被删除
+                if (rootDeleted) {
+                    !left && ret.push(root.left)
+                    !right && ret.push(root.right)
+                }
+                //如果左节点需要被删除
+                if (left) {
+                    root.left = null
+                }
+                //如果右节点需要被删除
+                if (right) {
+                    root.right = null
+                }
+                return rootDeleted
+            }
+            let set = new Set(to_delete)
+            let ret = []
+            if (dfs(root) === false) {
+                ret.push(root)
+            }
+            return ret
+        };
+        console.log(delNodes(createTree([1,2,3,4,5,6,7]),[3,5]));
+        
+        // 作者：AStarlessNight
+        // 链接：https://leetcode-cn.com/problems/delete-nodes-and-return-forest/solution/javascript-shi-jian-100-dfs-di-gui-by-as-5jfo/
+
+        function isDel(root, to_delete) {
+            const dfs = (root) => {
+                if (root === null) {
+                    return true
+                }
+                let left = dfs(root.left)
+                let right = dfs(root.right)
+                let isDeleted = set.has(root.val)
+                if (isDeleted) {
+                    !left && ret.push(root.left)
+                    !right && ret.push(root.right)
+                }
+                if (left) {
+                    root.left = null
+                }
+                if (right) {
+                    root.right = null
+                }
+                return isDeleted
+            }
+            let set = new Set(to_delete)
+            let ret = []
+            if (dfs(root) === false) {
+                ret.push(root)
+            }
+            return ret
+        }
+
+        function delN(root,to_delete) {
+            function dfs(root){
+                if(root===null){
+                    return false
+                }
+                let left=dfs(root.left)
+                let right=dfs(root.right)
+                let isD=set.has(root.val)
+                if(isD){
+                    !left&&ret.push(root.left)
+                    !right&&ret.push(root.right)
+                }
+                if(left){
+                    root.left=null
+                }
+                if(right){
+                    root.right=null
+                }
+                return isD
+            }
+            let set=new Set(to_delete)
+            let ret=[]
+            // 通过dfs把其余枝叶裁剪掉，并先把零星枝叶放入ret中，最后才把root放进去
+            if(dfs(root)===false){
+                ret.push(root)
+            }
+            return ret
+        }
+
+        var delN=function(root,to_delete){
+            function dfs(root){
+                if(root===null)return
+                let left=dfs(root.left)
+                let right=dfs(root.right)
+                let isD=set.has(root.val)
+                if(isD){
+                    !left&&ret.push(root.left)
+                    !right&&ret.push(root.right)
+                }
+                if(left){
+                    root.left=null
+                }
+                if(right){
+                    root.right=null
+                }
+                return isD
+            }
+            let set=new Set(to_delete)
+            let ret=[]
+            if(dfs(root)===false){
+                ret.push(root)
+            }
+            return ret
+        }
+    </script>
+</body>
+
+</html>
