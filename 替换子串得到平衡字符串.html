@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 1.把要改的元素加入窗口里，一直加，一直加，加到什么时候呢？
+
+         2.当窗口外所有元素的个数都小于等于n/4，说明修改窗口内的元素就可以得到平衡字符串
+         （不管是怎么修改的，反正如果窗口外的元素存在某个元素的个数大于n/4就是不满足的）
+
+         3.当找到满足的窗口以后，收缩左边界，看能不能得到更小的值
+
+        链接：https://leetcode-cn.com/problems/replace-the-substring-for-balanced-string/solution/hua-dong-chuang-kou-tan-xin-zhen-shi-mia-14zb/ -->
+    <script>
+        var balancedString = function (s) {
+            let left = right = 0, len = s.length, avg = len / 4;
+            let map = { "Q": 0, "W": 0, "E": 0, "R": 0 }, min = len;
+            for (let i = 0; i < len; i++) { // 先记录所有元素的个数
+                map[s[i]]++;
+            }
+            // 不用修改就已经满足，返回0
+            if (map["Q"] === avg && map["W"] === avg && map["E"] === avg && map["R"] === avg) return 0;
+
+            while (right < len) {
+                // 默认s[right]一直要改（贪心），加入窗口，那么窗口外的该元素就少一个
+                map[s[right]]--;
+                // 当窗口外每个元素的个数都小于等于avg，说明找到了满足条件的，收缩左边界找更小的
+                while (left <= right && map["Q"] <= avg && map["W"] <= avg && map["E"] <= avg && map["R"] <= avg) {
+                    // 记录最小的
+                    min = Math.min(min, right - left + 1);
+                    // 收缩左边界，那么这个元素要放回窗口外
+                    map[s[left]]++;
+                    left++;
+                }
+                right++;
+            }
+            return min;
+
+        };
+
+        // 作者：YHuangXMU
+        // 链接：https://leetcode-cn.com/problems/replace-the-substring-for-balanced-string/solution/hua-dong-chuang-kou-tan-xin-zhen-shi-mia-14zb/
+
+        var balance = (s) => {
+            let left = right = 0, len = s.length, avg = len / 4
+            let map = { 'Q': 0, 'W': 0, 'E': 0, 'R': 0 }, min = len;
+            for (let i = 0; i < len; i++) {
+                map[s[i]]++
+            }
+            if (map['Q'] === avg && map['w'] === avg && map['E'] === avg && map['R'] === avg) return 0
+            while (right < len) {
+                map[s[right]]--;
+                while (left <= right && map['Q'] <= avg && map['w'] <= avg && map['E'] <= avg && map['R'] <= avg) {
+                    min = Math.min(min, right - left + 1)
+                    map[s[left]]++
+                    left++
+                }
+                right++
+            }
+            return min
+        }
+    </script>
+</body>
+
+</html>

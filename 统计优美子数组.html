@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 给你一个整数数组 nums 和一个整数 k。
+        如果某个 连续 子数组中恰好有 k 个奇数数字，
+        我们就认为这个子数组是「优美子数组」。
+        请返回这个数组中「优美子数组」的数目。
+         
+        示例 1：
+
+        输入：nums = [1,1,2,1,1], k = 3
+        输出：2
+        解释：包含 3 个奇数的子数组是 [1,1,2,1] 和 [1,2,1,1] 。
+
+        示例 2：
+
+        输入：nums = [2,4,6], k = 1
+        输出：0
+        解释：数列中不包含任何奇数，所以不存在优美子数组。
+
+        示例 3：
+
+        输入：nums = [2,2,2,1,2,2,1,2,2,2], k = 2
+        输出：16
+
+        链接：https://leetcode-cn.com/problems/count-number-of-nice-subarrays
+        著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+
+    <!-- dp[i] 与 dp[i-1] 的关系为： dp[i] = dp[i-1] + (nums[i] & 1)
+        我们要求的是符合k个奇数的子数组的个数，则假设存在一个子数组 j..i 满足：dp[i] - dp[j-1] === k
+        即 dp[j-1] === dp[i] - k（我们需要统计一下有多少个奇数个数为 dp[i] - k 的 dp[j] 即可）
+        我们建立 counts 数组来记录 dp[i] 出现的次数，则要求的counts[dp[j]] 就等于 counts[dp[i] - k]
+        因为 dp[i] 只与 dp[i-1] 有关，所以可以状态压缩为变量 oddCount 即可
+        即 result += counts[oddCount - k]
+
+        链接：https://leetcode-cn.com/problems/count-number-of-nice-subarrays/solution/javascript-dong-tai-gui-hua-shuang-100-dai-ma-jian/ -->
+
+    <!-- nums = [2, 1, 1, 2, 1, 2, 2, 1, 2]，k=3 为例
+        奇数有 4 个，k=3，前 3 个 和 后 3 个 奇数分别组成了所有优美子数组
+        我们可以把包含 3 个奇数的、尽可能短的子数组看作优美数组的基底
+        基底优美数组的两端都是奇数
+        基于该基底，向左和向右纳入偶数，也会是优美子数组
+        前 3 个奇数组成的基底数组，它的左侧作为端点有 2 种可能，右侧作为右端点有 3 种可能，一共有 2 x 3 种可能
+        后 3 个奇数组成的基底数组，它的左侧作为端点有 1 种可能，右侧作为右端点有 2 种可能，一共有 1 x 2 种可能
+        奇数索引相减得出偶数个数
+        很明显，这取决于基底数组两侧的偶数个数，而计算两侧的偶数个数，需要通过相邻的奇数的索引相减得出
+        我们干脆把所有奇数的索引放到一个数组 pos：[1, 2, 4, 7]
+        对 pos 数组进行小改动，更好写通式
+        最左边出现的基底数组，它左侧的偶数，不能通过奇数索引相减得出
+        最右出现的基底数组，它右侧的偶数，不能通过奇数索引相减得出
+        于是我们可以改造 pos 数组：把 nums 数组的两侧界外当做奇数
+        于是 pos 数组变成 [-1, 1, 2, 4, 7, 9]
+        这样就能套用通式，求出两侧的偶数个数
+        对于每一个基底数组，基于它的所有可能有通式：
+        (pos[i]-pos[i-1]) * (pos[i+k]-pos[i+k-1])
+        (pos[i]−pos[i−1])∗(pos[i+k]−pos[i+k−1])
+        i 从 pos 数组的索引 1 开始，到什么时候结束呢
+        当前遍历的索引 i + k 不能超出 pos 数组的末尾索引：奇数个数+1
+        其实遍历的次数 就是 基底数组种类数
+        每次迭代进行累加，得出优美子数组的总数
+
+        
+        作者：xiao_ben_zhu
+        链接：https://leetcode-cn.com/problems/count-number-of-nice-subarrays/solution/xun-zhao-ji-di-you-mei-shu-zu-xiang-liang-ce-kuo-z/
+        来源：力扣（LeetCode）
+        著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。 -->
+    <script>
+        
+        var numberOfSubarrays = function (nums, k) {
+            let total = 0
+            let pos = [] // 存放奇数的索引
+            let oddAmount = 0 // 奇数的个数
+            for (let i = 0; i < nums.length; i++) {
+                if (nums[i] % 2 === 1)
+                    pos.push(i)
+            }
+            
+
+            // 补齐首尾两项
+            pos.push(nums.length)
+            pos.unshift(-1)
+
+            oddAmount = pos.length
+            
+            for (let i = 1; i + k < oddAmount ; i++) {
+                total += (pos[i] - pos[i - 1]) * (pos[i + k] - pos[i + k - 1])
+            }
+            return total
+        };
+
+        console.log(numberOfSubarrays([2, 1, 1, 2, 1, 2, 2, 1, 2],3));
+        
+// 作者：xiao_ben_zhu
+// 链接：https://leetcode-cn.com/problems/count-number-of-nice-subarrays/solution/xun-zhao-ji-di-you-mei-shu-zu-xiang-liang-ce-kuo-z/
+
+    </script>
+</body>
+
+</html>
