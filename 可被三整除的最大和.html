@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!--维护一个3个元素的state数组表示3个状态
+
+        state[0] 表示 mod 为 0 的 最大和
+        state[1] 表示 mod 为 1 的 最大和
+        state[2] 表示 mod 为 2 的 最大和
+
+        遍历nums数组的每个元素num,会不断改变状态机的状态
+
+        (1) 当num%3为0时，state各个元素加上num后，nums%3后的值不变
+
+        (2) 当num%3为1时，
+
+        state[2] + num后是一个能被3整除的数，此时只需比较和state[0]哪个大，
+        把值大的赋予state[0]即可,即state[0] = Max(state[2] + num, state[0])
+        state[0] + num后是一个mod 3为1的数，此时state[1] = Max(state[0] + num, state[1])
+        state[1] + num后是一个mod 3为2的数，此时state[2] = Max(state[1] + num, state[2])
+
+        (3) 当num%3为2时，
+
+        state[1] + num后是一个能被3整除的数，此时state[0] = Max(state[1] + num, state[0])
+        state[2] + num后是一个mod 3为1的数，此时state[1] = Max(state[2] + num, state[1])
+        state[0] + num后是一个mod 3为2的数，此时state[2] = Max(state[0] + num, state[2])
+
+        最后state[0]即为所求的值
+
+        作者：xing-guang-29
+        链接：https://leetcode-cn.com/problems/greatest-sum-divisible-by-three/solution/you-xian-zhuang-tai-ji-by-xing-guang-29/ -->
+    <script>
+        var maxSumDivThree1 = function (nums) {
+            let state = [0, Number.MIN_SAFE_INTEGER, Number.MIN_SAFE_INTEGER];
+
+            for (let num of nums) {
+                if (num % 3 === 0) {
+                    state = [state[0] + num, state[1] + num, state[2] + num]
+                } else if (num % 3 === 1) {
+                    const a = Math.max(state[2] + num, state[0]);
+                    const b = Math.max(state[0] + num, state[1]);
+                    const c = Math.max(state[1] + num, state[2]);
+                    state = [a, b, c];
+                } else if (num % 3 === 2) {
+                    const a = Math.max(state[1] + num, state[0]);
+                    const b = Math.max(state[2] + num, state[1]);
+                    const c = Math.max(state[0] + num, state[2]);
+                    state = [a, b, c];
+                }
+            }
+            return state[0];
+        };
+
+        // 作者：xing-guang-29
+        // 链接：https://leetcode-cn.com/problems/greatest-sum-divisible-by-three/solution/you-xian-zhuang-tai-ji-by-xing-guang-29/
+
+
+        var maxSumDivThree = function (arr) {
+            let arr1 = arr.filter(item => item % 3 === 1).sort((a, b) => a - b);
+            let arr2 = arr.filter(item => item % 3 === 2).sort((a, b) => a - b);
+            let sum = arr.reduce((pre, cur) => pre + cur, 0)
+            if (sum % 3 === 0) {
+                return sum;
+            } else if (sum % 3 === 1) {
+                sum = Math.max(sum - arr1[0], sum - arr2[0] - arr2[1] | 0);
+            } else {
+                sum = Math.max(sum - arr2[0], sum - arr1[0] - arr1[1] | 0);
+            }
+            return sum
+        };
+
+        // 作者：tallJack
+        // 链接：https://leetcode-cn.com/problems/greatest-sum-divisible-by-three/solution/jsjie-fa-qiu-yu-jie-fa-by-talljack/
+
+    </script>
+</body>
+
+</html>
