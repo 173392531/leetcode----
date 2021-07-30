@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var findSpecialInteger = function (arr) {
+            if (arr.length <= 3) return arr[0]
+            let num = Math.ceil(arr.length * 0.25);
+            let num1 = 0
+            for (let i = 0; i < arr.length - 1; i++) {
+                arr[i] === arr[i + 1] ? num1++ : num1 = 0
+                if (num === num1) {
+                    return arr[i]
+                }
+            }
+        };
+
+        // 作者：cqweifeng
+        // 链接：https://leetcode-cn.com/problems/element-appearing-more-than-25-in-sorted-array/solution/you-xu-shu-zu-zhong-chu-xian-ci-shu-chao-guo-25d-2/
+
+        var findSpecialInteger = a => a.length < 2 ? a[0] : a.filter(n => ((a.lastIndexOf(n) - a.indexOf(n) + 1) / (a.length + 1) >= 0.25))[0];
+
+        // 作者：qnurye
+        // 链接：https://leetcode-cn.com/problems/element-appearing-more-than-25-in-sorted-array/solution/js-yi-xing-dai-ma-shi-xian-by-qnurye/
+
+    </script>
+</body>
+
+</html>
