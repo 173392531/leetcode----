@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const removeLeafNodes = (node, target) => {
+            node.left && (node.left = removeLeafNodes(node.left, target));
+            node.right && (node.right = removeLeafNodes(node.right, target));
+            // 怕值一样那个节点也是不同的节点。这时候只有当两个节点都是空值 null 的时候才会值相等，
+            // 所以我们可以直接判断左右两个子节点是否相等，即可完成左右两个子节点是否都是空值的判断
+            return node.left === node.right && node.val === target ? null : node;
+        };
+
+// 作者：poppinl
+// 链接：https://leetcode-cn.com/problems/delete-leaves-with-a-given-value/solution/bao-bao-ye-neng-kan-dong-de-leetcode-ti-jie-hou-xu/
+
+    </script>
+</body>
+
+</html>

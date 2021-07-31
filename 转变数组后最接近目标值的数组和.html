@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 给你一个整数数组 arr 和一个目标值 target ，请你返回一个整数 value ，
+        使得将数组中所有大于 value 的值变成 value 后，数组的和最接近  target （最接近表示两者之差的绝对值最小）。
+        如果有多种使得和最接近 target 的方案，请你返回这些整数中的最小值。
+        请注意，答案不一定是 arr 中的数字。
+
+        示例 1：
+
+        输入：arr = [4,9,3], target = 10
+        输出：3
+        解释：当选择 value 为 3 时，数组会变成 [3, 3, 3]，和为 9 ，这是最接近 target 的方案。
+        示例 2：
+
+        输入：arr = [2,3,5], target = 10
+        输出：5
+        示例 3：
+
+        输入：arr = [60864,25176,27249,21296,20204], target = 56803
+        输出：11361
+
+        来源：力扣（LeetCode）
+        链接：https://leetcode-cn.com/problems/sum-of-mutated-array-closest-to-target
+        著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+    <script>
+        // 先排序数组
+        // 计算剩余数组平均值
+        // 平均值小于当前数，返回平均值
+
+        var findBestValue = function (arr, target) {
+            if (!arr) return 0;
+            arr.sort((a, b) => a - b);
+            let n = arr.length;
+            let sum = 0;
+            for (let i = 0; i < n; i++) {
+                let x = (target - sum) / (n - i);
+                // 直针对n.5这一种情况向下取整，其余情况四舍五入
+                if (x < arr[i]) return Math.round(x - 0.000001);
+                sum += arr[i];
+            }
+            return arr[n - 1];
+        };
+        console.log(findBestValue([4, 9, 3], 10));
+
+        // 作者：Edward40
+        // 链接：https://leetcode-cn.com/problems/sum-of-mutated-array-closest-to-target/solution/1300-sum-of-mutated-array-closest-to-target-by-edw/
+
+        var findBestValue = function (arr, target) {
+            let len = arr.length
+            let min = Math.min(...arr, ~~(target / len))
+            let max = Math.max(...arr)
+            let last = 0
+            while (min < max) {   // 因为(数组中所有大于 value 的值变成 value) 所以最大值只能为arr中的最大值
+                // 求和  先把arr中大于min的 变成 min
+                let sum = arr.reduce((a, b) => a + Math.min(b, min), 0)
+                if (sum < target) {  // 小于时 min++ 继续
+                    min = min < max ? min + 1 : max
+                    last = sum
+                } else {
+                    if (target - last <= sum - target) { // 当上一次 和 target差  小于 当前 和 target差  取小的那个
+                        --min
+                    }
+                    return min
+                }
+            }
+            return min
+        };
+
+// 作者：shetia
+// 链接：https://leetcode-cn.com/problems/sum-of-mutated-array-closest-to-target/solution/bao-li-by-shetia-6/
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 给你一个字符串 s ，每一次操作你都可以在字符串的任意位置插入任意字符。
+        请你返回让 s 成为回文串的 最少操作次数 。
+        「回文串」是正读和反读都相同的字符串。
+
+        示例 1：
+
+        输入：s = "zzazz"
+        输出：0
+        解释：字符串 "zzazz" 已经是回文串了，所以不需要做任何插入操作。
+        示例 2：
+
+        输入：s = "mbadm"
+        输出：2
+        解释：字符串可变为 "mbdadbm" 或者 "mdbabdm" 。
+        示例 3：
+
+        输入：s = "leetcode"
+        输出：5
+        解释：插入 5 个字符后字符串变为 "leetcodocteel" 。
+        示例 4：
+
+        输入：s = "g"
+        输出：0
+        示例 5：
+
+        输入：s = "no"
+        输出：1
+
+        来源：力扣（LeetCode）
+        链接：https://leetcode-cn.com/problems/minimum-insertion-steps-to-make-a-string-palindrome
+        著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+    <script>
+        const minInsertions = s => {
+            const LEN = s.length;
+            const dp = new Uint16Array(LEN);
+            console.log('dp',dp);
+            for (let i = LEN - 2; i >= 0; i--) {
+                let prev = 0;
+                for (let j = i + 1; j < LEN; j++) {
+                    const tmp = dp[j];
+                    console.log(tmp);
+                    dp[j] = s[i] === s[j] ? prev : 1 + Math.min(dp[j], dp[j - 1]);
+                    console.log(dp);
+                    prev = tmp;
+                }
+            }
+            return dp[LEN - 1];
+        };
+
+        console.log(minInsertions('leetcode'));
+        
+        // 作者：poppinl
+        // 链接：https://leetcode-cn.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/solution/bao-bao-ye-neng-kan-dong-de-leetcode-ti-jie-dp-by-/
+
+
+        // 容易理解的方法
+        var minInsertions1 = function (s) {
+            let n = s.length;
+
+            // n行，n列的二维数组，初始化为0，base case为 i===j时，dp[i][j]=0
+            const dp = Array.from(Array(n), () => Array(n).fill(0));
+            // console.log(dp);
+
+            // 从下往上
+            for (let i = n - 2; i >= 0; i--) {
+                // 从左往右
+                for (let j = i + 1; j < n; j++) {
+                    if (s[i] === s[j]) {
+                        dp[i][j] = dp[i + 1][j - 1];
+                    } else {
+                        dp[i][j] = Math.min(dp[i + 1][j], dp[i][j - 1]) + 1;
+                    }
+                }
+            }
+
+            // 所求结果
+            return dp[0][n - 1];
+        };
+
+        // 作者：xing-guang-29
+        // 链接：https://leetcode-cn.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/solution/hui-wen-chuan-dong-tai-gui-hua-by-xing-guang-29/
+
+    </script>
+</body>
+
+</html>
