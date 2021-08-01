@@ -81,15 +81,23 @@
         // 作者：hyde-5
         // 链接：https://leetcode-cn.com/problems/ba-shu-zu-pai-cheng-zui-xiao-de-shu-lcof/solution/kuai-su-pai-xu-he-nei-zhi-han-shu-liang-hlac2/
 
-        
+
         // 内置排序：
         var minNumber = function (nums) {
-            return nums.sort((a, b) => ('' + a + b) - ('' + b + a)).join('');
+            return nums.sort((a, b) => {
+                console.log('a',a);
+                console.log('b',b);
+                console.log(('' + a + b) - ('' + b + a));
+                return ('' + a + b) - ('' + b + a)
+            }).join('');
         }
 
-// 作者：hyde-5
-// 链接：https://leetcode-cn.com/problems/ba-shu-zu-pai-cheng-zui-xiao-de-shu-lcof/solution/kuai-su-pai-xu-he-nei-zhi-han-shu-liang-hlac2/
+        console.log(minNumber([3,30,34,5,9]));
+        
+        // 作者：hyde-5
+        // 链接：https://leetcode-cn.com/problems/ba-shu-zu-pai-cheng-zui-xiao-de-shu-lcof/solution/kuai-su-pai-xu-he-nei-zhi-han-shu-liang-hlac2/
 
+        // 08-01复习
     </script>
 </body>
 

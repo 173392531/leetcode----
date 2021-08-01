@@ -30,6 +30,15 @@
     };
 
 
+    var msg=function(nums){
+      const dp=[]
+      dp[0]=0;
+      dp[1]=0;
+      for(let i=2;i<nums.length+2;i++){
+        dp[i]=Math.max(dp[i-2]+nums[i-2,dp[i-1]])
+      }
+      return dp[nums.length-1]
+    }
 // 链接：https://leetcode-cn.com/problems/the-masseuse-lcci/solution/dong-tai-gui-hua-he-zhu-zhan-198house-robber-yi-ya/
 
 // 优化：可以将空间复杂度进行优化，从 O(n)O(n) 降低到 O(1)O(1),
@@ -49,6 +58,8 @@
 // }
 
 // 链接：https://leetcode-cn.com/problems/the-masseuse-lcci/solution/mei-ri-yi-ti-ep24-massagema-sha-ji-javascriptjs-by/
+  
+  // 08-01复习
   </script>
 </body>
 
