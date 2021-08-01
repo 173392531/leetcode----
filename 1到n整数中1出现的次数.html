@@ -58,9 +58,28 @@
 
         };
 
-// 作者：a-mao-da-ma
-// 链接：https://leetcode-cn.com/problems/1nzheng-shu-zhong-1chu-xian-de-ci-shu-lcof/solution/1nzheng-shu-zhong-1chu-xian-de-ci-shu-by-a-mao-da-/
+        // 作者：a-mao-da-ma
+        // 链接：https://leetcode-cn.com/problems/1nzheng-shu-zhong-1chu-xian-de-ci-shu-lcof/solution/1nzheng-shu-zhong-1chu-xian-de-ci-shu-by-a-mao-da-/
 
+
+        var countDigitOne = function (n) {
+            let count = 0;
+
+            for (let i = 1; i <= n; i *= 10) {
+                let divide = i * 10;
+                let p = Math.floor(n / divide), k = n % divide, rest = 0;
+
+                count += p * i;
+                rest = (k > (2 * i - 1)) ? i : ((k < i) ? 0 : k - i + 1);
+                count += rest;
+            }
+            return count;
+        };
+
+// 作者：wanyuxuan
+// 链接：https://leetcode-cn.com/problems/1nzheng-shu-zhong-1chu-xian-de-ci-shu-lcof/solution/gui-na-zhi-sheng-by-wanyuxuan/
+
+// 07-31复习
     </script>
 </body>
 
