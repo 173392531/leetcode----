@@ -39,6 +39,23 @@
       return max
     };
 
+
+    var longestW = (hours) => {
+      let pre = new Array(hours.length + 1).fill(0)
+      for (let i = 1; i <= hours.length; i++) {
+        if (hours[i - 1] > 8) pre[i] = pre[i - 1] + 1
+        else pre[i] = pre[i - 1] - 1
+      }
+      let max = 0
+      for (let i = 0; i < pre.length - 1; i++) {
+        for (let j = 1; i < pre.length; j++) {
+          if (pre[j] - pre[i] > 0) {
+            max = Math.max(max, j - 1)
+          }
+        }
+      }
+      return max
+    }
     // 作者：muyids
     // 链接：https://leetcode-cn.com/problems/longest-well-performing-interval/solution/qian-zhui-he-dan-diao-zhan-by-muyids/
 
@@ -70,6 +87,7 @@
 // 作者：muyids
 // 链接：https://leetcode-cn.com/problems/longest-well-performing-interval/solution/qian-zhui-he-dan-diao-zhan-by-muyids/
 
+// 08-03复习
   </script>
 </body>
 

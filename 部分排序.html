@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
   <!-- 给定一个整数数组，编写一个函数，找出索引m和n，只要将索引区间[m,n]的元素排好序，整个数组就是有序的。注意：n-m尽量最小，也就是说，找出符合条件的最短序列。函数返回值为[m,n]，若不存在这样的m和n（例如整个数组是有序的），请返回[-1,-1]。
 
@@ -33,34 +35,60 @@
  * @param {number[]} array
  * @return {number[]}
  */
-var subSort = function(array) {
-    let r=-1,l=-1;
-    //正向遍历记录最右区间值
-    let max = Number.MIN_SAFE_INTEGER;
-    // console.log(max);
-    for(let i=0;i<array.length;i++){
-        if(array[i]>=max){
-            max = array[i];
-        }else{
-            r = i;
-        }
-    }
-    //反向遍历记录最左区间值
-    let min = Number.MAX_SAFE_INTEGER;
-    // console.log(min);
-    for(let i=array.length-1;i>=0;i--){
-        if(array[i]<=min){
-            min = array[i]
-        }else{
-            l = i;
-        }
-    }
-    return [l,r]
-};
-  console.log(subSort([1,2,4,7,10,11,7,12,6,7,16,18,19]));
-// 作者：lee-lei
-// 链接：https://leetcode-cn.com/problems/sub-sort-lcci/solution/zheng-fan-liang-ci-bian-li-by-lee-lei/
+    var subSort = function (array) {
+      let r = -1, l = -1;
+      //正向遍历记录最右区间值
+      let max = Number.MIN_SAFE_INTEGER;
+      // console.log(max);
+      for (let i = 0; i < array.length; i++) {
+        if (array[i] >= max) {
+          max = array[i];
+        } else {
+          r = i;
+          console.log('r', r);
 
+        }
+      }
+      //反向遍历记录最左区间值
+      let min = Number.MAX_SAFE_INTEGER;
+      // console.log(min);
+      for (let i = array.length - 1; i >= 0; i--) {
+        if (array[i] <= min) {
+          min = array[i]
+        } else {
+          l = i;
+          console.log('l', l);
+
+        }
+      }
+      return [l, r]
+    };
+    console.log(subSort([1, 2, 4, 7, 10, 11, 7, 12, 6, 7, 16, 18, 19]));
+    // 作者：lee-lei
+    // 链接：https://leetcode-cn.com/problems/sub-sort-lcci/solution/zheng-fan-liang-ci-bian-li-by-lee-lei/
+    var subSort = (arr) => {
+      let r = -1, l = -1;
+      let max = Number.MIN_SAFE_INTEGER
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i] >= max) {
+          max = arr[i]
+        } else {
+          r = i
+        }
+      }
+      let min = Number.MAX_SAFE_INTEGER
+      for (let i = arr.length - 1; i > 0; i--) {
+        if (arr[i] <= min) {
+          min = arr[i]
+        } else {
+          l = i
+        }
+      }
+      return [l, r]
+    }
+    // 双向遍历找出不符合规律的边界指针
+    // 08-03复习
   </script>
 </body>
+
 </html>

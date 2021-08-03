@@ -42,6 +42,7 @@
             for(let i=0,len=secret.length;i<len;i++){
                 if(secret[i]===guess[i])m++
                 else{
+                    // 先判断再进行+-操作
                     if(hash[secret[i]]++ < 0)n++
                     if(hash[guess[i]]-- > 0)n++
                 }
@@ -49,6 +50,18 @@
             return `${m}A${n}B`
         }
         console.log(getHint("1121","0111"))
+        var getH=(s,g)=>{
+            let arrMap=new Array(10).fill(0),m=n=0
+            for(let i=0;i<s.length;i++){
+                if(s[i]===g[i])m++
+                else{
+                    if(arrMap[s[i]]++<0)n++
+                    if(arrMap[g[i]]-->0)n++
+                }
+            }
+            return `${m}A${n}B`
+        }
+        // 08-03复习
     </script>
 </body>
 </html>
