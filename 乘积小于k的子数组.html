@@ -40,6 +40,20 @@
             return count
         };
 
+        var Sub=(nums,k)=>{
+            if(k<=1)return 0
+            let count=0
+            let L=R=0,mul=1
+            while(R<nums.length){
+                mul=mul*nums[R]
+                while(mul>=k){
+                    mul=mul/nums[L++]
+                }
+                count+=R-L+1
+                R++
+            }
+            return count
+        }
         // 作者：eskimo6666
         // 链接：https://leetcode-cn.com/problems/subarray-product-less-than-k/solution/cheng-ji-xiao-yu-kde-zi-shu-zu-by-eskimo6666/
 
@@ -74,6 +88,7 @@
 // 作者：jack-108
 // 链接：https://leetcode-cn.com/problems/subarray-product-less-than-k/solution/hua-dong-chuang-kou-xiang-jie-by-jack-108/
 
+//08-04复习
     </script>
 </body>
 

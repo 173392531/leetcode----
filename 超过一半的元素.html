@@ -52,6 +52,29 @@
             }
             return count * 2 > length ? flatNum : -1
         }
+
+        var major=(nums)=>{
+            let flat=-1
+            let count=0;
+            for(const num of nums){
+                if(count===0){
+                    flat=num
+                }
+                if(num===flat){
+                    count++
+                }else{
+                    count--
+                }
+            }
+            count=0
+            const length=nums.length
+            for(const num of nums){
+                if(num===flat){
+                    count++
+                }
+            }
+            return count*2>length?flat:-1
+        }
         // map存储法
         var majorEl=function(nums){
             if(nums.length===1)return nums[0]
@@ -66,6 +89,7 @@
             }
             return -1
         }
+        // 08-04复习
     </script>
 </body>
 

@@ -42,9 +42,44 @@
             }
         };
 
+        var deepSum = (root) => {
+            var arr = []
+            dfs(root, 0)
+            var res = 0
+            if (arr.length === 0) return res
+            for (var i = 0; i < arr[arr.length - 1].length; i++) {
+                res += arr[arr.length - 1][i]
+            }
+            return res
+            var dfs = (root, n) => {
+                if (!root) return
+                if (!Array.isArray(arr[n])) arr[n] = []
+                arr[n].push(root.val)
+                dfs(root.left, n + 1)
+                dfs(root.right, n + 1)
+            }
+        }
+
 // 作者：chenchangyuan
 // 链接：https://leetcode-cn.com/problems/deepest-leaves-sum/solution/shen-du-you-xian-bian-li-by-chenchangyuan/
 
+        var arrSum=(root)=>{
+            if(!root)return 
+            let arr=[],res=0
+            var dfs=(root,n)=>{
+                if(!root)return
+                if(!Array.isArray(arr[n]))arr[n]=[]
+                arr[n].push(root.val)
+                dfs(root.left,n+1)
+                dfs(root.right,n+1)
+            }
+            dfs(root,0)
+            for(let i=0;i<arr[arr.length-1].length;i++){
+                res+=arr[arr.length-1][i]
+            }
+            return res
+        }
+        // 08-03复习
     </script>
 </body>
 

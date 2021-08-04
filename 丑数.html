@@ -71,9 +71,30 @@
       }
     };
 
+    var isUg = (num) => {
+      if (num <= 0) {
+        return false
+      }
+      while (true) {
+        if (num == 1 || num == 2 || num == 3 || num == 5) {
+          return true
+        }
+        if (num % 2 == 0) {
+          num /= 2
+        } else if (num % 3 == 0) {
+          num /= 3
+        } else if (num % 5 == 0) {
+          num /= 5
+        } else {
+          return false
+        }
+      }
+    }
+
 // 作者：xiao-min-s
 // 链接：https://leetcode-cn.com/problems/ugly-number/solution/chou-shu-by-xiao-min-s-m25v/
 
+// 08-04复习
   </script>
 </body>
 

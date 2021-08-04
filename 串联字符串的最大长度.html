@@ -48,22 +48,52 @@
             return dfs(0, '')
         };
 
+        var maxL = (arr) => {
+            var n = arr.length
+            var dfs = (index, arr) => {
+                if (index >= n) return 0
+                let s = arr[index]
+                for (let word of s) {
+                    if (str.indexOf(word) != -1 || s.indexOf(word) != s.lastIndexOf(word)) {
+                        return dfs(index + 1, str)
+                    }
+                }
+                return Math.max(dfs(index + 1, str + s) + s.length, dfs(index + 1, str))
+            }
+            return dfs(0, '')
+        }
+
+        var maxTo = (arr) => {
+            var n = arr.length
+            var dfs = (index, arr) => {
+                if (index >= n) return 0
+                let s = arr[index]
+                for (let word of s) {
+                    if (str.indexOf(word) != -1 || s.indexOf(word) != s.lastIndexOf(word)) {
+                        return dfs(index + 1, str)
+                    }
+                }
+                return Math.max(dfs(index + 1, str + s) + s.length, dfs(index + 1, str))
+            }
+            return dfs(0, '')
+        }
         // 作者：liangtx
         // 链接：https://leetcode-cn.com/problems/maximum-length-of-a-concatenated-string-with-unique-characters/solution/js-dfs-by-liangtx-iy5n/
 
-        var maxL=function(arr){
-            var n=arr.length
-            var dfs=function(index,str){
-                if(index>=n)return 0
-                let s=arr[index]
-                for(let word of s){
-                    if(str.indexOf(word)!=-1 || s.indexOf(word) != s.lastIndexOf(word))
-                    return dfs(index+1,str)
+        var maxL = function (arr) {
+            var n = arr.length
+            var dfs = function (index, str) {
+                if (index >= n) return 0
+                let s = arr[index]
+                for (let word of s) {
+                    if (str.indexOf(word) != -1 || s.indexOf(word) != s.lastIndexOf(word))
+                        return dfs(index + 1, str)
                 }
-                return Math.max(dfs(index+1,str+s)+s.length,dfs(index+1,str))
+                return Math.max(dfs(index + 1, str + s) + s.length, dfs(index + 1, str))
             }
-            return dfs(0,'')
+            return dfs(0, '')
         }
+        // 08-04复习
     </script>
 </body>
 
