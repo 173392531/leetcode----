@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
   <!-- 输入一个链表的头节点，从尾到头反过来返回每个节点的值（用数组返回）。
 
@@ -21,29 +23,44 @@
  *     this.next = null;
  * }
  */
-/**
- * @param {ListNode} head
- * @return {number[]}
- */
-var reversePrint = function(head) {
-    const stack = [],res = [];
-    let p = head,t = 0;
-     while(p){
-      // 记录长度并把所有链表节点值存入stack中
+    /**
+     * @param {ListNode} head
+     * @return {number[]}
+     */
+    var reversePrint = function (head) {
+      const stack = [], res = [];
+      let p = head, t = 0;
+      while (p) {
+        // 记录长度并把所有链表节点值存入stack中
         stack.push(p.val);
-        t ++;
+        t++;
         p = p.next;
-    }
-    for(let i = 0;i < t;i ++){
-      // 向res中存入stack的末尾值
+      }
+      for (let i = 0; i < t; i++) {
+        // 向res中存入stack的末尾值
         res.push(stack.pop());
-    }
-    return res;
-};
+      }
+      return res;
+    };
 
+    var reverseP = (head) => {
+      const stack = [], res = []
+      let p = head, t = 0
+      while (p) {
+        stack.push(p.val)
+        t++
+        p = p.next
+      }
+      for (let i = 0; i < t; i++) {
+        res.push(stack.pop())
+      }
+      return res
+    }
 // 作者：javascript-8
 // 链接：https://leetcode-cn.com/problems/cong-wei-dao-tou-da-yin-lian-biao-lcof/solution/cong-wei-dao-tou-da-yin-lian-biao-by-jav-n69x/
 
+// 08-05复习
   </script>
 </body>
+
 </html>

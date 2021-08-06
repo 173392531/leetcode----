@@ -31,7 +31,7 @@
       if (!root) return []
 
       const queue = [root], res = []
-      
+
       while (queue.length) {
         const node = queue.shift()
 
@@ -44,9 +44,34 @@
       return res
     };
 
+    var levelO = (root) => {
+      if (!root) return []
+      const queue = [root], res = []
+      while (queue.length) {
+        const node = queue.shift()
+        res.push(node.val)
+        node.left && queue.push(node.left)
+        node.right && queue.push(node.right)
+      }
+      return res
+    }
+
+    var level = (root) => {
+      if (!root) return []
+      const queue = [root], res = []
+      while (queue.length) {
+        const node = queue.shift()
+        res.push(node.val)
+        node.left && res.push(node.left)
+        node.right && res.push(node.right)
+      }
+      return res
+    }
+
 // 作者：floretpig
 // 链接：https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-lcof/solution/bfsyou-ya-shi-xian-cong-shang-dao-xia-da-2r85/
 
+// 08-05复习
   </script>
 </body>
 

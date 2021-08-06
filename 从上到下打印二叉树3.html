@@ -56,9 +56,36 @@
       return res
     };
 
+    var levelSortOrder = (root) => {
+      if (!root) return
+      const queue = [[root, 0]], res = []
+      while (queue.length) {
+        const [node, lev] = queue.shift()
+        if (!res[lev]) res[lev] = []
+        lev & 1 ? res[lev].unshift(node.val) : res[lev].push(node.val)
+        node.left && queue.push([node.left, lev + 1])
+        node.right && queue.push([node.right, lev + 1])
+      }
+      return res
+    }
+
+    var levelS = (root) => {
+      if (!root) return
+      const queue = [[root, 0]], res = []
+      while (queue.length) {
+        const [node, lev] = queue.shift()
+        if (!res[lev]) res[lev] = []
+        lev & 1 ? res[lev].unshift(node.val) : res[lev].push(node.val)
+        root.left && queue.push([root.left, lev + 1])
+        root.right && queue.push([root.right, lev + 1])
+      }
+      return res
+    }
+
 // 作者：floretpig
 // 链接：https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-iii-lcof/solution/bfsyou-ya-shi-xian-cong-shang-dao-xia-da-bufo/
 
+// 08-05复习
   </script>
 </body>
 

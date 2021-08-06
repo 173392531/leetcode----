@@ -28,6 +28,10 @@
             return Array.from({ length: len }, (item, index) => index + 1)
         };
 
+        var printN=(n)=>{
+            let len=Math.pow(10,n)-1
+            return Array.from({length:len},(item,index)=>index+1)
+        }
         // 作者：chenweihuan
         // 链接：https://leetcode-cn.com/problems/da-yin-cong-1dao-zui-da-de-nwei-shu-lcof/solution/javascript-mathpowarrayfrom-by-chenweihuan/
         var printNumbers = function (n) {
@@ -40,9 +44,18 @@
             return res
         };
 
-// 作者：gang-feng
-// 链接：https://leetcode-cn.com/problems/da-yin-cong-1dao-zui-da-de-nwei-shu-lcof/solution/tong-su-yi-dong-de-jie-fa-by-gang-feng-ijep/
+        var printB=(n)=>{
+            let res=[],cur=1
+            while(cur.toString().length<=n){
+                res.push(cur)
+                cur++
+            }
+            return res
+        }
+        // 作者：gang-feng
+        // 链接：https://leetcode-cn.com/problems/da-yin-cong-1dao-zui-da-de-nwei-shu-lcof/solution/tong-su-yi-dong-de-jie-fa-by-gang-feng-ijep/
 
+        // 08-05复习
     </script>
 </body>
 
