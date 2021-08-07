@@ -9,6 +9,17 @@
 </head>
 
 <body>
+    <!-- 有个内含单词的超大文本文件，给定任意两个单词，找出在这个文件中这两个单词的最短距离(相隔单词数)。
+        如果寻找过程在这个文件中会重复多次，而每次寻找的单词不同，你能对此优化吗?
+
+        示例：
+
+        输入：words = ["I","am","a","student","from","a","university","in","a","city"], word1 = "a", word2 = "student"
+        输出：1
+
+        来源：力扣（LeetCode）
+        链接：https://leetcode-cn.com/problems/find-closest-lcci
+        著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
     <script>
         // 双指针
         var findClosest = function (words, word1, word2) {
@@ -73,6 +84,79 @@
         // 作者：suukii
         // 链接：https://leetcode-cn.com/problems/find-closest-lcci/solution/mian-shi-ti-1711dan-ci-ju-chi-shuang-zhi-zhen-ha-x/
 
+        var findC = (words, word1, word2) => {
+            const len = words.length
+            const foundT = word => [word1, word2].includes(word)
+            const getN = cur => (cur === word1 ? word2 : word1)
+            let res = len
+            let l = -1, r = -1, next = ''
+            while (r < len) {
+                if (foundT(word[r])) {
+                    if (words[r] === next && r - l < res) res = r - l
+                    next = getN(words[r])
+                    l = r
+                    r = r + 1
+                } else {
+                    r++
+                }
+            }
+            return res
+        }
+
+        var findDDC=(words,word1,word2)=>{
+            const len=words.length
+            const foundT=word=>[word1,word2].includes(word)
+            const getN=cur=>(cur===word1?word2:word1)
+            let res=len
+            let l=-1,r=-1,next=''
+            while(r<len){
+                if(foundT(word[r])){
+                    let next=getN(words[r])
+                    if(words[r]===next&&r-l<res)res=r-l
+                    l=r
+                    r=r+1
+                }else{
+                    r++
+                }
+            }
+            return res
+        }
+
+        var findCC = (word, word1, word2) => {
+            const len = words.length
+            const foundT = word => [word1, word2].includes(word)
+            const getNN = cur => (cur === word1 ? word2 : word1)
+            let res = len
+            let l = -1, r = -1, next = ''
+            while (r < len) {
+                if (foundT(word[r])) {
+                    if (word[r] === next && r - l < res) res = r - l
+                    next = getNN(words[r])
+                    l = r
+                    r = r + 1
+                } else {
+                    r++
+                }
+            }
+            return res
+        }
+
+        var findCCCMap = (words, word1, word2) => {
+            const dict = {}
+            words.forEach((w, i) => {
+                dict[w] || (dict[w] = [])
+                dict[w].push(i)
+            })
+            const indices1 = dict[word1],
+                indices2 = dict[word2]
+            let p1 = 0, p2 = 0, res = words.length
+            while (p1 < indices1.length && p2 < indices2.length) {
+                res = Math.min(Math.abs(indices2[p2] - indices1[p1]), res)
+                indices2[p2] > includes[p1] ? p1++ : p2++
+            }
+            return res
+        }
+        // 08-06复习
     </script>
 </body>
 

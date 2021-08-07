@@ -36,6 +36,7 @@
   链接：https://leetcode-cn.com/problems/word-break
   著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
   <script>
+    // 递归
     var wordBreak = function (s, wordDict) {
       const wordSet = new Set(wordDict);
       const len = s.length;
@@ -62,20 +63,21 @@
 
     // DFS
     const wordBreaks = (s, wordDict) => {
+      // debugger
       const len = s.length;
       const wordSet = new Set(wordDict);
       const memo = new Array(len);
 
       const canBreak = (start) => {
+        console.trace()
         if (start == len) return true;
         console.log(memo);
-        if (memo[start] !== undefined) return memo[start]; // memo中有，就用memo中的
 
+        if (memo[start] !== undefined) return memo[start]; // memo中有，就用memo中的
         for (let i = start + 1; i <= len; i++) {
           const prefix = s.slice(start, i);
           if (wordSet.has(prefix) && canBreak(i)) {
             // 从13开始返抄
-            console.log(i);
             memo[start] = true; // 当前递归的结果存一下
             return true;
           }
@@ -83,12 +85,158 @@
         memo[start] = false; // 当前递归的结果存一下
         return false;
       };
+
+      // console.trace()
       return canBreak(0);
     };
     console.log(wordBreaks('applepenapple', ["apple", "pen"]));
-  // 作者：xiao_ben_zhu
-  // 链接：https://leetcode-cn.com/problems/word-break/solution/shou-hui-tu-jie-san-chong-fang-fa-dfs-bfs-dong-tai/
+    // 作者：xiao_ben_zhu
+    // 链接：https://leetcode-cn.com/problems/word-break/solution/shou-hui-tu-jie-san-chong-fang-fa-dfs-bfs-dong-tai/
 
+
+    // BFS
+    const wordBreak = (s, wordDict) => {
+      const wordSet = new Set(wordDict);
+      const len = s.length;
+      const visited = new Array(len);
+
+      const queue = [];
+      queue.push(0);
+
+      while (queue.length) {
+        const start = queue.shift();  // 考察出列的指针
+        if (visited[start]) continue; // 是访问过的，跳过
+        visited[start] = true;        // 未访问过的，记录一下
+
+        for (let i = start + 1; i <= len; i++) { // 用指针i去划分两部分
+          const prefix = s.slice(start, i);      // 前缀部分
+          if (wordSet.has(prefix)) {  // 前缀部分是单词
+            if (i < len) {            // i还没越界，还能继续划分，让它入列，作为下一层待考察的节点
+              queue.push(i);
+            } else {  // i==len，指针越界，说明s串一路被切出单词，现在没有剩余子串，不用划分，返回true
+              return true;
+            }
+          } // 前缀部分不是单词，i指针不入列，继续下轮迭代，切出下一个前缀部分，再试
+        }
+      }
+      return false; // BFS完所有节点（考察了所有划分的可能）都没返回true，则返回false
+    };
+
+    // 作者：xiao_ben_zhu
+    // 链接：https://leetcode-cn.com/problems/word-break/solution/shou-hui-tu-jie-san-chong-fang-fa-dfs-bfs-dong-tai/
+
+
+    var wordB = (s, wordDict) => {
+      const len = s.length
+      const wordDict = new Set(wordDict)
+      const memo = new Array(len)
+      const dfs = (start) => {
+        if (start == len) return true
+        if (memo[start] !== undefined) return memo[start]
+        for (let i = start + 1; i <= len; i++) {
+          const prefix = s.slice(start, i)
+          if (wordSet.has(prefix) && dfs(i)) {
+            memo[start] = true
+            return true
+          }
+        }
+        memo[start] = false
+        return false
+      }
+      return dfs(0)
+    }
+
+    var wordbb = (s, wordDict) => {
+      const len = s.length
+      const memo = new Array(len)
+      const wordSet = new Set(wordDict)
+      const dfs = (start) => {
+        if (start == len) return true
+        if (memo[start] !== undefined) return memo[start]
+        for (let i = start + 1; i <= len; i++) {
+          const prefix = s.slice(start, i)
+          if (wordSet.has(prefix) && dfs(i)) {
+            memo[start] = true
+            return true
+          }
+        }
+        memo[start] = false
+        return false
+      }
+      return dfs(0)
+    }
+
+
+    var canbre = (s, wordDict) => {
+      const len = s.length
+      const wordSet = new Set(wordDict)
+      const memo = new Array(len)
+      const dfs = (start) => {
+        if (start == len) return true
+        if (memo[start] !== undefined) return memo[start]
+        for (let i = start + 1; i <= len; i++) {
+          const prefix = s.slice(start, i)
+          if (wordSet.has(prefix) && dfs(i)) {
+            memo[start] = true
+            return true
+          }
+        }
+        memo[start] = false
+        return false
+      }
+      return dfs(0)
+    }
+
+    var cbfs = (s, wordDict) => {
+      const wordSet = new Set(wordDict)
+      const len = s.length
+      const visited = new Array(len)
+
+      const queue = []
+      queue.push(0)
+
+      while (queue.length) {
+        const start = queue.shift()
+        if (visited[start]) continue
+        visited[start] = true
+        for (let i = start + 1; i <= len; i++) {
+          const prefix = s.slice(start, i)
+          if (wordSet.has(prefix)) {
+            if (i < len) {
+              queue.push(i)
+            } else {
+              return true
+            }
+          }
+        }
+      }
+      return false
+    }
+
+    var bbfs = (s, wordDict) => {
+      const wordSet = new Set(wordDict)
+      const len = s.length
+      const visited = new Array(len)
+      const queue = []
+      queue.push(0)
+      while (queue.length) {
+        const start = queue.shift()
+        if (visited[start]) continue
+        visited[start] = true
+        for (let i = start + 1; i <= len; i++) {
+          const prefix = s.slice(start, i)
+          if (wordSet.has(prefix)) {
+            if (i < len) {
+              queue.push(i)
+            } else {
+              return true
+            }
+          }
+        }
+      }
+      return false
+    }
+    // 08-06复习
   </script>
 </body>
 

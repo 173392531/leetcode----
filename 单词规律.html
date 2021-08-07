@@ -51,7 +51,7 @@
       if (pattern.length !== words.length) {
         return false;
       }
-      // entries给数组内容排序
+      // entries给数组内容排序，生成一个带索引的数组
       for (const [i, word] of words.entries()) {
         const ch = pattern[i];
         if (word2ch.has(word) && word2ch.get(word) != ch || ch2word.has(ch) && ch2word.get(ch) !== word) {
@@ -63,9 +63,46 @@
       return true;
     };
 
-// 作者：LeetCode-Solution
-// 链接：https://leetcode-cn.com/problems/word-pattern/solution/dan-ci-gui-lu-by-leetcode-solution-6vqv/
+    // 作者：LeetCode-Solution
+    // 链接：https://leetcode-cn.com/problems/word-pattern/solution/dan-ci-gui-lu-by-leetcode-solution-6vqv/
 
+    var wordPattern = function (pattern, s) {
+      const a = s.split(' ')
+      if (pattern.length !== a.length) return false
+      const h = new Map
+      for (let i = 0; i < a.length; i++) {
+        let p = pattern.charCodeAt(i), s = a[i]
+        if (!h.has(p)) {
+          if (Array.from(h.values()).includes(s)) return false
+          h.set(p, s)
+        } else {
+          if (h.get(p) !== s) return false
+        }
+      }
+      return true
+    };
+
+    var wordP = (pattern, s) => {
+      const a = s.split(' ')
+      if (pattern.length !== a.length) {
+        return false
+      }
+      const h = new Map
+      for (let i = 0; i < a.length; i++) {
+        let p = pattern.charCodeAt(i), s = a[i]
+        if (!h.has(p)) {
+          if (Array.from(h.values()).includes(s)) return false
+          h.set(p, s)
+        } else {
+          if (h.get(p) !== s) return false
+        }
+      }
+      return true
+    }
+    // 作者：mantoufan
+    // 链接：https://leetcode-cn.com/problems/word-pattern/solution/suo-yin-ha-xi-biao-yuan-zu-ji-he-7xing-d-vw3o/
+
+    // 08-06复习
   </script>
 </body>
 
