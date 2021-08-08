@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
   <!-- 给你一个由 '1'（陆地）和 '0'（水）组成的的二维网格，请你计算网格中岛屿的数量。
 
@@ -16,7 +18,7 @@
 来源：力扣（LeetCode）
 链接：https://leetcode-cn.com/problems/number-of-islands
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
-<!-- 输入：grid = [
+  <!-- 输入：grid = [
   ["1","1","1","1","0"],
   ["1","1","0","1","0"],
   ["1","1","0","0","0"],
@@ -24,7 +26,7 @@
 ]
 输出：1  -->
 
-<!-- 思路一：深度优先遍历DFS
+  <!-- 思路一：深度优先遍历DFS
 目标是找到矩阵中 “岛屿的数量” ，上下左右相连的 1 都被认为是连续岛屿。
 dfs方法： 设目前指针指向一个岛屿中的某一点 (i, j)，寻找包括此点的岛屿边界。
 从 (i, j) 向此点的上下左右 (i+1,j),(i-1,j),(i,j+1),(i,j-1) 做深度搜索。
@@ -41,44 +43,70 @@ grid[i][j] == 0，代表此分支已越过岛屿边界。
 来源：力扣（LeetCode）
 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。 -->
   <script>
-  function helper(grid, i, j, rows, cols) {
-  if (i < 0 || j < 0 || i > rows - 1 || j > cols - 1 || grid[i][j] === "0")
-    return;
+    function helper(grid, i, j, rows, cols) {
+      if (i < 0 || j < 0 || i > rows - 1 || j > cols - 1 || grid[i][j] === "0")
+        return;
 
-    // 将该“岛屿”沉没
-  grid[i][j] = "0";
+      // 将该“岛屿”沉没
+      grid[i][j] = "0";
 
-  // 继续查找周边相连的岛屿是否为1，并迭代看能否将其沉没从而找到边界
-  helper(grid, i + 1, j, rows, cols);
-  helper(grid, i, j + 1, rows, cols);
-  helper(grid, i - 1, j, rows, cols);
-  helper(grid, i, j - 1, rows, cols);
-}
-/**
- * @param {character[][]} grid
- * @return {number}
- */
-var numIslands = function(grid) {
-  let res = 0;
-  const rows = grid.length;
-  if (rows === 0) return 0;
-  const cols = grid[0].length;
-  for (let i = 0; i < rows; i++) {
-    for (let j = 0; j < cols; j++) {
-      if (grid[i][j] === "1") {
-        helper(grid, i, j, rows, cols);
-        res++;
-      }
+      // 继续查找周边相连的岛屿是否为1，并迭代看能否将其沉没从而找到边界
+      helper(grid, i + 1, j, rows, cols);
+      helper(grid, i, j + 1, rows, cols);
+      helper(grid, i - 1, j, rows, cols);
+      helper(grid, i, j - 1, rows, cols);
     }
-  }
-  return res;
-};
+    /**
+     * @param {character[][]} grid
+     * @return {number}
+     */
+    var numIslands = function (grid) {
+      let res = 0;
+      const rows = grid.length;
+      if (rows === 0) return 0;
+      const cols = grid[0].length;
+      for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < cols; j++) {
+          if (grid[i][j] === "1") {
+            helper(grid, i, j, rows, cols);
+            res++;
+          }
+        }
+      }
+      return res;
+    };
+
+    var numI = (grid) => {
+      let res = 0;
+      const rows = grid.length
+      if (rows === 0) return 0
+      const cols = grid[0].length
+      for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < cols; j++) {
+          if (grid[i][j] === 1) {
+            dfs(i, j, rows, cols, grid)
+            res++
+          }
+        }
+      }
+      const dfs = (i, j, rows, cols, grid) => {
+        if (i < 0 || j < 0 || i >= rows || j >= cols) return
+        grid[i][j] = '0'
+        dfs(i + 1, j, rows, cols, grid)
+        dfs(i, j + 1, rows, cols, grid)
+        dfs(i, j - 1, rows, cols, grid)
+        dfs(i - 1, j, rows, cols, grid)
+      }
+      return res
+    }
 
 // 作者：fe-lucifer
 // 链接：https://leetcode-cn.com/problems/number-of-islands/solution/pythonjavascript-tao-lu-dfs200-dao-yu-shu-liang-by/
 // 来源：力扣（LeetCode）
 // 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 
+// 08-08复习
   </script>
 </body>
+
 </html>

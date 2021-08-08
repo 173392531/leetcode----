@@ -55,9 +55,38 @@
             return inc || dec;
         };
 
+        var inM = (arr) => {
+            let raise = true, down = true
+            const len = arr.length
+            for (let i = 0; i < len - 1; i++) {
+                if (A[i] > A[i + 1]) {
+                    raise = false
+                }
+                if (A[i] < A[i + 1]) {
+                    down = false
+                }
+            }
+            return raise || down
+        }
+
+        var inss=(arr)=>{
+            let r=true ,d=true
+            const len=arr.length
+            for(let i=0;i<len-1;i++){
+                if(arr[i]>arr[i+1]){
+                    r=false
+                }
+                if(arr[i]<arr[i+1]){
+                    l=false
+                }
+            }
+            return r||l
+        }
+
 // 作者：LeetCode-Solution
 // 链接：https://leetcode-cn.com/problems/monotonic-array/solution/dan-diao-shu-lie-by-leetcode-solution-ysex/
 
+// 08-08复习
     </script>
 </body>
 

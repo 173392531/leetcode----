@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
+
 <body>
-    <!-- 如果一个数列至少有三个元素，并且任意两个相邻元素之差相同，则称该数列为等差数列。
+  <!-- 如果一个数列至少有三个元素，并且任意两个相邻元素之差相同，则称该数列为等差数列。
 
 例如，以下数列为等差数列:
 
@@ -35,54 +37,107 @@ A = [1, 2, 3, 4]
 返回: 3, A 中有三个子等差数组: [1, 2, 3], [2, 3, 4] 以及自身 [1, 2, 3, 4]。
 
  -->
-    <script>
-// 公式推导
+  <script>
+    // 公式推导
 
-// 我们假设一个等差数列长度为 n (n>=3)，我们来计算其中长度为 j (3=<j<=n) 
-// 的子数组的个数（想象长度为 j 的滑动窗口从左往右滑，每次滑1格记1个）
-// 长度为3的：n-2
-// 长度为4的：n-3
-// 长度为5的：n-4
-// ...
-// 长度为n-1的：n-(n-2)
-// 长度为n的：n-(n-1)
-// 所以最终上面的相加就行了
-// (n-2)+(n-3)+(n-4)+..+(n-(n-1))
-// =n*(n-3)/2+1
+    // 我们假设一个等差数列长度为 n (n>=3)，我们来计算其中长度为 j (3=<j<=n) 
+    // 的子数组的个数（想象长度为 j 的滑动窗口从左往右滑，每次滑1格记1个）
+    // 长度为3的：n-2
+    // 长度为4的：n-3
+    // 长度为5的：n-4
+    // ...
+    // 长度为n-1的：n-(n-2)
+    // 长度为n的：n-(n-1)
+    // 所以最终上面的相加就行了
+    // (n-2)+(n-3)+(n-4)+..+(n-(n-1))
+    // =n*(n-3)/2+1
 
-// 代码如下
+    // 代码如下
 
 
-var numberOfArithmeticSlices = function(A) {
-  if(!A||A.length<3)return 0
-  //i记录本次数列的起始位置
-  //j记录最后一个数的位置
-  //d记录数列的差
-  let i=0,j=1,d=A[1]-A[0],ans=0
-  //c为下一个数 
-  for (let c=2;c<A.length;){
-    if(d===A[c]-A[j]){ //如果c可以加入之前的序列
-      j++
-      c++
-    }else { //当前位置不能和之前的成为数列，那么统计，然后从它重新开始计算新数列
-      let len=j-i+1
-      if(len>=3){ //长度大于等于3的才符合条件
-        ans+=((len-3)*len/2+1)
+    var numberOfArithmeticSlices = function (A) {
+      if (!A || A.length < 3) return 0
+      //i记录本次数列的起始位置
+      //j记录最后一个数的位置
+      //d记录数列的差
+      let i = 0, j = 1, d = A[1] - A[0], ans = 0
+      //c为下一个数 
+      for (let c = 2; c < A.length;) {
+        if (d === A[c] - A[j]) { //如果c可以加入之前的序列
+          j++
+          c++
+        } else { //当前位置不能和之前的成为数列，那么统计，然后从它重新开始计算新数列
+          let len = j - i + 1
+          if (len >= 3) { //长度大于等于3的才符合条件
+            ans += ((len - 3) * len / 2 + 1)
+          }
+          i = j   //注意这里要从 j 重新开始，因为比如[1,2,3,6,9],3可以[1,2,3],也可以[3,6,9]
+          j = i + 1
+          d = A[j] - A[i] //更新新数列的差
+          c = i + 2
+        }
       }
-      i=j   //注意这里要从 j 重新开始，因为比如[1,2,3,6,9],3可以[1,2,3],也可以[3,6,9]
-      j=i+1
-      d=A[j]-A[i] //更新新数列的差
-      c=i+2 
-    }
-  }
-  //最后记得再算一次
-  let len=j-i+1
-  if(len>=3){
-    ans+=((len-3)*len/2+1)
-  }
-  return ans
-};
+      //最后记得再算一次
+      let len = j - i + 1
+      if (len >= 3) {
+        ans += ((len - 3) * len / 2 + 1)
+      }
+      return ans
+    };
 
-    </script>
+    var numberOfArithmeticSlices = function (A) {
+      let l = A.length, count = 0;
+      if (l <= 2) { return 0 }
+      for (let i = l - 1; i >= 2; i--) {
+        // 每次重新计算等差值
+        let temp = A[i] - A[i - 1];
+        // j-1下标  因此>0
+        for (let j = i - 1; j > 0; j--) {
+          if (temp == A[j] - A[j - 1]) {
+            count++
+          }
+          else {
+            break;
+          }
+        }
+      }
+      return count
+    };
+
+    var numS=(A)=>{
+      let l=A.length,count=0;
+      if(l<=2)return 0
+      for(let i=l-1;i>=2;i--){
+        let temp=A[i]-A[i-1]
+        for(let j=i-1;j>0;j--){
+          if(temp==A[j]-A[j-1]){
+            count++
+          }else{
+            break
+          }
+        }
+      }
+      return count
+    }
+    var numsS=(arr)=>{
+      let len=arr.length,count=0
+      if(len<2)return 0
+      for(let i=len-1;i>=2;i--){
+        let temp=arr[i]-arr[i-1]
+        for(let j=i-1;j>0;j--){
+          if(temp==arr[j]-arr[j-1]){
+            count++
+          }else{
+            break
+          }
+        }
+      }
+      return count
+    }
+// 作者：LinStan
+// 链接：https://leetcode-cn.com/problems/arithmetic-slices/solution/ji-chu-dp-javascriptti-jiao-zhong-ji-bai-liao-9388/
+
+  </script>
 </body>
+
 </html>

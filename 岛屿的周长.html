@@ -37,9 +37,28 @@
       return 4 * land - 2 * border;
     };
 
+    var isP = (grid) => {
+      let land = 0, border = 0;
+      for (let i = 0; i < grid.length; i++) {
+        for (let j = 0; i < grid[0].length; j++) {
+          if (grid[i][j] == 1) {
+            land++
+            if (i < grid.length - 1 && grid[i + 1][j] == 1) {
+              border++
+            }
+            if (j < grid[0].length - 1 && grid[i][j + 1] == 1) {
+              border++
+            }
+          }
+        }
+      }
+      return land * 4 - border * 2
+    }
+
 // 作者：xiao_ben_zhu
 // 链接：https://leetcode-cn.com/problems/island-perimeter/solution/shou-hua-tu-jie-463-dao-yu-de-zhou-chang-by-xiao_b/
 
+// 08-08复习
   </script>
 </body>
 
