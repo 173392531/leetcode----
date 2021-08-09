@@ -58,7 +58,7 @@
       let res = 0;
       for (let i = 0; i < 32; i++) {
         // 先取出最后一位，左移32次后它就成了第一位
-        res = (res << 1) + (n & 1);
+        res = (res << 1) + (n & 1);// n&1 代表最后一位与1
         // 把倒数第二位变成倒数第一位
         n = n >>> 1;
       }
@@ -66,6 +66,14 @@
       return res >>> 0;
     };
 
+    var reverB=(n)=>{
+      let res=0;
+      for(let i=0;i<32;i++){
+        res=(res<<1)+(n&1)
+        n=n>>>1
+      }
+      return n>>>0
+    }
 // 作者：fe-lucifer
 // 链接：https://leetcode-cn.com/problems/reverse-bits/solution/li-kou-jia-jia-duo-chong-yu-fa-duo-chong-jqw3/
 

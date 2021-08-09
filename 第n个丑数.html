@@ -22,7 +22,7 @@
         链接：https://leetcode-cn.com/problems/chou-shu-lcof
         著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
 
-        <!-- 因为丑数只包含质因数 2, 3, 5，所以对于下个丑数来说，
+    <!-- 因为丑数只包含质因数 2, 3, 5，所以对于下个丑数来说，
             一定是前面某个丑数乘 3、乘 4 或者乘 5 所得。
             准备三个指针 ptr2、ptr3、ptr5，它们指向的数只能乘 2、3 和 5。
             在循环过程中，每次选取 2 * res[ptr2]、3 * res[ptr3] 和
@@ -59,9 +59,31 @@
             return res[n - 1];
         };
 
-// 作者：xin-tan
-// 链接：https://leetcode-cn.com/problems/chou-shu-lcof/solution/shuang-jie-fa-dong-tai-gui-hua-zui-xiao-dui-javasc/
+        // 作者：xin-tan
+        // 链接：https://leetcode-cn.com/problems/chou-shu-lcof/solution/shuang-jie-fa-dong-tai-gui-hua-zui-xiao-dui-javasc/
 
+        var nN = (n) => {
+            const res = new Array(n)
+            res[0] = 1
+
+            let p2 = 0, p3 = 0, p5 = 0
+            for (let i = 1; i < n; i++) {
+                res[i] = Math.min(res[p2] * 2, res[p3] * 3, res[p5] * 5)
+                if (res[i] === res[p2] * 2) {
+                    p2++
+                }
+                if (res[i] === res[p3] * 3) {
+                    p3++
+                }
+                if (res[i] === res[p5] * 5) {
+                    p5++
+                }
+            }
+            return res[n - 1]
+        }
+        console.log(nN(10));
+
+        // 08-09复习
     </script>
 </body>
 

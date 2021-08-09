@@ -25,7 +25,12 @@
 // 作者：mantoufan
 // 链接：https://leetcode-cn.com/problems/missing-number/solution/ha-xi-biao-deng-chai-shu-lie-1xing-dai-ma-chao-98-/
 
+  var missNum=(nums)=>{
+    let len=nums.length
+    return ((len+len*len)/2)-nums.reduce((p,v)=>p+v,0)
+  }
 
+  // 08-09复习
   </script>
 </body>
 </html>
