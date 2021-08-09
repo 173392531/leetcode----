@@ -54,9 +54,23 @@
       return check(root.left, root.right); // 否则，判断它的左右子树是否满足对称
     };
 
+
+    var isSt = (root) => {
+      const check = (left, right) => {
+        if (left == null && right == null) return true
+        if (left && right) {
+          return left.val == right.val && check(left.left, right.right) && check(left.right, right.left)
+        }
+        return false
+      }
+      if (root == null) return true
+      return check(root.left, root.right)
+    }
+
 // 作者：xiao_ben_zhu
 // 链接：https://leetcode-cn.com/problems/symmetric-tree/solution/di-gui-zhan-mo-ni-di-gui-bfs-by-hyj8/
 
+// 08-09复习
   </script>
 </body>
 

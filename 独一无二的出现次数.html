@@ -46,9 +46,26 @@
       return times.size === occur.size;
     };
 
+    var uniO = (arr) => {
+      const occur = new Map()
+      for (const x of arr) {
+        if (occur.has(x)) {
+          occur.set(x, occur.get(x) + 1)
+        } else {
+          occur.set(x, 1)
+        }
+      }
+      const times = new Set()
+      for (const [key, value] of occur) {
+        times.add(value)
+      }
+      return times.size === occur.size
+    }
+
 // 作者：LeetCode-Solution
 // 链接：https://leetcode-cn.com/problems/unique-number-of-occurrences/solution/du-yi-wu-er-de-chu-xian-ci-shu-by-leetcode-solutio/
 
+// 08-09复习
   </script>
 </body>
 

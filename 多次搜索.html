@@ -45,6 +45,23 @@
             return res;
         };
 
+
+        var mS = (big, smalls) => {
+            const res = []
+            for (let i = 0; i < smalls.length; i++) {
+                res[i] = []
+                const cur = smalls[i]
+                if (!cur) continue
+                const l = cur.length
+                for (let j = 0; j < big.length - l; j++) {
+                    const str = big.slice(j, j + l)
+                    if (str === cur) {
+                        res[i].push(j)
+                    }
+                }
+            }
+            return res
+        }
         // 作者：7yue
         // 链接：https://leetcode-cn.com/problems/multi-search-lcci/solution/10-xing-dai-ma-by-7yue-ttnv/
 
@@ -98,6 +115,7 @@
 // 作者：xiaoranzife
 // 链接：https://leetcode-cn.com/problems/multi-search-lcci/solution/tong-guo-smallsgou-jian-trieshu-bian-li-nazbr/
 
+// 08-09复习
     </script>
 </body>
 

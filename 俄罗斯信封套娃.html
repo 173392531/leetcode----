@@ -82,6 +82,28 @@
         }
         return f_env(height)
     }
+
+    var my_Env=(envelopes)=>{
+        let len=envelopes.length
+        var height=[]
+        envelopes.sort((a,b)=>a[0]===b[0]?b[1]-a[1]:a[0]-b[0])
+        for(let i=0;i<len;i++){
+            height[i]=envelopes[i][1]
+        }
+        function f_env(height){
+            let dp=new Array(height.length).fill(1)
+            for(let i=0;i<height.length;i++){
+                for(let j=0;j<i;j++){
+                    if(height[i]-height[j]>0){
+                        dp[i]=Math.max(dp[i],dp[j+1])
+                    }
+                }
+            }
+            return Math.max(...dp,0)
+        }
+        return f_env(height)
+    }
+    // 08-09复习
     </script>
 </body>
 
