@@ -9,7 +9,8 @@
 </head>
 
 <body>
-  <!-- 在字符串 s 中找出第一个只出现一次的字符。如果没有，返回一个单空格。 s 只包含小写字母。
+  <!-- 在字符串 s 中找出第一个只出现一次的字符。
+    如果没有，返回一个单空格。 s 只包含小写字母。
 
     示例:
 
@@ -22,25 +23,25 @@
   <script>
     // 自己的解法
     var firstUniqChar = function (s) {
-      var map=new Map
-      var sn=s.split('')
-      for(let i=0;i<sn.length;i++){
-        if(map.has(sn[i])){
+      var map = new Map
+      var sn = s.split('')
+      for (let i = 0; i < sn.length; i++) {
+        if (map.has(sn[i])) {
           // map.get(sn[i])+1
-          map.set(sn[i],map.get(sn[i])+1)
+          map.set(sn[i], map.get(sn[i]) + 1)
           // console.log(map.get(sn[i]));
-        }else{
-          map.set(sn[i],1)
+        } else {
+          map.set(sn[i], 1)
         }
       }
       // console.log(map.get(sn[1]));
       // console.log(sn[1]);
-      for(let i=0;i<sn.length;i++){
-        if(map.get(sn[i])==1){
+      for (let i = 0; i < sn.length; i++) {
+        if (map.get(sn[i]) == 1) {
           return sn[i]
         }
       }
-        return ' '
+      return ' '
     };
     console.log(firstUniqChar('azbaccdeff'));
 
@@ -52,7 +53,17 @@
     //     return ' '
     // };
 
+    var firstUniqChar = function (s) {
+      for (let x of s) {
+        if (s.indexOf(x) === s.lastIndexOf(x)) return x
+      }
+      return ' '
+    };
 
+// 作者：xia-yu-tian-hn
+// 链接：https://leetcode-cn.com/problems/di-yi-ge-zhi-chu-xian-yi-ci-de-zi-fu-lcof/solution/si-xing-dai-ma-zhi-chu-xian-yi-ci-de-zi-fu-zhi-xu-/
+
+// 08-08复习
   </script>
 </body>
 
