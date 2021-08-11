@@ -23,10 +23,19 @@
       return count;
     };
 
+    var ham = (n) => {
+      let count = 0
+      while (n !== 0) {
+        n = n & (n - 1)
+        count++
+      }
+      return count
+    }
 
 // 作者：fe-lucifer
 // 链接：https://leetcode-cn.com/problems/er-jin-zhi-zhong-1de-ge-shu-lcof/solution/jian-dan-yi-dong-wei-yun-suan-js-cpython-by-azl397/
 
+// 08-11复习
   </script>
 </body>
 

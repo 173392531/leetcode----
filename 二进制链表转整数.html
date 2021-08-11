@@ -52,9 +52,20 @@
             return count
         };
 
+        var getD = (head) => {
+            let count = 0
+            while (head) {
+                count = count * 2 + head.val
+                head = head.next
+            }
+            return count
+        }
+
+
 // 作者：sacicii
 // 链接：https://leetcode-cn.com/problems/convert-binary-number-in-a-linked-list-to-integer/solution/lian-biao-shua-ti-ji-lu-by-sacicii-9qw9/
 
+// 08-11复习
     </script>
 </body>
 

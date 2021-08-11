@@ -74,16 +74,17 @@
 
 
 
-      // res存储结果，stack存储一条路径
-      // dfs中压入路径，并计算值
-      // 到叶子节点，满足条件放入res中
-      // 遍历后，弹出路径的所有节点回溯
+    // res存储结果，stack存储一条路径
+    // dfs中压入路径，并计算值
+    // 到叶子节点，满足条件放入res中
+    // 遍历后，弹出路径的所有节点回溯
     var pathSum = function (root, sum) {
-      var res = [],stack = [];
+      var res = [], stack = [];
       function dfs(r, sum) {
         if (r == null) return;
         sum -= r.val;
         stack.push(r.val);
+        // 要注意此处一定要用[...stack]，为了深拷贝一份，再操作stack不会影响到res中原有数据
         if (r.left == null && r.right == null && sum == 0) res.push([...stack]);
         dfs(r.left, sum);
         dfs(r.right, sum);
@@ -93,9 +94,98 @@
       return res
     };
 
-// 作者：xing-he-6p
-// 链接：https://leetcode-cn.com/problems/er-cha-shu-zhong-he-wei-mou-yi-zhi-de-lu-jing-lcof/solution/ji-bai-96-by-xing-he-6b-8gdw/
+    // 作者：xing-he-6p
+    // 链接：https://leetcode-cn.com/problems/er-cha-shu-zhong-he-wei-mou-yi-zhi-de-lu-jing-lcof/solution/ji-bai-96-by-xing-he-6b-8gdw/
 
+
+    var pathS = (root, sum) => {
+      let stack = [], res = []
+      function dfs(r, sum) {
+        if (r == null) return
+        sum -= r.val
+        stack.push(r.val)
+        if (r.left == null && r.right == null && sum == 0) res.push([...stack])
+        dfs(r.left, sum)
+        dfs(r.right, sum)
+        stack.pop()
+      }
+      dfs(root, sum)
+      return res
+    }
+
+    var pathTree = (root, sum) => {
+      if (!root) return
+      const res = [], stack = []
+      function dfs(root, sum) {
+        if (!root) return
+        sum -= root.val
+        stack.push(root.val)
+        if (!root.left && !root.right && sum == 0) res.push([...stack])
+        dfs(root.left, sum)
+        dfs(root.right, sum)
+        stack.pop()
+      }
+      dfs(root, sum)
+      return res
+    }
+
+    var pathT = (root, sum) => {
+      const stack = [], res = []
+      function dfs(root, sum) {
+        if (!root) return
+        stack.push(root.val)
+        sum -= root.val
+        if (!root.left && !root.right && sum === 0) res.push([...stack])
+        dfs(root.left, sum)
+        dfs(root.right, sum)
+        stack.pop()
+      }
+      dfs(root, sum)
+      return res
+    }
+
+    var pathSum = function (root, target) {
+      if (!root) return []
+      const res = []
+      // 模拟递归栈 需要保存三个变量分别是 当前节点 目标值 当前路径已经遍历的值
+      const stack = [[root, target, []]]
+      while (stack.length > 0) {
+        const [node, t, values] = stack.pop()
+        const next = t - node.val
+        if (next === 0 && !node.left && !node.right) {
+          // 遍历到叶子节点并且next === 0 说明当前路径符合要求
+          values.push(node.val)
+          res.push(values)
+        } else {
+          if (node.right) stack.push([node.right, next, [...values, node.val]])
+          if (node.left) stack.push([node.left, next, [...values, node.val]])
+        }
+      }
+      return res
+    };
+
+    var pathS=(root,target)=>{
+      if(!root) return []
+      const res=[]
+      const stack=[[root,target,[]]]
+      while(stack.length>0){
+        const [node,t,values]=stack.pop()
+        const next=t-node.val
+        if(next===0 && !node.left && !node.right){
+          values.push(node.val)
+          res.push(values)
+        }else{
+          if(node.right)stack.push([node.right,next,[...values,node.val]])
+          if(node.left)stack.push([node.left,next,[...values,node.val]])
+        }
+      }
+      return res
+    }
+
+// 作者：et-wenchao
+// 链接：https://leetcode-cn.com/problems/er-cha-shu-zhong-he-wei-mou-yi-zhi-de-lu-jing-lcof/solution/js-die-dai-xie-fa-by-et-wenchao-dh2i/
+
+// 08-11复习
   </script>
 </body>
 
