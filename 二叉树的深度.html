@@ -36,6 +36,22 @@
             return loop(root);
         };
 
+        var maxDeep=(root)=>{
+            if(!root)return 0
+            var loop=(node,deep=1)=>{
+                if(!node){
+                    return deep-1
+                }
+                if(!node.left && !node.right){
+                    return deep
+                }
+                const leftD=loop(node.left,deep+1)
+                const rightD=loop(node.right,deep+1)
+                return Math.max(leftD,rightD)
+            }
+            return loop(root)
+        }
+
 // 作者：caiyongmin
 // 链接：https://leetcode-cn.com/problems/er-cha-shu-de-shen-du-lcof/solution/di-gui-qiu-jie-er-cha-shu-zui-da-shen-du-hist/
 

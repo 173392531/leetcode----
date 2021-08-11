@@ -50,6 +50,48 @@
     // 作者：fe - lucifer
     // 链接：https://leetcode-cn.com/problems/er-cha-shu-de-zui-jin-gong-gong-zu-xian-lcof/solution/chao-jian-dan-di-gui-pythonjavascript-by-azl397985/
 
+
+    var lowC = (root, p, q) => {
+      if (!root || root == p || root == q) return root
+      const left = lowC(root.left, p, q)
+      const right = lowC(root.right, p, q)
+      if (!left) return right
+      if (!right) return left
+      return root
+    }
+
+    var lowCc = (root, p, q) => {
+      if (!root || root == p || root == q) return root
+      const left = lowCc(root.left, p, q)
+      const right = lowCc(root.right, p, q)
+      if (!left) return right
+      if (!right) return left
+      return root
+    }
+
+    var lowCC = (root, p, q) => {
+      if (!root || root == p || root == q) return root
+      const left = lowCC(root.left, p, q)
+      const right = lowCC(root.right, p, q)
+      // 当左右树中有一方没有查到子节点时，返回另一方的查询结果
+      if (!left) return right
+      if (!right) return left
+      //  只有当左树右树都有才返回root，这就是它们的最近祖先
+      return root
+    }
+
+
+    // var ss=(arr)=>{
+    //   if(arr.length){
+    //     console.log(arr);
+    //     arr.pop()
+    //   }else{
+    //     return
+    //   }
+    //   const left=ss(arr)
+    // }
+    // console.log(ss([1,2,3,4,5,6,7,8]));
+
   </script>
 </body>
 

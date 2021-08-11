@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
   <!-- 给你一个二叉树，
     请你返回其按 层序遍历 得到的节点值。 （即逐层地，从左到右访问所有节点）。
@@ -25,41 +27,81 @@
   [15,7]
 ] -->
 
-<!-- 思路：我们定义一个数组 quene 来存储每一层的节点，初始先把根节点放进去。
+  <!-- 思路：我们定义一个数组 quene 来存储每一层的节点，初始先把根节点放进去。
   当 quene 长度大于 0 的时候，定义一个数组 arr 来存储每一层的节点值。
   同时把每个节点的左右节点添加到数组 quene 中去。-->
   <script>
-/**
- * Definition for a binary tree node.
- * function TreeNode(val) {
- *     this.val = val;
- *     this.left = this.right = null;
- * }
- */
-/**
- * @param {TreeNode} root
- * @return {number[][]}
- */
- var levelOrder = function(root) {
-    if(!root) return []
-    let queue = [root]
-    let res = []
-    while(queue.length > 0){
-      let len = queue.length
-      let arr = []
-      while(len){
-        let node = queue.shift()
-        arr.push(node.val)
-        if(node.left) queue.push(node.left)
-        if(node.right) queue.push(node.right)
-        len--
+    /**
+     * Definition for a binary tree node.
+     * function TreeNode(val) {
+     *     this.val = val;
+     *     this.left = this.right = null;
+     * }
+     */
+    /**
+     * @param {TreeNode} root
+     * @return {number[][]}
+     */
+    var levelOrder = function (root) {
+      if (!root) return []
+      let queue = [root]
+      let res = []
+      while (queue.length > 0) {
+        let len = queue.length
+        let arr = []
+        while (len) {
+          let node = queue.shift()
+          arr.push(node.val)
+          if (node.left) queue.push(node.left)
+          if (node.right) queue.push(node.right)
+          len--
+        }
+        res.push(arr)
       }
-      res.push(arr)
+      return res
+    };
+
+    var levelO = (root) => {
+      if (!root) return []
+      let queue = [root]
+      let res = []
+      while (queue.length > 0) {
+        let len = queue.length
+        let arr = []
+        while (len) {
+          let node = queue.shift()
+          arr.push(node.val)
+          if (node.left) queue.push(node.left)
+          if (node.right) queue.push(node.right)
+          len--
+        }
+        res.push(arr)
+      }
+      return res
     }
-    return res
-};
+
+    var levelO=(root)=>{
+      if(!root)return 
+      let queue=[root]
+      let res=[]
+      while(queue.length>0){
+        let len=queue.length,arr=[]
+        while(len){
+          let node=queue.shift()
+          len--
+          arr.push(node)
+          if(node.left)queue.push(node.left)
+          if(node.right)queue.push(node.right)
+        }
+        res.push(arr)
+      }
+      return res
+    }
 //图解：见下链接
 // 链接：https://leetcode-cn.com/problems/binary-tree-level-order-traversal/solution/yan-du-you-xian-sou-suo-by-shetia/
+  
+  // 08-10复习
   </script>
 </body>
+
 </html>

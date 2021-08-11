@@ -51,6 +51,18 @@
             DFS(root)
             return root
         }
+
+        var misT=(root)=>{
+            const swap=(root)=>[root.left,root.right]=[root.right,root.left]
+            const DFS=root=>{
+                if(!root)return
+                swap(root)
+                DFS(root.left)
+                DFS(root.right)
+            }
+            DFS(root)
+            return root
+        }
 // 作者：floretpig
 // 链接：https://leetcode-cn.com/problems/er-cha-shu-de-jing-xiang-lcof/solution/di-gui-stackyou-ya-shi-xian-er-cha-shu-j-2aab/
 
