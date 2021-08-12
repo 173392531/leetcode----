@@ -48,6 +48,18 @@
             return arr.join(' ')
         };
 
+        var reverse=(s)=>{
+            let arr=s.trim().replace(/\s+/g,' ').split(' ')
+            let l=0,r=arr.length-1
+            while(l<r){
+                let temp=arr[l]
+                arr[l]=arr[r]
+                arr[r]=temp
+                l++
+                r--
+            }
+            return arr.join(' ')
+        }
         // 作者：gang-feng
         // 链接：https://leetcode-cn.com/problems/fan-zhuan-dan-ci-shun-xu-lcof/solution/xie-gei-qian-duan-peng-you-mei-you-bi-wo-vpev/
 
@@ -55,6 +67,7 @@
             s = s.replace(/ +/g, ' ')
             return s.split(' ').reverse().join(' ').trim()
         };
+        // 08-12复习
     </script>
 </body>
 

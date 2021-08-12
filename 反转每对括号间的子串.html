@@ -73,6 +73,44 @@
             }
             return stack.join('')
         }
+
+        var reverse2=(s)=>{
+            let stack=[]
+            for(let i=0;i<s.length;i++){
+                if(s[i]!==')'){
+                    stack.push(s[i])
+                }else{
+                    let temp=[]
+                    while(stack.length){
+                        let cur=stack.pop()
+                        if(cur==='(')break
+                        else temp.push(cur)
+                    }
+                    stack.push(...temp)
+                }
+            }
+            return stack.join('')
+        }
+
+
+        var reverse3=(s)=>{
+            let stack=[]
+            for(let str of s){
+                if(str!==')'){
+                    stack.push(str)
+                }else{
+                    let temp=[]
+                    while(stack.length){
+                        let cur=stack.pop()
+                        if(cur=='(')break
+                        temp.push(str)
+                    }
+                    stack.push(...temp)
+                }
+            }
+            return stack.join('')
+        }
+        // 08-12日记
     </script>
 </body>
 

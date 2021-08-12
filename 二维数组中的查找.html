@@ -55,6 +55,40 @@
       return false;
     };
 
+    var findN = (matrix, target) => {
+      if (matrix.length == 0 || matrix[0].length == 0) return false
+      let maxRow = matrix.length - 1
+      let maxCol = matrix[0].length - 1
+      let [row, col] = [maxRow, 0]
+      while (row >= 0 && col <= maxCol) {
+        if (target > matrix[row][col]) {
+          col++
+        } else if (target < matrix[row][col]) {
+          row--
+        } else {
+          return true
+        }
+      }
+      return false
+    }
+
+
+    var find2 = (matrix, target) => {
+      if (matrix.length == 0 || matrix[0].length == 0) return false
+      let maxRow = matrix.length - 1
+      let maxCol = matrix[0].length - 1
+      let [row, col] = [maxRow, 0]
+      while (row >= 0 && col <= maxCol) {
+        if (target > matrix[row][col]) {
+          col++
+        } else if (target < matrix[row][col]) {
+          row--
+        } else {
+          return true
+        }
+      }
+      return false
+    }
     // 作者：turbohzw
     // 链接：https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/solution/guan-fang-de-pang-xie-zou-fa-jsshi-xian-svc8s/
 
@@ -82,23 +116,24 @@
       return false;
     };
 
-// 作者：demigodliu
-// 链接：https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/solution/zuo-biao-zhou-fa-he-wei-sde-liang-ge-shu-rj11/
+    // 作者：demigodliu
+    // 链接：https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/solution/zuo-biao-zhou-fa-he-wei-sde-liang-ge-shu-rj11/
 
-    var findNum=function(matrix,target){
-      if(!matrix.length)return false
-      let x=matrix.length-1,y=0
-      while(x>=0 && y<=matrix[0].length){
-        if(matrix[x][y]==target){
+    var findNum = function (matrix, target) {
+      if (!matrix.length) return false
+      let x = matrix.length - 1, y = 0
+      while (x >= 0 && y <= matrix[0].length) {
+        if (matrix[x][y] == target) {
           return true
-        }else if(matrix[x][y]>target){
+        } else if (matrix[x][y] > target) {
           x--
-        }else{
+        } else {
           y++
         }
       }
       return false
     }
+    // 08-12复习
   </script>
 </body>
 

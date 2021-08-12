@@ -47,6 +47,51 @@
             }
             return pre
           }
+
+          var reverS=(head)=>{
+              var pre=null
+              var next
+              while(head){
+                  next=head.next
+                  head.next=pre
+                  pre=head
+                  head=next
+              }
+              return pre
+          }
+
+          var rS=(head)=>{
+              var pre=null,next
+              while(head){
+                  next=head.next
+                  head.next=pre
+                  pre=head
+                  head=next
+              }
+              return pre
+          }
+
+          var rS2=(head)=>{
+              var pre=null,next
+              while(head){
+                  head=head.next
+                  head.next=pre
+                  pre=head
+                  head=next
+              }
+              return pre
+          }
+
+          var rrs=(head)=>{
+              var pre=null,next
+              while(head){
+                  next=head.next
+                  head.next=pre
+                  pre=head
+                  head=next
+              }
+              return pre
+          }
     </script>
 </body>
 
