@@ -70,9 +70,65 @@
       }
     };
     console.log(restoreIpAddresses("25525511215"));
-// 作者：lisa-6
-// 链接：https://leetcode-cn.com/problems/restore-ip-addresses/solution/93fu-zhi-ipdi-zhi-dfsjian-zhi-by-lisa-6/
+    // 作者：lisa-6
+    // 链接：https://leetcode-cn.com/problems/restore-ip-addresses/solution/93fu-zhi-ipdi-zhi-dfsjian-zhi-by-lisa-6/
 
+    var resA = (s) => {
+      let res = []
+      dfs(s, 0, 0, '')
+      return res
+      function dfs(string, pointer, num, path) {
+        if (num > 4) return
+        if (num === 4 && pointer === string.length) {
+          res.push(path)
+        }
+        for (let i = 1; i < 4; i++) {
+          let str = string.substring(pointer, pointer + 1)
+          if (str[0] === '0' && str.length > 1 || Number(str) > 255) return
+          dfs(string, pointer + i, num + 1, path + str + (num === 3 ? '' : '.'))
+        }
+      }
+    }
+
+    var resA = (s) => {
+      let res = []
+      function dfs(pointer, s, len, strs) {
+        if (len > 4) return
+        if (len == 4 && pointer == s.length) {
+          res.push(strs)
+        }
+        for (let i = 1; i < 4; i++) {
+          let str = s.substring(pointer, pointer + i)
+          if (str[0] == '0' && str.length >= 2 || Number(str) > 255) return
+          dfs(pointer + i, s, len + 1, strs + str + (num === 3 ? '' : '.'))
+        }
+      }
+      dfs(0, s, 0, '')
+      return res
+    }
+
+
+    var resA=(s)=>{
+      let res=[]
+      function dfs(pointer,len,str) {
+        if(len>4){
+          return 
+        }
+        if(len==4 && pointer==s.length){
+          res.push(str)
+        }
+        for(let i=1;i<4;i++){
+          let word=s.substring(pointer,pointer+i)
+          if(word[0]=='0'&&word.length>=2 || Number(word)>255){
+            return 
+          }
+          dfs(pointer+i,len+1,str+word+'')
+        }
+      }
+      dfs(0,0,'')
+      return res
+    }
+    // 08-14复习
   </script>
 </body>
 

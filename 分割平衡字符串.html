@@ -60,9 +60,25 @@
             return cnt;
         };
 
+        var balancedStr=(s)=>{
+            let cnt=0,temp=0
+            for(let i=0;i<s.length;i++){
+                if(s[i]==='R'){
+                    temp++
+                }else if(s[i]==='L'){
+                    temp--
+                }
+                if(temp==0){
+                    cnt++
+                }
+            }
+            return cnt
+        }
+
 // 作者：rancy98
 // 链接：https://leetcode-cn.com/problems/split-a-string-in-balanced-strings/solution/fen-ge-ping-heng-zi-fu-chuan-by-rancy98-kc9e/
 
+// 08-13复习
     </script>
 </body>
 

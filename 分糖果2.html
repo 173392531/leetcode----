@@ -49,21 +49,21 @@
     // 自己解法
     var distributeCandies = function (candies, num_people) {
       // 记录单次分发糖果个数的变量
-      let h=0
+      let h = 0
       // 定义长为num的全为0的数组
-      let arr=new Array(num_people).fill(0);res=candies
-      while(res>0){
+      let arr = new Array(num_people).fill(0); res = candies
+      while (res > 0) {
         // 每次循环把各个小朋友遍历完全
-        for(let i=0;i<num_people;i++,h++){
+        for (let i = 0; i < num_people; i++, h++) {
           // 如果每次剩余的糖果大于该小朋友所需糖果
-          if(res>=h+1){
+          if (res >= h + 1) {
             // 糖果累加给他
-            arr[i]+=h+1
+            arr[i] += h + 1
             // 更新剩余糖果
-            res=res-(h+1)
-          }else{
+            res = res - (h + 1)
+          } else {
             // 否则全部给他
-            arr[i]+=res
+            arr[i] += res
             // 返回数组
             return arr
           }
@@ -71,6 +71,34 @@
       }
       return arr
     };
+
+
+    var distributeCandies = function (candies, num_people) {
+      let res = new Array(num_people).fill(0)
+      let i = 0
+      while (candies != 0) {
+        res[i % num_people] += Math.min(i + 1, candies)
+        candies -= Math.min(i + 1, candies)
+        i++
+      }
+      return res
+    }
+
+    var disC=(candies,num_people)=>{
+      let res=new Array(num_people).fill(0)
+      let i=0
+      while(candies!=0){
+        res[i%num_people]+=Math.min(i+1,candies)
+        candies-=Math.min(i+1,candies)
+        i++
+      }
+      return res
+    }
+
+// 作者：ofeii
+// 链接：https://leetcode-cn.com/problems/distribute-candies-to-people/solution/mei-ri-yi-ti-ep05-divide-candyfen-tang-guo-iijavas/
+
+// 08-13复习
   </script>
 </body>
 
