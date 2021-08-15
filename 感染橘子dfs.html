@@ -1,64 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
+
 <body>
-  <script>
-    
-    var orangesRotting = function (grid) {
-    var minutes = 2, width = grid[0].length, height = grid.length;
-    while (true) {
-        var i = 0, j = i, flag = true;
-        while (i < height) {
-            if (grid[i][j] == minutes) {
-                if (i < height - 1) {
-                    grid[i + 1][j] = grid[i + 1][j] == 1 ? (minutes + 1) : grid[i + 1][j];
+    <script>
+
+        var orangesRotting = function (grid) {
+            var minutes = 2, width = grid[0].length, height = grid.length;
+            while (true) {
+                var i = 0, j = i, flag = true;
+                while (i < height) {
+                    if (grid[i][j] == minutes) {
+                        if (i < height - 1) {
+                            grid[i + 1][j] = grid[i + 1][j] == 1 ? (minutes + 1) : grid[i + 1][j];
+                        }
+                        if (i > 0) {
+                            grid[i - 1][j] = grid[i - 1][j] == 1 ? (minutes + 1) : grid[i - 1][j];
+                        }
+                        if (j > 0) {
+                            grid[i][j - 1] = grid[i][j - 1] == 1 ? (minutes + 1) : grid[i][j - 1];
+                        }
+                        if (j < width - 1) {
+                            grid[i][j + 1] = grid[i][j + 1] == 1 ? (minutes + 1) : grid[i][j + 1];
+                        }
+                        flag = false;
+                    }
+                    j++;
+                    if (j == width) {
+                        j = 0;
+                        i++;
+                    }
                 }
-                if (i > 0) {
-                    grid[i - 1][j] = grid[i - 1][j] == 1 ? (minutes + 1) : grid[i - 1][j];
+                minutes++;
+                if (flag) {
+                    i = 0, j = 0;
+                    var max = 2;
+                    while (i < height) {
+                        if (grid[i][j] == 1) {
+                            return -1;
+                        }
+                        max = Math.max(max, grid[i][j]);
+                        j++;
+                        if (j == width) {
+                            j = 0;
+                            i++;
+                        }
+                    }
+                    return max - 2;
                 }
-                if (j > 0) {
-                    grid[i][j - 1] = grid[i][j - 1] == 1 ? (minutes + 1) : grid[i][j - 1];
-                }
-                if (j < width - 1) {
-                    grid[i][j + 1] = grid[i][j + 1] == 1 ? (minutes + 1) : grid[i][j + 1];
-                }
-                flag = false;
             }
-            j++;
-            if (j == width) {
-                j = 0;
-                i++;
-            }
-        }
-        minutes++;
-        if (flag) {
-            i = 0, j = 0;
-            var max = 2;
-            while (i < height) {
-                if (grid[i][j] == 1) {
-                    return -1;
-                }
-                max = Math.max(max, grid[i][j]);
-                j++;
-                if (j == width) {
-                    j = 0;
-                    i++;
-                }
-            }
-            return max - 2;
-        }
-    }
-};
+        };
 
 // 作者：general-1
 // 链接：https://leetcode-cn.com/problems/rotting-oranges/solution/zhi-guan-bian-li-yan-du-bian-li-ma-by-general-1/
 
+// 08-15复习
 
-  </script>
+    </script>
 </body>
+
 </html>
