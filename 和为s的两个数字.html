@@ -39,6 +39,18 @@
 // 作者：demigodliu
 // 链接：https://leetcode-cn.com/problems/he-wei-sde-liang-ge-shu-zi-lcof/solution/shuang-zhi-zhen-he-wei-sde-liang-ge-shu-wy7r4/
 
+
+        var twoSum2=(nums,target)=>{
+            let l=0,r=nums.length-1
+            while(l<r){
+                if(nums[l]+nums[r]===target)return [nums[l],nums[r]]
+                else if(nums[l]+nums[r]>target)r--
+                else l++
+            }
+            return null
+        }
+
+        // 08-17复习
     </script>
 </body>
 
