@@ -55,6 +55,44 @@
             return res;
         };
 
+        var findC=(target)=>{
+            let index=target %2===0?target /2:(target/2|0)+1
+            let res=[]
+            let temp=[]
+            let sum=0
+            for(let i=1;i<=index;i++){
+                temp.push(i)
+                sum+=i
+                while(sum>target){
+                    sum-=temp[0]
+                    temp.shift()
+                }
+                if(sum===target){
+                    temp.length>=2&&res.push([...temp])
+                }
+            }
+            return res
+        }
+        // console.log(findC(9));
+        
+
+        var findC2=(target)=>{
+            let res=[],temp=[],sum=0
+            let index=Math.ceil(target/2)
+            for(let i=1;i<=index;i++){
+                temp.push(i)
+                sum+=i
+                while(sum>target){
+                    sum-=temp[0]
+                    temp.shift()
+                }
+                if(sum==target){
+                    temp.length>=2&&res.push([...temp])
+                }
+            }
+            return res
+        }
+        console.log(findC2(9));
         // 作者：minCoding
         // 链接：https://leetcode-cn.com/problems/he-wei-sde-lian-xu-zheng-shu-xu-lie-lcof/solution/javascripthua-dong-chuang-kou-hen-rong-yi-li-jie-d/
 
@@ -75,6 +113,8 @@
             }
             return res
         }
+
+        // 08-17复习
     </script>
 </body>
 

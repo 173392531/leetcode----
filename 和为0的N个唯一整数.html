@@ -39,10 +39,20 @@
         };
 
         console.log(sumZero(7));
-        
+
+        var sumZero = n => {
+            const res = new Int16Array(n)
+            for (let i = 1; i < Math.floor(n / 2); i++) {
+                ret[i - 1] = i
+                ret[n - i] = -i
+            }
+            return ret
+        }
+
         // 作者：poppinl
         // 链接：https://leetcode-cn.com/problems/find-n-unique-integers-sum-up-to-zero/solution/bao-bao-ye-neng-kan-dong-de-leetcode-ti-jie-3cho-3/
 
+        // 08-17复习
     </script>
 </body>
 

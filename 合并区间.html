@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
-  
+
   <!-- 以数组 intervals 表示若干个区间的集合，其中单个区间为 intervals[i] = [starti, endi] 。
     请你合并所有重叠的区间，并返回一个不重叠的区间数组，该数组需恰好覆盖输入中的所有区间。
 
@@ -37,23 +39,43 @@
   链接：https://leetcode-cn.com/problems/merge-intervals/solution/shou-hua-tu-jie-56he-bing-qu-jian-by-xiao_ben_zhu/ -->
   <script>
     var merge = function (intervals) {
-  let res = [];
-  intervals.sort((a, b) => a[0] - b[0]);
+      let res = [];
+      intervals.sort((a, b) => a[0] - b[0]);
 
-  let prev = intervals[0];
+      let prev = intervals[0];
 
-  for (let i = 1; i < intervals.length; i++) {
-    let cur = intervals[i];
-    if (prev[1] >= cur[0]) { // 有重合
-      prev[1] = Math.max(cur[1], prev[1]); 
-    } else {       // 不重合，prev推入res数组 
+      for (let i = 1; i < intervals.length; i++) {
+        let cur = intervals[i];
+        if (prev[1] >= cur[0]) { // 有重合
+          prev[1] = Math.max(cur[1], prev[1]);
+        } else {       // 不重合，prev推入res数组 
+          res.push(prev);
+          prev = cur;  // 更新 prev
+        }
+      }
       res.push(prev);
-      prev = cur;  // 更新 prev
+      return res;
+    };
+
+
+    var merge2 = (intervals) => {
+      let res = []
+      let prev = intervals[0]
+      for (let i = 1; i < intervals.length; i++) {
+        let cur = intervals[i]
+        if (prev[1] > cur[0]) {
+          prev[1] = Math.max(prev[1], cur[1])
+        } else {
+          res.push(prev)
+          prev = cur
+        }
+      }
+      res.push(prev)
+      return res
     }
-  }
-  res.push(prev);
-  return res;
-};
+
+    // 08-17复习
   </script>
 </body>
+
 </html>

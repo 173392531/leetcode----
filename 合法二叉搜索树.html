@@ -48,6 +48,30 @@
         // 作者：LeetCode - Solution
         // 链接：https://leetcode-cn.com/problems/legal-binary-search-tree-lcci/solution/he-fa-er-cha-sou-suo-shu-by-leetcode-sol-y1xm/
 
+
+        var isValidBST2 = (root) => {
+            return helper2(root, -Infinity, Infinity)
+            function helper2(root, lower, upper) {
+                if (root === null) return true
+                if (root.val <= lower || root.val >= upper) {
+                    return false
+                }
+                return helper2(root.left, lower, root.val) && helper2(root.right, root.val, upper)
+            }
+        }
+
+        var isValidBST3 = (root) => {
+            function valid(root, lower, upper) {
+                if (!root) return true
+                if (root.val <= lower || root.val >= upper) {
+                    return false
+                }
+                return valid(root.left, lower, root.val) && valid(root.right, root.val, upper)
+            }
+            return valid(root, -Infinity, Infinity)
+        }
+
+        // 08-17复习
     </script>
 </body>
 

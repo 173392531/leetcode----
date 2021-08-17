@@ -32,6 +32,11 @@
       nums1.sort((a, b) => a - b);
     };
 
+
+    var merge=(nums1,m,nums2,n)=>{
+      nums1.splice(m,nums1.length-m,...nums2)
+      nums1.sort((a,b)=>a-b)
+    }
 // 作者：LeetCode-Solution
 // 链接：https://leetcode-cn.com/problems/merge-sorted-array/solution/he-bing-liang-ge-you-xu-shu-zu-by-leetco-rrb0/
 
