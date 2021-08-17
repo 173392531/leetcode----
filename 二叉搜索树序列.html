@@ -115,118 +115,118 @@
                 if (i == arr.length) return tree
             }
         }
-        console.log(BSTSequences(createTree([4,2,6,1,3])));
-        
-        
+        console.log(BSTSequences(createTree([4, 2, 6, 1, 3])));
 
-        var BBST=(root)=>{
-            let res=[]
-            if(root==null)return [[]]
-            let queue=[]
-            let dfs=(root,res,queue,temp)=>{
-                if(root==null)return 
-                if(root.left)queue.push(root.left)
-                if(root.right)queue.push(root.right)
-                if(queue.length==0){
+
+
+        var BBST = (root) => {
+            let res = []
+            if (root == null) return [[]]
+            let queue = []
+            let dfs = (root, res, queue, temp) => {
+                if (root == null) return
+                if (root.left) queue.push(root.left)
+                if (root.right) queue.push(root.right)
+                if (queue.length == 0) {
                     res.push([...temp])
-                    return 
+                    return
                 }
-                let {length}=queue
-                while(length--){
-                    let cur=queue.shift()
-                    dfs(cur,res,queue.slice(),[...temp,cur.val])
+                let { length } = queue
+                while (length--) {
+                    let cur = queue.shift()
+                    dfs(cur, res, queue.slice(), [...temp, cur.val])
                     queue.push(cur)
                 }
             }
-            dfs(root,res,queue,[root.val])
+            dfs(root, res, queue, [root.val])
             return res
         }
 
-        var B=(root)=>{
-            let res=[]
-            if(root==null)return [[]]
-            let queue=[]
-            let dfs=(root,res,queue,temp)=>{
-                if(root==null)return
-                if(root.left)queue.push(root.left)
-                if(root.right)queue.push(root.right)
-                if(queue.length==0){
+        var B = (root) => {
+            let res = []
+            if (root == null) return [[]]
+            let queue = []
+            let dfs = (root, res, queue, temp) => {
+                if (root == null) return
+                if (root.left) queue.push(root.left)
+                if (root.right) queue.push(root.right)
+                if (queue.length == 0) {
                     res.push([...temp])
-                    return 
-                } 
-                let {length}=queue
-                while(length--){
-                    let cur=queue.shift()
-                    dfs(cur,res,queue,slice(),[...temp])
+                    return
+                }
+                let { length } = queue
+                while (length--) {
+                    let cur = queue.shift()
+                    dfs(cur, res, queue, slice(), [...temp])
                     queue.push(cur)
                 }
             }
-            dfs(root,res,queue,[root.val])
+            dfs(root, res, queue, [root.val])
             return res
         }
 
-        var Bst=(root)=>{
-            let res=[]
-            if(root==null)return [[]]
-            let queue=[]
-            let dfs=(root,res,queue,temp)=>{
-                if(root==null)return 
-                if(root.left)queue.push(root.left)
-                if(root.right)queue.push(root.right)
-                if(queue.length==0){
+        var Bst = (root) => {
+            let res = []
+            if (root == null) return [[]]
+            let queue = []
+            let dfs = (root, res, queue, temp) => {
+                if (root == null) return
+                if (root.left) queue.push(root.left)
+                if (root.right) queue.push(root.right)
+                if (queue.length == 0) {
                     res.push([...temp])
-                    return 
+                    return
                 }
-                let {length}=queue
-                while(length--){
-                    let cur=queue.shift()
-                    dfs(cur,res,queue.slice(),[...temp])
+                let { length } = queue
+                while (length--) {
+                    let cur = queue.shift()
+                    dfs(cur, res, queue.slice(), [...temp])
                     queue.push(cur)
                 }
             }
-            dfs(root,res,queue,[root.val])
+            dfs(root, res, queue, [root.val])
             return res
         }
 
-        var bst=(root)=>{
-            let res=[],queue=[]
-            if(root==null)return [[]]
-            let dfs=(root,res,queue,temp)=>{
+        var bst = (root) => {
+            let res = [], queue = []
+            if (root == null) return [[]]
+            let dfs = (root, res, queue, temp) => {
                 // 条件拦截
-                if(root==null)return 
+                if (root == null) return
                 // 收集依赖
-                if(root.left)queue.push(root.left)
-                if(root.right)queue.push(root.right)
+                if (root.left) queue.push(root.left)
+                if (root.right) queue.push(root.right)
                 // 终止条件
-                if(queue.length==0){
+                if (queue.length == 0) {
                     res.push([...temp])
-                    return 
+                    return
                 }
                 // 依赖处理
-                let {length}=queue
-                while(length--){
-                    let cur=queue.shift()
-                    dfs(cur,res,queue.slice(),[...temp,cur.val])
+                let { length } = queue
+                while (length--) {
+                    let cur = queue.shift()
+                    dfs(cur, res, queue.slice(), [...temp, cur.val])
                     queue.push(cur)
                 }
             }
         }
 
-        var bst3=(root)=>{
-            let res=[],queue=[]
-            if(!root)return [[]]
-            var dfs=(root,res,queue,temp)=>{
-                if(!root)return 
-                if(root.left)queue.push(root.left)
-                if(root.right)queue.push(root.right)
-                if(queue.length==0){
+        var bst3 = (root) => {
+            let res = [], queue = []
+            if (!root) return [[]]
+            var dfs = (root, res, queue, temp) => {
+                if (!root) return
+                if (root.left) queue.push(root.left)
+                if (root.right) queue.push(root.right)
+                if (queue.length == 0) {
                     res.push([...temp])
-                    return 
-                } 
-                let {length}=queue
-                while(length--){
-                    let cur=queue.shift()
-                    dfs(cur,res,queue.slice(),[...temp,cur.val])
+                    return
+                }
+                let { length } = queue
+                while (length--) {
+                    let cur = queue.shift()
+                    dfs(cur, res, queue.slice(), [...temp, cur.val])
                     queue.push(cur)
                 }
             }
@@ -235,17 +235,43 @@
         // var bst4=(root)=>{
 
         // }
-        let ques=[1,2,3,4]
+        let ques = [1, 2, 3, 4]
         ques.shift()
         ques.slice().shift()
         console.log(ques);
-        
 
-        var bst4=(root)=>{
+
+        var bst4 = (root) => {
+            if (!root) return
+            let res = [], queue = []
+            var dfs = (root, res, queue, temp) => {
+                if (!root) return
+                if (root.left) queue.push(root.left)
+                if (root.right) queue.push(root.right)
+                if (queue.length == 0) {
+                    res.push([...temp])
+                    return
+                }
+                let { length } = queue
+                while (length--) {
+                    let cur = queue.shift()
+                    dfs(cur, res, queue.slice(), [...temp, cur.val])
+                    queue.push(cur)
+                }
+            }
+            dfs(root, res, queue, [])
+            return res
+        }
+        // 作者：sc8816
+        // 链接：https://leetcode-cn.com/problems/bst-sequences-lcci/solution/dfs-by-sc8816/
+
+        // 08-11复习
+
+        var bst5=(root)=>{
             if(!root)return 
             let res=[],queue=[]
             var dfs=(root,res,queue,temp)=>{
-                if(!root)return
+                if(!root)return 
                 if(root.left)queue.push(root.left)
                 if(root.right)queue.push(root.right)
                 if(queue.length==0){
@@ -254,7 +280,7 @@
                 }
                 let {length}=queue
                 while(length--){
-                    let cur=queue.shift()
+                    let cur =queue.shift()
                     dfs(cur,res,queue.slice(),[...temp,cur.val])
                     queue.push(cur)
                 }
@@ -262,10 +288,6 @@
             dfs(root,res,queue,[])
             return res
         }
-// 作者：sc8816
-// 链接：https://leetcode-cn.com/problems/bst-sequences-lcci/solution/dfs-by-sc8816/
-
-// 08-11复习
     </script>
 </body>
 

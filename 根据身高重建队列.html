@@ -40,19 +40,34 @@
             // 创建新数组 ans
             let ans = []
             for (let i = 0; i < people.length; i++) {
+                debugger
                 // 挨个根据前面高于自己人数插入到ans里
                 // 因为people已按照身高排序，所以某个人被插入到ans里时，所有比他高的都已经在ans里了
                 // 而身高比他矮的人怎样插入到ans里都不影响前面高于他的人数
                 // 所以这样得到的数组就是符合我们要求的队列
                 ans.splice(people[i][1], 0, people[i])
+                console.log(ans);
+
             }
             return ans
         };
+        console.log(reconstructQueue([[6, 0], [5, 0], [4, 0], [3, 2], [2, 2], [1, 4]]));
 
-        console.log(reconstructQueue([[6,0],[5,0],[4,0],[3,2],[2,2],[1,4]]));
+
+        var reQ = (people) => {
+            people.sort((a, b) => a[0] === b[0] ? a[1] - b[1] : b[0] - a[0])
+            let ans = []
+            for (let i = 0; i < people.length; i++) {
+                ans.splice(people[i][1], 0, people[i])
+            }
+            return ans
+        }
+
+        console.log(reconstructQueue([[6, 0], [5, 0], [4, 0], [3, 2], [2, 2], [1, 4]]));
 // 作者：MaoZZ_17
 // 链接：https://leetcode-cn.com/problems/queue-reconstruction-by-height/solution/an-shen-gao-cong-da-dao-xiao-pai-xu-ai-ge-cha-ru-d/
 
+// 08-16复习
     </script>
 </body>
 

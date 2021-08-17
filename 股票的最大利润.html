@@ -37,9 +37,20 @@
       return sum
     };
 
-// 作者：xing-he-6p
-// 链接：https://leetcode-cn.com/problems/gu-piao-de-zui-da-li-run-lcof/solution/ji-bai-93-by-xing-he-6b-hs1q/
+    // 作者：xing-he-6p
+    // 链接：https://leetcode-cn.com/problems/gu-piao-de-zui-da-li-run-lcof/solution/ji-bai-93-by-xing-he-6b-hs1q/
 
+
+    var maxProfit1 = (prices) => {
+      let sum = 0, min = Infinity
+      for (let i = 0; i < prices.length; i++) {
+        min = Math.min(prices[i], min)
+        sum = Math.max(sum, prices[i] - min)
+      }
+      return sum
+    }
+
+    // 08-16复习
   </script>
 </body>
 

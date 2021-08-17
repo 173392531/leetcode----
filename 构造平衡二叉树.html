@@ -33,6 +33,22 @@
                 return node;
             }
         }
+        var createT=(array)=>{
+            if(arr.length==0){
+                return null
+            }else{
+                let mid=parseInt(array.length/2)
+                let node=new Node(array[mid],null,null)
+                let leftNode=array.slice(0,mid)
+                let rightNode=array.slice(mid+1,array.length)
+                node.left=createT(leftNode)
+                node.right=createT(rightNode)
+                return node
+            }
+        }
+        
+
+        // 08-16复习
     </script>
 </body>
 

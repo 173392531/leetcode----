@@ -128,41 +128,80 @@
     // 链接：https://leetcode-cn.com/problems/rotting-oranges/solution/tu-jie-dian-xing-de-bfs-kan-tu-ba-dai-ma-xiang-xi-/
 
 
-    const rottonOrange=(grid)=>{
-      const queue=[]
-      let unrotten=0
-      const height=grid.length
-      const width=grid[0].length
-      for(let i=0;i<height;i++){
-        for(let j=0;j<width;j++){
-          if(grid[i][j]==2){
-            queue.push([i,j])
-          }else if(grid[i][j]===1){
+    const rottonOrange = (grid) => {
+      const queue = []
+      let unrotten = 0
+      const height = grid.length
+      const width = grid[0].length
+      for (let i = 0; i < height; i++) {
+        for (let j = 0; j < width; j++) {
+          if (grid[i][j] == 2) {
+            queue.push([i, j])
+          } else if (grid[i][j] === 1) {
             unrotten++
           }
         }
       }
-      if(unrotten==0)return 0
-      let level=0
-      const dx=[0,1,0,-1]
-      const dy=[1,0,-1,0]
-      while(queue.length){
-        const levelSize=queue.length
+      if (unrotten == 0) return 0
+      let level = 0
+      const dx = [0, 1, 0, -1]
+      const dy = [1, 0, -1, 0]
+      while (queue.length) {
+        const levelSize = queue.length
         level++
-        for(let i=0;i<levelSize;i++){
-          let cur=queue.shift()
-          for(let j=0;j<4;j++){
-            let x=cur[0]+dx[j]
-            let y=cur[1]+dy[j]
-            if(x<0 || x>=height || y<0 || y>=width || grid[i][j]!=1)continue
-            grid[x][y]=2
-            queue.push([x,y])
+        for (let i = 0; i < levelSize; i++) {
+          let cur = queue.shift()
+          for (let j = 0; j < 4; j++) {
+            let x = cur[0] + dx[j]
+            let y = cur[1] + dy[j]
+            if (x < 0 || x >= height || y < 0 || y >= width || grid[i][j] != 1) continue
+            grid[x][y] = 2
+            queue.push([x, y])
             unrotten--
           }
         }
       }
+      return unrotten === 0 ? level - 1 : -1
     }
     // 08-15复习
+
+    const rottonO = (grid) => {
+      const queue = []
+      let unrotton = 0
+      const row = grid.length
+      const col = grid[0].length
+      for (let i = 0; i < row; i++) {
+        for (let j = 0; j < col; j++) {
+          if (grid[i][j] == 2) {
+            queue.push([i, j])
+          } else if (grid[i][j] == 1) {
+            unrotton--
+          }
+        }
+      }
+      if (unrotton == 0) return 0
+      let level = 0
+      const dx = [0, 1, 0, -1]
+      const dy = [1, 0, -1, 0]
+      while (queue.length) {
+        const levelSize = queue.length
+        level++
+        for (let i = 0; i < levelSize; i++) {
+          let cur = queue.shift()
+          for (let j = 0; j < 4; j++) {
+            let x = cur[0] + dx[j]
+            let y = cur[0] + dy[j]
+            if (x < 0 || x >= row || y < 0 || y >= col || grid[i][j] != 1) continue
+            grid[x][y] = 2
+            queue.push([x, y])
+            unrotton--
+          }
+        }
+      }
+      return unrotten === 0 ? level - 1 : -1
+    }
+
+    // 08-16复习
   </script>
 </body>
 

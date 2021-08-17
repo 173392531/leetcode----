@@ -35,9 +35,21 @@
             return Math.min(dist, sum - dist);
         };
 
+
+        var distance=(distance,start,destination)=>{
+            let dist=0,sum=0
+            for(let i=0;i<distance.length;i++){
+                sum+=distance[i]
+                if(i>=Math.min(start, destination)&&i < Math.max(start, destination)){
+                    dist+=distance[i]
+                }
+            }
+            return Math.min(dist,sum-dist)
+        }
         // 作者：zealot27
         // 链接：https://leetcode-cn.com/problems/distance-between-bus-stops/solution/1184gong-jiao-zhan-jian-de-ju-chi-yi-ci-7a9z1/
 
+        // 08-16复习
     </script>
 </body>
 
