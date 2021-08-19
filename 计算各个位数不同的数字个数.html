@@ -31,9 +31,37 @@
             return dp.reduce((sum, cur) => sum += cur, 0) + 1//加上0
         };
 
-// 作者：function-a-return-new-my
-// 链接：https://leetcode-cn.com/problems/count-numbers-with-unique-digits/solution/chao-100-by-function-a-return-new-my-n45s/
+        // 作者：function-a-return-new-my
+        // 链接：https://leetcode-cn.com/problems/count-numbers-with-unique-digits/solution/chao-100-by-function-a-return-new-my-n45s/
 
+        var countN = (n) => {
+            if (n > 9 || n < 1) return 1
+            let dp = new Array(n).fill(null)
+            dp[0] = 9
+            for (let i = 1; i < n; i++) {
+                dp[i] = (10 - i) * dp[i - 1]
+            }
+            return dp.reduce((sum, cur) => sum += cur, 0)+1
+        }
+
+        var countN=(n)=>{
+            if(n>9 || n<1)return 1
+            let dp=new Array(n).fill(null)
+            dp[0]=9
+            for(let i=1;i<n;i++){
+                dp[i]=(10-i)*dp[i-1]
+            }
+            return dp.reduce((sum,cur)=>sum+=cur,0)+1
+        }
+        var countN2=(n)=>{
+            if(n>9 || n<1)return 1
+            let dp=new Array(n).fill(null)
+            dp[0]=9
+            for(let i=1;i<n;i++){
+                dp[i]=(10-i)*dp[i-1]
+            }
+            return dp.reduce((sum,cur)=>sum+=cur,0)+1
+        }
     </script>
 </body>
 

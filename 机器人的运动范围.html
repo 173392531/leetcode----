@@ -52,9 +52,28 @@
       return total
     };
     console.log(movingCount(7, 8, 46));
-// 作者：shetia
-// 链接：https://leetcode-cn.com/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/solution/da-lao-jiu-shi-da-lao-zi-ji-xiang-po-nao-dai-du-xi/
+    // 作者：shetia
+    // 链接：https://leetcode-cn.com/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/solution/da-lao-jiu-shi-da-lao-zi-ji-xiang-po-nao-dai-du-xi/
 
+
+    var movC = (m, n, k) => {
+      let total = 0, obj = {}
+      function running(i, j) {
+        if (i < 0 || j < 0 || i >= m || j >= n) return
+        let sum = (i + '' + j).split('').reduce((a, b) => +a + +b)
+        let ax = [i, j]
+        if (sum <= k && !obj[ax]) {
+          total++
+          obj[ax] = true
+          running(i + 1, j)
+          running(i - 1, j)
+          running(i, j + 1)
+          running(i, j - 1)
+        }
+      }
+      running(0, 0)
+      return total
+    }
   </script>
 </body>
 

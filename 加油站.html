@@ -57,6 +57,36 @@
     // 链接：https://leetcode-cn.com/problems/gas-station/solution/shou-hua-tu-jie-liang-ge-guan-jian-jie-lun-de-jian/
 
     console.log(canCompleteCircuit([1, 2, 3, 4, 5], [3, 4, 5, 1, 2]));
+
+    var canCC2 = (gas, cost) => {
+      let left = 0, start = 0, totalGas = 0, totalCost = 0
+      for (let i = 0; i < gas.length; i++) {
+        totalGas += gas[i]
+        totalCost += cost[i]
+        left += gas[i] - cost[i]
+        if (left < 0) {
+          start = i + 1
+          left = 0
+        }
+      }
+      if (totalGas < totalCost) return -1
+      return start
+    }
+
+    var canCC3=(gas,cost)=>{
+      let left=0,start=0,totalGas=0,totalCost=0
+      for(let i=0;i<gas.length;i++){
+        totalGas+=cost[i]
+        totalCost+=cost[i]
+        left+=gas[i]-cost[i]
+        if(left<0){
+          start=i+1
+          left=0
+        }
+      }
+      if(totalCost>totalGas)return -1
+      return start
+    }
   </script>
 </body>
 
