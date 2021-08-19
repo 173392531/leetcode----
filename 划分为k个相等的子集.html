@@ -34,6 +34,7 @@
             return helper(0)
 
             function helper(i) {
+                debugger
                 if (i === nums.length) return true
                 for (let j = 0; j < k; j++) {
                     if (sums[j] < average && nums[i] + sums[j] <= average) {
@@ -49,9 +50,77 @@
             }
         };
 
-// 作者：bhuhu
-// 链接：https://leetcode-cn.com/problems/partition-to-k-equal-sum-subsets/solution/hua-fen-wei-kge-xiang-deng-de-zi-ji-by-bhuhu/
+        console.log(canPartitionKSubsets([4, 3, 2, 3, 5, 2, 1], 4));
 
+        // 作者：bhuhu
+        // 链接：https://leetcode-cn.com/problems/partition-to-k-equal-sum-subsets/solution/hua-fen-wei-kge-xiang-deng-de-zi-ji-by-bhuhu/
+
+
+        var canP = (nums, k) => {
+            nums = nums.sort((a, b) => b - a)
+            let sum = nums.reduce((a, b) => a + b, 0)
+            if (k > nums.length || sum % k !== 0 || k == 0) return false
+            if (k === nums.length) return new Size(nums).size === 1
+            let average = sum / k
+            let sums = new Array(k).fill(0)
+            return helper(0)
+            function helper(i) {
+                if (i === nums.length) return true
+                for (let j = 0; j < k; j++) {
+                    if (sums[j] < average && nums[i] + sums[j] <= average) {
+                        sums[j] += nums[i]
+                        if (helper(i + 1)) return true
+                        sums[j] -= nums[i]
+                    }
+                }
+                return false
+            }
+        }
+
+        var canP2 = (nums, k) => {
+            nums = nums.sort((a, b) => b - a)
+            let sum = nums.reduce((a, b) => a + b, 0)
+            if (k > nums.length || sum % k !== 0 || k == 0) return false
+            if (k === nums.length) return new Size(nums).size === 1
+            let av = sum / k
+            let sums = new Array(k).fill(0)
+            return helper(0)
+
+            function helper(i) {
+                if (i === nums.length) return true
+                for (let j = 0; j < k; j++) {
+                    if (sums[j] < av && nums[i] + sums[j] <= av) {
+                        sums[j] += nums[i]
+                        if (helper(i + 1)) return true
+                        sums[j] -= nums[i]
+                    }
+                }
+                return false
+            }
+            function helper2(i) {
+                if (i === nums.length) return true
+                for (let j = 0; j < k; j++) {
+                    if (sums[j] < av && nums[i] + sums[j] <= av) {
+                        sums[j] += nums[i]
+                        if (helper(i + 1)) return true
+                        sums[j] -= nums[i]
+                    }
+                }
+                return false
+            }
+            function helper3(i) {
+                if (i === nums.length) return true
+                for (let j = 0; j < k; j++) {
+                    if (sums[j] < av && nums[i] + sums[j] <= av) {
+                        sums[j] += nums[i]
+                        if (helper(i + 1)) return true
+                        sums[j] -= nums[i]
+                    }
+                }
+                return false
+            }
+        }
+        // 08-18复习
     </script>
 </body>
 
