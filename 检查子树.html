@@ -62,6 +62,27 @@
 // 作者：gang-feng
 // 链接：https://leetcode-cn.com/problems/check-subtree-lcci/solution/fei-chang-you-ya-de-qian-duan-jie-fa-kan-fhat/
 
+
+        var checkS2=(t1,t2)=>{
+            if(!t2)return true
+            if(!t1)return false
+            if(t1.val===t2.val){
+                return checkS2(t1.left,t2.left) && checkS2(t1.right,t2.right)
+            }else{
+                return checkS2(t1.left,t2) || checkS2(t1.right,t2)
+            }
+        }
+
+        var check3=(t1,t2)=>{
+            if(!t2)return true
+            if(!t1)return false
+            if(t1.val===t2.val){
+                return check3(t1.left,t2.left) && check3(t1.right,t2.right)
+            }else{
+                return check3(t1.left,t2)||check3(t1.right,t2)
+            }
+        }
+        // 08-20复习
     </script>
 </body>
 

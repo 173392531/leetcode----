@@ -43,6 +43,14 @@
             return res;
         };
 
+        let repE=(arr)=>{
+            let max=-1,res=[]
+            for(let i=arr.length-1;i>=0;i--){
+                res[i]=max
+                max=arr[i]>max?arr[i]:max
+            }
+            return res
+        }
         // 作者：wanyuxuan
         // 链接：https://leetcode-cn.com/problems/replace-elements-with-greatest-element-on-right-side/solution/cong-you-wang-zuo-by-wanyuxuan/
 
@@ -61,6 +69,17 @@
         // 作者：da-yu-58
         // 链接：https://leetcode-cn.com/problems/replace-elements-with-greatest-element-on-right-side/solution/jiang-shu-zu-zhong-mei-ge-yuan-su-ti-huan-wei-you-/
 
+
+        var repE2=(arr)=>{
+            let nums=[-1]
+            let temp=arr[arr.length-1]
+            for(let w=arr.length-1;w>0;w--){
+                if(temp<arr[w])temp=arr[w]
+                nums.unshift(temp)
+            }
+            return nums
+        }
+        // 08-20复习
     </script>
 </body>
 

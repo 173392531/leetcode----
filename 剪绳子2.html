@@ -45,9 +45,22 @@
             return res * n % max;
         };
 
-// 作者：lisa-6
-// 链接：https://leetcode-cn.com/problems/jian-sheng-zi-ii-lcof/solution/jian-sheng-zi-ii-shu-xue-gui-lu-de-zui-you-jie-by-/
+        // 作者：lisa-6
+        // 链接：https://leetcode-cn.com/problems/jian-sheng-zi-ii-lcof/solution/jian-sheng-zi-ii-shu-xue-gui-lu-de-zui-you-jie-by-/
 
+
+        var cuttR2 = (n) => {
+            let arr = [0, 0, 1, 2, 4]
+            if (n < 5) return arr[n]
+            const max = 1e9 + 7
+            let res = 1
+            while (n >= 5) {
+                res = res % max * 3
+                n -= 3
+            }
+            return res * n % max
+        }
+        // 08-20复习
     </script>
 </body>
 
