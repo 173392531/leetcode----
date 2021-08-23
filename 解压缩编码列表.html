@@ -9,7 +9,8 @@
 </head>
 
 <body>
-    <!-- 给你一个以行程长度编码压缩的整数列表 nums 。
+    <!--
+        给你一个以行程长度编码压缩的整数列表 nums 。
         考虑每对相邻的两个元素 [freq, val] = [nums[2*i], nums[2*i+1]] （其中 i >= 0 ），
         每一对都表示解压后子列表中有 freq 个值为 val 的元素，你需要从左到右连接所有子列表以生成解压后的列表。
         请你返回解压后的列表。
@@ -29,7 +30,8 @@
 
         来源：力扣（LeetCode）
         链接：https://leetcode-cn.com/problems/decompress-run-length-encoded-list
-        著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+        著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 
+    -->
     <script>
         var decompressRLElist = function (nums) {
             list = []
@@ -40,6 +42,16 @@
             }
             return list;
         };
+
+        var decompress2 = (nums) => {
+            let res = []
+            for (let i = 0; i < nums.length; i += 2) {
+                for (let j = 0; i < nums[i]; j++) {
+                    res.push(nums[i + 1])
+                }
+            }
+            return res
+        }
 
         // 作者：ladudu
         // 链接：https://leetcode-cn.com/problems/decompress-run-length-encoded-list/solution/1313-jie-ya-suo-bian-ma-lie-biao-by-ladudu/
@@ -52,6 +64,15 @@
             return result
         };
 
+
+        var dec3 = (nums) => {
+            let res = []
+            for (let i = 0; i < nums.length / 2; i++) {
+                res = [...res, ...new Array(nums[2 * i].fill(nums[2 * i + 1]))]
+            }
+            return res
+        }
+        
         // 作者：xch1029
         // 链接：https://leetcode-cn.com/problems/decompress-run-length-encoded-list/solution/jian-duan-jsban-by-xch1029/
 

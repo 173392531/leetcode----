@@ -79,6 +79,28 @@
 // 作者：tracy-25
 // 链接：https://leetcode-cn.com/problems/minimum-swaps-to-make-strings-equal/solution/js-ti-jie-by-tracy-25/
 
+
+        // 'xxyy'与'yyxx'只需要换两次就变成两个'xyxy'
+        var miniS=(s1,s2)=>{
+            if(s1.length!=s2.length)return -1
+            let stX=0,stY=0
+            for(let i=0;i<s1.length;i++){
+                if(s1[i]!==s2[i]){
+                    if(s1[i]=='x'){
+                        stX++
+                    }else{
+                        stY++
+                    }
+                }
+            }
+            if((stX+stY)%2===0){
+                return stX % 2===0?(stX+stY)/2:(stX+stY)/2+1
+            }else{
+                return -1
+            }
+        }
+
+        // 08-21复习
     </script>
 </body>
 
