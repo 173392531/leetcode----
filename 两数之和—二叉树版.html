@@ -69,6 +69,37 @@
 // 作者：cchroot-liu
 // 链接：https://leetcode-cn.com/problems/two-sum-iv-input-is-a-bst/solution/qian-xu-di-gui-set-cun-chu-pan-duan-by-cchroot-9/
 
+    var findT2=(root,k)=>{
+      let set=new Set()
+      var diff=(node)=>{
+        if(node===null)return false
+        if(set.has(k-node.val))return true
+        set.add(node.val)
+        return diff(node.left) || diff(node.right)
+      }
+      return diff(root)
+    }
+
+    var findT3=(root,k)=>{
+      let set=new Set()
+      var diff=(node)=>{
+        if(node===null)return false
+        if(set.has(k-node.val))return true
+        set.add(node.val)
+        return diff(node.left) || diff(node.right)
+      }
+    }
+
+    var finnT4=(root,k)=>{
+      let set=new Set()
+      var diff=(root)=>{
+        if(!root)return false
+        if(set.has(k-root.val))return true
+        set.add(root.val)
+        return diff(root.left) || diff(root.right)
+      }
+      return diff(root)
+    }
   </script>
 </body>
 

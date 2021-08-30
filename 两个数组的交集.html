@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
   <!-- 给定两个数组，编写一个函数来计算它们的交集。
 
@@ -22,27 +24,63 @@
 来源：力扣（LeetCode） -->
   <script>
     const set_intersection = (set1, set2) => {
-    if (set1.size > set2.size) {
+      if (set1.size > set2.size) {
         return set_intersection(set2, set1);
-    }
-    const intersection = new Set();
-    for (const num of set1) {
+      }
+      const intersection = new Set();
+      for (const num of set1) {
         if (set2.has(num)) {
-            intersection.add(num);
+          intersection.add(num);
         }
+      }
+      return [...intersection];
     }
-    return [...intersection];
-}
 
-var intersection = function(nums1, nums2) {
-  // new Set 是ES6中不能出现重复数字的数组
-    const set1 = new Set(nums1);
-    const set2 = new Set(nums2);
-    return set_intersection(set1, set2);
-};
+    var intersection = function (nums1, nums2) {
+      // new Set 是ES6中不能出现重复数字的数组
+      const set1 = new Set(nums1);
+      const set2 = new Set(nums2);
+      return set_intersection(set1, set2);
+    };
 
-// 作者：LeetCode-Solution
-// 链接：https://leetcode-cn.com/problems/intersection-of-two-arrays/solution/liang-ge-shu-zu-de-jiao-ji-by-leetcode-solution/
+    // 作者：LeetCode-Solution
+    // 链接：https://leetcode-cn.com/problems/intersection-of-two-arrays/solution/liang-ge-shu-zu-de-jiao-ji-by-leetcode-solution/
+
+    const intersection = (nums1, nums2) => {
+      const map = {};
+      const res = [];
+
+      for (const num1 of nums1) {
+        map[num1] = true; // 记录nums1出现过的数字
+      }
+      for (const num2 of nums2) {
+        if (map[num2]) {  // 如果nums2的这个数字在nums1出现过
+          map[num2] = false; // 置为false，避免重复推入res
+          res.push(num2);  // 交集数字推入res
+        }
+      }
+      return res;
+    };
+
+// 作者：xiao_ben_zhu
+// 链接：https://leetcode-cn.com/problems/intersection-of-two-arrays/solution/349-liang-ge-shu-zu-de-jiao-ji-liang-ci-bian-li-by/
+
+    const interSec=(nums1,nums2)=>{
+      const map={},res=[]
+      for(const num of nums1){
+        map[num]=true
+      }
+      for(const num of nums2){
+        if(map[num]){
+          mao[num]=false
+          res.push(num)
+        }
+      }
+      return res
+    }
+
+    // 08-26复习
   </script>
 </body>
+
 </html>

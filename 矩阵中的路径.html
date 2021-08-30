@@ -43,28 +43,58 @@
             return false
         };
 
-// 作者：user3502je
-// 链接：https://leetcode-cn.com/problems/ju-zhen-zhong-de-lu-jing-lcof/solution/dfssuan-fa-by-user3502je/
+        // 作者：user3502je
+        // 链接：https://leetcode-cn.com/problems/ju-zhen-zhong-de-lu-jing-lcof/solution/dfssuan-fa-by-user3502je/
 
-var exist=function(board,word){
-    var row =board.length;
-    var col=board[0].length
-    var dfs=function(i,j,board,word,index){
-        if(i<0  || i>=row || j<0 || j>col || board!==word[index])return false
-        if(index===word.length-1)return true
-        var tmp=board[i][j]
-        board[i][j]='-'
-        var res=dfs(i-1,j,board,word,index+1) || dfs(i+1,j,board,word,index+1) ||  dfs(i-1,j,board,word,index+1)  ||dfs(i,j-1,board,word,index+1)|| dfs(i,j+1,board,word,index+1)
-        board[i][j]=tmp
-        return res
-    }
-    for(let i=0;i<row;i++){
-        for(let j=0;i<col;j++){
-            if(dfs(i,j,board,word,0))return true
+        var exist = function (board, word) {
+            var row = board.length;
+            var col = board[0].length
+            var dfs = function (i, j, board, word, index) {
+                if (i < 0 || i >= row || j < 0 || j > col || board !== word[index]) return false
+                if (index === word.length - 1) return true
+                var tmp = board[i][j]
+                board[i][j] = '-'
+                var res = dfs(i - 1, j, board, word, index + 1) || dfs(i + 1, j, board, word, index + 1) || dfs(i - 1, j, board, word, index + 1) || dfs(i, j - 1, board, word, index + 1) || dfs(i, j + 1, board, word, index + 1)
+                board[i][j] = tmp
+                return res
+            }
+            for (let i = 0; i < row; i++) {
+                for (let j = 0; i < col; j++) {
+                    if (dfs(i, j, board, word, 0)) return true
+                }
+            }
+            return false
         }
-    }
-    return false
-}
+
+        var exist2 = (board, word) => {
+            const rowLen = board.length, colLen = board[0].length
+            for (let i = 0; i < rowLen; i++) {
+                for (let j = 0; j < colLen; j++) {
+                    if (dfs(i, j, 0)) {
+                        return true
+                    }
+                }
+            }
+            return false
+            function dfs(row, col, k) {
+                if (row >= rowLen || row < 0 || col >= colLen || col < 0 || board[row][col] == '' || board[row][col] !== word[k]) return false
+                if (k === word.length - 1) {
+                    return true
+                }
+                let temp = board[i][j]
+                if (temp == word[k]) {
+                    board[i][j] = ''
+                    let res =
+                        dfs(row + 1, col, k + 1) ||
+                        dfs(row - 1, col, k + 1) ||
+                        dfs(row, col + 1, k + 1) ||
+                        dfs(row, col - 1, k + 1);
+                    board[i][j] = temp
+                    return res
+                }
+            }
+        }
+        // 08-23复习
     </script>
 </body>
 

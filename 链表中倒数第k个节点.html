@@ -38,9 +38,21 @@
             return low;
         };
 
-// 作者：caoyq0521
-// 链接：https://leetcode-cn.com/problems/lian-biao-zhong-dao-shu-di-kge-jie-dian-lcof/solution/lian-biao-zhong-dao-shu-di-kge-jie-dian-13iow/
+        // 作者：caoyq0521
+        // 链接：https://leetcode-cn.com/problems/lian-biao-zhong-dao-shu-di-kge-jie-dian-lcof/solution/lian-biao-zhong-dao-shu-di-kge-jie-dian-13iow/
 
+
+        var getFE = (head, k) => {
+            let fast = head, low = fast, n = 0
+            while (fast) {
+                fast = fast.next
+                if (n >= k) {
+                    low = low.next
+                }
+                n++
+            }
+            return low
+        }
     </script>
 </body>
 

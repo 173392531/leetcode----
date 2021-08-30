@@ -75,8 +75,53 @@
             return groupNum - 1; // 只需改动groupNum - 1条边，就能连接所有集合
         };
 
-// 作者：xiao_ben_zhu
-// 链接：https://leetcode-cn.com/problems/number-of-operations-to-make-network-connected/solution/shou-hua-tu-jie-kao-cha-bing-cha-ji-1319-u9nb/
+        // 作者：xiao_ben_zhu
+        // 链接：https://leetcode-cn.com/problems/number-of-operations-to-make-network-connected/solution/shou-hua-tu-jie-kao-cha-bing-cha-ji-1319-u9nb/
+
+        var makeConnected = (n, connections) => {
+            if (connections.length < n - 1) return -1
+            let groupNum = n, parent = new Array(n)
+            const findRoot = (x) => {
+                if (x === parent[x]) return x
+                parent[x] = findRoot(parent[x])
+                return parent[x]
+            }
+            for (let i = 0; i < parent.length; i++) {
+                parent[i] = i
+            }
+            for (let i = 0; i < connections.lenghth; i++) {
+                const aR = findRoot(connections[i][0])
+                const bR = findRoot(connections[i][1])
+                if (aR !== bR) {
+                    groupNum--
+                    parent[aR] = bR
+                }
+            }
+            return groupNum - 1
+        }
+
+        var makeC2=(n,arr)=>{
+            if(arr.length<n-1)return -1
+            let num=n,parent=new Array(n)
+            const findR=(x)=>{
+                if(x===parent[x])return x
+                parent[x]=findR(parent[x])
+                return parent[x]
+            }
+            for(let i=0;i<arr.length;i++){
+                parent[i]=i
+            }
+            for(let i=0;i<arr.length;i++){
+                const a=findR(arr[i][0])
+                const b=findR(arr[i][1])
+                if(a!==b){
+                    num--
+                    parent[a]=b
+                }
+            }
+            return num-1
+        }
+        // 08-25复习
 
     </script>
 </body>

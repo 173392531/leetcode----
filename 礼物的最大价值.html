@@ -57,9 +57,58 @@
             return dp[rowNum - 1][colNum - 1];
         };
 
-// 作者：xin-tan
-// 链接：https://leetcode-cn.com/problems/li-wu-de-zui-da-jie-zhi-lcof/solution/dong-tai-gui-hua-nei-cun-ji-bai-100shi-jian-ji-bai/
+        // 作者：xin-tan
+        // 链接：https://leetcode-cn.com/problems/li-wu-de-zui-da-jie-zhi-lcof/solution/dong-tai-gui-hua-nei-cun-ji-bai-100shi-jian-ji-bai/
 
+
+        var getGiftSum = (arr) => {
+            const rowLen = grid.length, colLen = grid[0].length
+            const dp = []
+            for (let i = 0; i < rowLen; i++) {
+                dp[i] = []
+                for (let j = 0; j < colLen; j++) {
+                    dp[i][j] = 0
+                }
+            }
+            dp[0][0] = grid[0][0]
+            for (let i = 1; i < rowLen; i++) {
+                dp[i][0] = grid[i][0] + dp[i - 1][0]
+            }
+            for (let j = 1; j < colLen; j++) {
+                dp[0][j] = grid[0][j] + dp[0][j - 1]
+            }
+            for (let i = 1; i < rowLen; i++) {
+                for (let j = 1; j < colLen; j++) {
+                    dp[i][j] = grid[i][j] + Math.max(dp[i - 1][j], dp[i][j - 1])
+                }
+            }
+            return dp[rowLen - 1][colLen - 1]
+        }
+
+        var getG3 = (arr) => {
+            const rowLen = grid.length, colLen = grid[0].length
+            const dp = []
+            for (let i = 0; i < rowLen; i++) {
+                dp[i] = []
+                for (let j = 0; j < colLen; j++) {
+                    dp[i][j] = 0
+                }
+            }
+            dp[0][0] = grid[0][0]
+            for (let i = 1; i < rowLen; i++) {
+                dp[i][0] = grid[i][0] + dp[i - 1][0]
+            }
+            for (let j = 1; j < colLen; j++) {
+                dp[0][j] = grid[0][j] + dp[0][j - 1]
+            }
+            for (let i = 1; i < rowLen; i++) {
+                for (let j = 1; j < colLen; j++) {
+                    dp[i][j] = grid[i][j] + Math.max(dp[i - 1][j], dp[i][j - 1])
+                }
+            }
+            return dp[rowLen - 1][colLen - 1]
+        }
+        // 08-24复习
     </script>
 </body>
 

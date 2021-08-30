@@ -45,9 +45,24 @@
     };
     twoCitySchedCost([[10, 20], [30, 200], [400, 50], [30, 20]])
 
-// 作者：ahua-x
-// 链接：https://leetcode-cn.com/problems/two-city-scheduling/solution/can-kao-guan-fang-ti-jie-de-tan-xin-suan-fa-shi-yo/
+    // 作者：ahua-x
+    // 链接：https://leetcode-cn.com/problems/two-city-scheduling/solution/can-kao-guan-fang-ti-jie-de-tan-xin-suan-fa-shi-yo/
 
+    var totalCost2 = (costs) => {
+      const sortCosts = costs.sort((a, b) => (a[0] - a[1]) - (b[0] - b[1]))
+      const toA = sortCosts.splice(0, sortCosts.length / 2).reduce(((accumulator, b) => accumulator + b[0]), 0)
+      const toB = sortCosts.reduce(((accumulator, b) => accumulator + b[1]), 0)
+      return toA + toB
+    }
+
+    var totalC3 = (costs) => {
+      const cost = costs.sort((a, b) => (a[0] - a[1]) - (b[0] - b[1]))
+      const a = cost.splice(0, cost.length / 2).reduce(((pre, a) => pre + a[0]), 0)
+      const b = cost.reduce(((pre, b) => pre + b[1]), 0)
+      return a + b
+    }
+
+    // 08-25复习
   </script>
 </body>
 

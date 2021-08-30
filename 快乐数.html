@@ -61,6 +61,27 @@
 // 作者：shetia
 // 链接：https://leetcode-cn.com/problems/happy-number/solution/ji-xu-gao-dui-xiang-by-shetia/
 
+
+    var isHappy=(n)=>{
+      var sum=(n)=>{
+        n=n+''
+        let sum=0
+        for(let num of n){
+          sum+=num*num
+        }
+        return sum
+      }
+      let res=sum(n)
+      let obj={}
+      while(res!=1){
+        if(res in obj)return false
+        obj[res]=1
+        res=sum(res)
+      }
+      return true
+    }
+    // 08-24复习
+
   </script>
 </body>
 </html>

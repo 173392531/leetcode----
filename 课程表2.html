@@ -65,41 +65,99 @@
       return res.length === numCourses ? res : [] // 选齐了就返回res，否则返回[]
     };
 
-// 作者：xiao_ben_zhu
-// 链接：https://leetcode-cn.com/problems/course-schedule-ii/solution/bao-mu-shi-ti-jie-tuo-bu-pai-xu-si-lu-zen-yao-yi-2/
+    // 作者：xiao_ben_zhu
+    // 链接：https://leetcode-cn.com/problems/course-schedule-ii/solution/bao-mu-shi-ti-jie-tuo-bu-pai-xu-si-lu-zen-yao-yi-2/
 
 
-var findOrder2 = function(numCourses, prerequisites) {
-    let courses = Array(numCourses).fill(0)            // 初始化 上课 需要先完成课程 的门数
-    let obj = {}                                       // 记录受该课程 影响的其他课
-    prerequisites.forEach(item => {
-      let [one, two] = item                            // one 要上的课, two 需先完成的课
-      courses[one]++                                   // 门数 + 1
-      obj[two] ? obj[two].push(one) : obj[two] = [one] // 存在就加, 不存在就新建
-    })
-    let res = []
-    let queue = []                    // 队列
-    courses.forEach((t, i) => {       // 往队列添加 无需先上 就可以 上 的课
-      if(t === 0) queue.push(i)       // 因为是从0开始的, 所以索引也能代替 课的名称，t为0代表着这门课没有前置课程，t为值，i为index
-    })
-    while(queue.length){
-      let cur = queue.shift()         // 出队   表示该课已经上了
-      res.push(cur)                   // 把出队的放入 结果数组
-      let list = obj[cur]             // 获取受该课影响的 课       
-      list && list.forEach(item => { 
-        courses[item]--               // 因为 出队表示该课已经上了, 所以 要先完成的门数 - 1
-        if(courses[item] == 0){       // 当这个课 要先修完的 已经修完了, 入队
-          queue.push(item)
-        }
+    var findOrder2 = function (numCourses, prerequisites) {
+      debugger
+      let courses = Array(numCourses).fill(0)            // 初始化 上课 需要先完成课程 的门数
+      let obj = {}                                       // 记录受该课程 影响的其他课
+      prerequisites.forEach(item => {
+        let [one, two] = item                            // one 要上的课, two 需先完成的课
+        courses[one]++                                   // 门数 + 1
+        obj[two] ? obj[two].push(one) : obj[two] = [one] // 存在就加, 不存在就新建
       })
+      let res = []
+      let queue = []                    // 队列
+      courses.forEach((t, i) => {       // 往队列添加 无需先上 就可以 上 的课
+        if (t === 0) queue.push(i)       // 因为是从0开始的, 所以索引也能代替 课的名称，t为0代表着这门课没有前置课程，t为值，i为index
+      })
+      while (queue.length) {
+        let cur = queue.shift()         // 出队   表示该课已经上了
+        res.push(cur)                   // 把出队的放入 结果数组
+        let list = obj[cur]             // 获取受该课影响的 课       
+        list && list.forEach(item => {
+          courses[item]--               // 因为 出队表示该课已经上了, 所以 要先完成的门数 - 1
+          if (courses[item] == 0) {       // 当这个课 要先修完的 已经修完了, 入队
+            queue.push(item)
+          }
+        })
+      }
+      // 应题目要求: 如果不可能完成所有课程，返回一个空数组。
+      return res.length === numCourses ? res : []
+    };
+
+    console.log(
+      findOrder2(4, [[1, 0], [2, 0], [3, 1], [3, 2]])
+    );
+
+    // 作者：shetia
+    // 链接：https://leetcode-cn.com/problems/course-schedule-ii/solution/chao-da-an-by-shetia/
+
+
+    var findO = (numCourses, prerequisites) => {
+      let courses = new Array(numCourses).fill(0)
+      let obj = {}
+      prerequisites.forEach(item => {
+        let [one, two] = item
+        courses[one]++
+        obj[two] ? obj[two].push(one) : obj[two] = [one]
+      })
+      let res = [], queue = []
+      courses.forEach((t, i) => {
+        if (t === 0) queue.push(i)
+      })
+      while (queue.length) {
+        let cur = queue.shift()
+        res.push(cur)
+        let list = obj[cur]
+        list && list.forEach(item => {
+          courses[item]--
+          if (courses[item] == 0) {
+            queue.push(item)
+          }
+        })
+      }
+      return res.length === numCourses ? res : []
     }
-    // 应题目要求: 如果不可能完成所有课程，返回一个空数组。
-    return res.length === numCourses ? res : []
-  };
 
-// 作者：shetia
-// 链接：https://leetcode-cn.com/problems/course-schedule-ii/solution/chao-da-an-by-shetia/
-
+    var find3 = (num, arr) => {
+      let courses = new Array(num).fill(0)
+      let obj = {}
+      arr.forEach(item => {
+        let [one, two] = item
+        courses[one]++
+        obj[two] ? obj[two].push(one) : obj[two] = [one]
+      })
+      let res = [], queue = []
+      courses.forEach((t, i) => {
+        if (t === 0) queue.push(i)
+      })
+      while (queue.length) {
+        let cur = queue.shift()
+        res.push(cur)
+        let list = obj[cur]
+        list && list.forEach(item => {
+          courses[item]--
+          if (courses[item] == 0) {
+            queue.push(item)
+          }
+        })
+      }
+      return res.length === num ? res : []
+    }
+    // 08-24复习
   </script>
 </body>
 

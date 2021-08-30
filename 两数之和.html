@@ -68,6 +68,32 @@
     // 作者：callmew
     // 链接：https://leetcode-cn.com/problems/two-sum/solution/li-yong-javascriptde-mapjiu-xing-qiu-jie-1zyi/
 
+
+      var twoS2=(nums,target)=>{
+        if(!nums)return []
+        const m=new Map()
+        for(let i=0;i<nums.length;i++){
+          const n=nums[i]
+          const n2=target - nums[i]
+          if(m.has(n2)){
+            return [m.get(n2),i]
+          }
+          m.set(n,i)
+        }
+      }
+
+      var twoS3=(nums,target)=>{
+        if(!nums)return []
+        const m=new Map()
+        for(let i=0;i<nums.length;i++){
+          const n=nums[i]
+          const n2=target-nums[i]
+          if(m.has(n2)){
+            return [m.get(n2),i]
+          }
+          m.set(n,i)
+        }
+      }
   </script>
 </body>
 </html>

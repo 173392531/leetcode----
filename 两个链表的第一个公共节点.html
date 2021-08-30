@@ -28,8 +28,25 @@
       return null;
     };
 
+    var getI2 = (headA, headB) => {
+      const map = new Map()
+      let node = headA
+      while (node) {
+        map.set(node, true)
+        node = node.next
+      }
+      node = headB
+      while (node) {
+        if (map.has(node)) return node
+        node = node.next
+      }
+      return null
+    }
+
 // 作者：xin-tan
 // 链接：https://leetcode-cn.com/problems/liang-ge-lian-biao-de-di-yi-ge-gong-gong-jie-dian-lcof/solution/shuang-jie-fa-ha-xi-biao-kuai-man-zhi-zhen-nei-cun/
+
+  // 08-25复习
 
   </script>
 </body>

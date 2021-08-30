@@ -62,7 +62,28 @@
 
         // 作者：poppinl
         // 链接：https://leetcode-cn.com/problems/all-elements-in-two-binary-search-trees/solution/bao-bao-ye-neng-kan-dong-de-leetcode-ti-jie-inorde/
+        const getAll2 = (root1, root2) => {
+            const arr1 = [], arr2 = []
 
+            var RtoA = (root, arr) => {
+                if (!root) return
+                RtoA(root.left, arr)
+                arr.push(root.val)
+                RtoA(root.right, arr)
+            }
+            RtoA(root1, arr1)
+            RtoA(root2, arr2)
+            const res = []
+            let id1 = id2 = 0
+            while (id1 < arr1.length && id2 < arr2.length) {
+                arr1[id1] < arr2[id2] ? res.push(arr1[id1++]) : res.push(arr2[id2++])
+            }
+            while (id1 < arr1.length) res.push(arr1[id1++])
+            while (id2 < arr2.length) res.push(arr2[id2++])
+            return res
+        }
+
+        // 08-26复习
     </script>
 </body>
 
