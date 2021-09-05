@@ -34,7 +34,7 @@
   显而易见，需要双重循环就可实现，外层循环遍历每个单词，内层循环遍历单词中的每个字母，顺带统计其出现频率。
   在哪个时机对字母表Map和单词Map进行“构成单词”的判断呢？
   很显然，这个时机必须在字母Map和单词Map都已知的情况下，才能正常进行。 -->
-    <script>
+  <script>
     /**
      * @param {string[]} words
      * @param {string} chars
@@ -76,9 +76,35 @@
       // 返回单词长度
       return size;
     };
-// 作者：gatsby-23
-// 链接：https://leetcode-cn.com/problems/find-words-that-can-be-formed-by-characters/solution/javascript-ha-xi-biao-ji-shu-fa-fu-xiang-jin-jie-d/
 
+
+    // 作者：gatsby-23
+    // 链接：https://leetcode-cn.com/problems/find-words-that-can-be-formed-by-characters/solution/javascript-ha-xi-biao-ji-shu-fa-fu-xiang-jin-jie-d/
+
+
+    var countC2 = (words, chars) => {
+      let size = 0, charMap = new Map()
+      for (let char of chars) {
+        charMap.set(char, (charMap.has(char) ? charMap.get(char) + 1 : 1))
+      }
+      for (let word of words) {
+        let wordMap = new Map()
+        for (let char of word) {
+          wordMap.set(char, (wordMap.has(char) ? wordMap.get(char) + 1 : 1))
+        }
+        let enough = true
+        for (let char of word) {
+          if (wordMap.get(char) > charMap.get(char) || charMap.get(char) === undefined) {
+            enough = false
+            break
+          }
+        }
+        if (enough) size += word.length
+      }
+      return size
+    }
+
+    // 09-02复习
   </script>
 </body>
 

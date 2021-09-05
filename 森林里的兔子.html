@@ -10,7 +10,7 @@
 
 <body>
   <!-- 方法一：贪心
-<!-- 必看链接： -->
+ 必看链接：
   作者：LeetCode-Solution
   链接：https://leetcode-cn.com/problems/rabbits-in-forest/solution/sen-lin-zhong-de-tu-zi-by-leetcode-solut-kvla/
   来源：力扣（LeetCode）
@@ -30,7 +30,7 @@
 
     // 作者：LeetCode-Solution
     // 链接：https://leetcode-cn.com/problems/rabbits-in-forest/solution/sen-lin-zhong-de-tu-zi-by-leetcode-solut-kvla/
-   
+
     var numRabbits_map = function (answers) {
       let map = new Map(), res = 0;
       for (let a of answers) {
@@ -51,9 +51,29 @@
       }
       return res;
     };
-// 要想使得兔子数量最小，那么尽量将报同样数量的视为同一颜色，
-// 但为了不矛盾，需要使用map记录对应颜色兔子最大的出现次数
-// 报0的兔子一定是独一无二的直接++
+    // 要想使得兔子数量最小，那么尽量将报同样数量的视为同一颜色，
+    // 但为了不矛盾，需要使用map记录对应颜色兔子最大的出现次数
+    // 报0的兔子一定是独一无二的直接++
+
+    var numR2 = (ans) => {
+      let map = new Map(), res = 0
+      for (let a of ans) {
+        if (a == 0) {
+          res++
+        } else if (!map.has(a)) {
+          res += (1 + a)
+          map.set(a, a)
+        } else {
+          map.set(a, map.get(a) - 1)
+          if (map.get(a) == 0) {
+            map.delete(a)
+          }
+        }
+      }
+      return ans
+    }
+
+    // 09-05复习
   </script>
 </body>
 

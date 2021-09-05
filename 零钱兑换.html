@@ -83,6 +83,61 @@
       }
       return dp[amount] === Infinity ? -1 : dp[amount]
     }
+
+    const coinC2 = (coins, amount) => {
+      let dp = new Array(amount + 1).fill(Infinity)
+      dp[0] = 0
+      for (let coin of coins) {
+        for (let i = coin; i <= amount; i++) {
+          dp[i] = Math.min(dp[i], dp[i - coin] + 1)
+        }
+      }
+      return dp[amount]
+    }
+
+    const coinC3=(coins,amount)=>{
+      let dp=new Array(amount+1).fill(Infinity)
+      dp[0]=0
+      for(let coin of coins){
+        for(let i=coin;i<=amount;i++){
+          dp[i]=Math.min(dp[i],dp[i-coin]+1)
+        }
+      }
+      return dp[amount]
+    }
+
+    const coinC4=(coins,amount)=>{
+      let dp=new Array(amount+1).fill(Infinity)
+      dp[0]=0
+      for(let coin of coins){
+        for(let i=coin;i<amount;i++){
+          dp[i]=Math.min(dp[i],dp[i-coin]+1)
+        }
+      }
+      return dp[amount]
+    }
+
+    const coinC5=(coins,amount)=>{
+      let dp=new Array(amount+1).fill(Infinity)
+      dp[0]=0
+      for(let coin of coins){
+        for(let i=coin ;i<amount;i++){
+          dp[i]=Math.min(dp[i],dp[i-coin]+1)
+        }
+      }
+      return dp[amount]
+    }
+    
+    const coinC6=(coins,amount)=>{
+      let dp=new Array(amount+1).fill(Infinity)
+      for(let coin of coins){
+        for(let i=coin;i<amount;i++){
+          dp[i]=Math.min(dp[i-coin]+1,dp[i])
+        }
+      }
+      return dp[amount]
+    }
+    // 08-30复习
   </script>
 </body>
 

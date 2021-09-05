@@ -15,7 +15,8 @@
 
         网格中的障碍物和空位置分别用 1 和 0 来表示。
 
-        返回一条可行的路径，路径由经过的网格的行号和列号组成。左上角为 0 行 0 列。如果没有可行的路径，返回空数组。
+        返回一条可行的路径，路径由经过的网格的行号和列号组成。左上角为 0 行 0 列。
+        如果没有可行的路径，返回空数组。
 
         示例 1:
 
@@ -46,7 +47,7 @@
                     return false;
                 }
                 path.push([x, y]);
-                // visited[x][y] = true;
+                visited[x][y] = true;
                 //判断有没有到终点
                 if (x == r - 1 && y == c - 1) {
                     return true;
@@ -55,7 +56,7 @@
                     return true;
                 }
                 //都走不通，回溯
-                // path.pop();
+                path.pop();
                 return false;
             }
             backtrack(obstacleGrid, 0, 0, visited);
@@ -69,6 +70,63 @@
             [0, 0, 0],
             [0, 1, 0],
             [0, 0, 0]]))
+
+        var pathW2 = (ob) => {
+            let path = [], r = ob.length, c = ob[0].length
+            var visited = new Array(r).fill(false).map(() => new Array(c).fill(false))
+            function back(ob, x, y, visited) {
+                if (x >= r || y >= c || ob[x][y] == 1 || visited[x][y]) {
+                    return false
+                }
+                path.push([x, y])
+                if (x == r - 1 && y == c - 1) return true
+                if (back(ob, x + 1, y, visited) || back(ob, x, y + 1, visited)) return true
+                path.pop()
+                return false
+            }
+            back(ob, 0, 0, visited)
+            return path
+        }
+
+        var pathW3 = (ob) => {
+            let path = [], r = ob.length, c = ob[0].length
+            var visited = new Array(r).fill(false).map(() => new Array(c).fill(false))
+            var back = (ob, x, y, visited) => {
+                if (x >= r || y >= c || ob[x][y] == 1 || visited[x][y]) {
+                    return false
+                }
+                path.push([x, y])
+                visited[x, y] = true
+                if (x == r - 1 && y == c - 1) return true
+                if (back(ob, x + 1, y, visited) || back(ob, x, y + 1, visited)) return true
+                path.pop()
+                return false
+            }
+            back(ob, 0, 0, visited)
+            return path
+        }
+
+        var pathW4 = (ob) => {
+            let path = [], c = ob.length, r = ob[0].length
+            let visited = new Array(c).fill(false).map(() => new Array(c).fill(false))
+            function back(ob, i, j, visited) {
+                if (i >= r || j >= c || visited[i][j] || ob[i][j] == 1) {
+                    return false
+                }
+                path.push([i, j])
+                visited[i][j] = true
+                if (i == r - 1 && j == c - 1) return true
+                if (back(ob, i + 1, j, visited) || back(ob, i, j + 1, visited)) {
+                    return true
+                }
+                path.pop()
+                return false
+            }
+            back(ob, 0, 0, visited)
+            return path
+        }
+
+        // 09-02复习
     </script>
 </body>
 

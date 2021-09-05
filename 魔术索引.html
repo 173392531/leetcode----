@@ -47,6 +47,12 @@
         // 作者：xiao_ben_zhu
         // 链接：https://leetcode-cn.com/problems/magic-index-lcci/solution/shou-hua-tu-jie-er-fen-cha-zhao-de-bian-chong-xia-/
 
+        // 如果左侧找到了魔术索引，就没必要递归找右侧，因为左侧的索引肯定较小。
+        // 我们可以根据左侧递归的返回值，决定要不要递归右侧。
+        // 让递归函数返回找到的魔术索引，找不到则返回 -1。
+        // 先递归找 mid 左侧，找到就返回，没找到，再看 mid 是不是魔术索引，
+        // 是就返回，不是才找右侧。时间复杂度最坏去到 O(n)。
+
         const finI = function (nums) {
             const find = function (l, r) {
                 if (l > r) return -1
@@ -62,6 +68,40 @@
             }
             return find(0, nums.length - 1);
         }
+
+        const finI = (nums) => {
+            const find = function (l, r) {
+                if (l > r) return -1
+                const mid = Math.floor((l + r) / 2)
+                const magic = find(l, mid - 1)
+                if (magic > -1) {
+                    return magic
+                } else if (nums[mid] == mid) {
+                    return mid
+                } else {
+                    return find(mid + 1, r)
+                }
+            }
+            return find(0, nums.length - 1)
+        }
+
+        const find2 = (nums) => {
+            const find = (l, r) => {
+                if (l > r) return -1
+                const mid = Math.floor((l + r) / 2)
+                const magic = find(l, mid - 1)
+                if (magic > -1) {
+                    return magic
+                } else if (nums[mid] == mid) {
+                    return mid
+                } else {
+                    return find(0, nums.length - 1)
+                }
+            }
+            return find(0, nums.length - 1)
+        }
+
+        // 09-02复习
     </script>
 </body>
 

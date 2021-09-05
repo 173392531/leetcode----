@@ -16,13 +16,13 @@
     示例:
     给定如下二叉树，以及目标和 sum = 22，
 
-                5
+                 5
                 / \
-                4   8
-            /   / \
-            11  13  4
-            /  \    / \
-            7    2  5   1
+               4   8
+              /   / \
+            11   13  4
+            / \     / \
+            7  2   5   1
     返回:
 
     3
@@ -50,9 +50,49 @@
 
         };
 
-// 作者：IamLIFI
-// 链接：https://leetcode-cn.com/problems/paths-with-sum-lcci/solution/hui-su-by-iamlifi/
+        // 作者：IamLIFI
+        // 链接：https://leetcode-cn.com/problems/paths-with-sum-lcci/solution/hui-su-by-iamlifi/
 
+
+        var sumPath2 = (root, sum) => {
+            if (!root) return 0
+            return dfs(root, sum) + pathSum(root.right, sum) + pathSum(root.left, sum)
+            function dfs(root, sum) {
+                if (!root) return 0
+                if (root.val === sum) return 1 + dfs(root.left, sum - root.val) + dfs(root.right, sum - root.val)
+                return dfs(root.left, sum - root.val) + dfs(root.right, sum - root.val)
+            }
+        }
+
+        var sumPath3 = (root, sum) => {
+            if (!root) return 0
+            return back(root, sum) + sumPath3(root.right, sum) + sumPath3(root.left, sum)
+            function back(root, sum) {
+                if (!root) return 0
+                if (root.val === sum) return 1 + back(root.left, sum - root.val) + back(root.right, sum - root.val)
+                return back(root.left, sum - root.val) + back(root.right, sum - root.val)
+            }
+        }
+
+        var sumPath4 = (root, sum) => {
+            if (!root) return 0
+            return back(root, sum) + sumPath4(root.right, sum) + sumPath4(root.left, sum)
+            function backtrack(root, sum) {
+                if (!root) return 0
+                if (root.val === sum) return 1 + backtrack(root.left, sum - root.val) + backtrack(root.right, sum - root.val)
+                return backtrack(root.left, sum - root.val) + backtrack(root.right, sum - root.val)
+            }
+        }
+
+        var sumPath5 = (root, sum) => {
+            if (!root) return 0
+            return back(root, sum) + sumPath5(root.left, sum) + sumPath5(root.right, sum)
+            function back(root, sum) {
+                if (!root) return 0
+                if (root.val === sum) return 1 + back(root.left, sum - root.val) + back(root.right, sum - root.val)
+                return back(root.left, sum - root.val) + back(root.right, sum - root.val)
+            }
+        }
     </script>
 </body>
 

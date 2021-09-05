@@ -118,9 +118,54 @@
       return result;
     };
 
-// 作者：Alexer-660
-// 链接：https://leetcode-cn.com/problems/walking-robot-simulation/solution/874-mo-ni-xing-zou-ji-qi-ren-by-alexer-660/
+    // 作者：Alexer-660
+    // 链接：https://leetcode-cn.com/problems/walking-robot-simulation/solution/874-mo-ni-xing-zou-ji-qi-ren-by-alexer-660/
 
+
+    var robotSum2 = (com, ob) => {
+      var dx = [0, 1, 0, -1], dy = [1, 0, -1, 0], di = 0, endX = 0, endY = 0, result = 0, hashObstacle = {}
+      for (let r = 0; r < ob.length; r++) {
+        hashObstacle[ob[r][0] + '-' + ob[r][1]] = true
+      }
+      for (var s = 0; s < com.length; s++) {
+        if (com[s] == -2) {
+          di = (di + 3) % 4
+        } else if (com[s] == -1) {
+          di = (di + 1) % 4
+        } else {
+          for (var z = 1; z <= com[s]; z++) {
+            var nextX = endX + dx[di], nextY = endY + dy[di]
+            if (hashObstacle[nextX + '-' + nextY]) break
+            endX = nextX, endY = nextY
+            result = Math.max(result, endX * endX + endY * endY)
+          }
+        }
+      }
+      return result
+    }
+
+    var robotS3 = (com, ob) => {
+      let dx = [0, 1, 0, -1], dy = [1, 0, -1, 0], di = 0, endX = 0, endY = 0, res = 0, hash = {}
+      for (let r = 0; r < ob.length; r++) {
+        hash[ob[r][0] + '-' + ob[r][1]] = true
+      }
+      for (let s = 0; s < com.length; s++) {
+        if (com[s] == -2) {
+          di = (di + 3) % 4
+        } else if (com[s] === -1) {
+          di = (di + 1) % 4
+        } else {
+          for (let z = 1; z <= com[s]; z++) {
+            let nextX = endX + dx[di], nextY = endY + dy[di]
+            if (hash[nextX + '-' + nextY]) break
+            endX = nextX, endY = nextY
+            res = Math.max(res, endX * endX + endY * endY)
+          }
+        }
+      }
+      return res
+    }
+    // 09-02复习
   </script>
 </body>
 

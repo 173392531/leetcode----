@@ -46,6 +46,48 @@
       return total / customers.length
     }
     console.log(averageWaitingTime([[1, 2], [2, 5], [4, 3]]));
+
+    var averageW2 = (cus) => {
+      let total = t = 0
+      for (const data of cus) {
+        const [arrival, time] = data
+        total += time + Math.max(0, t - arrival)
+        t = Math.max(t, arrival) + time
+      }
+      return total / customers.length
+    }
+
+    var averageW3 = (cus) => {
+      let total = t = 0
+      for (const data of cus) {
+        const [arrival, time] = data
+        total += time + Math.max(0, t - arrival)
+        t = Math.max(t, arrival) + time
+      }
+      return total / customers.length
+    }
+
+    var averageW4 = (cus) => {
+      let total = t = 0
+      for (const data of cus) {
+        const [arrival, time] = data
+        total += Math.max(0, t - arrival) + time
+        t = Math.max(t, arrival) + time
+      }
+      return total / customers.length
+    }
+
+    const aveR5 = (cus) => {
+      let t = total = 0
+      for (const data of cus) {
+        const [arrival, time] = data
+        total += Math.max(0, t - arrival) + time
+        t = Math.max(t, arrival) + time
+      }
+      return total / cus.length
+    }
+
+    // 09-03复习
   </script>
 </body>
 

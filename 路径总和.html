@@ -41,6 +41,16 @@
 // 作者：xiao_ben_zhu
 // 链接：https://leetcode-cn.com/problems/path-sum/solution/di-gui-ti-by-hyj8/
 
+
+    const hasPS=(root,sum)=>{
+      if(!root)return false
+      if(!root.left && !root.right){
+        return sum-root.val===0
+      }
+      return hasPS(root.left,sum-root.val) || hasPS(root.right,sum-root.val)
+    }
+
+    // 08-29复习
   </script>
 </body>
 

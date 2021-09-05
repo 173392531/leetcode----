@@ -71,9 +71,29 @@
       return surfaceAreaAmuont;
     };
 
-// 作者：gatsby-23
-// 链接：https://leetcode-cn.com/problems/surface-area-of-3d-shapes/solution/javascripttong-su-yi-dong-zhu-shi-xiang-jin-yi-kan/
+    // 作者：gatsby-23
+    // 链接：https://leetcode-cn.com/problems/surface-area-of-3d-shapes/solution/javascripttong-su-yi-dong-zhu-shi-xiang-jin-yi-kan/
 
+
+    var surfaceA2 = (grid) => {
+      let surf = 0
+      for (let i = 0; i < grid.length; i++) {
+        for (let j = 0; i < grid[0].length; j++) {
+          const cub = grid[i][j]
+          if (!cub) continue
+          surf += 2 + 4 * cub
+          if (i + 1 < grid.length) {
+            surf -= 2 * Math.min(cub, grid[i + 1][j])
+          }
+          if (j + 1 < grid.length) {
+            surf -= 2 * Math.min(cub, grid[i][j + 1])
+          }
+        }
+      }
+      return surf
+    }
+
+    // 09-05复习
   </script>
 </body>
 

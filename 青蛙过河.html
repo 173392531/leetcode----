@@ -55,51 +55,123 @@
         // 回溯递归的超精妙解法：
         // 作者：xiao_ben_zhu
         // 链接：https://leetcode-cn.com/problems/frog-jump/solution/shou-hua-tu-jie-ji-hao-de-di-gui-ti-man-8kk2z/
-        var canJump=function(stones){
-            const set=new Set()
-            return helpers(stones,0,0,set)
+        var canJump = function (stones) {
+            const set = new Set()
+            return helpers(stones, 0, 0, set)
         }
-        var helpers =function(stones,index,k,set){
-            const key =index*1000+k
-            if(set.has(key)){
+        var helpers = function (stones, index, k, set) {
+            const key = index * 1000 + k
+            if (set.has(key)) {
                 return false
-            }else{
+            } else {
                 set.add(key)
             }
-            for(let i=index+1;i<stones.length;i++){
-                const gap=stones[i]-stones[index]
-                if(gap>=k-1&&gap<=k+1){
-                    if(helper(stones,i,gap,set)){
+            for (let i = index + 1; i < stones.length; i++) {
+                const gap = stones[i] - stones[index]
+                if (gap >= k - 1 && gap <= k + 1) {
+                    if (helper(stones, i, gap, set)) {
                         return true
                     }
-                }else if(gap>k+1){
+                } else if (gap > k + 1) {
                     break
                 }
             }
-            return index==stones.length-1
+            return index == stones.length - 1
         }
-        var canArrive=function(stones){
-            const set=new Set()
-            return canDo(stones,0,0,set)
+        var canArrive = function (stones) {
+            const set = new Set()
+            return canDo(stones, 0, 0, set)
         }
-        var canDo=function(stones,index,k,set){
-            const key =index*1000+k
-            if(set.has(key)){
+        var canDo = function (stones, index, k, set) {
+            const key = index * 1000 + k
+            if (set.has(key)) {
                 return false
-            }else{
+            } else {
                 set.add(key)
             }
-            for(let i=index+1;i<stones.length;i++){
-                const gap=stones[i]-stones[index]
-                if(gar<k+1&&k>k-1){
-                    if(canDo(stones,i,gap,set)){
+            for (let i = index + 1; i < stones.length; i++) {
+                const gap = stones[i] - stones[index]
+                if (gap <= k + 1 && gap >= k - 1) {
+                    if (canDo(stones, i, gap, set)) {
                         return true
                     }
-                }else if(gap>k+1){
+                } else if (gap > k + 1) {
                     break
                 }
             }
-            return index==stones.length-1
+            return index == stones.length - 1
+        }
+
+        var canA2 = (stones) => {
+            const set = new Set()
+            return canDo2(stones, 0, 0, set)
+            function canDo2(stones, index, k, set) {
+                const key = index * 1000 + k
+                if (set.has(key)) {
+                    return false
+                } else {
+                    set.add(key)
+                }
+                for (let i = index + 1; i < stones.length; i++) {
+                    const gap = stones[i] - stones[index]
+                    if (gap <= k + 1 && gap >= k - 1) {
+                        if (helper(stones, i, gap, set)) {
+                            return true
+                        }
+                    } else if (gap > k + 1) {
+                        break
+                    }
+                }
+                return index === stones.length - 1
+            }
+        }
+
+        var canA3 = (stones) => {
+            const set = new Set()
+            return canDo3(stones, 0, 0, set)
+            function canDo3(stones, index, k, set) {
+                const key = index * 1000 + k
+                if (set.has(key)) {
+                    return false
+                } else {
+                    set.add(key)
+                }
+                for (let i = index + 1; i < stones.length; i++) {
+                    const gap = stones[i] - stones[index]
+                    if (gap <= k + 1 && gap >= k - 1) {
+                        if (helper(stones, i, gap, set)) {
+                            return true
+                        }
+                    } else if (gap > k + 1) {
+                        break
+                    }
+                }
+                return index === stones.length - 1
+            }
+        }
+
+        var canDo4 = (stones) => {
+            const set = new Set()
+            return canJump(stones, 0, 0, set)
+            function canJump(stones, index, gap, set) {
+                let key = index * 1000 + k
+                if (set.has(key)) {
+                    return false
+                } else {
+                    set.add(key)
+                }
+                for (let i = index + 1; i < stones.length; i++) {
+                    const gap = stones[i] - stones[index]
+                    if (gap >= k - 1 && gap <= k + 1) {
+                        if (canJump(stones, i, gap, set)) {
+                            return true
+                        }
+                    } else if (gap > k + 1) {
+                        break
+                    }
+                }
+                return index === stones.length - 1
+            }
         }
     </script>
 </body>

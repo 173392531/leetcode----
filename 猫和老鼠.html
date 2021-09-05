@@ -77,9 +77,45 @@
             }
         };
 
-// 作者：wanyan
-// 链接：https://leetcode-cn.com/problems/cat-and-mouse/solution/javascriptdai-si-lu-by-wanyan/
+        // 作者：wanyan
+        // 链接：https://leetcode-cn.com/problems/cat-and-mouse/solution/javascriptdai-si-lu-by-wanyan/
 
+
+        var catM2 = (graph) => {
+            let N = graph.length
+            let dp = new Array(N * 2).fill(0)
+                .map(_ => new Array(N).fill(0)
+                    .map(_ => new Array(N).fill('#')))
+            return tools(0, 1, 2)
+
+            function tools(t, m, c) {
+                if (t >= 2 * N) return 0
+                if (dp[t][m][c] != '#') return dp[t][m][c]
+                if (m === 0) return dp[t][m][c] = 1
+                if (m === c) return dp[t][m][c] = 2
+                if (t % 2 === 0) {
+                    let nextM = graph[m]
+                    let resultSet = new Set()
+                    for (let nm of nextM) {
+                        let nextAns = tools(t + 1, nm, c)
+                        if (nextAns === 1) return dp[t][m][c] = 1
+                        resultSet.add(nextAns)
+                    }
+                    return resultSet.size === 1 ? (dp[t][m][c] = Array.from(resultSet)[0]) : (dp[t][m][c] = 0)
+                } else {
+                    let nextC = graph[c]
+                    let resultSet = new Set()
+                    for (let nc of nextC) {
+                        if (nc === 0) continue
+                        let nextAns = tools(t + 1, m, nc)
+                        if (nextAns === 2) return dp[t][m][c] = 2
+                        resultSet.add(nextAns)
+                    }
+                    return resultSet.size === 1 ? (dp[t][m][c] = Array.from(resultSet)[0]) : (dp[t][m][c] = 0)
+                }
+            }
+        }
+        // 09-01复习
     </script>
 </body>
 

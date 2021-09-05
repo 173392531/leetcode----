@@ -53,6 +53,19 @@
             return cur
         };
 
+        var waysToS2 = (n) => {
+            if (n < 3) return n
+            let cur = 4, one = 1, two = 2, three = 4
+            for (let i = 4; i <= n; i++) {
+                cur = (one + two + three) % 1000000007
+                one = two
+                two = three
+                three = cur
+            }
+            return cur
+        }
+
+        // 09-05复习
     </script>
 </body>
 

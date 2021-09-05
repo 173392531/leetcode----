@@ -89,6 +89,46 @@
         // 链接：https://leetcode-cn.com/problems/zero-matrix-lcci/solution/dfswu-di-jian-dan-yi-dong-de-jie-fa-by-g-tn0b/
         
         
+        var setZ2=(matrix)=>{
+            for(let i=0;i<matrix.length;i++){
+                for(let j=0;j<matrix[0].length;j++){
+                    if(matrix[i][j]===0)dfs(i,j,'')
+                }
+            }
+            function dfs(i,j,dir){
+                if(i<0 || j<0 || i>=matrix.length || j>=matrix[0].length)return 
+                if(matrix[i][j]!==0){
+                    matrix[i][j]='X'
+                }
+                if(!dir || dir=='left'){
+                    dfs(i,j-1,'left')
+                }
+                if(!dir || dir=='right'){
+                    dfs(i,j+1,'right')
+                }
+                if(!dir || dir=='up'){
+                    dfs(i-1,j,'up')
+                }
+                if(!dir || dir=='down'){
+                    dfs(i+1,j,'down')
+                }
+            }
+            for(let i=0;i<matrix.length;i++){
+                for(let j=0;j<matrix[0].length;j++){
+                    if(matrix[i][j]==='X')
+                    matrix[i][j]=0
+                }
+            }
+            return matrix
+        }
+
+        console.log(setZ2([
+    [1,1,1],
+    [1,0,1],
+    [1,1,1]
+    ]));
+        
+
         // 标识法
         var setZeroes = function (matrix) {
             const m = matrix.length, n = matrix[0].length;
@@ -108,11 +148,14 @@
                     }
                 }
             }
+            return matrix
         };
 
 // 作者：LeetCode-Solution
 // 链接：https://leetcode-cn.com/problems/zero-matrix-lcci/solution/ling-ju-zhen-by-leetcode-solution-7ogg/
 
+
+// 08-30复习
     </script>
 </body>
 

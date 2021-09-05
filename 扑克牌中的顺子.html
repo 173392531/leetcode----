@@ -67,9 +67,37 @@
       return true
     };
 
+    var isS2 = (nums) => {
+      nums = nums.sort((a, b) => a - b).filter(item => item !== 0)
+      if (nums[nums.length - 1] - nums[0] > 4) return false
+      for (let i = 0; i < nums.length - 1; i++) {
+        if (nums[i] === nums[i + 1]) return false
+      }
+      return true
+    }
+
+    var isS3 = (nums) => {
+      nums = nums.sort((a, b) => a - b).filter(item => item !== 0)
+      if (nums[nums.length - 1] - nums[0] > 4) return false
+      for (let i = 0; i < nums.length - 1; i++) {
+        if (nums[i] === nums[i + 1]) return false
+      }
+      return true
+    }
+
+    var isS4 = (nums) => {
+      nums = nums.sort((a, b) => a - b).filter(item => item !== 0)
+      if (nums[nums.length - 1] - nums[0] > 4) return false
+      for (let i = 0; i < nums.length; i++) {
+        if (nums[i] === nums[i + 1]) return false
+      }
+      return true
+    }
 // 作者：welnee
 // 链接：https://leetcode-cn.com/problems/bu-ke-pai-zhong-de-shun-zi-lcof/solution/jie-shi-xiang-xi-luo-ji-qing-xi-qiang-li-dyff/
 
+
+// 09-03复习
   </script>
 </body>
 

@@ -37,11 +37,19 @@
             return c
         };
 
-// 作者：floretpig
-// 链接：https://leetcode-cn.com/problems/qing-wa-tiao-tai-jie-wen-ti-lcof/solution/dpyou-ya-shi-xian-qiu-qing-wa-tiao-tai-j-676q/
-        var numWays=function(n){
-            let p=0,c=1
-            while(n--)[p,c]=[c,(p+c)%1000000007]
+        // 作者：floretpig
+        // 链接：https://leetcode-cn.com/problems/qing-wa-tiao-tai-jie-wen-ti-lcof/solution/dpyou-ya-shi-xian-qiu-qing-wa-tiao-tai-j-676q/
+        var numWays = function (n) {
+            let p = 0, c = 1
+            while (n--) [p, c] = [c, (p + c) % 1000000007]
+            return c
+        }
+
+        var numW2 = (n) => {
+            let p = 0, c = 1
+            while (n--) {
+                [p, c] = [c, (p + c) % 1000000007]
+            }
             return c
         }
     </script>

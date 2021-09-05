@@ -57,6 +57,67 @@
         // 作者：carlsun - 2
         // 链接：https://leetcode-cn.com/problems/permutations/solution/dai-ma-sui-xiang-lu-dai-ni-xue-tou-hui-s-mfrp/
 
+        var per2=(nums)=>{
+            const res=[],path=[]
+            backtracking(nums,nums.length,[])
+            return res
+            function backtracking(n,k,used){
+                if(path.length===k){
+                    res.push(Array.from(path))
+                    return 
+                }
+                for(let i=0;i<k;i++){
+                    if(used[i])continue
+                    path.push(n[i])
+                    used[i]=true
+                    backtracking(n,k,used)
+                    path.pop()
+                    used[i]=false
+                }
+            }
+        }
+
+        var pre3=(nums)=>{
+            const res=[],path=[]
+            back(nums,nums.length,[])
+            return res
+            function back(n,k,used){
+                if(path.length===k){
+                    res.push(Array.from(path))
+                    return 
+                }
+                for(let i=0;i<k;i++){
+                    if(used[i])continue
+                    path.push(n[i])
+                    used[i]=true
+                    back(n,k,used)
+                    path.pop()
+                    used[i]=false
+                }
+            }
+        }
+
+        var pre4=(nums)=>{
+            let res=[],path=[]
+            backtrack(nums,nums.length,[])
+            return res
+            function backtrack(n,k,used){
+                if(path.length===k){
+                    res.push(Array.from(path))
+                    return
+                }
+                for(let i=0;i<k;i++){
+                    if(used[i])continue
+                    path.push(n[i])
+                    used[i]=true
+                    backtrack(nums,k,used)
+                    path.pop()
+                    used[i]=false
+                }
+            }
+        }
+
+        //09-04复习
     </script>
 </body>
 

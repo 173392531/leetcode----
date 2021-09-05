@@ -44,7 +44,7 @@
         const minInsertions = s => {
             const LEN = s.length;
             const dp = new Uint16Array(LEN);
-            console.log('dp',dp);
+            console.log('dp', dp);
             for (let i = LEN - 2; i >= 0; i--) {
                 let prev = 0;
                 for (let j = i + 1; j < LEN; j++) {
@@ -59,7 +59,7 @@
         };
 
         console.log(minInsertions('leetcode'));
-        
+
         // 作者：poppinl
         // 链接：https://leetcode-cn.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/solution/bao-bao-ye-neng-kan-dong-de-leetcode-ti-jie-dp-by-/
 
@@ -91,6 +91,37 @@
         // 作者：xing-guang-29
         // 链接：https://leetcode-cn.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/solution/hui-wen-chuan-dong-tai-gui-hua-by-xing-guang-29/
 
+
+        var minI2 = (s) => {
+            let n = s.length
+            const dp = Array.from(Array(n), () => Array(n).fill(0))
+            for (let i = n - 2; i >= 0; i--) {
+                for (let j = i + 1; j < n; j++) {
+                    if (s[i] === s[j]) {
+                        dp[i][j] = dp[i + 1][j - 1]
+                    } else {
+                        dp[i][j] = Math.min(dp[i + 1][j], dp[i][j - 1]) + 1
+                    }
+                }
+            }
+            return dp[0][n - 1]
+        }
+
+        var minI3 = (s) => {
+            let n = s.length
+            const dp = new Array(n).fill(0).map(item => new Array(n).fill(0))
+            for (let i = n - 2; i >= 0; i--) {
+                for (let j = i + 1; j < n; j++) {
+                    if (s[i] === s[j]) {
+                        dp[i][j] = dp[i + 1][j - 1]
+                    } else {
+                        dp[i][j] = Math.min(dp[i + 1][j], dp[i][j - 1]) + 1
+                    }
+                }
+            }
+            return dp[0][n - 1]
+        }
+        // 09-05复习
     </script>
 </body>
 

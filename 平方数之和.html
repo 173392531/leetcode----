@@ -47,6 +47,13 @@
       return false;
     };
 
+    var judge2 = (c) => {
+      for (let a = 0; a * a <= c; a++) {
+        const b = Math.sqrt(c - a * a)
+        if (b === parseInt(b)) return true
+      }
+      return false
+    }
     // 作者：LeetCode-Solution
     // 链接：https://leetcode-cn.com/problems/sum-of-square-numbers/solution/ping-fang-shu-zhi-he-by-leetcode-solutio-8ydl/
 
@@ -66,9 +73,37 @@
       return false;
     };
 
-// 作者：LeetCode-Solution
-// 链接：https://leetcode-cn.com/problems/sum-of-square-numbers/solution/ping-fang-shu-zhi-he-by-leetcode-solutio-8ydl/
+    // 作者：LeetCode-Solution
+    // 链接：https://leetcode-cn.com/problems/sum-of-square-numbers/solution/ping-fang-shu-zhi-he-by-leetcode-solutio-8ydl/
 
+    var judge3 = (c) => {
+      let left = 0, right = Math.floor(Math.sqrt(c))
+      while (left <= right) {
+        const sum = left * left + right * right
+        if (sum === c) {
+          return true
+        } else if (sum > c) {
+          right--
+        } else {
+          left++
+        }
+      }
+      return false
+    }
+
+    var judge4 = (c) => {
+      let left = 0, right = Math.floor(Math.sqrt(c))
+      while (left <= right) {
+        const sum = left * left + right * right
+        if (sum === c) {
+          return true
+        } else if (sum < c) {
+          left++
+        } else {
+          right--
+        }
+      }
+    }
   </script>
 </body>
 

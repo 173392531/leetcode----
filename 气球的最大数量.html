@@ -80,9 +80,67 @@
             return res;
         };
 
+        var maxN2 = (text) => {
+            const num = {
+                o: 2,
+                a: 1,
+                b: 1,
+                l: 2,
+                n: 1
+            }
+            const map = {}
+            Array.prototype.forEach.call(text, (item) => {
+                map[item] ? map[item]++ : (map[item] = 1)
+            })
+            let res = Infinity
+            for (let key in num) {
+                if (!map[key]) return 0
+                res = Math.min(res, Math.floor(map[key] / num[key]))
+            }
+            return res
+        }
         // 作者：wJQldc9IPK
         // 链接：https://leetcode-cn.com/problems/maximum-number-of-balloons/solution/mei-ju-zhao-dao-zui-xiao-ci-shu-nei-cun-ns3p2/
 
+        var maxNN3=(text)=>{
+            const num={
+                b:1,
+                a:1,
+                l:2,
+                o:2,
+                n:1
+            }
+            const map={}
+            Array.prototype.forEach.call(text,(item)=>{
+                map[item]?map[item]++:(map[item]=1)
+            })
+            let res=Infinity
+            for(let key in num){
+                if(!map[key])return 0
+                res=Math.min(res,Math.floor(map[key]/num[key]))
+            }
+        }
+
+        var maxN4=(text)=>{
+            const num={
+                b:1,
+                a:1,
+                l:2,
+                o:2,
+                n:1
+            }
+            const map={}
+            Array.prototype.forEach.call(text,(item)=>{
+                map[item]?map[item]++:(map[item]=1)
+            })
+            let res=Infinity
+            for(let key in num){
+                if(!map[key])return 0
+                res=Math.min(res,Math.floor(map[key]/num[key]))
+            }
+        }
+
+        // 09-04复习
     </script>
 </body>
 
