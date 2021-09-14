@@ -58,9 +58,44 @@
 
         };
 
-// 作者：i3rAztJHZn
-// 链接：https://leetcode-cn.com/problems/ransom-note/solution/383-shu-jin-xin-by-i3raztjhzn-512p/
+        // 作者：i3rAztJHZn
+        // 链接：https://leetcode-cn.com/problems/ransom-note/solution/383-shu-jin-xin-by-i3raztjhzn-512p/
 
+        var canC2 = (ransomNote, magazine) => {
+            let hash = {}
+            for (let i = 0; i < ransomNote.length; i++) {
+                let value = ransomNote[i]
+                hash[value] ? hash[value]++ : hash[value] = 1
+            }
+            for (let i = 0; i < magazine.length; i++) {
+                let value = magazine[i]
+                if (hash[value]) {
+                    hash[value]--
+                }
+            }
+            for (let key in hash) {
+                if (hash[key]) return false
+            }
+            return true
+        }
+
+        var canC3 = (ransomNote, magazine) => {
+            let hash = {}
+            for (let i = 0; i < ransomNote.length; i++) {
+                let value = ransomNote[i]
+                hash[value] ? hash[value]++ : hash[value] = 1
+            }
+            for (let i = 0; i < magazine.length; i++) {
+                let value = magazine[i]
+                if (hash[value]) hash[value]--
+            }
+            for (let key in hash) {
+                if (hash[key]) return false
+            }
+            return true
+        }
+
+        // 09-09复习
     </script>
 </body>
 

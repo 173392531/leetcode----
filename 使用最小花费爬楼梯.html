@@ -65,6 +65,29 @@
 // 作者：mantoufan
 // 链接：https://leetcode-cn.com/problems/min-cost-climbing-stairs/solution/di-gui-dong-tai-gui-hua-zhuang-tai-ji-1x-rrca/
 
+    var minC2=(cost)=>{
+      if(!cost.length)return 0
+      if(cost.length==1)return cost[0]
+      var dp=new Array(cost.length)
+      dp[0]=cost[0]
+      dp[1]=cost[1]
+      for(let i=2;i<cost.length;i++){
+        dp[i]=Math.min(dp[i-1],dp[i-2])+cost[i]
+      }
+      return Math.min(dp[dp.length-1],dp[dp.length-2])
+    }
+
+    var minC3=(cost)=>{
+      if(!cost.length)return 0
+      if(cost.length===1)return cost[0]
+      var dp=new Array(cost.length)
+      dp[0]=cost[0],dp[1]=cost[1]
+      for(let i=2;i<cost.length;i++){
+        dp[i]=Math.min(dp[i-1],dp[i-2])+cost[i]
+      }
+      return Math.min(dp[dp.length-1],dp[dp.length-2])
+    }
+    // 09-09复习
   </script>
 </body>
 

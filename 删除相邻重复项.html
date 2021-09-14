@@ -62,6 +62,20 @@
 // 链接：https://leetcode-cn.com/problems/remove-all-adjacent-duplicates-in-string/solution/tu-jie-guan-fang-tui-jian-ti-jie-shan-ch-x8iz/
 
     console.log(removeDuplicates("abbaca"));
+
+    var removeD2=(S)=>{
+      let stock=[]
+      for(let item of S){
+        if(stock[stock.length-1]===item){
+          stock.pop()
+        }else{
+          stock.push(item)
+        }
+      }
+      return stock.join('')
+    }
+
+    // 09-06复习
   </script>
 </body>
 </html>

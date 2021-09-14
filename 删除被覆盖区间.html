@@ -52,9 +52,49 @@
             return len - cut;
         };
 
-// 作者：wanyuxuan
-// 链接：https://leetcode-cn.com/problems/remove-covered-intervals/solution/xian-pai-xu-si-lu-qing-xi-by-wanyuxuan/
+        // 作者：wanyuxuan
+        // 链接：https://leetcode-cn.com/problems/remove-covered-intervals/solution/xian-pai-xu-si-lu-qing-xi-by-wanyuxuan/
 
+
+        var removeC2 = (int) => {
+            int.sort((a, b) => {
+                if (a[0] === b[0]) {
+                    return b[1] - a[1]
+                }
+                return a[0] - b[0]
+            })
+            let i = 0, len = int.length, cut = 0
+            while (i < len) {
+                let [m, n] = int[i], j = i + 1
+                while (j < len && m <= int[j][0] && n >= int[j][1]) {
+                    j++;
+                    cut++
+                }
+                i = j
+            }
+            return len - cut
+        }
+
+        var removeC3 = (int) => {
+            int.sort((a, b) => {
+                if (a[0] === b[0]) {
+                    return b[1] - a[1]
+                }
+                return a[0] - b[0]
+            })
+            let i = 0, len = int.length, cut = 0
+            while (j < len) {
+                let [m, n] = int[i], j = i + 1
+                while (j < len && n >= int[j][1]) {
+                    j++
+                    cut++
+                }
+                i = j
+            }
+            return len - cut
+        }
+
+        // 09-06复习
     </script>
 </body>
 

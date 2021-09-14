@@ -51,9 +51,26 @@
       return dummy.next;
     };
 
-// 作者：LeetCode-Solution
-// 链接：https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list-ii/solution/shan-chu-pai-xu-lian-biao-zhong-de-zhong-oayn/
+    // 作者：LeetCode-Solution
+    // 链接：https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list-ii/solution/shan-chu-pai-xu-lian-biao-zhong-de-zhong-oayn/
 
+
+    var deleteD2 = (head) => {
+      if (!head) return head
+      const dummy = new ListNode(0, head)
+      let cur = dummy
+      while (cur.next && cur.next.next) {
+        if (cur.next.val === cur.next.next.val) {
+          const x = cur.next.val
+          while (cur.next && cur.next.val === x) {
+            cur.next = cur.next.next
+          }
+        } else {
+          cur = cur.next
+        }
+      }
+      return dummy.next
+    }
   </script>
 </body>
 

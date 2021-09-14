@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
   <!-- 给你两个整数 left 和 right ，表示区间 [left, right] ，返回此区间内所有数字 按位与 的结果（包含 left 、right 端点）。
 
@@ -26,21 +28,33 @@
     链接：https://leetcode-cn.com/problems/bitwise-and-of-numbers-range
     著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
   <script>
-    var rangeBitwiseAnd = function(m, n) {
-    let shift = 0;
-    // 找到公共前缀,直到它们相等时终止循环
-    while (m < n) {
-      // 不断右移，杀掉m与n不相等的位
+    var rangeBitwiseAnd = function (m, n) {
+      let shift = 0;
+      // 找到公共前缀,直到它们相等时终止循环
+      while (m < n) {
+        // 不断右移，杀掉m与n不相等的位
         m >>= 1;
         n >>= 1;
         ++shift;
+      }
+      return m << shift;
+    };
+
+    var rangeB2 = (m, n) => {
+      let shift = 0
+      while (m < n) {
+        m >>= 1
+        n >>= 1
+        shift++
+      }
+      return m << shift
     }
-    return m << shift;
-};
+
 
 // 作者：LeetCode-Solution
 // 链接：https://leetcode-cn.com/problems/bitwise-and-of-numbers-range/solution/shu-zi-fan-wei-an-wei-yu-by-leetcode-solution/
 
   </script>
 </body>
+
 </html>

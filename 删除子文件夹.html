@@ -57,11 +57,28 @@
             }
             return result;
         };
-        console.log(removeSubfolders(["/a","/a/b","/c/d","/c/d/e","/c/f"]));
-        
-// 作者：caoyq0521
-// 链接：https://leetcode-cn.com/problems/remove-sub-folders-from-the-filesystem/solution/shan-chu-zi-wen-jian-jia-by-caoyq0521/
+        console.log(removeSubfolders(["/a", "/a/b", "/c/d", "/c/d/e", "/c/f"]));
 
+        // 作者：caoyq0521
+        // 链接：https://leetcode-cn.com/problems/remove-sub-folders-from-the-filesystem/solution/shan-chu-zi-wen-jian-jia-by-caoyq0521/
+
+
+        var removeS2 = (folder) => {
+            folder = folder.sort()
+            let res = []
+            const { length } = folder
+            for (let i = 0, j; i < length; i++) {
+                j = i + 1
+                let v = `${folder[i]}/`
+                res.push(folder[i])
+                while (j < length) {
+                    if (!folder[j].includes(v)) break
+                    j++
+                }
+                i = j - 1
+            }
+            return res
+        }
     </script>
 </body>
 

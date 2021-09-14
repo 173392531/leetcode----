@@ -28,7 +28,59 @@
             }
         }
 
-        console.log('result', dfs([[1, 2], [3, 4], [5, 6],[7,8]]))
+        // console.log('result', dfs([[1, 2], [3, 4], [5, 6]]))
+
+        var newDfs = (arr) => {
+            const len = arr.length
+            let res = [], path = []
+            var inner = (arr, k) => {
+                if (path.length == len) {
+                    res.push(path.join(''))
+                    return
+                }
+                for (let v of arr[k]) {
+                    path.push(v)
+                    inner(arr, k + 1)
+                    path.pop()
+                }
+            }
+            inner(arr, 0)
+            return res
+        }
+        // console.log(newDfs([[1, 2], [3, 4], [5, 6]]));
+
+        var newDfs2 = (arr) => {
+            let res = []
+            if(arr.length<=1){
+                return arr[0]
+            }else{
+                let a1 = arr.shift()
+                let a2 = newDfs2(arr)
+                a1.forEach(m => {
+                    a2.forEach(n => {
+                        res.push(`${m}${n}`)
+                    })
+                })
+                return res
+            }
+        }
+        console.log(newDfs2([[1, 2], [3, 4], [5, 6]]));
+        
+        var newDfs3=(arr)=>{
+            let res=[]
+            if(arr.length<=1){
+                return arr[0]
+            }else{
+                let a1=arr.shift()
+                let a2=newDfs3(arr)
+                a1.forEach(m=>{
+                    a2.forEach(n=>{
+                        res.push(`${m}${n}`)
+                    })
+                })
+                return res
+            }
+        }
     </script>
 </body>
 

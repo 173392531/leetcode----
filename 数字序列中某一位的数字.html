@@ -54,14 +54,27 @@
             }
             //此时n就是i位数里面的第几个字符
             // 然后找到是哪个数字
+            // x**n  相当于 Math.pow(x,n)  即x的n次方
             n--;//变为下标
             let start = 10 ** (i - 1) + parseInt(n / i) + '';
             return start[n % i];
         };
 
-// 作者：tang_chao_li_zi
-// 链接：https://leetcode-cn.com/problems/shu-zi-xu-lie-zhong-mou-yi-wei-de-shu-zi-lcof/solution/zhao-qu-jian-zhao-shu-zi-zhao-wei-zhi-javascript-b/
+        // 作者：tang_chao_li_zi
+        // 链接：https://leetcode-cn.com/problems/shu-zi-xu-lie-zhong-mou-yi-wei-de-shu-zi-lcof/solution/zhao-qu-jian-zhao-shu-zi-zhao-wei-zhi-javascript-b/
 
+        var findN2 = (n) => {
+            if (n < 10) return n
+            let i = 1, num = 9
+            while (n >= num) {
+                n -= num
+                i++
+                num = 9 * 10 ** (i - 1) * i
+            }
+            n--
+            let start = 10 ** (i - 1) + parseInt(n / i) + ''
+            return start[n % i]
+        }
     </script>
 </body>
 

@@ -58,9 +58,35 @@
       return head
     };
 
-// 作者：qing-jiao-wo-xiao-bai-tong-xue
-// 链接：https://leetcode-cn.com/problems/shan-chu-lian-biao-de-jie-dian-lcof/solution/di-gui-xie-fa-by-qing-jiao-wo-xiao-bai-tong-xue-2/
+    // 作者：qing-jiao-wo-xiao-bai-tong-xue
+    // 链接：https://leetcode-cn.com/problems/shan-chu-lian-biao-de-jie-dian-lcof/solution/di-gui-xie-fa-by-qing-jiao-wo-xiao-bai-tong-xue-2/
 
+
+    var deleteN = (head, val) => {
+      if (head.val == val) {
+        return head.next
+      }
+      head.next = deleteN(head.next, val)
+      return head
+    }
+
+    var deleteN2 = (head, val) => {
+      if (head.val === val) {
+        return head.next
+      }
+      head.next = deleteN2(head.next, val)
+      return head
+    }
+
+    var delete3 = (head, val) => {
+      if (head.val === val) {
+        return head.next
+      }
+      head.next = delete3(head.next, val)
+      return head
+    }
+
+    // 09-06复习
   </script>
 </body>
 

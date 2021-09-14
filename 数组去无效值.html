@@ -13,7 +13,9 @@
         // 方法一。直接使用filter就能搞定了
         var arr = [1, 2, null, undefined, 9];
         arr = arr.filter(Boolean);
-        
+
+        arr = arr.filter(Boolean)
+
         // 方法二。null，undefined，empty这些在if里面都是空值。所以可以if判断。
         var arr = [1, 2, null, undefined, 9];
         let newArr = []
@@ -22,6 +24,8 @@
                 newArr.push(item)
             }
         })
+
+        // 09-12复习
     </script>
 </body>
 

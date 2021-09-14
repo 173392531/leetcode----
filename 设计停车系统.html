@@ -47,6 +47,16 @@
         // 作者：xiao_ben_zhu
         // 链接：https://leetcode-cn.com/problems/design-parking-system/solution/leetcode-1603she-ji-ting-che-xi-tong-des-p5pp/
 
+
+        var parkS2=(big,medium,small)=>{
+            this.lot=[big,medium,small]
+        }
+        parkS2.prototype.addCar=(carType)=>{
+            this.lot[carType-1]--
+            return this.lot[carType-1]>=0
+        }
+
+        // 09-07复习
     </script>
 </body>
 

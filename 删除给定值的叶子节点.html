@@ -18,9 +18,28 @@
             return node.left === node.right && node.val === target ? null : node;
         };
 
-// 作者：poppinl
-// 链接：https://leetcode-cn.com/problems/delete-leaves-with-a-given-value/solution/bao-bao-ye-neng-kan-dong-de-leetcode-ti-jie-hou-xu/
+        // 作者：poppinl
+        // 链接：https://leetcode-cn.com/problems/delete-leaves-with-a-given-value/solution/bao-bao-ye-neng-kan-dong-de-leetcode-ti-jie-hou-xu/
 
+        const removeL2 = (node, target) => {
+            node.left && (node.left = removeL2(node.left, target))
+            node.right && (node.right = removeL2(node.right, target))
+            return node.left === node.right && node.val === target ? null : node
+        }
+
+        const removeL3 = (node, target) => {
+            node.left && (node.left = removeL3(node.left, target))
+            node.right && (node.right = removeL3(node.right, target))
+            return node.left === node.right && node.val === target ? null : node
+        }
+
+        const removeL4 = (node, target) => {
+            node.left && (node.left = removeL4(node.left, target))
+            node.right && (ode.right = removeL4(node.right, target))
+            return node.right === node.left && node.val === target ? null : node
+        }
+
+        // 09-06复习
     </script>
 </body>
 

@@ -58,29 +58,29 @@
         // 链接：https://leetcode-cn.com/problems/living-people-lcci/solution/jscong-ling-yi-ge-jiao-du-li-jie-wen-ti-by-oppeuro/
 
 
-        var maxLiveNum=function(){
-            let add=new Array(101).fill(0),
-            diff=new Array(101).fill(0),
-            max=0,ret=-1;
-            for(let i=0;i<birth.length;i++){
-                add[birth[i]-1900]++;
-                diff[death[i]-1900]++;
+        var maxLiveNum = function () {
+            let add = new Array(101).fill(0),
+                diff = new Array(101).fill(0),
+                max = 0, ret = -1;
+            for (let i = 0; i < birth.length; i++) {
+                add[birth[i] - 1900]++;
+                diff[death[i] - 1900]++;
             }
-            for(let i=1;i<add.length;i++){
-                add[i]=add[i]+add[i-1]
-                diff[i]=diff[i]+diff[i-1]
+            for (let i = 1; i < add.length; i++) {
+                add[i] = add[i] + add[i - 1]
+                diff[i] = diff[i] + diff[i - 1]
             }
-            for(let i=0;i<add.length;i++){
-                if(i==0 && max<add[i]){
-                    max=add[i];
-                    ret=0;
+            for (let i = 0; i < add.length; i++) {
+                if (i == 0 && max < add[i]) {
+                    max = add[i];
+                    ret = 0;
                 }
-                if(i!=0 && max<add[i]-diff[i-1]){
-                    max=add[i]-diff[i-1]
-                    ret=i;
+                if (i != 0 && max < add[i] - diff[i - 1]) {
+                    max = add[i] - diff[i - 1]
+                    ret = i;
                 }
             }
-            return ret+1900
+            return ret + 1900
         }
         var maxAliveYear = function (birth, death) {
             //arr为辅助数组，num为当前存活人数最多的年份的存活人数，min为最小的存活人数最多的年份，minBirth为出生时间中的最小值（为了减小arr的内存浪费）
@@ -102,9 +102,51 @@
             }
             return min + minBirth;
         };
-    // 作者：tang_chao_li_zi
-    // 链接：https://leetcode-cn.com/problems/living-people-lcci/solution/zhi-xing-yong-shi-he-nei-cun-xiao-hao-du-ji-bai-li/
+        // 作者：tang_chao_li_zi
+        // 链接：https://leetcode-cn.com/problems/living-people-lcci/solution/zhi-xing-yong-shi-he-nei-cun-xiao-hao-du-ji-bai-li/
 
+
+        var maxA2 = (birth, death) => {
+            let arr = [], num = 0, min = 0, minBirth = birth[0]
+            for (let i = 1; i < birth.length; i++) {
+                if (birth[i] < minBirth) minBirth = birth[i]
+            }
+            for (let i = 0; i < birth.length; i++) {
+                for (let j = birth[i] - minBirth; j <= death[i] - minBirth; j++) {
+                    if (arr[j] == undefined) arr[j] = 0
+                    arr[j]++
+                    if (arr[j] > num) {
+                        num = arr[j]
+                        min = j
+                    } else if (arr[j] == num) {
+                        if (j < min) min = j
+                    }
+                }
+            }
+            return min + minBirth
+        }
+
+        var maxA3=(birth,death)=>{
+            let arr=[],num=0,min=0,minBirth=birth[0]
+            for(let i=1;i<birth.length;i++){
+                if(birth[i]<minBirth)minBirth=birth[i]
+            }
+            for(let i=0;i<birth.length;i++){
+                for(let j=birth[i]-minBirth;j<=birth[i]-minBirth;j++){
+                    if(arr[i]==undefined)arr[j]=0
+                    arr[j]++
+                    if(arr[j]>num){
+                        num=arr[j]
+                        min=j
+                    }else if(arr[j]==num){
+                        if(j<min)min=j
+                    }
+                }
+            }
+            return min+minBirth
+        }
+
+        // 09-07复习
     </script>
 </body>
 

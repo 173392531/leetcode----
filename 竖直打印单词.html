@@ -57,6 +57,53 @@
             return ret;
         };
 
+        const printV2 = (s) => {
+            const words = s.split(' ')
+            let maxLen = 0
+            for (let i = 0; i < words.length; i++) {
+                if (words[i].length > maxLen) maxLen = words[i].length
+            }
+            const ret = new Array(maxLen)
+            for (let i = 0; i < maxLen; i++) {
+                ret[i] = ''
+                let prev = ''
+                for (let j = 0; j < words.length; j++) {
+                    words[j][i] === undefined ? (prev += ' ') : ((ret[i] += prev + words[j][i]), (prev = ''))
+                }
+            }
+            return ret
+        }
+
+        var printV3 = (s) => {
+            debugger
+            const words = s.split(' ')
+            let maxLen = 0
+            for (let i = 0; i < words.length; i++) {
+                maxLen = Math.max(maxLen, words[i].length)
+            }
+            const res = new Array(maxLen).fill('')
+            for (let i = 0; i < maxLen; i++) {
+                for (let j = 0; j < words.length; j++) {
+                    if (words[j][i] == undefined) {
+                        res[i] += ' '
+                    } else {
+                        res[i] += words[j][i]
+                    }
+                }
+            }
+            return res
+        }
+
+        console.log(printV3("TO BE OR NOT TO BEHK"));
+        
+        var printV4=(s)=>{
+            const words=s.split(' ')
+            let max=0
+            for(let i=0;i<words.length;i++){
+                max=Math.max(words.length,max)
+            }
+
+        }
         // 作者：poppinl
         // 链接：https://leetcode-cn.com/problems/print-words-vertically/solution/bao-bao-ye-neng-kan-dong-de-leetcode-ti-jie-2-chon/
 
@@ -65,7 +112,7 @@
                 words = s.split(' '),
                 result = [],
                 newStr
-                console.log(words);
+            console.log(words);
             while (newStr = words.map(item => item[index] || ' ').join('').trimEnd()) {
                 result.push(newStr)
                 index++
@@ -74,9 +121,9 @@
         };
 
         console.log(printVertically("TO BE OR NOT TO BE"));
-        
-// 作者：suan-huang-suan-ge
-// 链接：https://leetcode-cn.com/problems/print-words-vertically/solution/bu-xu-yao-cha-zhao-zui-chang-yuan-su-de-fang-fa-by/
+
+        // 作者：suan-huang-suan-ge
+        // 链接：https://leetcode-cn.com/problems/print-words-vertically/solution/bu-xu-yao-cha-zhao-zui-chang-yuan-su-de-fang-fa-by/
 
     </script>
 </body>

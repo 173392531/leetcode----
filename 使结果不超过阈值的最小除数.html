@@ -52,9 +52,24 @@
         };
         console.log(smallestDivisor([2, 3, 5, 7, 11], 11));
 
-    // 作者：caimao
-    // 链接：https://leetcode-cn.com/problems/find-the-smallest-divisor-given-a-threshold/solution/er-fen-fa-by-caimao/
+        // 作者：caimao
+        // 链接：https://leetcode-cn.com/problems/find-the-smallest-divisor-given-a-threshold/solution/er-fen-fa-by-caimao/
 
+
+        var smallD2 = (nums, thre) => {
+            let left = 1, right = 1000000
+            while (left < right) {
+                let mid = Math.floor((left + right) / 2)
+                if (nums.reduce((a, b) => a + Math.ceil(b / mid), 0) <= thre) {
+                    right = mid
+                } else {
+                    left = mid + 1
+                }
+            }
+            return left
+        }
+
+        // 09-08复习
     </script>
 </body>
 

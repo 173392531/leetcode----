@@ -67,8 +67,30 @@
             return isSameTree(A.left, B.left) && isSameTree(A.right, B.right);
         };
 
-// 作者：xuxun
-// 链接：https://leetcode-cn.com/problems/shu-de-zi-jie-gou-lcof/solution/javascript-di-gui-fei-di-gui-liang-chong-jie-fa-sh/
+        // 作者：xuxun
+        // 链接：https://leetcode-cn.com/problems/shu-de-zi-jie-gou-lcof/solution/javascript-di-gui-fei-di-gui-liang-chong-jie-fa-sh/
+
+        var isSub = (A, B) => {
+            if (!A || !B) return false
+            return isSame(A, B) || isSub(A.left, B) || isSub(A.right, B)
+            var isSame = function (A, B) {
+                if (!B) return true
+                if (!A) return false
+                if (A.val !== B.val) return false
+                return isSame(A.left, B.left) && isSame(A.right, B.right)
+            }
+        }
+
+        var isSub2 = (A, B) => {
+            if (!A || !B) return false
+            return isSame2(A, B) || isSub2(A.left, B) || isSub2(A.right, B)
+            var isSame2 = function (A, B) {
+                if (!B) return true
+                if (!A) return false
+                if (A.val !== B.val) return false
+                return isSame2(A.left, B.left) && isSame2(A.right, B.right)
+            }
+        }
 
     </script>
 </body>

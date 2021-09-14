@@ -50,9 +50,31 @@
       return res;
     };
 
-// 作者：xiao_ben_zhu
-// 链接：https://leetcode-cn.com/problems/relative-sort-array/solution/bu-shi-yong-sort-pai-xu-de-jie-fa-1122-shu-zu-de-x/
+    // 作者：xiao_ben_zhu
+    // 链接：https://leetcode-cn.com/problems/relative-sort-array/solution/bu-shi-yong-sort-pai-xu-de-jie-fa-1122-shu-zu-de-x/
 
+    var relative2 = (arr1, arr2) => {
+      const counts = new Array(1001).fill(0)
+      for (const n of arr1) {
+        counts[n]++
+      }
+      const res = []
+      for (const n of arr2) {
+        while (counts[n] > 0) {
+          res.push(n)
+          counts[n]--
+        }
+      }
+      for (let i = 0; i < counts.length; i++) {
+        while (counts[i] > 0) {
+          res.push(i)
+          counts[i]--
+        }
+      }
+      return res
+    }
+
+    // 09-12复习
   </script>
 </body>
 

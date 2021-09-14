@@ -101,8 +101,8 @@
             }
             return ret
         };
-        console.log(delNodes(createTree([1,2,3,4,5,6,7]),[3,5]));
-        
+        console.log(delNodes(createTree([1, 2, 3, 4, 5, 6, 7]), [3, 5]));
+
         // 作者：AStarlessNight
         // 链接：https://leetcode-cn.com/problems/delete-nodes-and-return-forest/solution/javascript-shi-jian-100-dfs-di-gui-by-as-5jfo/
 
@@ -134,44 +134,146 @@
             return ret
         }
 
-        function delN(root,to_delete) {
-            function dfs(root){
-                if(root===null){
+        function delN(root, to_delete) {
+            function dfs(root) {
+                if (root === null) {
                     return false
                 }
-                let left=dfs(root.left)
-                let right=dfs(root.right)
-                let isD=set.has(root.val)
-                if(isD){
-                    !left&&ret.push(root.left)
-                    !right&&ret.push(root.right)
+                let left = dfs(root.left)
+                let right = dfs(root.right)
+                let isD = set.has(root.val)
+                if (isD) {
+                    !left && ret.push(root.left)
+                    !right && ret.push(root.right)
                 }
-                if(left){
-                    root.left=null
+                if (left) {
+                    root.left = null
                 }
-                if(right){
-                    root.right=null
+                if (right) {
+                    root.right = null
                 }
                 return isD
             }
-            let set=new Set(to_delete)
-            let ret=[]
+            let set = new Set(to_delete)
+            let ret = []
             // 通过dfs把其余枝叶裁剪掉，并先把零星枝叶放入ret中，最后才把root放进去
-            if(dfs(root)===false){
+            if (dfs(root) === false) {
                 ret.push(root)
             }
             return ret
         }
 
-        var delN=function(root,to_delete){
-            function dfs(root){
-                if(root===null)return
-                let left=dfs(root.left)
-                let right=dfs(root.right)
-                let isD=set.has(root.val)
-                if(isD){
-                    !left&&ret.push(root.left)
-                    !right&&ret.push(root.right)
+        var delN = function (root, to_delete) {
+            function dfs(root) {
+                if (root === null) return
+                let left = dfs(root.left)
+                let right = dfs(root.right)
+                let isD = set.has(root.val)
+                if (isD) {
+                    !left && ret.push(root.left)
+                    !right && ret.push(root.right)
+                }
+                if (left) {
+                    root.left = null
+                }
+                if (right) {
+                    root.right = null
+                }
+                return isD
+            }
+            let set = new Set(to_delete)
+            let ret = []
+            if (dfs(root) === false) {
+                ret.push(root)
+            }
+            return ret
+        }
+
+        var delN2 = (root, to_delete) => {
+            const dfs = (root) => {
+                if (root == null) return true
+                let left = dfs(root.left)
+                let right = dfs(root.right)
+                let rootDeleted = set.has(root.val)
+                if (rootDeleted) {
+                    !left && ret.push(root.left)
+                    !right && ret.push(root.right)
+                }
+                if (left) {
+                    root.left = null
+                }
+                if (right) {
+                    root.right = null
+                }
+                return rootDeleted
+            }
+            let set = new Set(to_delete)
+            let ret = []
+            if (dfs(root) === false) {
+                ret.push(root)
+            }
+            return ret
+        }
+
+        var delN3 = (root, to_delete) => {
+            const dfs = (root) => {
+                if (root === null) return true
+                let left = dfs(root.left)
+                let right = dfs(root.right)
+                let rootDeleted = set.has(root.val)
+                if (rootDeleted) {
+                    !left && ret.push(root.left)
+                    !right && ret.push(root.right)
+                }
+                if (left) {
+                    root.left = null
+                }
+                if (right) {
+                    root.right = null
+                }
+                return rootDeleted
+            }
+            let set = new Set(to_delete)
+            let ret = []
+            if (dfs(root) === false) {
+                ret.push(root)
+            }
+            return ret
+        }
+
+        var delN4 = (root, to_delete) => {
+            const dfs = (root) => {
+                if (root === null) return true
+                let left = dfs(root.left), right = dfs(root.right)
+                let isDel = set.has(root.val)
+                if (isDel) {
+                    !left && ret.push(root.left)
+                    !right && ret.push(root.right)
+                }
+                if (left) {
+                    root.left = null
+                }
+                if (right) {
+                    root.right = null
+                }
+                return isDel
+            }
+            let set = new Set(to_delete)
+            let ret = []
+            if (dfs(root) === false) {
+                ret.push(root)
+            }
+            return ret
+        }
+
+        var delN5=(root,to_delete)=>{
+            const dfs=(root)=>{
+                if(root===null)return true
+                let left=dfs(root.left),right=dfs(root.right)
+                let isDel=set.has(root.val)
+                if(isDel){
+                    !left && ret.push(root.left)
+                    !right && ret.push(root.right)
                 }
                 if(left){
                     root.left=null
@@ -179,7 +281,7 @@
                 if(right){
                     root.right=null
                 }
-                return isD
+                return isDel
             }
             let set=new Set(to_delete)
             let ret=[]
@@ -188,6 +290,7 @@
             }
             return ret
         }
+        // 09-06复习
     </script>
 </body>
 
