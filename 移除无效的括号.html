@@ -99,6 +99,29 @@
             }
             return res.join('')
         }
+
+        var removeV2 = (s) => {
+            const n = s.length, leftDel = [], rightDel = []
+            for (let i = 0; i < n; i++) {
+                const char = s[i]
+                if (char === '(') {
+                    leftDel.push(i)
+                } else if (char === ')') {
+                    if (leftDel.length > 0) {
+                        leftDel.pop()
+                    } else {
+                        rightDel.push(i)
+                    }
+                }
+            }
+            const res = [...s], filter = leftDel.concat(rightDel), l = filter.length
+            for (let i = 0; i < l; i++) {
+                res[filter[i]] = ''
+            }
+            return res.join('')
+        }
+
+        // 09-22复习
     </script>
 </body>
 

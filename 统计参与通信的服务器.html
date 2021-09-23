@@ -37,7 +37,7 @@
         来源：力扣（LeetCode）
         链接：https://leetcode-cn.com/problems/count-servers-that-communicate
         著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
-        
+
     <!-- 
         两次遍历二维数组即可；
         1、第一次遍历，统计每一行和每一列上的计算机数量。
@@ -77,6 +77,51 @@
         // 作者：fan-gun-de-xian-yu-jun
         // 链接：https://leetcode-cn.com/problems/count-servers-that-communicate/solution/jszhi-xing-shi-jian-da-bai-liao-100zhao-gui-lu-de-/
 
+        var countS2 = (grid) => {
+            let row = grid.length
+            let col = 0
+            if (row) {
+                col = grid[0].length
+            }
+            let rowArr = Array(row).fill(0)
+            let colArr = Array(col).fill(0)
+            for (let i = 0; i < row; i++) {
+                for (let j = 0; j < col; j++) {
+                    if (grid[i][j]) {
+                        rowArr[i]++
+                        colArr[j]++
+                    }
+                }
+            }
+            let res = 0
+            for (let i = 0; i < row; i++) {
+                for (let j = 0; j < col; j++) {
+                    if (rowArr[i] > 1 || colArr[j] > 1) res++
+                }
+            }
+            return res
+        }
+
+        var countS3 = (grid) => {
+            let row = grid.length, col = 0
+            if (row) col = grid[0].length
+            let rowArr = Array(row).fill(0)
+            let colArr = Array(col).fill(0)
+            for (let i = 0; i < row; i++) {
+                for (let j = 0; j < col; j++) {
+                    if (grid[i][j]) {
+                        rowArr[i]++
+                        rowArr[j]++
+                    }
+                }
+            }
+            let res = 0
+            for (let i = 0; i < row; i++) {
+                for (let j = 0; j < col; j++) {
+                    if (rowArr[i] > 1 || colArr[j] > 1) res++
+                }
+            }
+        }
     </script>
 </body>
 

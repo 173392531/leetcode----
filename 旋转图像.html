@@ -32,6 +32,20 @@
 // 作者：mantoufan
 // 链接：https://leetcode-cn.com/problems/rotate-image/solution/luo-xuan-kao-bei-xuan-zhuan-fan-zhuan-7x-5v91/
 
+    var rotate2=(matrix)=>{
+      let n=matrix.length,queue=[]
+      for(let i=0;i<n;i++){
+        for(let j=0;j<n;j++){
+          queue.push(matrix[i][j])
+        }
+      }
+      for(let j=n;j--;){
+        for(let i=0;i<n;i++){
+          matrix[i][j]=queue.shift()
+        }
+      }
+      return matrix
+    }
 
 // 拷贝方法
 // var rotate = function(matrix) {
@@ -47,6 +61,7 @@
 // 作者：mantoufan
 // 链接：https://leetcode-cn.com/problems/rotate-image/solution/luo-xuan-kao-bei-xuan-zhuan-fan-zhuan-7x-5v91/
 
+// 09-20复习
   </script>
 </body>
 

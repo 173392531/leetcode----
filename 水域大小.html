@@ -30,9 +30,9 @@
          * @param {number[][]} land
          * @return {number[]}
          */
-        let res
-        let area
         var pondSizes = function (land) {
+            let res
+            let area
             res = []
             for (let i = 0; i < land.length; i++) {
                 for (let j = 0; j < land[0].length; j++) {
@@ -44,27 +44,70 @@
                 }
             }
             return res.sort((a, b) => (a - b))
+            function dfs(land, i, j) {
+                if (i < 0 || j < 0 || i >= land.length || j >= land[0].length) return
+                if (land[i][j] == 0) {
+                    land[i][j] = 1
+                    area++
+                    dfs(land, i - 1, j)
+                    dfs(land, i + 1, j)
+                    dfs(land, i, j - 1)
+                    dfs(land, i, j + 1)
+                    dfs(land, i - 1, j - 1)
+                    dfs(land, i - 1, j + 1)
+                    dfs(land, i + 1, j - 1)
+                    dfs(land, i + 1, j + 1)
+                }
+            }
         };
 
-        function dfs(land, i, j) {
-            if (i < 0 || j < 0 || i >= land.length || j >= land[0].length) return
-            if (land[i][j] == 0) {
-                land[i][j] = 1
-                area++
-                dfs(land, i - 1, j)
-                dfs(land, i + 1, j)
-                dfs(land, i, j - 1)
-                dfs(land, i, j + 1)
-                dfs(land, i - 1, j - 1)
-                dfs(land, i - 1, j + 1)
-                dfs(land, i + 1, j - 1)
-                dfs(land, i + 1, j + 1)
+
+        console.log(pondSizes([
+            [0, 2, 1, 0],
+            [0, 1, 0, 1],
+            [1, 1, 0, 1],
+            [0, 1, 0, 1]
+        ]));
+
+        // 作者：malin-code
+        // 链接：https://leetcode-cn.com/problems/pond-sizes-lcci/solution/si-lu-qing-xi-jiao-wo-di-yi-dfszhuan-lian-by-mal-5/
+
+        var pS2 = (land) => {
+            let area, res = []
+            for (let i = 0; i < land.length; i++) {
+                for (let j = 0; j < land[0].length; j++) {
+                    if (land[i][j] == 0) {
+                        area = 0
+                        dfs(land, i, j)
+                        res.push(area)
+                    }
+                }
+            }
+            return res.sort((a, b) => (a - b))
+            function dfs(land, i, j) {
+                if (i < 0 || j < 0 || i >= land.length || j >= land[0].length) return
+                if (land[i][j] == 0) {
+                    land[i][j] = 1
+                    area++
+                    dfs(land, i - 1, j)
+                    dfs(land, i + 1, j)
+                    dfs(land, i, j - 1)
+                    dfs(land, i, j + 1)
+                    dfs(land, i - 1, j - 1)
+                    dfs(land, i - 1, j + 1)
+                    dfs(land, i + 1, j - 1)
+                    dfs(land, i + 1, j + 1)
+                }
             }
         }
-
-// 作者：malin-code
-// 链接：https://leetcode-cn.com/problems/pond-sizes-lcci/solution/si-lu-qing-xi-jiao-wo-di-yi-dfszhuan-lian-by-mal-5/
-
+        console.log(pS2([
+            [0, 2, 1, 0],
+            [0, 1, 0, 1],
+            [1, 1, 0, 1],
+            [0, 1, 0, 1]
+        ]));
+        
+// 09-13复习
     </script>
 </body>
 

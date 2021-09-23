@@ -63,9 +63,24 @@
             return res;
         };
 
-// 作者：caimao
-// 链接：https://leetcode-cn.com/problems/search-suggestions-system/solution/xian-pai-xu-bfs-by-caimao/
+        // 作者：caimao
+        // 链接：https://leetcode-cn.com/problems/search-suggestions-system/solution/xian-pai-xu-bfs-by-caimao/
 
+        var suggestP2 = (products, searchWord) => {
+            let res = []
+            products.sort()
+            for (let i = 0, len = searchWord.length; i < len; i++) {
+                let temp = []
+                products.forEach(product => {
+                    if (product[i] === searchWord[i]) {
+                        temp.push(product)
+                    }
+                })
+                products = temp
+                res.push(products.length > 3 ? products.slice(0, 3) : products)
+            }
+            return res
+        }
     </script>
 </body>
 

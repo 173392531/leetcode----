@@ -51,6 +51,28 @@ nums1 中数字 x 的下一个更大元素是指 x 在 nums2 中对应位
 // 作者：ityi
 // 链接：https://leetcode-cn.com/problems/next-greater-element-i/solution/jiu-ying-jie-by-ityi-089b/
 
+  var nextG2=(nums1,nums2)=>{
+    let arr=[]
+    for(let i=0;i<nums1.length;i++){
+      let num=nums2.indexOf(nums1[i])
+      if(num===ums2.length-1)arr.push(-1)
+      else{
+        for(let j=num+1;j<nums2.length;j++){
+          if(nums1[i]<nums2[j]){
+            arr.push(nums2[j])
+            break
+          }else{
+            if(j===nums2.length-1){
+              arr.push(-1)
+            }
+          }
+        }
+      }
+    }
+    return arr
+  }
+
+  // 09-18复习
   </script>
 </body>
 </html>

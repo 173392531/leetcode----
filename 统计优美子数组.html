@@ -73,7 +73,7 @@
         来源：力扣（LeetCode）
         著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。 -->
     <script>
-        
+
         var numberOfSubarrays = function (nums, k) {
             let total = 0
             let pos = [] // 存放奇数的索引
@@ -82,25 +82,87 @@
                 if (nums[i] % 2 === 1)
                     pos.push(i)
             }
-            
+
 
             // 补齐首尾两项
             pos.push(nums.length)
             pos.unshift(-1)
 
             oddAmount = pos.length
-            
-            for (let i = 1; i + k < oddAmount ; i++) {
+
+            for (let i = 1; i + k < oddAmount; i++) {
                 total += (pos[i] - pos[i - 1]) * (pos[i + k] - pos[i + k - 1])
             }
             return total
         };
 
-        console.log(numberOfSubarrays([2, 1, 1, 2, 1, 2, 2, 1, 2],3));
-        
-// 作者：xiao_ben_zhu
-// 链接：https://leetcode-cn.com/problems/count-number-of-nice-subarrays/solution/xun-zhao-ji-di-you-mei-shu-zu-xiang-liang-ce-kuo-z/
+        console.log(numberOfSubarrays([2, 1, 1, 2, 1, 2, 2, 1, 2], 3));
 
+        var numberOfSubarrays = function (nums, k) {
+            let res = 0, right = 0, left = 0, currNums = 0;
+            while (right <= nums.length) {
+                if (nums[right] % 2 === 1) {
+                    currNums++;
+                }
+                right++;
+                // 当前窗口刚好有K个奇数
+                if (currNums === k) {
+                    // 计算第K个奇数右边的偶数个数
+                    let temp = right;
+                    while (nums[right] % 2 === 0 && right < nums.length) {
+                        right++;
+                    }
+                    const rightNums = right - temp + 1;
+                    // 计算第一个奇数左边的偶数个数
+                    let leftNums = 0;
+                    while (nums[left] % 2 === 0 && left < nums.length) {
+                        left++;
+                        leftNums++;
+                    }
+                    leftNums = leftNums + 1;
+                    res += rightNums * leftNums;
+                    // 此时 left 指向的是第 1 个奇数，因为该区间已经统计完了，因此 left 右移一位，currNums--
+                    left++;
+                    currNums--;
+                }
+
+            }
+            return res
+        };
+
+
+        // 作者：xiao_ben_zhu
+        // 链接：https://leetcode-cn.com/problems/count-number-of-nice-subarrays/solution/xun-zhao-ji-di-you-mei-shu-zu-xiang-liang-ce-kuo-z/
+
+
+        var numOfSub = (nums, k) => {
+            let res = 0, right = 0, left = 0, cur = 0
+            while (right < nums.length) {
+                if (nums[right] % 2 === 1) {
+                    cur++
+                }
+                right++
+                if (cur === k) {
+                    let temp = right
+                    while (nums[right] % 2 === 0 && right < nums.length) {
+                        right++
+                    }
+                    const rightNums = right - temp + 1
+                    let leftNums = 0
+                    while (nums[left] % 2 === 0 && left < nums.length) {
+                        left++
+                        leftNums++
+                    }
+                    leftNums = leftNums + 1
+                    res += rightNums * leftNums
+                    left++
+                    cur--
+                }
+            }
+            return res
+        }
+
+        // 09-18复习
     </script>
 </body>
 

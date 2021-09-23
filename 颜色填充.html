@@ -71,26 +71,67 @@
             return image;
         };
 
-        console.log(setC(
-            [
-                [1, 1, 1],
-                [1, 1, 0],
-                [1, 0, 1],
-            ],
-            1,
-            1,
-            2
-        )); // [ [ 2, 2, 2 ], [ 2, 2, 0 ], [ 2, 0, 1 ] ]
+        const changeC2 = (image, sr, sc, newColor) => {
+            const tmp = image[sr][sc]
+            const rowLen = image.length
+            const colLen = image[0].length
+            function dfs(image, row, col) {
+                if (row >= rowLen || col >= colLen || row < 0 || col < 0 || image[row][col] !== tmp) {
+                    return
+                }
+                if (image[row][col] !== newColor) {
+                    image[row][col] = newColor
+                    dfs(image, row + 1, col)
+                    dfs(image, row - 1, col)
+                    dfs(image, row, col + 1)
+                    dfs(image, row, col - 1)
+                }
+            }
+            dfs(image, sr, sc)
+            return image
+        }
+        console.log(changeC2([[1, 1, 1], [1, 1, 0], [1, 0, 1]], 1, 1, 2));
 
-        console.log(dfs(
-            [
-                [0, 0, 0],
-                [0, 1, 1],
-            ],
-            1,
-            1,
-            1
-        )); // [ [ 0, 0, 0 ], [ 0, 1, 1 ] ]
+
+        const changeC3 = (image, sr, sc, newColor) => {
+            const tmp = image[sr][sc]
+            const rowLen = image.length
+            const colLen = image[0].length
+            const stack = [[sr, sc]]
+            // while(stack.length){
+            for (let item of stack) {
+                // debugger
+                const [r, c] = item
+                if (r < 0 || c < 0 || r >= rowLen || c >= colLen) continue
+                if (image[r][c] && image[r][c] == tmp) {
+                    image[r][c] = newColor
+                    stack.push([r + 1, c], [r - 1, c], [r, c + 1], [r, c - 1])
+                }
+            }
+            // }
+            return image
+        }
+        console.log(changeC3([[1, 1, 1], [1, 1, 0], [1, 0, 1]], 1, 1, 2));
+        // console.log(setC(
+        //     [
+        //         [1, 1, 1],
+        //         [1, 1, 0],
+        //         [1, 0, 1],
+        //     ],
+        //     1,
+        //     1,
+        //     2
+        // )); // [ [ 2, 2, 2 ], [ 2, 2, 0 ], [ 2, 0, 1 ] ]
+
+        // console.log(dfs(
+        //     [
+        //         [0, 0, 0],
+        //         [0, 1, 1],
+        //     ],
+        //     1,
+        //     1,
+        //     1
+        // )); // [ [ 0, 0, 0 ], [ 0, 1, 1 ] ]
 
 
         // bfs
@@ -173,6 +214,7 @@
 // 作者：jsliang
 // 链接：https://leetcode-cn.com/problems/color-fill-lcci/solution/javascript-shen-du-you-xian-sou-suo-dfs-yan-du-y-2/
 
+// 09-22复习
     </script>
 </body>
 

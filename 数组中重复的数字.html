@@ -32,9 +32,17 @@
       return null;
     };
 
-// 作者：demigodliu
-// 链接：https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/solution/ha-xi-biao-shu-zu-zhong-zhong-fu-de-shu-bh7co/
+    // 作者：demigodliu
+    // 链接：https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/solution/ha-xi-biao-shu-zu-zhong-zhong-fu-de-shu-bh7co/
 
+    var findR2 = (nums) => {
+      let map = new Map()
+      for (let i of nums) {
+        if (map.has(i)) return i
+        map.set(i, 1)
+      }
+      return null
+    }
   </script>
 </body>
 

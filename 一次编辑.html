@@ -87,6 +87,58 @@
         // 作者：tou - fa - yi - jiu - xiao - sa
         // 链接：https://leetcode-cn.com/problems/one-away-lcci/solution/shuang-zhi-zhen-bian-li-shi-jian-fu-za-d-vwrc/
 
+        var oneE2=(first,second)=>{
+            if(Math.abs(first.length-second.length)>1)return false
+            let i=0,j=0,edit=false
+            while(i<first.length && j<second.length){
+                if(first.charAt(i)===second.charAt(j)){
+                    i++
+                    j++
+                }else{
+                    if(!edit){
+                        if(first.length===second.length){
+                            i++
+                            j++
+                        }else if(first.length<second.length){
+                            j++
+                        }else{
+                            i++
+                        }
+                        edit=true
+                    }else{
+                        return false
+                    }
+                }
+            }
+            return true
+        }
+
+        var oneE3=(first,second)=>{
+            if(Math.abs(first.length-second.length)>1)return false
+            let i=0,j=0,edit=false
+            while(i<first.length && j<second.length){
+                if(first.charAt(i)===second.charAt(j)){
+                    i++
+                    j++
+                }else{
+                    if(!edit){
+                        if(first.length===second.length){
+                            i++
+                            j++
+                        }else if (first.length<second.length){
+                            j++
+                        }else{
+                            i++
+                        }
+                        edit=true
+                    }else{
+                        return false
+                    }
+                }
+            }
+            return true
+        }
+        // 09-22复习
     </script>
 </body>
 

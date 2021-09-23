@@ -1,26 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
   <script>
+    // 判断两个链表是否相交
 
     // 双指针法
     var getIntersectionNode = function (headA, headB) {
-    if (!headA || !headB) return null;
-    let pA = headA,
+      if (!headA || !headB) return null;
+      let pA = headA,
         pB = headB;
-    while (pA !== pB) {
+      while (pA !== pB) {
         pA = pA === null ? headB : pA.next;
         pB = pB === null ? headA : pB.next;
-    }
-    return pA;
-};
+      }
+      return pA;
+    };
 
+    var getI2 = (headA, headB) => {
+      if (!headA || !headB) return null
+      let pA = headA, pB = headB
+      while (pA !== pB) {
+        pA = pA === null ? headB : pA.next
+        pB = pB === null ? headA : pB.next
+      }
+      return pA
+    }
+
+    var getI3=(headA,headB)=>{
+      if(!headA || !headB)return null
+      let pA=headA,pB=headB
+      while(pA!==pB){
+        pA=pA===null ? headB:pA.next
+        pB=pB===null ? headA:pB.next
+      }
+    }
 //  暴力遍历法
 // var getIntersectionNode = function (headA, headB) {
 //     if (!headA || !headB) return null;
@@ -58,4 +79,5 @@
 
   </script>
 </body>
+
 </html>

@@ -67,6 +67,18 @@ queue1 = []
       return res
     };
 
+    Stack.prototype.pop=function(){
+      let queue1=[]
+      while(this.queue.length>1){
+        queue1.push(this.queue.shift())
+      }
+      let res=this.queue.shift()
+      while(queue1.length){
+        this.queue.push(queue1.shift())
+      }
+      return res
+    }
+
     /**
      * Get the top element.
      * @return {number}
@@ -95,6 +107,7 @@ queue1 = []
 // 作者：shetia
 // 链接：https://leetcode-cn.com/problems/implement-stack-using-queues/solution/kan-qing-ti-mu-yong-dui-lie-shi-xian-zhan-by-sheti/
 
+// 09-23复习
   </script>
 </body>
 </html>

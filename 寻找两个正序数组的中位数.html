@@ -131,9 +131,40 @@
       }
     };
 
-// 作者：fe-lucifer
-// 链接：https://leetcode-cn.com/problems/median-of-two-sorted-arrays/solution/er-fen-fa-duo-yu-yan-javajs4-xun-zhao-liang-ge-zhe/
+    // 作者：fe-lucifer
+    // 链接：https://leetcode-cn.com/problems/median-of-two-sorted-arrays/solution/er-fen-fa-duo-yu-yan-javajs4-xun-zhao-liang-ge-zhe/
 
+
+    var find2 = (nums1, nums2) => {
+      if (nums1.length > nums2.length) {
+        [nums1, nums2] = [nums2, nums1]
+      }
+      const m = nums1.length
+      const n = nums2.length
+      let low = 0
+      let high = m
+      while (low <= high) {
+        const i = low + Math.floor((high - low) / 2)
+        // 找出在nums1中位数为i的情况下，nums2的中位数
+        const j = Math.floor((m + n + 1) / 2) - i
+        const maxLeftA = i === 0 ? -Infinity : nums1[i - 1]
+        const minRightA = i === m ? Infinity : nums1[i]
+        const maxLeftB = j === 0 ? -Infinity : nums2[j - 1]
+        const minRightB = j === n ? Infinity : nums2[j]
+        // 两数组中位数相互交叉
+        if (maxLeftA <= minRightB && minRightA >= maxLeftB) {
+          return (m + n) % 2 === 1 ? Math.max(maxLeftA, maxLeftB) : (Math.max(maxLeftA, maxLeftB) + Math.min(minRightA, minRightB)) / 2
+        } else if (maxLeftA > minRightB) {
+          // 缩小数组1的中位数
+          high = i - 1
+        } else {
+          // 增大数组1的中位数
+          low = low + 1
+        }
+      }
+    }
+
+    // 09-22复习
   </script>
 </body>
 

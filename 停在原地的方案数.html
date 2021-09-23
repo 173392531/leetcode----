@@ -63,6 +63,40 @@
         // 作者：shetia
         // 链接：https://leetcode-cn.com/problems/number-of-ways-to-stay-in-the-same-place-after-some-steps/solution/ting-zai-yuan-di-de-fang-an-shu-by-sheti-sxga/
 
+        
+        // dp[i][j] 表示经过 i 步之后, 停在 j 处的方案数
+
+        var numW2 = (steps, arrLen) => {
+            let mod = 10 ** 9 + 7
+            let m = Math.min((step / 2 | 0) + 1, arrLen)
+            let dp = Array(steps + 1).fill(0).map(() => Array(m).fill(0))
+            dp[0][0] = 1
+            for (let i = 1; i <= steps; i++) {
+                for (let j = 0; j < m; j++) {
+                    let left = j > 0 ? dp[i - 1][j - 1] : 0
+                    let right = j < m - 1 ? dp[i - 1][j + 1] : 0
+                    let cur = dp[i - 1][j]
+                    dp[i][j] = (left + cur + right) % mod
+                }
+            }
+            return dp[steps][0]
+        }
+
+        var numW3 = (steps, arrLen) => {
+            let mod = 10 ** 9 + 7
+            let m = Math.min((step / 2 | 0) + 1, arrLen)
+            let dp = Array(steps + 1).fill(0).map(() => Array(m).fill(0))
+            dp[0][0] = 1
+            for (let i = 1; i <= steps; i++) {
+                for (let j = 0; j < m; j++) {
+                    let left = j > 0 ? dp[i - 1][j - 1] : 0
+                    let right = j < m - 1 ? dp[i - 1][j + 1] : 0
+                    let cur = dp[i - 1][j]
+                    dp[i][j] = (left + cur + right) % mod
+                }
+            }
+            return dp[steps][0]
+        }
     </script>
 </body>
 

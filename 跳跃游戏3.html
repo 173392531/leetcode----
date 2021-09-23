@@ -60,6 +60,47 @@
             return false;
         };
 
+        var canR2 = (arr, start) => {
+            const visited = new Set()
+            const queue = [start]
+            for (let len = 0, max = arr.length; len < queue.length; len++) {
+                const idx = queue[len]
+                if (visited.has(idx)) continue
+                if (arr[idx] === 0) return true
+                visited.add(idx)
+                idx + arr[idx] < max && queue.push(idx + arr[idx])
+                idx - arr[idx] >= 0 && queue.push(idx - arr[idx])
+            }
+            return false
+        }
+
+        var canR3 = (arr, start) => {
+            const visited = new Set()
+            const queue = [start]
+            for (let len = 0, max = arr.length; len < queue.length; len++) {
+                const idx = queue[len]
+                if (visited.has(idx)) continue
+                if (arr[idx] === 0) return true
+                visited.add(idx)
+                idx + arr[idx] < max && queue.push(idx + arr[idx])
+                idx - arr[idx] >= 0 && queue.push(idx - arr[idx])
+            }
+            return false
+        }
+
+        var canR4 = (arr, start) => {
+            const visited = new Set()
+            const queue = [start]
+            for (let len = 0, max = arr.length; len < queue.length; len++) {
+                const idx = queue[len]
+                if (visited.has(idx)) continue
+                if (arr[idx] === 0) return true
+                visited.add(idx)
+                idx + arr[idx] < max && queue.push(idx + arr[idx])
+                idx - arr[idx] >= 0 && queue.push(idx - arr[idx])
+            }
+            return false
+        }
         // 作者：poppinl
         // 链接：https://leetcode-cn.com/problems/jump-game-iii/solution/bao-bao-ye-neng-kan-dong-de-leetcode-ti-jie-bfs-df/
 
@@ -75,6 +116,32 @@
         // 作者：poppinl
         // 链接：https://leetcode-cn.com/problems/jump-game-iii/solution/bao-bao-ye-neng-kan-dong-de-leetcode-ti-jie-bfs-df/
 
+
+        var canR2 = (arr, start) => {
+            const val = arr[start]
+            if (val === 0) return true
+            if (val === -1) return false
+            arr[start] = -1
+            return (start - val >= 0 && canR2(arr, start - val)) || (start + val < arr.length && canR2(arr, start + val))
+        }
+
+        var canR3 = (arr, start) => {
+            const val = arr[start]
+            if (val === 0) return true
+            if (val === -1) return false
+            arr[start] = -1
+            return (start - val >= 0 && canR3(arr, start - val)) || (start + val < arr.length && canR3(arr, start + val))
+        }
+
+        var canR4 = (arr, start) => {
+            const val = arr[start]
+            if (val === 0) return true
+            if (val === -1) return false
+            arr[start] = -1
+            return (start - val >= 0 && canR4(arr, start - val)) || (start + val < arr.length && canR4(arr, start + val))
+        }
+
+        // 09-16复习
     </script>
 </body>
 

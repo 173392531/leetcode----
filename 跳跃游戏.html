@@ -18,19 +18,29 @@
 解释：可以先跳 1 步，从下标 0 到达下标 1, 然后再从下标 1 跳 3 步到达最后一个下标。 -->
   <script>
     var canJump = function (nums) {
-      for (var i = 0, max = 0; i < nums.length; i++){
+      for (var i = 0, max = 0; i < nums.length; i++) {
         if (i <= max) max = Math.max(max, i + nums[i])
         else return false
       }
       return true
     };
 
+
+    var canJ2 = (nums) => {
+      for (var i = 0, max = 0; i < nums.length; i++) {
+        if (i <= max) max = Math.max(max, i + nums[i])
+        else return false
+      }
+      return true
+    }
   // var jumpLast= function(nums){
   //   for(var i=0,max=0;i<nums.length;i++)
   //     if(i<=max) max=Math.max(max,i+nums[i])
   //     else return false
   //     return true
   // }
+
+  // 09-16复习
   </script>
 </body>
 

@@ -52,8 +52,22 @@
             }
         }
         
+        var convert=(item)=>{
+            if(typeof item =='number'){
+                return {
+                    value:item
+                }
+            }else if(Array.isArray(item)){
+                return {
+                    children:item.map(_item => convert(_item))
+                }
+            }
+        }
+
         var o = convert(arr);
         console.log(o);
+
+        // 09-20复习
     </script>
 </body>
 </html>

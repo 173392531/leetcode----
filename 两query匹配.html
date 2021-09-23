@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const ergodicQuery = (newRoute, oldRoute, newPath = '', oldPath = '') => {
+            let newRq = [], oldRq = []
+            Object.keys(newRoute).forEach((key) => {
+                let item = key + '=' + newRoute[key]
+                newRq.push(item)
+            })
+            Object.keys(oldRoute).forEach((key) => {
+                let item = key + '=' + oldRoute[key]
+                oldRq.push(item)
+            })
+            if (newRq.length == 0 && oldRq.length == 0) return true
+            if (newPath && oldPath) {
+                let path1 = newPath.split('?')[0]
+                let path2 = oldPath.split('?')[0]
+                newPath=newPath.substring(newPath.indexOf('?'))
+                oldPath=oldPath.substring(oldPath.indexOf('?'))
+                newPath = path1+newPath.split('&').sort().join('&')
+                oldPath = path2+oldPath.split('&').sort().join('&')
+            }
+            console.log(
+                newPath,oldPath
+            );
+            
+            let newstr = newPath + '?' + (newRq.sort().join('&').toString()), oldstr = oldPath + '?' + (oldRq.sort().join('&').toString())
+            console.log(newstr, oldstr);
+
+            return newstr === oldstr
+        }
+
+        let q1 = {
+            // name: 'shq',
+            // age: 22,
+            // like: "computer",
+            // know: 'vue'
+        }
+        let q2 = {
+            // age: 22,
+            // like: 'computer',
+            // name: 'shq'
+            id:1111,
+            name:'lh'
+        }
+        let p1 = {
+
+        }
+        let p2 = {
+
+        }
+        let q3 = ''
+        console.log(ergodicQuery(q1, q2, '/about?name=lh&id=1111', '/about'));
+
+    </script>
+</body>
+
+</html>

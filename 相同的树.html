@@ -33,9 +33,35 @@
             return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
         };
 
+        var isSame2 = (p, q) => {
+            if (p == null && q == null) {
+                return true
+            }
+            if (p == null || q == null) {
+                return false
+            }
+            if (p.val != q.val) {
+                return false
+            }
+            return isSame2(p.left, q.left) && isSame2(p.right, q.right)
+        }
+
+        var isSame3 = (p, q) => {
+            if (p == null && q == null) {
+                return true
+            }
+            if (p == null || q == null) {
+                return false
+            }
+            if (p.val !== q.val) {
+                return false
+            }
+            return isSame3(p.left, q.left) && isSame3(p.right, q.right)
+        }
 // 作者：guanpengchn
 // 链接：https://leetcode-cn.com/problems/same-tree/solution/hua-jie-suan-fa-100-xiang-tong-de-shu-by-guanpengc/
 
+// 09-18复习
     </script>
 </body>
 

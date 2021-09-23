@@ -40,7 +40,7 @@
 
 链接：https://leetcode-cn.com/problems/valid-parentheses -->
 
-<!-- 判断括号的有效性可以使用「栈」这一数据结构来解决。
+  <!-- 判断括号的有效性可以使用「栈」这一数据结构来解决。
 
 我们遍历给定的字符串 ss。当我们遇到一个左括号时，我们会期望在后续的遍历中，有一个相同类型的右括号将其闭合。由于后遇到的左括号要先闭合，因此我们可以将这个左括号放入栈顶。
 
@@ -70,6 +70,22 @@
       return !stack.length;
     };
 
+    var isValid2 = (s) => {
+      s = s.split('')
+      let sl = s.length
+      if (sl % 2) return false
+      let map = new Map([[')', '('], ['}', '{'], [']', '[']])
+      let stack = []
+      for (let i of s) {
+        if (map.get(i)) {
+          if (stack[stack.length - 1] !== map.get(i)) return false
+          else stack.pop()
+        } else {
+          stack.push(i)
+        }
+      }
+      return !stack.length
+    }
 //作者：demigodliu
 //链接：https://leetcode-cn.com/problems/valid-parentheses/solution/guan-fang-tui-jian-ti-jie-you-xiao-de-gu-zyzg/
 

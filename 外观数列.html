@@ -65,9 +65,23 @@ countAndSay(4) = 读 "21" = 一 个 2 + 一 个 1 = "12" + "11" = "1211"
       return result   //最后返回结果
     };
 
+    //链接：https://leetcode-cn.com/problems/count-and-say/solution/jsdi-gui-jie-jue-by-wo-shi-gao-xiao-de/
 
-//链接：https://leetcode-cn.com/problems/count-and-say/solution/jsdi-gui-jie-jue-by-wo-shi-gao-xiao-de/
+    var countA2 = (n) => {
+      if (n == 1) {
+        return n.toString()
+      }
+      let tempArr = countA2(n - 1).match(/(\d)\1*/g)
+      let res = ''
+      tempArr.forEach((item) => {
+        let lth = item.length.toString()
+        let num = item.substring(0, 1)
+        res = res + lth + num
+      })
+      return res
+    }
 
+    // 09-18复习
   </script>
 </body>
 

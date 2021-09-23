@@ -46,6 +46,15 @@
         // 作者：runner-6a
         // 链接：https://leetcode-cn.com/problems/find-numbers-with-even-number-of-digits/solution/shi-liao-xia-pu-tong-de-forbi-filtersu-du-kuai-by-/
 
+        var findN2 = (nums) => {
+            let count = 0
+            for (let i = 0; i < nums.length; i++) {
+                if (String(nums[i]).length % 2 === 0) count++
+            }
+            return count
+        }
+
+        // 09-17复习
     </script>
 </body>
 

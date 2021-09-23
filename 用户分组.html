@@ -54,9 +54,24 @@
             return res
         };
 
+        var groupT2=(groupSizes)=>{
+            let obj={},res=[]
+            for(let i=0;i<groupSizes.length;i++){
+                let size=groupSizes[i]
+                if(obj.hasOwnProperty(size))obj[size].push(i)
+                else obj[size]=[i]
+                if(obj[size].length===size){
+                    res.push(obj[size])
+                    obj[size]=[]
+                }
+            }
+            return res
+        }
+
         // 作者：gcssloop
         // 链接：https://leetcode-cn.com/problems/group-the-people-given-the-group-size-they-belong-to/solution/gcssloop-javascript-dan-ci-bian-li-fang-iqlod/
 
+        // 09-23复习
     </script>
 </body>
 

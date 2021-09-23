@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
   <!-- 请实现一个函数，把字符串 s 中的每个空格替换成"%20"。
 
@@ -32,33 +34,72 @@
 来源：力扣（LeetCode）
 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。 -->
   <script>
-    var replaceSpace = function(s) {
-    s = s.split("");
-    let oldLen = s.length;
-    let spaceCount = 0;
-    for (let i = 0; i < oldLen; i++) {
+    var replaceSpace = function (s) {
+      s = s.split("");
+      let oldLen = s.length;
+      let spaceCount = 0;
+      for (let i = 0; i < oldLen; i++) {
         if (s[i] === ' ') spaceCount++;
-    }
-    s.length += spaceCount * 2;
-    for (let i = oldLen - 1, j = s.length - 1; i >= 0; i--, j--) {
+      }
+      s.length += spaceCount * 2;
+      for (let i = oldLen - 1, j = s.length - 1; i >= 0; i--, j--) {
         if (s[i] !== ' ') s[j] = s[i];
         else {
-            s[j - 2] = '%';
-            s[j - 1] = '2';
-            s[j] = '0';
-            j -= 2;
+          s[j - 2] = '%';
+          s[j - 1] = '2';
+          s[j] = '0';
+          j -= 2;
         }
+      }
+      return s.join('');
+    };
+
+    // 或者：
+    // return s = s.split(' ').join("%20");
+
+
+    // 作者：demigodliu
+    // 链接：https://leetcode-cn.com/problems/ti-huan-kong-ge-lcof/solution/tu-jie-guan-fang-tui-jian-ti-jie-ti-huan-3l74/
+
+    var replaceS2 = (s) => {
+      s = s.split('')
+      let oldLen = s.length
+      let spaceCount = 0
+      for (let i = 0; i < oldLen; i++) {
+        if (s[i] === ' ') spaceCount++
+      }
+      s.length += spaceCount * 2
+      for (let i = oldLen - 1, j = s.length - 1; i >= 0; i--, j--) {
+        if (s[i] !== ' ') s[j] = s[i]
+        else {
+          s[j - 2] = '%'
+          s[j - 1] = '2'
+          s[j] = '0'
+          j -= 2
+        }
+      }
+      return s.join('')
     }
-    return s.join('');
-  };
 
-  // 或者：
-  // return s = s.split(' ').join("%20");
-
-
-// 作者：demigodliu
-// 链接：https://leetcode-cn.com/problems/ti-huan-kong-ge-lcof/solution/tu-jie-guan-fang-tui-jian-ti-jie-ti-huan-3l74/
-
+    var replaceS3 = (s) => {
+      s = s.split('')
+      let oldLen = s.length, spaceCount = 0
+      for (let i = 0; i < oldLen; i++) {
+        if (s[i] === ' ') spaceCount++
+      }
+      s.length += spaceCount * 2
+      for (let i = oldLen - 1, j = s.length - 1; j >= 0; i--, j--) {
+        if (s[i] !== ' ') s[j] = s[i]
+        else {
+          s[j - 2] = '%'
+          s[j - 1] = '2'
+          s[j] = '0'
+          j -= 2
+        }
+      }
+      return s.join('')
+    }
   </script>
 </body>
+
 </html>

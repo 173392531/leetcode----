@@ -39,6 +39,17 @@
             return arr
         };
 
+        var divingB = (shorter, longer, k) => {
+            if (k == 0) return []
+            if (shorter === longer) return [shorter * k]
+            var arr = new Array(k + 1).fill(shorter * k)
+            var tem = longer - shorter
+            arr.forEach((item, i) => {
+                arr[i] = item + i * item
+            })
+            return arr
+        }
+
         // 数组法
         var divingBoard = function (shorter, longer, k) {
             if (k == 0) return [];
@@ -49,6 +60,8 @@
             }
             return res;
         };
+
+        // 09-16复习
     </script>
 </body>
 

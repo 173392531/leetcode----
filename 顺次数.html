@@ -46,9 +46,46 @@
             return result
         };
 
-    // 作者：ai-fei-de-da-xiang
-    // 链接：https://leetcode-cn.com/problems/sequential-digits/solution/js-hua-dong-qu-zhi-by-ai-fei-de-da-xiang/
+        // 作者：ai-fei-de-da-xiang
+        // 链接：https://leetcode-cn.com/problems/sequential-digits/solution/js-hua-dong-qu-zhi-by-ai-fei-de-da-xiang/
 
+        var sequent2 = (low, high) => {
+            var l1 = low.toString().length
+            var l2 = high.toString().length
+            var str = '123456789'
+            var res = []
+            while (l1 <= l2) {
+                var idx = 0
+                while (idx + l1 <= str.length) {
+                    let num = parseInt(str.substring(idx, idx + l1))
+                    if (num >= low && num <= high) {
+                        res.push(num)
+                    }
+                    idx++
+                }
+                l1++
+                return res
+            }
+        }
+
+        var sequent3=(low,high)=>{
+            var l1=low.toString().length
+            var l2=high.toString().length
+            var str='123456789'
+            var res=[]
+            while(l1<=l2){
+                let idx=0
+                while(idx+l1<=str.length){
+                    let num=parseInt(str.substring(idx,idx+l1))
+                    if(num>=low && num<=high){
+                        res.push(num)
+                    }
+                    idx++
+                }
+                l1++
+                return res
+            }
+        }
     </script>
 </body>
 

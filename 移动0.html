@@ -56,9 +56,23 @@
       }
     };
 
+    const moveZeros2=(nums)=>{
+      const len=nums.length
+      let left=0,right=0
+      while(right<len){
+        if(nums[right]){
+          const temp=nums[right]
+          nums[right]=nums[left]
+          nums[left]=temp
+          left++
+        }
+        right++
+      }
+    }
 // 作者：zxhnext
 // 链接：https://leetcode-cn.com/problems/move-zeroes/solution/yi-dong-ling-shuang-zhi-zhen-by-zxhnext-t27s/
 
+// 09-22复习
   </script>
 </body>
 
