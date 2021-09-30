@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
   <!-- 给定两个字符串 s 和 t，它们只包含小写字母。
   字符串 t 由字符串 s 随机重排，然后在随机位置添加一个字母。
@@ -15,31 +17,35 @@
   该字母就将val减一（防止新增的字母是原本出现过的字母），如果遇见val值为0的
   或者没有val值的就返回这个字母-->
   <script>
-      var findTheDifference = function(s, t) {
-        const map = new Map();
-        for(let i = 0; i < s.length; i++) {
-          const val = map.get(s[i]);
-          map.set(s[i], val === undefined ? 1 : val + 1);
+    var findTheDifference = function (s, t) {
+      const map = new Map();
+      for (let i = 0; i < s.length; i++) {
+        const val = map.get(s[i]);
+        map.set(s[i], val === undefined ? 1 : val + 1);
+        // console.log(map);
+      }
+      for (let i = 0; i < t.length; i++) {
+        const val = map.get(t[i]);
+        if (val === 0 || val === undefined) {
+          return t[i];
+        }
+        else {
+          map.set(t[i], val - 1);
           // console.log(map);
         }
-        for(let i = 0; i < t.length; i++) {
-            const val = map.get(t[i]);
-            if(val === 0 || val === undefined) {
-                return t[i];
-            }
-             else {
-                map.set(t[i], val - 1);
-                // console.log(map);
-            }
-        }
-      };
-    console.log(findTheDifference('acdzxcz','cadcczzx'));
+      }
+    };
+
+    console.log(findTheDifference('acdzxcz', 'cadcczzx'));
 // 作者：guanpengchn
 // 链接：https://leetcode-cn.com/problems/find-the-difference/solution/hua-jie-suan-fa-389-zhao-bu-tong-by-guanpengchn/
 
   // var x='skahdfjkbkxz'
   // var n=x.split('')
   // console.log(n);
+
+  // 09-24复习
   </script>
 </body>
+
 </html>

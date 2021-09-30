@@ -60,8 +60,61 @@
             return stack2[0].repeat(stack1[0]);
         }
 
-        var result = smartRepeat('3[2[3[a]1[b]]4[d]]');
+        var smartR2 = (tem) => {
+            var index = 0, stack1 = [], stack2 = [], res = tem
+            while (index < tem.length - 1) {
+                debugger
+                res = tem.substring(index)
+                if (/^\d+\[/.test(res)) {
+                    let times = Number(res.match(/^(\d+)\[/)[1])
+                    stack1.push(times)
+                    stack2.push('')
+                    index += times.toString().length + 1
+                } else if (/^\w+\]/.test(res)) {
+                    let word = res.match(/^(\w+)\]/)[1]
+                    stack2[stack2.length - 1] = word
+                    index += word.length
+                } else if (res[0] == ']') {
+                    let times = stack1.pop()
+                    let word = stack2.pop()
+                    stack2[stack2.length - 1] += word.repeat(times)
+                    index++
+                }
+            }
+            console.log(stack1, stack2);
+            return stack2[0].repeat(stack1[0])
+        }
+
+        var result = smartR2('3[2[3[a]1[b]]4[d]]');
         console.log(result);
+
+        var smartR3 = (tem) => {
+            var index = 0, stack1 = [], stack2 = [], res = tem
+            while (index < tem.length - 1) {
+                res = tem.substring(index)
+                if (/^\d+\[/.test(res)) {
+                    let times = Number(res.match(/^(\d+)\[/)[1])
+                    stack1.push(times)
+                    stack2.push('')
+                    index += times.toString().length + 1
+                } else if (/^\w+\]/.test(res)) {
+                    // 关于match返回值
+                    // （1）.第0个元素是匹配结果。
+                    // （2）.第1个元素是第一个引用型分组匹配的子字符串。 
+                    // （3）.第2个元素存放的是第二个引用型分组匹配的子字符串，依次类推。
+                    let word = res.match(/^(\w+)\]/)[1]
+                    stack2[stack2.length - 1] = word
+                    index += word.length
+                } else if (res[0] == ']') {
+                    let times = stack1.pop()
+                    let word = stack2.pop()
+                    stack2[stack2.length - 1] += word.repeat(times)
+                    index++
+                }
+            }
+            return stack2[0].repeat(stack1[0])
+        }
+
     </script>
 </body>
 

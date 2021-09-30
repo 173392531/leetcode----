@@ -19,7 +19,7 @@
   输出: 10
   链接：https://leetcode-cn.com/problems/largest-rectangle-in-histogram/-->
   <script>
-    
+
     const largestRectangleArea = (heights) => {
       let maxArea = 0
       const stack = []
@@ -35,6 +35,23 @@
         stack.push(i)                      // 当前bar比栈顶bar高了，入栈
       }
       return maxArea
+    }
+
+    var largeR2 = (heights) => {
+      let max = 0
+      const stack = []
+      heights = [0, ...heights, 0]
+      for (let i = 0; i < heights.length; i++) {
+        while (heights[i] < heights[stack[stack.length - 1]]) {
+          const stackTopIndex = stack.pop()
+          max = Math.max(
+            max,
+            heights[stackTopIndex] * (i - stack[stack.length - 1] - 1)
+          )
+        }
+        stack.push(i)
+      }
+      return max
     }
 
 // console.log(largestRectangleArea([1,1,1,1,1,1,1,1,1,2,3,4,1]));

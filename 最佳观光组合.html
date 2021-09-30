@@ -31,10 +31,46 @@
       return res
     }
 
-// 作者：xiao_ben_zhu
-// 链接：https://leetcode-cn.com/problems/best-sightseeing-pair/solution/gei-chu-3ban-dai-ma-bao-li-dp-you-hua-by-hyj8/
-// 来源：力扣（LeetCode）
-// 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+    // 作者：xiao_ben_zhu
+    // 链接：https://leetcode-cn.com/problems/best-sightseeing-pair/solution/gei-chu-3ban-dai-ma-bao-li-dp-you-hua-by-hyj8/
+    // 来源：力扣（LeetCode）
+    // 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+    // DP
+    const maxScoreSightseeingPair = (A) => {
+      const dp = new Array(A.length)
+      let res = 0
+      dp[0] = 0
+      for (let i = 1; i < A.length; i++) {
+        dp[i] = Math.max(dp[i - 1], A[i - 1] + i - 1)
+        res = Math.max(res, dp[i] + A[i] - i)
+      }
+      return res
+    }
+
+    var max2 = (A) => {
+      const dp = new Array(A.length)
+      let res = 0
+      dp[0] = 0
+      for (let i = 0; i < A.length; i++) {
+        dp[i] = Math.max(dp[i - 1], A[i - 1] + i - 1)
+        res = Math.max(res, dp[i] + A[i] - i)
+      }
+    }
+
+    // 降维，优化
+    const maxScoreSightseeingPair = (A) => {
+      let res = 0
+      let prev = 0
+      for (let i = 1; i < A.length; i++) {
+        prev = Math.max(prev, A[i - 1] + i - 1)//prev是前i-1个元素中A[m]+m的最大值
+        res = Math.max(res, prev + A[i] - i)
+      }
+      return res
+    }
+
+
+    // 09-27复习
   </script>
 </body>
 

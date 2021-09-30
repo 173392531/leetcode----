@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <!-- 有一堆石头，每块石头的重量都是正整数。
     每一回合，从中选出两块 最重的 石头，然后将它们一起粉碎。假设石头的重量分别为 x 和 y，且 x <= y。那么粉碎的可能结果如下：
@@ -23,9 +25,9 @@
     链接：https://leetcode-cn.com/problems/last-stone-weight
     著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
     <script>
-            var stones=[2,4,5,7,9,8];
-            
-            var lastStoneWeight = function(stones) {
+        var stones = [2, 4, 5, 7, 9, 8];
+
+        var lastStoneWeight = function (stones) {
             stones.sort((a, b) => a - b)
             // sort() 方法用于对数组的元素进行排序。
             // 如果想按照其他标准进行排序，就需要提供比较函数，该函数要比较两个值，然后返回一个用于说
@@ -41,8 +43,19 @@
             }
             return stones.length ? stones[0] : 0
         };
-       console.log(lastStoneWeight(stones)); 
+
+        var lastS2 = (stones) => {
+            stones.sort((a, b) => a - b)
+            if (stones.length > 1) {
+                const d = stones.pop() - stones.pop()
+                if (d) stones.push(d)
+                return lastS2(stones)
+            }
+            return stones.length ? stones[0] : 0
+        }
+        console.log(lastStoneWeight(stones));
     </script>
 </body>
+
 </html>
 <!--原作者答案 https://leetcode-cn.com/problems/last-stone-weight/solution/di-gui-die-dai-dui-lie-cha-pai-1xing-dai-70hv/ -->

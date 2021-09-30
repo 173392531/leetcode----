@@ -51,9 +51,32 @@
     };
 
     // 见链接图解：
-// 作者：xiao_ben_zhu
-// 链接：https://leetcode-cn.com/problems/longest-valid-parentheses/solution/shou-hua-tu-jie-zhan-de-xiang-xi-si-lu-by-hyj8/
+    // 作者：xiao_ben_zhu
+    // 链接：https://leetcode-cn.com/problems/longest-valid-parentheses/solution/shou-hua-tu-jie-zhan-de-xiang-xi-si-lu-by-hyj8/
 
+
+    var longestP2 = (s) => {
+      let max = 0
+      const stack = []
+      stack.push(-1)
+      for (let i = 0; i < s.length; i++) {
+        const c = s[i]
+        if (c == '(') {
+          stack.push(i)
+        } else {
+          stack.pop()
+          if (stack.length) {
+            const curMax = i - stack[stack.length - 1]
+            max = Math.max(curMax, max)
+          } else {
+            stack.push(i)
+          }
+        }
+      }
+      return max
+    }
+
+    // 09-29复习
   </script>
 </body>
 

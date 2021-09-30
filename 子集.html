@@ -62,6 +62,38 @@
             dfs(0, [])
             return res
         }
+
+        const subsets = (nums) => {
+            const res = [];
+
+            const dfs = (index, list) => {
+                res.push(list.slice());     // 调用子递归前，加入解集
+                for (let i = index; i < nums.length; i++) { // 枚举出所有可选的数
+                    list.push(nums[i]);       // 选这个数
+                    dfs(i + 1, list);         // 基于选这个数，继续递归，传入的是i+1，不是index+1
+                    list.pop();               // 撤销选这个数
+                }
+            };
+            dfs(0, []);
+            return res;
+        };
+
+        // 作者：xiao_ben_zhu
+        // 链接：https://leetcode-cn.com/problems/subsets/solution/shou-hua-tu-jie-zi-ji-hui-su-fa-xiang-jie-wei-yun-/
+
+        const subS2 = (nums) => {
+            const res = []
+            const dfs = (index, list) => {
+                res.push(list.slice())
+                for (let i = index; i < nums.length; i++) {
+                    list.push(nums[i])
+                    dfs(i + 1, list)
+                    list.pop()
+                }
+            }
+            dfs(0, [])
+            return res
+        }
     </script>
 </body>
 

@@ -39,6 +39,7 @@
             while (right < arr.length) {
                 let k = arr[right] - arr[left];
                 if (k < c) {
+                    // 遇到了更小值，需要清空res
                     res = [];
                     res.push([arr[left], arr[right]]);
                     c = k;
@@ -51,9 +52,26 @@
             return res;
         };
 
-    // 作者：wanyuxuan
-    // 链接：https://leetcode-cn.com/problems/minimum-absolute-difference/solution/pai-xu-shuang-zhi-zhen-by-wanyuxuan/
+        // 作者：wanyuxuan
+        // 链接：https://leetcode-cn.com/problems/minimum-absolute-difference/solution/pai-xu-shuang-zhi-zhen-by-wanyuxuan/
 
+        var minD2 = (arr) => {
+            arr.sort((a, b) => a - b)
+            let left = 0, right = 1, res = [], c = Number.MAX_SAFE_INTEGER
+            while (right < arr.length) {
+                let k = arr[right] - arr[left]
+                if (k < c) {
+                    res = []
+                    res.push([arr[left], arr[right]])
+                    c = k
+                } else if (k === c) {
+                    res.push([arr[left], arr[right]])
+                }
+                left++
+                right++
+            }
+            return res
+        }
     </script>
 </body>
 

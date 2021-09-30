@@ -67,8 +67,46 @@
     var m = convert("whatxhyyzjshapkm", 4)
     console.log(m);
 
-// 作者：guanpengchn
-// 链接：https://leetcode-cn.com/problems/zigzag-conversion/solution/hua-jie-suan-fa-6-z-zi-xing-bian-huan-by-guanpengc/
+    // 作者：guanpengchn
+    // 链接：https://leetcode-cn.com/problems/zigzag-conversion/solution/hua-jie-suan-fa-6-z-zi-xing-bian-huan-by-guanpengc/
+
+    var convert = (s, numRows) => {
+      if (numRows == 1) return s
+      const len = Math.min(s.length, numRows)
+      const rows = []
+      for (let i = 0; i < len; i++)row[i] = ''
+      let loc = 0, down = false
+      for (const c of s) {
+        rows[loc] += c
+        if (loc == 0 || loc == numRows - 1) down = !down
+        loc += down ? 1 : -1
+      }
+      let ans = ''
+      for (const row of rows) {
+        ans += row
+      }
+      return ans
+    }
+
+    var convert2 = (s, numRows) => {
+      if (numRows == 1) return s
+      const len = Math.min(s.length, numRows)
+      const rows = []
+      for (let i = 0; i < len; i++)row[i] = ''
+      let loc = 0, down = false
+      for (const c of s) {
+        rows[loc] += c
+        if (loc == 0 || loc == numRows - 1) down = !down
+        loc += down ? 1 : -1
+      }
+      let ans = ''
+      for (const row of rows) {
+        ans += row
+      }
+      return ans
+    }
+
+    // 09-30复习
   </script>
 </body>
 

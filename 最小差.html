@@ -9,7 +9,9 @@
 </head>
 
 <body>
-    <!-- 给定两个整数数组a和b，计算具有最小差绝对值的一对数值（每个数组中取一个值），并返回该对数值的差
+    <!-- 给定两个整数数组a和b，
+        计算具有最小差绝对值的一对数值（每个数组中取一个值），
+        并返回该对数值的差
 
         示例：
 
@@ -32,6 +34,18 @@
             }
             return res;
         };
+
+        var smallD2=(a,b)=>{
+            a.sort((i,j)=>i-j)
+            b.sort((i,j)=>i-j)
+            let left=0,Right=0,res=Infinity
+            while(left<a.length && Right<b.length){
+                res=Math.min(res,Math.abs(a[left]-b[Right]))
+                if(a[left]>b[Right])Right++
+                else left++
+            }
+            return res
+        }
 
 // 作者：hblvsjtu
 // 链接：https://leetcode-cn.com/problems/smallest-difference-lcci/solution/js-shuang-zhi-zhen-by-hblvsjtu-4/

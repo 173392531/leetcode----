@@ -78,6 +78,27 @@
 
             return max_len
         };
+
+        var longestS2=(arr,difference)=>{
+            let max=1,isFind=false
+            for(let left=0;left<arr.length;left++){
+                let temp=1
+                let mid=left
+                do{
+                    isFind=false
+                    for(let right=mid+1;right<arr.length && !isFind;right++){
+                        if(arr[right]-arr[mid]===difference){
+                            mid=right
+                            isFind=true
+                            temp++
+                            max=Math.max(max,temp)
+                        }
+                    }
+                }while(mid<arr.length && isFind)
+            }
+            return max
+        }
+        
         console.log(longestSubsequence1([1,5,7,8,5,3,4,2,1],-2));
         // 作者：mermaid-Ly
         // 链接：https://leetcode-cn.com/problems/longest-arithmetic-subsequence-of-given-difference/solution/javascript-dong-tai-gui-hua-hashmapshuang-zhi-zhen/

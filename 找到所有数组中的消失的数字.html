@@ -46,8 +46,29 @@
       return res;
     };
 
-// 链接：https://leetcode-cn.com/problems/find-all-numbers-disappeared-in-an-array/solution/shou-hua-tu-jie-jiao-huan-shu-zi-zai-ci-kzicg/
+    // 链接：https://leetcode-cn.com/problems/find-all-numbers-disappeared-in-an-array/solution/shou-hua-tu-jie-jiao-huan-shu-zi-zai-ci-kzicg/
 
+    var findD2 = (nums) => {
+      let i = 0;
+      while (i < nums.length) {
+        if (nums[i] == i + 1) {
+          i++
+          continue
+        }
+        const idealIdx = nums[i] - 1
+        if (nums[i] == nums[idealIdx]) {
+          i++
+          continue
+        }
+        // 在nums[i]！==nums[idealIdx]的情况下将两者置换
+        [nums[idealIdx], nums[i]] = [nums[i], nums[idealIdx]]
+      }
+      const res = []
+      for (let i = 0; i < nums.length; i++) {
+        if (nums[i] != i + 1) res.push(i + 1)
+      }
+      return res
+    }
   </script>
 </body>
 

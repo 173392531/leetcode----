@@ -51,6 +51,19 @@
         };
         console.log(findBestValue([4, 9, 3], 10));
 
+        var findB2 = (arr, target) => {
+            if (!arr) return 0
+            arr.sort((a, b) => a - b)
+            let n = arr.length
+            let sum = 0
+            for (let i = 0; i < n; i++) {
+                let x = (target - sum) / (n - i)
+                if (x < arr[i]) return Math.round(x - 0.000001)
+                sum += arr[i]
+            }
+            return arr[n - 1]
+        }
+
         // 作者：Edward40
         // 链接：https://leetcode-cn.com/problems/sum-of-mutated-array-closest-to-target/solution/1300-sum-of-mutated-array-closest-to-target-by-edw/
 
@@ -75,8 +88,50 @@
             return min
         };
 
-// 作者：shetia
-// 链接：https://leetcode-cn.com/problems/sum-of-mutated-array-closest-to-target/solution/bao-li-by-shetia-6/
+        // 作者：shetia
+        // 链接：https://leetcode-cn.com/problems/sum-of-mutated-array-closest-to-target/solution/bao-li-by-shetia-6/
+
+        var findBestValue = function (arr, target) {
+            arr.sort((v1, v2) => v1 - v2);
+            let n = arr.length;
+            let sum = 0;
+
+            for (let i = 0; i < arr.length; i++) {
+                var ave = (target - sum) / n;
+                if (arr[i] < ave) {
+                    sum += arr[i];
+                    n--;
+                }
+                else {
+                    let f = target - Math.floor(ave) * n - sum;
+                    let c = Math.ceil(ave) * n + sum - target;
+                    if (c >= f) return Math.floor(ave); //比较是取floor还是ceil
+                    else return Math.ceil(ave);
+                }
+            }
+            return arr[arr.length - 1];
+        };
+
+        var findB2 = (arr, target) => {
+            arr.sort((a, b) => a - b)
+            let n = arr.length, sum = 0
+            for (let i = 0; i < arr.length; i++) {
+                var ave = (target - sum) / n
+                if (arr[i] < ave) {
+                    sum += arr[i]
+                    n--
+                } else {
+                    let f = target - Math.floor(ave) * n - sum
+                    let c = Math.ceil(ave) * n + sum - target
+                    if (c >= f) return Math.floor(ave)
+                    else return Math.ceil(ave)
+                }
+            }
+            return arr[arr.length - 1]
+        }
+
+// 作者：xue-ding-ka-pei
+// 链接：https://leetcode-cn.com/problems/sum-of-mutated-array-closest-to-target/solution/di-gui-ping-jun-zhi-gan-jue-wo-xie-de-ting-hao-li-/
 
     </script>
 </body>

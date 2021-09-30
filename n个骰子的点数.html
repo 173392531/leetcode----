@@ -29,9 +29,9 @@
   著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
   <script>
     /**
- * @param {number} n
- * @return {number[]}
- */
+     * @param {number} n
+     * @return {number[]}
+     */
     var twoSum = function (n) {
       let dp = [1 / 6, 1 / 6, 1 / 6, 1 / 6, 1 / 6, 1 / 6];
       for (let i = 2; i <= n; i++) {
@@ -48,6 +48,36 @@
       return dp;
     };
 
+    var twoS2 = (n) => {
+      let dp = [1 / 6, 1 / 6, 1 / 6, 1 / 6, 1 / 6, 1 / 6]
+      for (let i = 2; i <= n; i++) {
+        const temp = []
+        for (let j = 1; j <= 6; j++) {
+          for (let k = 0; k < dp.length; k++) {
+            const sum = k + j - 1
+            temp[sum] = (temp[sum] || 0) + dp[k] * 1 / 6
+          }
+        }
+        dp = temp
+      }
+      return dp
+    }
+
+    var twoS3 = (n) => {
+      let dp = [1 / 6, 1 / 6, 1 / 6, 1 / 6, 1 / 6, 1 / 6]
+      for (let i = 2; i <= n; i++) {
+        const temp = []
+        for (let j = 1; j <= 6; j++) {
+          for (let k = 0; k < dp.length; k++) {
+            const sum = k + j - 1
+            temp[sum] = (temp[sum] || 0) + dp[k] * 1 / 6
+          }
+        }
+        dp = temp
+      }
+      return dp
+    }
+
 
 
 // 图解版解答
@@ -58,6 +88,8 @@
 // 作者：mayness
 // 链接：https://leetcode-cn.com/problems/nge-tou-zi-de-dian-shu-lcof/solution/dong-tai-gui-hua-by-mayness/
 
+
+// 09-29复习
   </script>
 </body>
 

@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
   <!-- 标签：位运算
 本题根据题意，线性时间复杂度 O(n)O(n)，很容易想到使用 Hash 映射来进行计算，遍历一次后结束得到结果，
@@ -18,13 +20,15 @@ XOR 运算满足交换律和结合律：a⊕b⊕a = (a⊕a)⊕b = 0⊕b = b
 时间复杂度：O(n)O(n)，空间复杂度：O(1)O(1)-->
 
   <script>
-    var singleNumber = function(nums) {
-    let ans = 0;
-    for(const num of nums) {
+    var singleNumber = function (nums) {
+      let ans = 0;
+      for (const num of nums) {
         ans ^= num;
-    }
-    return ans;
-};
+      }
+      return ans;
+    };
+    // 09-24
   </script>
 </body>
+
 </html>

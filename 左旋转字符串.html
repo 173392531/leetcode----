@@ -26,7 +26,7 @@
     var reverseLeftWords = function (s, n) {
       // 1. 库函数
       return s.slice(n) + s.slice(0, n)
-      
+
       // 2. 分治思想 分为左右两部分 最后想加 时间复杂度O(n) 空间复杂度O(1)
       let l = r = ''
       for (let c of s)
@@ -34,9 +34,18 @@
       return l + r
     };
 
+    var reverse = (s, n) => {
+      let l = r = ''
+      for (let o of s) {
+        n-- > 0 ? (r += c) : (l += c)
+      }
+      return l + r
+    }
+
 // 作者：floretpig
 // 链接：https://leetcode-cn.com/problems/zuo-xuan-zhuan-zi-fu-chuan-lcof/solution/fen-zhi-si-xiang-you-ya-shi-xian-zuo-xua-8iod/
 
+// 09-29复习
   </script>
 </body>
 

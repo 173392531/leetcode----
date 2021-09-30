@@ -43,6 +43,10 @@
             return ret
         };
 
+        var toLowerCase2=(str)=>{
+            return str.replace(/[A-Z]/g,(item)=>String.fromCharCode(item.charCodeAt()+32))
+        }
+
         // 作者：marooned
         // 链接：https://leetcode-cn.com/problems/to-lower-case/solution/javascript-a65-a97-xiang-jia-32-suan-fa-by-maroone/
 
@@ -53,6 +57,7 @@
             );
         };
 
+        // 09-25复习
 // 作者：keep-26
 // 链接：https://leetcode-cn.com/problems/to-lower-case/solution/zheng-ze-biao-da-shi-ye-ke-yi-by-keep-26/
 

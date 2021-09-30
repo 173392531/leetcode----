@@ -41,48 +41,112 @@
             return ansl === -1 && ansr === -1 ? [] : [ansl, ansr];
         };
 
-// 作者：Stoney_s
-// 链接：https://leetcode-cn.com/problems/shortest-supersequence-lcci/solution/jshua-dong-chuang-kou-by-stoney-3/
+        // 作者：Stoney_s
+        // 链接：https://leetcode-cn.com/problems/shortest-supersequence-lcci/solution/jshua-dong-chuang-kou-by-stoney-3/
 
-        var shortS=function(big,small){
+        var shortS = function (big, small) {
             // l和r是预检索左右窗口
-            let window={},need={},l=-1,r=-1,count=0;
+            let window = {}, need = {}, l = -1, r = -1, count = 0;
             // ansr，ansl是真正要输出的左右窗口
-            let ansl=-1,ansr=-1,len=big.length+1;
-            small.forEach(item=>need[item]?need[item]++:need[item]=1)
-            while(r<big.length){
+            let ansl = -1, ansr = -1, len = big.length + 1;
+            small.forEach(item => need[item] ? need[item]++ : need[item] = 1)
+            while (r < big.length) {
                 // 先让右侧窗口覆盖子串
                 r++;
-                let c=big[r];
-                if(need[c]){
-                    window[c]=window[c]+1 || 1;
-                    if(window[c]===1){
+                let c = big[r];
+                if (need[c]) {
+                    window[c] = window[c] + 1 || 1;
+                    if (window[c] === 1) {
                         count++
                     }
                 }
                 // 检索左侧窗口的最大值
-                while(count===small.length && big.length-1>small.length){
+                while (count === small.length && big.length - 1 > small.length) {
                     l++;
                     // 获取下一个的值
-                    let d=big[l];
+                    let d = big[l];
                     // 看下一个是否需要
-                    if(need[d]){
+                    if (need[d]) {
                         // 如果需要
-                        if(--window[d]==0){
+                        if (--window[d] == 0) {
                             // 直接--count打破循环规则
                             count--;
-                            if(len>r-l+1){
+                            if (len > r - l + 1) {
                                 // 记录窗口左右值
-                                ansl=l;
-                                ansr=r;
-                                len=r-l+1;
+                                ansl = l;
+                                ansr = r;
+                                len = r - l + 1;
                             }
                         }
                     }
                 }
             }
-            return ansl===-1 && ansr=== -1 ?[]:[ansl,ansr] 
+            return ansl === -1 && ansr === -1 ? [] : [ansl, ansr]
         }
+
+        var shortS2 = (big, small) => {
+            let window = {}, need = {}, l = -1, r = -1, count = 0
+            let ansl = -1, ansr = -1, len = big.length + 1
+            small.forEach(item => need[item] ? need[item]++ : need[item] = 1)
+            while (r < big.length) {
+                r++
+                let c = big[r]
+                if (need[c]) {
+                    window[c] = window[c] + 1 || 1
+                    if (window[c] == 1) {
+                        count++
+                    }
+                }
+                while (count === small.length && big.length - 1 > small.length) {
+                    l++
+                    let d = big[l]
+                    if (need[d]) {
+                        if (--window[d] == 0) {
+                            count--
+                            if (len > r - l + 1) {
+                                ansl = l
+                                ansr = r
+                                len = r - l + 1
+                            }
+                        }
+                    }
+                }
+            }
+            return ansl === -1 && ansr === -1 ? [] : [ansl, ansr]
+        }
+
+        var shortS2 = (big, small) => {
+            let window = {}, need = {}, l = -1, r = -1, count = 0
+            let ansl = -1, ansr = -1, len = big.length + 1
+            small.forEach(item => need[item] ? need[item]++ : need[item] = 1)
+            while (r < big.length) {
+                r++
+                let c = big[r]
+                if (need[c]) {
+                    window[c] = window[c] + 1 || 1
+                    if (window == 1) {
+                        count++
+                    }
+                }
+                while (count === small.length && big.length - 1 > small.length) {
+                    l++
+                    let d = big[l]
+                    if (need[d]) {
+                        if (--window[d] == 0) {
+                            count--
+                            if (len > r - l + 1) {
+                                ansl = l
+                                ansr = r
+                                len = r - l + 1
+                            }
+                        }
+                    }
+                }
+            }
+            return ansl === -1 && ansr === -1 ? [] : [ansl, ansr]
+        }
+
+        // 09-27复习
     </script>
 </body>
 

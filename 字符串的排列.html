@@ -56,6 +56,33 @@
             dfs('')
             return [...res]
         }
+
+        var sortWord=(str)=>{
+            // debugger
+            let res=[],arrStr=str.split('')
+            let map=new Map()
+            var dfs=(arr,item)=>{
+                if(item.length===arrStr.length){
+                    res.push(item.join(''))
+                    return
+                }
+                for(let i=0;i<arr.length;i++){
+                    let k=arrStr[i]
+                    if(map.has(k))continue
+                    item.push(k)
+                    map.set(k,1)
+                    dfs(arr,item)
+                    item.pop()
+                    map.delete(k)
+                }
+            }
+            dfs(arrStr,[])
+            return res
+        }
+        console.log(sortWord('abcd'));
+        
+
+        // 09-25复习
     </script>
 </body>
 

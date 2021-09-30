@@ -56,6 +56,25 @@
       let result = str.length >= S.length ? S : str
       return result
     };
+
+
+    var pressStr=(str)=>{
+      let stack=[]
+      let l=0,prev=''
+      for(let i=0;i<=str.length;i++){
+        if(prev!==str[i]){
+          if(l)stack.push(l)
+          prev=str[i]
+          stack.push(str[i])
+          l=1
+        }else{
+          l++
+        }
+      }
+      return stack.join('')
+    }
+    console.log(pressStr('aabbccacaa'));
+    
   </script>
 </body>
 

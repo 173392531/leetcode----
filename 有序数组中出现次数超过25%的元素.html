@@ -22,6 +22,16 @@
             }
         };
 
+        var findS2=(arr)=>{
+            if(arr.length<=3)return arr[0]
+            let num=Math.ceil(arr.length*0.25)
+            let num1=0
+            for(let i=0;i<arr.length-1;i++){
+                arr[i]===arr[i+1]?num1++:num1=0
+                if(num===num1)return arr[i]
+            }
+        }
+
         // 作者：cqweifeng
         // 链接：https://leetcode-cn.com/problems/element-appearing-more-than-25-in-sorted-array/solution/you-xu-shu-zu-zhong-chu-xian-ci-shu-chao-guo-25d-2/
 

@@ -48,20 +48,33 @@
       return !stack.length
     };
 
-// 作者：qing-jiao-wo-xiao-bai-tong-xue
-// 链接：https://leetcode-cn.com/problems/zhan-de-ya-ru-dan-chu-xu-lie-lcof/solution/fu-zhu-zhan-by-qing-jiao-wo-xiao-bai-tong-xue/
-
-var myStack=function(pushed,popped){
-  let stack=[],index=0
-  for(let i=0;i<pushed.length;i++){
-    stack.push(pushed[i])
-    while(stack.length && stack[stack.length-1]==popped[index]){
-      stack.pop()
-      index++
+    var validS2=(pushed,popped)=>{
+      const stack=[]
+      let index=0
+      for(let i=0,len=pushed.length-1;i<=len;i++){
+        stack.push(pushed[i])
+        while(stack.length!==0 && stack[stack.length-1]===popped[index]){
+          stack.pop()
+          index++
+        }
+        return !stack.length
+      }
     }
-  }
-  return !stack.length
-}
+
+    // 作者：qing-jiao-wo-xiao-bai-tong-xue
+    // 链接：https://leetcode-cn.com/problems/zhan-de-ya-ru-dan-chu-xu-lie-lcof/solution/fu-zhu-zhan-by-qing-jiao-wo-xiao-bai-tong-xue/
+
+    var myStack = function (pushed, popped) {
+      let stack = [], index = 0
+      for (let i = 0; i < pushed.length; i++) {
+        stack.push(pushed[i])
+        while (stack.length && stack[stack.length - 1] == popped[index]) {
+          stack.pop()
+          index++
+        }
+      }
+      return !stack.length
+    }
   </script>
 </body>
 

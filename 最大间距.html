@@ -23,6 +23,15 @@
     输入: [10]
     输出: 0
     解释: 数组元素个数小于 2，因此返回 0。 -->
+
+    <!-- 一种最简单的思路是将数组排序后再找出最大间距，
+        但传统的基于比较的排序算法（快速排序、归并排序等）均需要 
+        O(N\log N)O(NlogN) 的时间复杂度。
+        如果要将时间复杂度降到 O(N)O(N)，我们就必须使用其他的排序算法。
+        例如，基数排序可以在 O(N)O(N) 的时间内完成整数之间的排序。
+
+        作者：LeetCode-Solution
+        链接：https://leetcode-cn.com/problems/maximum-gap/solution/zui-da-jian-ju-by-leetcode-solution/ -->
     <script>
         // 基数排序法
         var maximumGap = function (nums) {
@@ -119,6 +128,39 @@
 // 作者：LeetCode-Solution
 // 链接：https://leetcode-cn.com/problems/maximum-gap/solution/zui-da-jian-ju-by-leetcode-solution/
 
+
+        var maxG2=(nums)=>{
+            debugger
+            const n=nums.length
+            if(n<2)return 0
+            let exp=1
+            const buf=new Array(n).fill(0)
+            const max=Math.max(...nums)
+            while(max>=exp){
+                const cnt=new Array(10).fill(0)
+                for(let i=0;i<n;i++){
+                    let digit=Math.floor(nums[i]/exp)%10
+                    cnt[digit]++
+                }
+                for (let i = n - 1; i >= 0; i--) {
+                    let digit = Math.floor(nums[i] / exp) % 10;
+                    buf[cnt[digit] - 1] = nums[i];
+                    cnt[digit]--;
+                }
+                nums.splice(0, n, ...buf);
+                exp *= 10;
+            }
+            let ret = 0;
+            for (let i = 1; i < n; i++) {
+                ret = Math.max(ret, nums[i] - nums[i - 1]);
+            }
+            return ret;
+        }
+
+        console.log(maxG2([3,6,9,1]));
+        
+
+        // 09-26复习
     </script>
 </body>
 

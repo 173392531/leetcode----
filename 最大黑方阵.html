@@ -98,59 +98,107 @@
             return size == 0 ? [] : [x, y, size];
         }
 
-// 作者：oppeuro
-// 链接：https://leetcode-cn.com/problems/max-black-square-lcci/solution/js-dong-tai-gui-hua-by-oppeuro/
+        // 作者：oppeuro
+        // 链接：https://leetcode-cn.com/problems/max-black-square-lcci/solution/js-dong-tai-gui-hua-by-oppeuro/
 
-    var findS=function(matrix){
-        let dp=new Array(matrix.length),
-        size=0,
-        x=0,
-        y=0;
-        // 初始化dp数组
-        for(let i=0;i<maxtrix.length;i++){
-            dp[i]=[];
-            for(let i=0;j<maxtrix[i].length;j++){
-                if(matrix[i][j]==0){
-                    dp[i][j]=[1,1]
-                    if(size==0){
-                        size=1;
-                        x=i;
-                        y=j;
+        var findS = function (matrix) {
+            let dp = new Array(matrix.length),
+                size = 0,
+                x = 0,
+                y = 0;
+            // 初始化dp数组
+            for (let i = 0; i < maxtrix.length; i++) {
+                dp[i] = [];
+                for (let i = 0; j < maxtrix[i].length; j++) {
+                    if (matrix[i][j] == 0) {
+                        dp[i][j] = [1, 1]
+                        if (size == 0) {
+                            size = 1;
+                            x = i;
+                            y = j;
+                        }
+                    } else {
+                        dp[i][j] = [0, 0]
                     }
-                }else{
-                    dp[i][j]=[0,0]
                 }
             }
-        }
-        for(let i=1;i<matrix.length;i++){
-            if(matrix[i][0]==0){
-                dp[i][0][1]=Math.max(1,dp[i-1][0][1]+1);
+            for (let i = 1; i < matrix.length; i++) {
+                if (matrix[i][0] == 0) {
+                    dp[i][0][1] = Math.max(1, dp[i - 1][0][1] + 1);
+                }
             }
-        }
-        for(let i=1;i<matrix[0].length;i++){
-            if(matrix[0][i]==0){
-                dp[0][i][0]=Math.max(1,dp[0][i-1][0]+1);
+            for (let i = 1; i < matrix[0].length; i++) {
+                if (matrix[0][i] == 0) {
+                    dp[0][i][0] = Math.max(1, dp[0][i - 1][0] + 1);
+                }
             }
-        }
-        for(let i=1;i<maxtrix.length;i++){
-            for(let j=1;j<matrix[i].length;j++){
-                if(matrix[i][j]==0){
-                    dp[i][j][0]=Math.max(1,dp[i][j-1][0]+1)
-                    dp[i][j][1]=Math.max(1,dp[i-1][j][1]+1)
-                    let range=Math.min(dp[i][j][0],dp[i][j][1])
-                    for(;range>size;range--){
-                        if(dp[i-range+1][j][0]>=range && dp[i][j-range+1][1]>=range){
-                            size=range;
-                            x=i-range+1;
-                            y=j-range+1;
-                            break;
+            for (let i = 1; i < maxtrix.length; i++) {
+                for (let j = 1; j < matrix[i].length; j++) {
+                    if (matrix[i][j] == 0) {
+                        dp[i][j][0] = Math.max(1, dp[i][j - 1][0] + 1)
+                        dp[i][j][1] = Math.max(1, dp[i - 1][j][1] + 1)
+                        let range = Math.min(dp[i][j][0], dp[i][j][1])
+                        for (; range > size; range--) {
+                            if (dp[i - range + 1][j][0] >= range && dp[i][j - range + 1][1] >= range) {
+                                size = range;
+                                x = i - range + 1;
+                                y = j - range + 1;
+                                break;
+                            }
                         }
                     }
                 }
             }
+            return size == 0 ? [] : [x, y, size]
         }
-        return size==0?[]:[x,y,size]
-    }
+
+        var findS2 = (matrix) => {
+            let dp = new Array(matrix.length),
+                size = 0, x = 0, y = 0
+            for (let i = 0; i < maxtrix.length; i++) {
+                dp[i] = []
+                for (let i = 0; i < maxtrix[i].length; j++) {
+                    if (matrix[i][j] == 0) {
+                        dp[i][j] = 1
+                        if (size == 0) {
+                            size = 1
+                            x = i
+                            y = j
+                        }
+                    } else {
+                        dp[i][j] = [0, 0]
+                    }
+                }
+            }
+            for (let i = 1; i < matrix.length; i++) {
+                if (matrix[i][0] == 0) {
+                    dp[i][0][1] = Math.max(1, dp[i - 1][0][1] + 1)
+                }
+            }
+            for (let i = 1; i < matrix[0].length; i++) {
+                if (matrix[0][i] == 0) {
+                    dp[0][i][0] = Math.max(1, dp[0][i - 1][0] + 1)
+                }
+            }
+            for (let i = 1; i < matrix.length; i++) {
+                for (let j = 1; j < matrix[i].length; j++) {
+                    if (matrix[i][j] == 0) {
+                        dp[i][j][0] = Math.max(1, dp[i][j - 1][0] + 1)
+                        dp[i][j][1] = Math.max(1, dp[i - 1][j][1] + 1)
+                        let range = Math.min(dp[i][j][0], dp[i][j][1])
+                        for (; range > size; range--) {
+                            if (dp[i - range + 1][j][0] >= range && dp[i][j - range + 1][1] >= range) {
+                                size = range
+                                x = i - range + 1
+                                y = j - range + 1
+                                break
+                            }
+                        }
+                    }
+                }
+            }
+            return size === 0 ? [] : [x, y, size]
+        }
     </script>
 </body>
 

@@ -109,6 +109,84 @@
         // 作者：rancy98
         // 链接：https://leetcode-cn.com/problems/sum-of-nodes-with-even-valued-grandparent/solution/zu-fu-jie-dian-zhi-wei-ou-shu-de-jie-dia-8mkh/
 
+        var sumE2 = (root) => {
+            let sum = 0
+            const helper = (root, arr) => {
+                if (!root) return
+                arr.push(root.val)
+                let pp = arr[arr.length - 3]
+                if (arr.length > 2 && pp % 2 === 0) {
+                    sum += root.val
+                }
+                helper(root.left, arr)
+                helper(root.right, arr)
+                arr.pop()
+            }
+            helper(root, [])
+            return sum
+        }
+
+        var sumBfs = (root) => {
+            let queue = [], count = 0
+            queue.push([null, null, root])
+            while (queue.length > 0) {
+                let size = queue.length
+                while (size > 0) {
+                    size--
+                    let [grandFather, father, node] = queue.shift()
+                    if (node === null) continue
+                    if (grandFather !== null && grandFather % 2 === 0) {
+                        count += node.val
+                    }
+                    if (node.left) {
+                        queue.push([father, node.val, node.left])
+                    }
+                    if (node.right) {
+                        queue.push([father, node.val, node.right])
+                    }
+                }
+                return count
+            }
+        }
+
+        var sumDfs2 = (root) => {
+            let sum = 0
+            const dfs = (root, path) => {
+                if (!root) return
+                path.push(root.val)
+                if (path.length > 2 && path[path.length - 3] % 2 == 0) {
+                    sum += root.val
+                }
+                dfs(root.left, path)
+                dfs(root.right, path)
+                path.pop()
+            }
+            dfs(root, [])
+            return sum
+        }
+
+        var sumBfs2 = (root) => {
+            let queue = [], sum = 0
+            queue.push([null, null, root])
+            while (queue.length > 0) {
+                let size = queue.length
+                while (size > 0) {
+                    size--
+                    let [grandFather, father, node] = queue.shift()
+                    if (node == null) continue
+                    if (grandFather !== null && grandFather % 2 === 0) {
+                        count += node.val
+                    }
+                    if (node.left) {
+                        queue.push([father, node.val, node.left])
+                    }
+                    if (node.right) {
+                        queue.push([father, node.val, node.right])
+                    }
+                }
+            }
+            return count
+        }
     </script>
 </body>
 

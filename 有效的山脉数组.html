@@ -47,9 +47,27 @@
       return i === N - 1;
     };
 
-// 作者：LeetCode-Solution
-// 链接：https://leetcode-cn.com/problems/valid-mountain-array/solution/you-xiao-de-shan-mai-shu-zu-by-leetcode-solution/
+    // 作者：LeetCode-Solution
+    // 链接：https://leetcode-cn.com/problems/valid-mountain-array/solution/you-xiao-de-shan-mai-shu-zu-by-leetcode-solution/
 
+
+    var valid2 = (arr) => {
+      const N = arr.length
+      let i = 0
+      while (i + 1 < N && arr[i] < arr[i + 1]) i++
+      if (i === 0 || i === N - 1) return false
+      while (i + 1 < N && arr[i] > arr[i + 1]) i++
+      return i === N - 1
+    }
+
+    var valid3 = (arr) => {
+      const len = arr.length
+      let i = 0
+      while (i + 1 < len && arr[i] < arr[i + 1])i++
+      if (i === 0 || i === len - 1) return false
+      while (i + 1 < len && arr[i] > arr[i + 1]) i++
+      return i === len - 1
+    }
   </script>
 </body>
 

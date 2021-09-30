@@ -46,6 +46,13 @@
       // return r - l >= 0 ? r - l + 1 : 0
     };
 
+
+    var search2=(nums,target)=>{
+      let l=0,r=nums.length-1
+      while(nums[l]<target)l++
+      while(nums[r]>target)r--
+      return r-l>=0 ? r-l+1:0
+    }
 // 作者：floretpig
 // 链接：https://leetcode-cn.com/problems/zai-pai-xu-shu-zu-zhong-cha-zhao-shu-zi-lcof/solution/ha-xi-shuang-duan-zhi-zhen-you-ya-shi-xi-hzdw/
 

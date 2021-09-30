@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
   <!-- 设计一个支持 push ，pop ，top 操作，并能在常数时间内检索到最小元素的栈。
 
@@ -49,32 +51,34 @@
 
 链接：https://leetcode-cn.com/problems/min-stack/solution/zui-xiao-zhan-by-leetcode-solution/ -->
   <script>
-    var MinStack = function() {
+    var MinStack = function () {
       this.x_stack = [];
       this.min_stack = [Infinity];
-  };
+    };
 
-  MinStack.prototype.push = function(x) {
+    MinStack.prototype.push = function (x) {
       this.x_stack.push(x);
       this.min_stack.push(Math.min(this.min_stack[this.min_stack.length - 1], x));
-  };
+    };
 
-  MinStack.prototype.pop = function() {
+    MinStack.prototype.pop = function () {
       this.x_stack.pop();
       this.min_stack.pop();
-  };
+    };
 
-  MinStack.prototype.top = function() {
+    MinStack.prototype.top = function () {
       return this.x_stack[this.x_stack.length - 1];
-  };
+    };
 
-  MinStack.prototype.getMin = function() {
+    MinStack.prototype.getMin = function () {
       return this.min_stack[this.min_stack.length - 1];
-  };
+    };
 
-// 作者：LeetCode-Solution
-// 链接：https://leetcode-cn.com/problems/min-stack/solution/zui-xiao-zhan-by-leetcode-solution/
+    // 作者：LeetCode-Solution
+    // 链接：https://leetcode-cn.com/problems/min-stack/solution/zui-xiao-zhan-by-leetcode-solution/
 
+    // 09-28复习
   </script>
 </body>
+
 </html>

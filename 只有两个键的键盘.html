@@ -24,6 +24,16 @@ Paste (粘贴) : 你可以粘贴你上一次复制的字符。
 来源：力扣（LeetCode）
 链接：https://leetcode-cn.com/problems/2-keys-keyboard
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+
+  <!-- 对长度为1的字符进行1次Copy All和k1-1次Paste，则总次数为k1次，最终长度k1
+对长度为k1的字符进行1次Copy All和k2-1次Paste，则总次数为k1+k2次，最终长度k1*k2
+经过若干次，得到长度恰好为n的长度，则n=k1*k2*...*kx，消耗的次数为k1+k2+...+kx
+则只要求n=k1*k2*...*kx，使得k1+k2+...+kx最小即可
+对n进行求解质因数即可，每次的结果累加到res
+
+作者：lzxjack
+链接：https://leetcode-cn.com/problems/2-keys-keyboard/solution/fen-jie-zhi-yin-shu-javascriptban-by-lzx-etuq/
+ -->
   <script>
     var minSteps = function (n) {
       let ans = 0,
@@ -35,12 +45,53 @@ Paste (粘贴) : 你可以粘贴你上一次复制的字符。
           n /= d;
         }
         // 如果此时 d 不是当前 n 的最小素数因子了，那么 d++ 继续试探
-        // 其实此处应该是把 d 变为比 d 大的下一个素数，但是我们没有必要在构建出一个素数因子的数组，因为得不偿失(还需要创建一个判断是否为素数的方法)，那会花费更多的时间和空间，不如让计算机一个个去试就好了
+        // 其实此处应该是把 d 变为比 d 大的下一个素数，
+        // 但是我们没有必要在构建出一个素数因子的数组，
+        // 因为得不偿失(还需要创建一个判断是否为素数的方法)，
+        // 那会花费更多的时间和空间，不如让计算机一个个去试就好了
         d += 1;
       };
 
       return ans;
     };
+
+    var minStep2 = (n) => {
+      let ans = 0, d = 2
+      while (n > 1) {
+        while (n % d === 0) {
+          ans += d
+          n /= d
+        }
+        d += 1
+      }
+      return ans
+    }
+
+    const minSteps = n => {
+      let res = 0;
+      for (let i = 2; i <= n; i++) {
+        while (!(n % i)) {
+          res += i;
+          n /= i;
+        }
+      }
+      return res;
+    };
+
+    const minStep3 = n => {
+      let res = 0
+      for (let i = 2; i <= n; i++) {
+        while (!(n % i)) {
+          res += i
+          n /= i
+        }
+      }
+      return res
+    }
+
+// 作者：lzxjack
+// 链接：https://leetcode-cn.com/problems/2-keys-keyboard/solution/fen-jie-zhi-yin-shu-javascriptban-by-lzx-etuq/
+
   </script>
 </body>
 

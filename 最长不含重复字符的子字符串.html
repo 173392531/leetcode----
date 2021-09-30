@@ -48,8 +48,38 @@
             return res;
         };
 
-// 作者：tang_chao_li_zi
-// 链接：https://leetcode-cn.com/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof/solution/shi-fu-onjavascript-by-tang_chao_li_zi/
+        // 作者：tang_chao_li_zi
+        // 链接：https://leetcode-cn.com/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof/solution/shi-fu-onjavascript-by-tang_chao_li_zi/
+
+        var maxLen2 = (s) => {
+            const len = s.length
+            let res = 0, temp = ''
+            for (let i = 0; i < len; i++) {
+                if (temp.indexOf(s[i]) === -1) {
+                    temp += s[i]
+                    res = Math.max(res, temp.length)
+                } else {
+                    temp = temp.slice(temp.indexOf(s[i]) + 1)
+                    temp += s[i]
+                }
+            }
+            return res
+        }
+        
+        var maxLen3=(s)=>{
+            const len=s.length
+            let res=0,temp=''
+            for(let i=0;i<len;i++){
+                if(temp.indexOf(s[i])===-1){
+                    temp+=s[i]
+                    res=Math.max(res,temp.length)
+                }else{
+                    temp=temp.slice(temp.indexOf(s[i])+1)
+                    temp+=s[i]
+                }
+            }
+            return res
+        }
 
     </script>
 </body>

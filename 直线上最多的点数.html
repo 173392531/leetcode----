@@ -25,7 +25,7 @@
         来源：力扣（LeetCode）
         链接：https://leetcode-cn.com/problems/max-points-on-a-line
         著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
-        
+
     <!-- 先排序数组，先将两个点 a, b 加入数组，
     再计算 a, b 两点的斜率 (xa - xb) / (ya - yb)
     判断之后的第三个点 c 和 a 或 b 的斜率是否一样
@@ -59,9 +59,61 @@
             return max;
         };
 
-// 作者：cyphernull
-// 链接：https://leetcode-cn.com/problems/max-points-on-a-line/solution/js-jian-dan-dfs-si-lu-by-cyphernull-najf/
+        var maxP2 = (points) => {
+            points.sort((a, b) => a[0] - b[0])
+            let max = 1
+            const dfs = (start, selected) => {
+                max = Math.max(max, selected.length)
+                for (let i = start; i < points.length; i++) {
+                    if (selected.length < 2) {
+                        selected.push(points[i])
+                        dfs(i + 1, selected)
+                        selected.pop()
+                    } else {
+                        const curK = (selected[0][0] - selected[1][0]) / (selected[0][1] - selected[1][1])
+                        const thisK = (selected[0][0] - points[i][0]) / (selected[0][1] - points[i][1])
+                        if (curK === thisK) {
+                            selected.push(points[i])
+                            dfs(i + 1, selected)
+                            selected.pop()
+                        }
+                    }
+                }
+            }
+            dfs(0, [])
+            return max
+        }
 
+        // 作者：cyphernull
+        // 链接：https://leetcode-cn.com/problems/max-points-on-a-line/solution/js-jian-dan-dfs-si-lu-by-cyphernull-najf/
+
+
+        var maxPoints2 = (points) => {
+            points.sort((a, b) => a[0] - b[0])
+            let max = 1
+            const dfs = (start, selected) => {
+                max = Math.max(max, selected.length)
+                for (let i = start; i < points.length; i++) {
+                    if (selected.length < 2) {
+                        selected.push(points[i])
+                        dfs(i + 1, selected)
+                        selected.pop()
+                    } else {
+                        const curK = (selected[0][0] - selected[1][0]) / (selected[0][1] - selected[1][1])
+                        const thisK = (selected[0][0] - points[i][0]) / (selected[0][1] - points[i][1])
+                        if (curK === thisK) {
+                            selected.push(points[i])
+                            dfs(i + 1, selected)
+                            selected.pop()
+                        }
+                    }
+                }
+            }
+            dfs(0, [])
+            return max
+        }
+
+        // 09-24复习
     </script>
 </body>
 

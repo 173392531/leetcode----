@@ -92,7 +92,7 @@
         // 链接：https://leetcode-cn.com/problems/k-concatenation-maximum-sum/solution/dpyi-ci-bian-li-by-caimao/
 
         var kConcatenationMaxSum1 = function (arr, k) {
-            let len1 = arr.length, arrSum=0
+            let len1 = arr.length, arrSum = 0
             for (let s of arr) {
                 arrSum += s
             }
@@ -115,6 +115,24 @@
             return res % 1000000007
         }
         console.log(kConcatenationMaxSum1([3, -2, 1], 3));
+
+        var kC2 = (arr, k) => {
+            let len = arr.length, arrSum = 0
+            let tempSum = 0, res = 0
+            for (let i = 0; i < loopCount; i++) {
+                let val = arr[i % len]
+                tempSum = tempSum + val > 0 ? tempSum + val : 0
+                res = Math.max(res, tempSum)
+            }
+            if (arrSum > 0) {
+                while (k-- > 2) {
+                    res = (res + arrSum)
+                }
+            }
+            return res
+        }
+
+        // 09-29复习
     </script>
 </body>
 
