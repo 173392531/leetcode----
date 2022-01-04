@@ -29,7 +29,7 @@
 感到满意的最大客户数量 = 1 + 1 + 1 + 1 + 7 + 5 = 16.
 
 链接：https://leetcode-cn.com/problems/grumpy-bookstore-owner -->
-<!--  本题一定要看题解链接！：https://leetcode-cn.com/problems/grumpy-bookstore-owner/solution/shou-hua-tu-jie-sheng-huo-mei-you-mo-fa-olaos/ -->
+  <!--  本题一定要看题解链接！：https://leetcode-cn.com/problems/grumpy-bookstore-owner/solution/shou-hua-tu-jie-sheng-huo-mei-you-mo-fa-olaos/ -->
 
   <script>
     var maxSatisfied = function (customers, grumpy, X) {
@@ -45,7 +45,7 @@
       }
       let maxBonus = bonus;
       for (let i = X - 1; i < customers.length; i++) {
-          // 如果新元素对应生气的日子，它是额外增加的满意度，累加给 bonus
+        // 如果新元素对应生气的日子，它是额外增加的满意度，累加给 bonus
         if (grumpy[i] == 1) {
           bonus += customers[i];
           maxBonus = Math.max(bonus, maxBonus);
@@ -62,34 +62,60 @@
       return regular + maxBonus;
     };
 
-// 作者：xiao_ben_zhu
-// 本题一定要看题解链接！：
-// 链接：https://leetcode-cn.com/problems/grumpy-bookstore-owner/solution/shou-hua-tu-jie-sheng-huo-mei-you-mo-fa-olaos/
+    // 作者：xiao_ben_zhu
+    // 本题一定要看题解链接！：
+    // 链接：https://leetcode-cn.com/problems/grumpy-bookstore-owner/solution/shou-hua-tu-jie-sheng-huo-mei-you-mo-fa-olaos/
 
-    var maxSat=(customers,grumpy,x)=>{
-      let bonus=0,regular=0;
-      for(let i=0;i<X-1;i++){
-        if(grumpy[i]==1){
-          bonus+=customers[i]
-        }else{
-          regular+=customers[i]
+    var maxSat = (customers, grumpy, x) => {
+      let bonus = 0, regular = 0;
+      for (let i = 0; i < X - 1; i++) {
+        if (grumpy[i] == 1) {
+          bonus += customers[i]
+        } else {
+          regular += customers[i]
         }
       }
-      let maxBonus=bonus
-      for(let i=X-1;i<customers.length;i++){
-        if(grumpy[i]==1){
-          bonus+=customers[i]
-          maxBonus=Math.max(bonus,maxBonus)
-        }else{
-          regular+=customers[i]
+      let maxBonus = bonus
+      for (let i = X - 1; i < customers.length; i++) {
+        if (grumpy[i] == 1) {
+          bonus += customers[i]
+          maxBonus = Math.max(bonus, maxBonus)
+        } else {
+          regular += customers[i]
         }
-        if(grumpy[i+1-X]==1){
-          bonus-=customers[i+1-X]
+        if (grumpy[i + 1 - X] == 1) {
+          bonus -= customers[i + 1 - X]
         }
       }
       return regular + maxBonus
     }
     // 07-31复习
+
+    var maxSatisfied3 = function (customers, grumpy, X) {
+      let pre = 0, aft = 0, bonus = 0
+      for (let i = 0; i < X - 1; i++) {
+        if (grumpy[i] == 0) {
+          pre += customers[i]
+        } else {
+          bonus += customers[i]
+        }
+      }
+      let max = bonus
+      for (let i = X - 1; i < customers.length; i++) {
+        if (grumpy[i] == 1) {
+          bonus += customers[i]
+          max = Math.max(bonus, max)
+        } else {
+          pre += customers[i]
+        }
+        if (grumpy[i - X + 1] == 1) {
+          bonus -= customers[i - X + 1]
+        }
+      }
+      return pre + max
+    }
+
+    // 10-03
   </script>
 </body>
 

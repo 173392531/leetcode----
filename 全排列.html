@@ -118,6 +118,26 @@
         }
 
         //09-04复习
+
+        var reP=(nums)=>{
+            const res=[],path=[],used=new Array(nums.length).fill(false)
+            dfs(path)
+            function dfs(path) {
+                if(path.length===nums.length){
+                    res.push(Array.from(path))
+                    return 
+                }
+                for(let i=0;i<nums.length;i++){
+                    if(used[i])continue
+                    path.push(nums[i])
+                    used[i]=true
+                    dfs(path)
+                    path.pop()
+                    used[i]=false
+                }
+            }
+            return res
+        }
     </script>
 </body>
 

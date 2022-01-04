@@ -115,6 +115,24 @@
         }
 
         // 08-17复习
+
+        var getArr = (t) => {
+            const limit = Math.floor(t/2)
+            const sum = 0
+            const temp = [],res=[]
+            for(let i=1;i<limit;i++){
+                sum+=i
+                temp.push(i)
+                while(sum>t){
+                    const first = temp.shift()
+                    sum -= first
+                }
+                if(sum == target){
+                    temp.length >= 2 && res.push(temp)
+                }
+            }
+            return res
+        }
     </script>
 </body>
 

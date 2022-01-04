@@ -53,12 +53,23 @@
       for (let i = nums.length - 1; i >= 0; i--) {
         if (nums[i] < med) return true
         while (stack.length > 0 && stack[stack.length - 1] < nums[i]) {
-          med = stack.pop()
+          mid = stack.pop()
         }
         stack.push(nums[i])
       }
       return false
     };
+
+    var find132=(nums)=>{
+      let stack=[],mid=-Infinity
+      for(let i=nums.length-1;i>=0;i--){
+        if(nums[i]<mid)return true
+        while(stack.length>0 && stack[stack.length-1]<nums[i]){
+          mid=stack.pop()
+        }
+        stack.push(nums[i])
+      }
+    }
 
     // 作者：zn_
     // 链接：https://leetcode-cn.com/problems/132-pattern/solution/dan-diao-zhan-jie-132-by-zn_-s8xh/
@@ -83,6 +94,7 @@
     // 链接：https://leetcode-cn.com/problems/132-pattern/solution/zhan-132mo-shi-by-demigodliu-v9cx/
 
     // 07-31复习
+    // 10-03
   </script>
 </body>
 

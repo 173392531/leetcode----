@@ -93,6 +93,45 @@
     // 作者：xiao_ben_zhu
     // 链接：https://leetcode-cn.com/problems/word-break/solution/shou-hui-tu-jie-san-chong-fang-fa-dfs-bfs-dong-tai/
 
+    var breakWordsDFS=(s,wordDict)=>{
+      const len=s.length
+      const wordSet=new Set(wordDict)
+      const memo=new Array(len)
+      const canBreak=(start)=>{
+        if(start===len)return true
+        if(memo[start]!==undefined)return memo[start]
+        for(let i=0;i<len;i++){
+          const pre=s.slice(start,i)
+          if(wordSet.has(pre) && canBreak(i)){
+            memo[start]=true
+            return true
+          }
+        }
+        memo[start]=false
+        return false
+      }
+      return canBreak(0)
+    }
+
+    var breakWordsDFS2=(s,words)=>{
+      const len=s.length
+      const wordsSet=new Set(words)
+      const memo=new Array(len)
+      const canBreak=(start)=>{
+        if(start==len)return true
+        if(memo[start]!==undefined)return memo[start]
+        for(let i=start+1;i<=len;i++){
+          const pre=s.slice(start,i)
+          if(wordSet.has(pre) && canBreak(i)){
+            memo[start]=true
+            return true
+          }
+        }
+        memo[start]=false
+        return false
+      }
+      return canBreak(0)
+    }
 
     // BFS
     const wordBreak = (s, wordDict) => {

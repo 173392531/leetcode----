@@ -74,6 +74,23 @@
       }
       return wall.length - max
     }
+
+    var leastB3=(wall)=>{
+      const map = new Map()
+      for(const widths of wall){
+        const n = widths.length
+        let sum = 0
+        for(let i=0;i<n;i++){
+          sum+=widths[i]
+          map.set(sum,(map.get(sum) || 0)+1)
+        }
+      }
+      let max= 0
+      for(const [_,c] of map.entries()){
+        max=Math.max(max,c)
+      }
+      wall.length - max
+    }
   </script>
 </body>
 

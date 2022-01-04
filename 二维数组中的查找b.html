@@ -86,20 +86,19 @@
             return false;
         };
 
-        var searchM=(matrix,target)=>{
-            var N=matrix.length
-            if(!N)return 0
-            var M=matrix[0].length
-            for(let i=0;i<N;i++){
-                if(matrix[i][0]>target)break
-                var left=0,right=M-1
-                while(left<=right){
-                    var mid=(right+left)>>1
-                    var midVal=matrix[i][mid]
-                    if(target===midVal || target===matrix[i][left] || target===matrix[i][right])return true
-                    if(left+1==right)break
-
-                    if(target >midVal)left++
+        var searchM = (matrix, target) => {
+            var N = matrix.length
+            if (!N) return 0
+            var M = matrix[0].length
+            for (let i = 0; i < N; i++) {
+                if (matrix[i][0] > target) break
+                var left = 0, right = M - 1
+                while (left <= right) {
+                    var mid = (right + left) >> 1
+                    var midVal = matrix[i][mid]
+                    if (target === midVal || target === matrix[i][left] || target === matrix[i][right]) return true
+                    if (left + 1 == right) break
+                    if (target > midVal) left++
                     else right--
                 }
             }

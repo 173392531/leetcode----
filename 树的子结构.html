@@ -92,6 +92,17 @@
             }
         }
 
+        var isSub3 = (A,B)=>{
+            if(!A || !B)return false
+            return isSame(A,B) || isSub3(A.left,B) || isSub3(A.right,B)
+            var isSame=function (A,B){
+                if(!B)return true
+                if(!A)return false
+                if(A.val !==B.val)return false
+                return isSame(A.left,B.left) && isSame(A.right,B.right)
+            }
+        }
+
     </script>
 </body>
 

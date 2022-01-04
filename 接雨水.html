@@ -91,6 +91,25 @@
     }
 
     // 08-21复习
+
+    var trap2=(height)=>{
+      let len=height.length
+      if(len===0)return 0
+      let res=0
+      let left_max=[],right_max=[]
+      left_max[0]=height[0]
+      for(let i=1;i<len;i++){
+        left_max[i]=Math.max(left_max[i-1],height[i])
+      }
+      right_max[len-1]=height[len-1]
+      for(let i=len-2;i>=0;i--){
+        right_max[i]=Math.max(right_max[i+1],height[i])
+      }
+      for(let i=0;i<len;i++){
+        res+=Math.min(left_max[i],right_max[i])-height[i]
+      }
+      return res
+    }
   </script>
 </body>
 

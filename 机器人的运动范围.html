@@ -35,8 +35,6 @@
         if (i < 0 || j < 0 || i >= m || j >= n) return
         // +a + +b转成数字类型
         let sum = (i + '' + j).split('').reduce((a, b) => +a + +b)
-        // console.log(sum);
-        // let axis = JSON.stringify([i,j])
         let axis = [i, j]
         if (sum <= k && !obj[axis]) {  // 当该点还没走过 和 满足 不大于k 时 继续执行
           total++

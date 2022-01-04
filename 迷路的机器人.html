@@ -127,6 +127,28 @@
         }
 
         // 09-02复习
+
+        var goThroughMap = (map)=>{
+            const res=[]
+            debugger
+            const rowLen=map.length,colLen=map[0].length
+            const dfs=(map,row,col)=>{
+                if(row>=rowLen || col>=colLen || map[row][col]==1)return false
+                res.push([row,col])
+                if(row===rowLen-1 && col===colLen-1)return true
+                if(dfs(map,row+1,col) || dfs(map,row,col+1))return true
+                res.pop()
+                return false
+            }
+            dfs(map,0,0)
+            return res
+        }
+        console.log(goThroughMap([
+          [0,0,0],
+          [0,1,0],
+          [0,0,0]
+        ]));
+        
     </script>
 </body>
 

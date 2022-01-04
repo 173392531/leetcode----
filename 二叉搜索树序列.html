@@ -157,7 +157,7 @@
                 let { length } = queue
                 while (length--) {
                     let cur = queue.shift()
-                    dfs(cur, res, queue, slice(), [...temp])
+                    dfs(cur, res, queue.slice(), [...temp])
                     queue.push(cur)
                 }
             }
@@ -288,6 +288,28 @@
             dfs(root,res,queue,[])
             return res
         }
+
+    var bfs=(root)=>{
+        const res=[],queue=[]
+        const dfs=(root,res,queue,temp)=>{
+            if(root===null)return 
+            root.left && queue.push(root.left)
+            root.right && queue.push(root.right)
+            if(queue.length == 0){
+                res.push([...temp])
+                return
+            }
+            let len=queue.length
+            while(len){
+                len--
+                let cur=queue.shift()
+                dfs(cur,res,queue.slice(),[...temp,cur.val])
+                queue.push(cur)
+            }
+            dfs(root,res,queue,[root.val])
+            return res
+        }
+    }
     </script>
 </body>
 

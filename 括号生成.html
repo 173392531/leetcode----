@@ -75,6 +75,26 @@
       return res
     }
     // 08-24复习
+
+    var getBrackets = (n) => {
+      const res = []
+      const dfs = (left,right,temp) =>{
+        if(temp.length == 2*n){
+          res.push(temp)
+          return
+        }
+        if(left>0){
+          dfs(left-1,right,temp+'(')
+        }
+        if(right > left){
+          dfs(left,right-1,temp+')')
+        }
+      }
+      dfs(n,n,'')
+      return res
+    }
+    console.log(getBrackets(3));
+    
   </script>
 </body>
 

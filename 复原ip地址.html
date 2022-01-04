@@ -129,6 +129,27 @@
       return res
     }
     // 08-14复习
+
+    var restoreIP=(s)=>{
+      const res=[]
+      const dfs=(index,path,num)=>{
+        if(num>4)return
+        if(num===4 && index == s.length){
+          res.push(path)
+          return
+        }
+        for(let i=1;i<4;i++){
+          let str=s.substring(index,index+i)
+          if(Number(str)>255 || (str[0]==='0' && str.length!==1))continue
+          const tail=num==3?'':'.'
+          dfs(index+i,path+str+tail,num+1)
+        }
+      }
+      dfs(0,'',0)
+      return res
+    }
+    console.log(restoreIP('25525511215'));
+    
   </script>
 </body>
 

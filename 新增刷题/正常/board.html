@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var exist = function (board, word) {
+            const [rowLen, colLen] = [board.length, board[0].length]
+            for (let i = 0; i < rowLen; i++) {
+                for (let j = 0; j < colLen; j++) {
+                    if (board[i][j] === word[0]) {
+                        const res = dfs(i, j, 0)
+                        if(res)return true
+                    }
+                }
+            }
+            return false
+            function dfs(row, col, index) {
+                if (row >= rowLen || col >= colLen || row < 0 || col < 0 || board[row][col] !== word[index]) return false
+                if (index == word.length - 1) return true
+                if (board[row][col] === word[index]) {
+                    const temp = board[row][col]
+                    board[row][col]=''
+                    if (
+                        dfs(row + 1, col, index + 1) ||
+                        dfs(row - 1, col, index + 1) ||
+                        dfs(row, col + 1, index + 1) ||
+                        dfs(row, col - 1, index + 1)
+                    ) {
+                        return true
+                    } else {
+                        board[row][col]=temp
+                        return false
+                    }
+                }
+            }
+        };
+        console.log(exist([["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]]
+,"ABCB"));
+
+    </script>
+</body>
+
+</html>

@@ -125,17 +125,17 @@
             return min
         }
 
-        var balance2=(s)=>{
-            let left=right=0,len=s.length,avg=len/4
-            let map={'Q': 0, 'W': 0, 'E': 0, 'R': 0},min=len
-            for(let item  of s){
+        var balance2 = (s) => {
+            let left = right = 0, len = s.length, avg = len / 4
+            let map = { 'Q': 0, 'W': 0, 'E': 0, 'R': 0 }, min = len
+            for (let item of s) {
                 map[item]++
             }
-            if(map['Q']===avg && map['W']===avg && map['E']===avg && map['R']===avg)return 0
-            while(right<len){
+            if (map['Q'] === avg && map['W'] === avg && map['E'] === avg && map['R'] === avg) return 0
+            while (right < len) {
                 map[s[right]]--
-                while(left<=right && map['Q'] <= avg && map['W'] <= avg && map['E'] <= avg && map['R'] <= avg){
-                    min=Math.min(min,right-left+1)
+                while (left <= right && map['Q'] <= avg && map['W'] <= avg && map['E'] <= avg && map['R'] <= avg) {
+                    min = Math.min(min, right - left + 1)
                     map[s[left]]++
                     left++
                 }
@@ -145,6 +145,32 @@
         }
 
         // 09-16复习
+
+        var balance3=(s)=>{
+            let left = right = 0,len = s.length,avg = len/4
+            let map = {
+                'Q':0,
+                'W':0,
+                'E':0,
+                'R':0
+            },min = len
+            for(let item of s){
+                map[item]++
+            }
+            if(map['Q'] === avg && map['E'] === avg &&map['W'] === avg &&map['R'] === avg )return true
+            while(right<len){
+                map[s[right]]--
+                right++
+                while(left < right && map['Q']<=avg && map['E']<=avg && map['W']<=avg && map['R']<=avg){
+                    min = Math.min(min,right-left)
+                    map[s[left]]++
+                    left++
+                }
+            }
+
+        }
+        console.log(balancedString3('WWEQERQWQWWRWWERQWEQ'));
+        
     </script>
 </body>
 

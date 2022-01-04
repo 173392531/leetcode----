@@ -43,20 +43,20 @@
                 height[i] = envelopes[i][1];
             }
             return lengthOfLIS(height);
-        };
-
-        function lengthOfLIS(nums) {
-            let dp = new Array(nums.length).fill(1);
-            for (let i = 0; i < nums.length; i++) {
-                for (let j = 0; j < i; j++) {
-                    // 代表可以套下前一个
-                    if (nums[i] - nums[j] > 0) {
-                        dp[i] = Math.max(dp[i], dp[j] + 1)
+            function lengthOfLIS(nums) {
+                let dp = new Array(nums.length).fill(1);
+                for (let i = 0; i < nums.length; i++) {
+                    for (let j = 0; j < i; j++) {
+                        // 代表可以套下前一个
+                        if (nums[i] - nums[j] > 0) {
+                            dp[i] = Math.max(dp[i], dp[j] + 1)
+                        }
                     }
                 }
+                return Math.max(...dp, 0)
             }
-            return Math.max(...dp, 0)
-        }
+        };
+
 
 // 作者：Stoney_s
 // 链接：https://leetcode-cn.com/problems/russian-doll-envelopes/solution/js-dong-tai-gui-hua-by-stoney_s/

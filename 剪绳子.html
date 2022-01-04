@@ -18,6 +18,7 @@
     输入: 2
     输出: 1
     解释: 2 = 1 + 1, 1 × 1 = 1
+
     示例 2:
 
     输入: 10
@@ -30,9 +31,9 @@
 因为i-j不一定大于dp[i - j]（数字i-j拆分成整数之和的最大乘积），这里要选择最大的值作为 dp[i] 的结果。 -->
   <script>
     /**
- * @param {number} n
- * @return {number}
- */
+      * @param {number} n
+      * @return {number}
+      */
     var cuttingRope = function (n) {
       const dp = new Array(n + 1).fill(1);
 

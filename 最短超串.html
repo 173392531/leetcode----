@@ -9,6 +9,26 @@
 </head>
 
 <body>
+    <!-- 假设你有两个数组，一个长一个短，短的元素均不相同。
+        找到长数组中包含短数组所有的元素的最短子数组，其出现顺序无关紧要。
+        返回最短子数组的左端点和右端点，如有多个满足条件的子数组，返回左端点最小的一个。若不存在，返回空数组。
+
+        示例 1:
+
+        输入:
+        big = [7,5,9,0,2,1,3,5,7,9,1,1,5,8,8,9,7]
+        small = [1,5,9]
+        输出: [7,10]
+        示例 2:
+
+        输入:
+        big = [1,2,3]
+        small = [4]
+        输出: []
+
+        来源：力扣（LeetCode）
+        链接：https://leetcode-cn.com/problems/shortest-supersequence-lcci
+        著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
     <script>
         var shortestSeq = function (big, small) {
             let window = {}, need = {}, l = -1, r = -1, count = 0;
@@ -61,7 +81,7 @@
                     }
                 }
                 // 检索左侧窗口的最大值
-                while (count === small.length && big.length - 1 > small.length) {
+                while (count === small.length && big.length - l > small.length) {
                     l++;
                     // 获取下一个的值
                     let d = big[l];
@@ -147,6 +167,36 @@
         }
 
         // 09-27复习
+
+
+        var shortestStr = (big,small) => {
+            let window={},need ={},l=-1,r=-1,count=0
+            let ansl =-1,ansr = -1,blen = big.length,slen = small.length
+            small.forEach((item) => need[item] ? need[item]++ : need[item] = 1)
+            while(r < blen){
+                r++
+                let c = big[r]
+                if(need[c]){
+                    window[c] = window[c]+1 || 1
+                    if(window[c] ===1 )count++
+                }
+                while(count === slen && blen - l > slen){
+                    l++
+                    let d =big[l]
+                    if(need[d]){
+                        if(--window[d] == 0){
+                            count--
+                            if(len > r-l+1){
+                                ansl = l
+                                ansr = r
+                                len = r - l + 1
+                            } 
+                        }
+                    }
+                }
+            }
+            return ansl === -1 && ansr === -1 ? []:[ansl,ansr]
+        }
     </script>
 </body>
 

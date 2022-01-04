@@ -52,6 +52,19 @@
       nums[j] = tmp;
     }
 
+
+    var sortDifColor=(nums)=>{
+      let p0=0,p2=nums.length-1
+      for(let i=0;i<=p2;i++){
+        while(i<=p2 && nums[i]===2)swap(nums,i,p2--)
+        if(nums[i]===0)swap(nums,i,p0++)
+      }
+      function swap(nums,i,j){
+        const tmp=nums[i]
+        nums[i]=nums[j]
+        nums[j]=tmp
+      }
+    }
 // 作者：jing-wm
 // 链接：https://leetcode-cn.com/problems/sort-colors/solution/yan-se-fen-lei-si-lu-dai-ma-python-java-qaln9/
 

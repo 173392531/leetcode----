@@ -34,49 +34,78 @@
       return pA
     }
 
-    var getI3=(headA,headB)=>{
-      if(!headA || !headB)return null
-      let pA=headA,pB=headB
-      while(pA!==pB){
-        pA=pA===null ? headB:pA.next
-        pB=pB===null ? headA:pB.next
+    var getI3 = (headA, headB) => {
+      if (!headA || !headB) return null
+      let pA = headA, pB = headB
+      while (pA !== pB) {
+        pA = pA === null ? headB : pA.next
+        pB = pB === null ? headA : pB.next
       }
     }
-//  暴力遍历法
-// var getIntersectionNode = function (headA, headB) {
-//     if (!headA || !headB) return null;
-//     let pA = headA;
-//     while (pA) {
-//         let pB = headB;
-//         while (pB) {
-//             if (pA === pB) return pA;
-//             pB = pB.next;
-//         }
-//         pA = pA.next;
-//     }
-// };
+    //  暴力遍历法
+    // var getIntersectionNode = function (headA, headB) {
+    //     if (!headA || !headB) return null;
+    //     let pA = headA;
+    //     while (pA) {
+    //         let pB = headB;
+    //         while (pB) {
+    //             if (pA === pB) return pA;
+    //             pB = pB.next;
+    //         }
+    //         pA = pA.next;
+    //     }
+    // };
 
 
 
-// 哈希表法
-// var getIntersectionNode = function (headA, headB) {
-//     if (!headA || !headB) return null;
-//     const hashmap = new Map();
-//     let pA = headA;
-//     while (pA) {
-//         hashmap.set(pA, 1);
-//         pA = pA.next;
-//     }
-//     let pB = headB;
-//     while (pB) {
-//         if (hashmap.has(pB)) return pB;
-//         pB = pB.next;
-//     }
-// };
+    // 哈希表法
+    // var getIntersectionNode = function (headA, headB) {
+    //     if (!headA || !headB) return null;
+    //     const hashmap = new Map();
+    //     let pA = headA;
+    //     while (pA) {
+    //         hashmap.set(pA, 1);
+    //         pA = pA.next;
+    //     }
+    //     let pB = headB;
+    //     while (pB) {
+    //         if (hashmap.has(pB)) return pB;
+    //         pB = pB.next;
+    //     }
+    // };
 
-// 作者：suukii
-// 链接：https://leetcode-cn.com/problems/intersection-of-two-linked-lists/solution/160xiang-jiao-lian-biao-shuang-zhi-zhen-ha-xi-biao/
+    // 作者：suukii
+    // 链接：https://leetcode-cn.com/problems/intersection-of-two-linked-lists/solution/160xiang-jiao-lian-biao-shuang-zhi-zhen-ha-xi-biao/
 
+
+
+    function FindFirstCommonNode(pHead1, pHead2) {
+      // write code here
+
+      while (pHead1) {
+        pHead1.f = true;
+        pHead1 = pHead1.next;
+      }
+      while (pHead2) {
+        if (pHead2.f) return pHead2;
+        pHead2 = pHead2.next
+      }
+      return null;
+    }
+
+    var findCommonNode=(A,B)=>{
+      while(A){
+        A.f=true
+        A=A.next
+      }
+      while(B){
+        if(B.f)return B
+        B=B.next
+      }
+      return null
+    }
+
+// 原文链接：https://blog.csdn.net/zoooo_/article/details/113359619
   </script>
 </body>
 

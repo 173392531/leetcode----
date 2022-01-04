@@ -31,7 +31,6 @@
                 var res = dfs(i - 1, j, board, word, index + 1) || dfs(i + 1, j, board, word, index + 1) || dfs(i, j - 1, board, word, index + 1) || dfs(i, j + 1, board, word, index + 1);
                 board[i][j] = tmp;   // 恢复现场
                 return res;
-
             }
             // 遍历整个board，找到初始位置点
             for (var i = 0; i < row; i++) {

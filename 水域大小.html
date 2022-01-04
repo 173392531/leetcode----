@@ -26,6 +26,49 @@
     链接：https://leetcode-cn.com/problems/pond-sizes-lcci
     著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
     <script>
+        var watersSize=(arr)=>{
+            const rowLen=arr.length,colLen=arr[0].length,res=[]
+            let state=new Array(rowLen).fill(false).map(_=>new Array(colLen).fill(false))
+            
+            var dfs=(row,col)=>{
+                if(row==rowLen || col==colLen || row<0 || col<0 || arr[row][col]!==0 || state[row][col]==true){
+                    return 0
+                }
+                state[row][col]=true
+                const total=(
+                    dfs(row+1,col)+
+                    dfs(row+1,col+1)+
+                    dfs(row+1,col-1)+
+                    dfs(row-1,col+1)+
+                    dfs(row-1,col-1)+
+                    dfs(row-1,col)+
+                    dfs(row,col+1)+
+                    dfs(row,col-1)
+                )
+                return 1+total
+            }
+            for(let i=0;i<rowLen;i++){
+                for(let j=0;j<colLen;j++){
+                    if(arr[i][j]==0){
+                        debugger
+                        const num = dfs(i,j)
+                        if(num!==0){
+                            res.push(num)
+                        }
+                    }
+                }
+            }
+            res.sort((a,b)=>a-b)
+            return res
+        }
+        console.log(watersSize([
+            [0, 2, 1, 0],
+            [0, 1, 0, 1],
+            [1, 1, 0, 1],
+            [0, 1, 0, 1]
+        ]));
+        
+
         /**
          * @param {number[][]} land
          * @return {number[]}

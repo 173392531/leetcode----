@@ -97,6 +97,40 @@
             }
             return dp[steps][0]
         }
+
+        var numW4=(steps,arrLen)=>{
+            let m=Math.min((step/2 | 0)+1,arrLen)
+            let dp=Array(step+1).fill(0).map(()=>Array(m).fill(0))
+            dp[0][0]=1
+            for(let i=1;i<=steps;i++){
+                for(let j=0;j<m;j++){
+                    let left=j>0?dp[i-1][j-1]:0
+                    let right=j<m-1?dp[i-1][j+1]:0
+                    let cur=dp[i-1][j]
+                    dp[i][j]=(left+cur+right)%mod
+                }
+            }
+            return dp[steps][0]
+        }
+
+        var newWay=(steps,arrLen)=>{
+            let m=Math.min((steps/2 | 0)+1,arrLen)
+            const dp=new Array(steps+1).fill(0).map(_=>new Array(m).fill(0))
+            dp[0][0]=1
+            for(let i=1;i<=steps;i++){
+                for(let j=0;j<m;j++){
+                    let left=j>0 ? dp[i-1][j-1]:0
+                    let right=j<m-1?dp[i-1][j+1]:0
+                    let cur=dp[i-1][j]
+                    dp[i][j]=(left+right+cur)
+                }
+            }
+            console.log(dp)
+            
+            return dp[steps][0]
+        }
+        console.log(newWay(4,2));
+        
     </script>
 </body>
 

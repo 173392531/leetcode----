@@ -83,6 +83,14 @@
       root.left=constM3(nums.slice(0,nums.indexOf(big)))
       root.right=constM3(nums.slice(nums.indexOf(big)+1))
     }
+
+    var constM4 = (nums) => {
+      if(nums.length == 0)return null
+      let big = Math.max(...nums)
+      let root = new TreeNode(big)
+      root.left = constM4(nums.slice(0,nums.indexOf(big)))
+      root.right = constM4(nums.slice(nums.indexOf(big)+1))
+    }
   </script>
 </body>
 

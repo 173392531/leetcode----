@@ -88,6 +88,22 @@
     }
 
     // 09-03复习
+
+    var averageWaitTime =(customers)=>{
+      let people=customers.length,sum=customers[people-1][1],res=[]
+      for(let i=0;i<people-1;i++){
+        const [start,wait] = customers[i]
+        sum+=wait
+        res.push(start+wait-customers[i+1][0])
+      }
+      const len=res.length
+      for(let i=0;i<len;i++){
+        sum+=res[i]*(len-i)
+      }
+      return sum/people
+    }
+    console.log(averageWaitTime([[1,2],[2,5],[4,3]]));
+    
   </script>
 </body>
 

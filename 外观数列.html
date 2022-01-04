@@ -82,6 +82,27 @@ countAndSay(4) = 读 "21" = 一 个 2 + 一 个 1 = "12" + "11" = "1211"
     }
 
     // 09-18复习
+
+    var countDp=(num)=>{
+      const dp=new Array(num).fill('')
+      dp[0]="1"
+      for(let i=1;i<num;i++){
+        const preLen=dp[i-1].length
+        let first=dp[i-1][0],count=0
+        for(let j=0;j<=preLen;j++){
+          if(dp[i-1][j]==first){
+            count++
+          }else{
+            dp[i]+=count+first
+            first=dp[i-1][j] || ''
+            count=1
+          }
+        }
+      }
+      return dp[num-1]
+    }
+    console.log(countDp(6));
+    
   </script>
 </body>
 

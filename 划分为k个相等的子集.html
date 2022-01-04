@@ -34,7 +34,7 @@
             return helper(0)
 
             function helper(i) {
-                debugger
+                // 能走到此步代表每一个num都被加上了并且每一个区间都小于average
                 if (i === nums.length) return true
                 for (let j = 0; j < k; j++) {
                     if (sums[j] < average && nums[i] + sums[j] <= average) {
@@ -121,6 +121,44 @@
             }
         }
         // 08-18复习
+
+        var canPartitionKSubsets = function (nums, k) {
+            const total = nums.reduce((total, num) => total + num, 0)
+            const target0 = total / k // 目标组合的和
+            if (target0 !== Math.floor(target0)) return false
+            let used = new Array(nums.length).fill(false)
+            nums.sort((a, b) => a - b) // 从小到大排序
+            // 如果找到 k - 1 个目标组合，那么剩下的数肯定能组成第 k 个目标组合
+            return dfs(target0, k - 1, 0, used, nums)
+
+            // 返回是否找到 k 个目标组合，
+            // target 表示当前组合还可以容纳多大的数
+            function dfs(target, k, start, used, nums) {
+                // 找到一个目标组合，接着找下一个目标组合
+                if (target === 0) return dfs(target0, k - 1, 0, used, nums)
+                if (k === 0) return true // 已找到所有目标组合
+                // 尝试将每个数放入当前组合
+                // 因为是找组合，无需回头尝试，比如组合 {a, b} 和组合 {b, a} 是等价的
+                for (let i = start; i < nums.length; ++i) {
+                    if (used[i]) continue
+                    const num = nums[i]
+                    // 可行性剪枝: 
+                    // num 无法构成目标组合
+                    // nums 从小到大排序，既然 nums[i] 都偏大了， nums[i + 1] 更加偏大，无需尝试
+                    if (num > target) return false
+
+                    used[i] = true
+                    const got = dfs(target - num, k, i + 1, used, nums) // 找当前组合的下一个数
+                    if (got) return got
+                    used[i] = false
+                }
+                return false
+            }
+        }
+
+        // 作者：kerry95
+        // 链接：https://leetcode-cn.com/problems/partition-to-k-equal-sum-subsets/solution/yong-shi-ji-bai-100-2chong-jie-fa-dfsjia-w15d/
+
     </script>
 </body>
 

@@ -62,6 +62,56 @@
 
 // 08-15复习
 
+
+        var orangesRotting2 = function (grid) {
+            const rowLen = grid.length, colLen = grid[0].length, rootenArr = []
+            let round = 0, freshNum = 0
+            for (let i = 0; i < rowLen; i++) {
+                for (let j = 0; j < colLen; j++) {
+                    if (grid[i][j] === 2) {
+                        rootenArr.push([i, j])
+                    } else if (grid[i][j] === 1) {
+                        freshNum++
+                    }
+                }
+            }
+            bfs()
+            return round
+            function bfs() {
+                let preFresh = freshNum
+                let len = rootenArr.length
+                while(len--){
+                    const item = rootenArr.shift()    
+                    routenAround(item)
+                }
+                if (freshNum !== preFresh) {
+                    round++
+                    if (freshNum === 0)return 
+                    bfs()
+                } else {
+                    if (freshNum) {
+                        round = -1
+                        return 
+                    }
+                }
+            }
+            function routenAround(item) {
+                const row = item[0], col = item[1]
+                getValid(row + 1, col)
+                getValid(row - 1, col)
+                getValid(row, col - 1)
+                getValid(row, col + 1)
+            }
+            function getValid(row, col) {
+                if (row < 0 || col < 0 || row >= rowLen || col >= colLen) return
+                if (grid[row][col] === 1) {
+                    grid[row][col] = 2
+                    freshNum--
+                    rootenArr.push([row, col])
+                }
+
+            }
+        };
     </script>
 </body>
 

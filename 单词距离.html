@@ -103,19 +103,19 @@
             return res
         }
 
-        var findDDC=(words,word1,word2)=>{
-            const len=words.length
-            const foundT=word=>[word1,word2].includes(word)
-            const getN=cur=>(cur===word1?word2:word1)
-            let res=len
-            let l=-1,r=-1,next=''
-            while(r<len){
-                if(foundT(word[r])){
-                    let next=getN(words[r])
-                    if(words[r]===next&&r-l<res)res=r-l
-                    l=r
-                    r=r+1
-                }else{
+        var findDDC = (words, word1, word2) => {
+            const len = words.length
+            const foundT = word => [word1, word2].includes(word)
+            const getN = cur => (cur === word1 ? word2 : word1)
+            let res = len
+            let l = -1, r = -1, next = ''
+            while (r < len) {
+                if (foundT(word[r])) {
+                    let next = getN(words[r])
+                    if (words[r] === next && r - l < res) res = r - l
+                    l = r
+                    r = r + 1
+                } else {
                     r++
                 }
             }
@@ -158,9 +158,6 @@
         }
         // 08-06复习
 
-        var findCC2=(words,word1,word2)=>{
-            
-        }
     </script>
 </body>
 

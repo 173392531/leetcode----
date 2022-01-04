@@ -126,6 +126,28 @@ n 是非负整数，且不会超过输入数组的大小。
             }
             return count >= num
         }
+
+        var matchM3=(arr,num)=>{
+            let count=0
+            const m=arr.length
+            let prev=-1
+            for(let i=0;i<m;i++){
+                if(arr[i]===1){
+                    if(prev < 0){
+                        count+=Math.floor(i/2)
+                    }else{
+                        count+=Math.floor((i-prev-2)/2)
+                    }
+                    prev=i
+                }
+            }
+            if(prev<0){
+                count+=(m+1)/2
+            }else{
+                count+=(m-prev-1)/2
+            }
+            return count>=num
+        }
     </script>
 </body>
 

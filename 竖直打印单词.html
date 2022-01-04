@@ -125,6 +125,28 @@
         // 作者：suan-huang-suan-ge
         // 链接：https://leetcode-cn.com/problems/print-words-vertically/solution/bu-xu-yao-cha-zhao-zui-chang-yuan-su-de-fang-fa-by/
 
+
+        const printWordsVertically=(s)=>{
+            const res=[]
+            s=s.split(' ')
+            console.log(s);
+            let index=0,maxLen=0
+            for(let item of s){
+                maxLen=Math.max(item.length,maxLen)
+            }
+            while(index<maxLen){
+                let str=''
+                s.forEach(item=>{
+                    const word= item[index] || ' '
+                    str+=word
+                })
+                res.push(str.trimEnd())
+                index++
+            }
+            return res
+        }
+        console.log(printWordsVertically('CONTEST IS COMING'));
+        
     </script>
 </body>
 

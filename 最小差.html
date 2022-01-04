@@ -47,6 +47,18 @@
             return res
         }
 
+        var smallD3 = (a,b) => {
+            a.sort((i,j)=>i-j)
+            b.sort((i,j)=>i-j)
+            let left = 0,right = 0,res = Infinity
+            while(left < a.length && right <b.length){
+                res = Math.min(res,Math.abs(a[left]-b[left]))
+                if(a[left] > b[right])right++
+                else left++
+            }
+            return res
+        }
+
 // 作者：hblvsjtu
 // 链接：https://leetcode-cn.com/problems/smallest-difference-lcci/solution/js-shuang-zhi-zhen-by-hblvsjtu-4/
 

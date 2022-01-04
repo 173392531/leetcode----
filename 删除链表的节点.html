@@ -86,6 +86,12 @@
       return head
     }
 
+    var del4=(head,val)=>{
+      if(head.val===val)return head.next
+      head.next=del4(head.next,val)
+      return head
+    }
+
     // 09-06复习
   </script>
 </body>

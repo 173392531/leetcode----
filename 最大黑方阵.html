@@ -199,6 +199,59 @@
             }
             return size === 0 ? [] : [x, y, size]
         }
+
+        var findS3=(matrix)=>{
+            let dp = new Array(matrix.length),size=0,x=0,y=0
+            for(let i=0;i<matrix.length;i++){
+                dp[i]=[]
+                for(let j=0;j<matrix[i].length;j++){
+                    // 先给每个黑色单元初始化dp在xy轴上的值
+                    if(matrix[i][j]==0){
+                        dp[i][j] = [1,1]
+                        if(size ==0){
+                            size = 1
+                            x=i
+                            y=j
+                        }
+                    }else{
+                        dp[i][j] = [0, 0]
+                    }
+                }
+            }
+            // y轴方向合并dp
+            for(let i=1;i<matrix.length;i++){
+                if(matrix[i][0]==0){
+                    dp[i][0][1]=Math.max(1,dp[i-1][0][1]+1)
+                }
+            }
+            for(let i=1;i<matrix[0].length;i++){
+                if(matrix[0][i]==0){
+                    dp[0][i][0]=Math.max(1,dp[0][i-1][0]+1)
+                }
+            }
+            for(let i=1;i<matrix.length;i++){
+                for(let j=1;j<matrix[i].length;j++){
+                    if(matrix[i][j]==0){
+                        dp[i][j][0]=Math.max(1,dp[i][j-1][0]+1)
+                        dp[i][j][1]=Math.max(1,dp[i-1][j][1]+1)
+                        let range = Math.min(dp[i][j][0],dp[i][j][1])
+                        // 如果黑方阵边长比原size大则记录最新边长
+                        for (; range > size; range--) {
+                            if (dp[i - range + 1][j][0] >= range && dp[i][j - range + 1][1] >= range) {
+                            console.log(dp[i - range + 1][j][0],dp[i][j - range + 1][1],range);
+                                size = range;
+                                x = i - range + 1;
+                                y = j - range + 1;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            return size === 0 ? []:[x,y,size]
+        }
+        console.log('!',findS3([[0,1,1],[1,0,1],[1,1,0]]));
+        
     </script>
 </body>
 

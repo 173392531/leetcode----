@@ -61,6 +61,38 @@
         }
 
         // 08-01复习
+
+        var createTree2 = (arr) => {
+            let tree = new TreeNode(arr[0])
+            let Nodes = [tree]
+            let i = 1
+            for (let node of Nodes) {
+                node.left = new TreeNode(arr[i])
+                Nodes.push(node.left)
+                i += 1
+                if (i == arr.length) return tree
+                node.right = new TreeNode(arr[i])
+                Nodes.push(node.right)
+                i += 1
+                if (i == arr.length) return tree
+            }
+        }
+
+        var createTree3=(arr)=>{
+            let tree=new TreeNode(arr[0])
+            let Nodes = [tree]
+            let i=1
+            for(let node of Nodes){
+                node.left = new TreeNode(arr[i])
+                Nodes.push(node.left)
+                i+=1
+                if(i===arr.length)return tree
+                node.right = new TreeNode(arr[i])
+                Node.push(node.right)
+                i+=1
+                if(i===arr.length)return tree
+            }
+        }
     </script>
 </body>
 

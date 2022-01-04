@@ -248,6 +248,39 @@
             return ans === Number.MAX_SAFE_INTEGER ? -1 : ans
         }
         // 09-18复习
+
+        var shortestPath=(grid,k)=>{
+            const rowLen=grid.length,colLen=grid[0].length
+            let way=Infinity
+            const step=new Array(rowLen).fill(false).map(_=>new Array(colLen).fill(false))
+            const go=(row,col,k,path)=>{
+                if(row==rowLen || col==colLen || row<0 || col<0 ||step[row][col])return
+                if(grid[row][col]==1)k--
+                if(k<0 || path>=way)return
+                if(row==rowLen-1 && col==colLen-1){
+                    way=Math.min(path,way)
+                    return
+                }
+                if(path+1>=way)return
+                step[row][col]=true
+                go(row+1,col,k,path+1)
+                go(row-1,col,k,path+1)
+                go(row,col+1,k,path+1)
+                go(row,col-1,k,path+1)
+                step[row][col]=false
+            }
+            go(0,0,k,0)
+            return way===Infinity?-1:way
+        }
+        console.log(shortestWay(
+            [
+              [0, 1, 0, 0, 0, 1, 0, 0],
+              [0, 1, 0, 1, 0, 1, 0, 1],
+              [0, 0, 0, 1, 0, 0, 1, 0]
+            ],
+            1
+        ));
+        
     </script>
 </body>
 

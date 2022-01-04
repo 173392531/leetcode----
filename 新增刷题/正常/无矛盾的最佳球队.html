@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // var bestTeamScore = function (scores, ages) {
+        //     const len = ages.length, arr = [];
+        //     let num=0, max=0, preH=-Infinity
+        //     for (let i = 0; i < len; i++) {
+        //         arr.push([ages[i],scores[i]])
+        //     }
+        //     arr.sort((a,b)=>{
+        //         return a[0]===b[0]? b[1]-a[1] : a[0]-b[0]
+        //     })
+        //     let pre=-Infinity
+        //     // for(let i=0;i<len;i++){
+        //     //     if(arr[i][1]<pre || preH !== arr[i][0]){
+        //     //         num=0
+        //     //     }
+        //     //     num+=arr[i][1]
+        //     //     max=Math.max(max,num)
+        //     //     pre=arr[i][1]
+        //     //     preH = arr[i][0]
+        //     // }
+        //     console.log(arr);
+        //     return max
+        // };
+        var bestTeamScore = function (scores, ages) {
+            let arr = [];
+            let len = ages.length;
+            for (let i = 0; i < len; i++) {
+                arr.push({
+                    scores: scores[i],
+                    ages: ages[i]
+                })
+            }
+            // 先按照年龄从小到大排序，年龄相等，按照分数从小到大排序。
+            arr = arr.sort((a, b) => {
+                return a.ages == b.ages ? a.scores - b.scores : a.ages - b.ages;
+            })
+
+            let rst = 0;
+            let dp = new Array(len).fill(0);
+            for (let i = 0; i < len; i++) {
+                for (let j = i - 1; j >= 0; j--) {
+                    // 如果前一个队员的分数小于当前队员的分数，那么 一定 没有冲突
+                    if (arr[j].scores <= arr[i].scores) {
+                        // 注意这里是小于等于
+                        dp[i] = Math.max(dp[i], dp[j]);     // 这一步之后，当前的 dp[i] 就是 前 i 个队员里 能够获得到的最大分数
+                    }
+                }
+                console.log(dp);
+
+                dp[i] += arr[i].scores;     // 如果前面的人都有冲突，那么自己就要从0分开始了。
+                rst = Math.max(dp[i], rst); // 每一遍循环，记录最大值。
+            }
+            return rst;
+        };
+
+        // 作者：kurahutororensu
+        // 链接：https://leetcode-cn.com/problems/best-team-with-no-conflicts/solution/tan-tan-jiu-wan-shi-er-liao-by-kurahutororensu/
+
+        console.log(bestTeamScore([4, 5, 6, 5], [2, 1, 2, 1]));
+        // console.log(bestTeamScore([319776, 611683, 835240, 602298, 430007, 574, 142444, 858606, 734364, 896074], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]));
+        // console.log(bestTeamScore([1, 2, 3, 5], [8, 9, 10, 1]));
+        var bestTeamScore = (scores, ages) => {
+            const len = ages.length, arr = []
+            for (let i = 0; i < len; i++) {
+                arr.push([ages[i], scores[i]])
+            }
+            arr.sort((a, b) => {
+                return a[0] === b[0] ? a[1] - b[1] : a[0] - b[0]
+            })
+            let dp = new Array(len).fill(0)
+            let res = 0
+            for (let i = 0; i < len; i++) {
+                for (let j = i - 1; j >= 0; j--) {
+                    if (arr[j][1] <= arr[i][1]) {
+                        // 在顺序排序情况下出现这种情况代表上一组数据可以作为下一组dp的基础
+                        dp[i] = Math.max(dp[i], dp[j])
+                    }
+                }
+                dp[i] += arr[i][1]
+                res = Math.max(dp[i], res)
+            }
+            return res
+        }
+    </script>
+</body>
+
+</html>

@@ -74,6 +74,20 @@
       return profit;
     };
 
+    var maxProfit2=(prices,fee)=>{
+      const len = prices.length
+      let buy = prices[0]+fee
+      let profit = 0
+      for(let i=1;i<len;i++){
+        if(prices[i]+fee < buy){
+          buy = prices[i]+fee
+        }else if(prices[i] > buy){
+          profit += prices[i] - buy
+          buy = prices[i]
+        }
+      }
+    }
+
 // 作者：LeetCode-Solution
 // 链接：https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/solution/mai-mai-gu-piao-de-zui-jia-shi-ji-han-sh-rzlz/
 

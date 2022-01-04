@@ -70,6 +70,16 @@
     digits=[...[1],...digits]
     return digits
   }
+
+  var plusO3=(digits)=>{
+    for(let i=digits.length-1;i>=0;i++){
+      digits[i]++
+      digits%=10
+      if(digits[i]!==0)return digits
+    }
+    digits=[...[1],...digits]
+    return digits
+  }
   </script>
 </body>
 

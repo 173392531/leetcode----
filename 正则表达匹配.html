@@ -93,6 +93,7 @@
           if (p[j - 1] === '*') {
             // *前的字母出现0次的情况
             dp[i][j] = dp[i][j - 2]
+            // 传入的match的是当前dp索引，-1变成s和p的索引
             if (match(s, p, i, j - 1)) {
               // *前的字母出现多次的情况
               dp[i][j] = dp[i][j] || dp[i - 1][j]
@@ -164,6 +165,29 @@
     }
 
     // 09-24复习
+
+    var isMatch5=(s,p)=>{
+      const m=s.length,n=p.length
+      const dp=new Array(m).fill(false).map(_=>new Array(n).fill(false))
+      dp[0][0]=true
+      for(let i=0;i<=m;i++){
+        for(let j=1;j<=n;j++){
+          if(p[j-1]==='*'){
+            dp[i][j]=dp[i][j-2]
+            if(match(i,j-1)){
+              dp[i][j]=dp[i][j] || dp[i][j-1]
+            }
+          }else{
+            if(match(i,j))dp[i][j]=d[i-1][j-1]
+          }
+        }
+      }
+      function match(i,j){
+        if(i===0)return false
+        if(p[j-1]==='.')return true
+        return s[i-1]===p[j-1]
+      }
+    }
   </script>
 </body>
 

@@ -142,6 +142,14 @@
         }
 
         // 09-16复习
+
+        const bfs=(arr,start)=>{
+            const val = arr[start]
+            if(val===0)return true
+            if(val===-1)return false
+            arr[start]=-1
+            return (start-val>=0 && bfs(arr,start-val)) || (start+val<arr.length && bfs(arr,start+val))
+        }
     </script>
 </body>
 

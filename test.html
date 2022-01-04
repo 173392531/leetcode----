@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function getElpText(text) {
+            const totalLen = text.length
+            const arr = text.split('/')
+            if (arr.length > 1 && totalLen > 12) {
+                const last = arr.pop()
+                const lastLen = last.length
+                const aheadLen = totalLen - lastLen - 1
+                const getMaxLengthStr = (text, last, n, len) => {
+                    if (n < 8 - len) {
+                        n = 8 - len
+                    }
+                    const isEllipsis = aheadLen > n ? '...' : ''
+                    let final = `${text.slice(0, n)}${isEllipsis}/${len > 8 ? (last.slice(0, 8) + '...') : last}`
+                    return final
+                }
+                return getMaxLengthStr(text, last, 2, lastLen)
+            } else {
+                let backStr = `${arr.join('/')}`
+                const len = backStr.length
+                return `${len > 14 ? (arr.join('/').slice(0, 11) + '...') : arr.join('/')}`
+            }
+        }
+        console.log(getElpText('一/二/三/四/无/柳'));
+        console.log(getElpText('一啊是孤独啊上帝啊hi速度柳阿萨德'));
+        console.log(getElpText('哈哈哈哈哈哈哈自hi是啊/柳'));
+        console.log(getElpText('一阿斯活动/就哈山东i啊就'));
+        console.log(getElpText('一啊上帝/只啊四四/安东搜索'));
+        console.log(getElpText('zjbdasiubd/asdnadasnkd'));
+        console.log(getElpText('一zoiisaod即/阿萨'));
+        console.log(getElpText('一就拿四大皆空蹑手蹑脚妇女纳斯达克你发你看；俺打算明年的爬山/阿松都能脑四年佛i阿森纳的佛啊实打实的/啊傻逼浓度比那艘UI啊赌博啊UI撒娇年佛'));
+
+
+        
+    </script>
+</body>
+
+</html>

@@ -119,6 +119,17 @@
 // 作者：floretpig
 // 链接：https://leetcode-cn.com/problems/ping-heng-er-cha-shu-lcof/solution/zi-shang-er-xia-zi-di-xiang-shang-you-ya-kj8i/
 
+
+    var isBalance = (root) => {
+      if(!root)return true
+      const depth = (root) => {
+        if(!root)return 0
+        else{
+          return Math.max(depth(root.left),depth(root.right))+1
+        }
+      }
+      return Math.abs(depth(root.left),depth(root.right))<2 && isBalance(root.left) && isBalance(root.right)
+    }
   </script>
 </body>
 

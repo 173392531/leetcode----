@@ -44,6 +44,18 @@
       return res
     };
 
+    var levelTree=(root)=>{
+      if(!root)return []
+      const res=[],queue=[root]
+      while(queue.length){
+        const root=queue.shift()
+        res.push(root.val)
+        root.left && res.push(root.left)
+        root.right && res.push(root.right)
+      }
+      return res
+    }
+
     var levelO = (root) => {
       if (!root) return []
       const queue = [root], res = []

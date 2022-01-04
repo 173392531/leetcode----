@@ -29,7 +29,6 @@
 
     const hasPathSum = (root, sum) => {
       if (root == null) return false;                // 遍历到null节点
-      // console.log("sss");
       if (root.left == null && root.right == null) { // 遍历到叶子节点
         return sum - root.val == 0;                  // 如果满足这个就返回true。否则返回false
       }
@@ -51,6 +50,12 @@
     }
 
     // 08-29复习
+
+    const hasPs=(root,sum)=>{
+      if(!root)return false
+      if(!root.left && !root.right)return sum-root.val===0
+      return hasPS(root.left,sum-root.val) || hasPS(root.right,sum-root.val)
+    }
   </script>
 </body>
 
