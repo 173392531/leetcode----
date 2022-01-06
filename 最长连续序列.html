@@ -74,6 +74,37 @@
 // 作者：xiao_ben_zhu
 // 链接：https://leetcode-cn.com/problems/longest-consecutive-sequence/solution/fang-fa-cong-yi-dao-nan-bing-cha-ji-fang-fa-bu-hui/
 
+
+    var longestC3 = (nums) => {
+      let map = new Map(),max = 0
+      for(const item of nums){
+        if(!map.has(cur)){
+          let pre = map.get(item-1) || 0
+          let next = map.get(item+1) || 0
+          let cur = pre + 1 + next
+          map.set(num,cur)
+          max = Math.max(max,cur)
+          map.set(num-pre,cur)
+          map.set(num+next,cur)
+        }
+      }
+    }
+
+
+    var longestC4=(nums)=>{
+      let map =new Map(),max=0
+      for(const item of nums){
+        if(!map.get(item)){
+          const pre = map.get(item-1)||0
+          const next = map.get(item+1)||0
+          const cur = pre+1+next
+          map.set(item,cur)
+          max = Math.max(cur,max)
+          map.set(num-pre,cur)
+          map.set(num+next,cur)
+        }
+      }
+    } 
   </script>
 </body>
 

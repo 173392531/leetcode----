@@ -116,6 +116,26 @@
     }
 
     // 09-29复习
+
+    const longC5=(root)=>{
+      let res = 0
+      const dfs= (root)=>{
+        if(root===null)return 0
+        const left = dfs(root.left)
+        const right = dfs(root.right)
+        const leftP =0,rightP =0
+        if(root.left && root.left.val===root.val){
+          leftP=left+1
+        }
+        if(root.right && root.right.val == root.val){
+          rightP = right+1
+        }
+        res = Math.max(res,leftP+rightP)
+        return Math.max(rightP,leftP)
+      }
+      dfs(root)
+      return res
+    }
   </script>
 </body>
 
