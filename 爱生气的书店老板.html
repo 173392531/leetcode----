@@ -115,6 +115,30 @@
       return pre + max
     }
 
+    var maxS4 = (customers,grumpy,X) =>{
+      let pre= 0,aft = 0,bonus = 0
+      for(let i =0;i<X-1;i++){
+        if(grumpy[i]==0){
+          pre+=customers[i]
+        }else{
+          bonus += customers[i]
+        }
+      }
+      let max= bonus 
+      for(let i = X-1;i<customers.length;i++){
+        if(grumpy[i]==1){
+          bonus += customers[i]
+          max = Math.max(bonus,max)
+        }else{
+          pre+=customers[i]
+        }
+        if(grumpy[i-X+1]==1){
+          bonus -= customers[i-X+1]
+        }
+      }
+      return pre+ max
+    }
+
     // 10-03
   </script>
 </body>

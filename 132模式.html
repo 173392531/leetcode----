@@ -60,6 +60,30 @@
       return false
     };
 
+    var find132 = (nums)=>{
+      let stack = [],mid = -Infinity
+      for(let i = nums.length-1;i>=0;i--){
+        if(nums[i]<mid)return true
+        while(stack.length > 0 && stack[stack.length-1]<nums[i]){
+          mid = stack.pop()
+        }
+        stack.push(nums[i])
+      }
+      return false
+    }
+
+    var find132 = (nums)=>{
+      let stack  =[],mid = -Infinity
+      for(let i =0;i<nums.length;i++){
+        if(nums[i]<mid)return true
+        while(stack.length && stack[stack.length-1]<nums[i]){
+          mid = stack.pop()
+        }
+        stack.push(nums[i])
+      }
+      return false
+    }
+
     var find132=(nums)=>{
       let stack=[],mid=-Infinity
       for(let i=nums.length-1;i>=0;i--){
