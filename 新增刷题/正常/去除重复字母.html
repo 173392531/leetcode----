@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 给你一个字符串 s ，
+        请你去除字符串中重复的字母，使得每个字母只出现一次。
+        需保证 返回结果的字典序最小（要求不能打乱其他字符的相对位置）。 
+        输入：s = "bcabc"
+        输出："abc"   -->
+    <script>
+
+        // 创建一个 map(对象也行) 统计字符串 s 中每个字符出现次数
+        // 创建一个栈 stack 维护字典序最小的字符序列
+        // 遍历字符串，维护当前 map，字符出现次数 -1
+        // 如果当前栈中没有包含当前遍历到的字符 s[i]（后续用 char 表示），则需要把 char 加入 stack 中
+
+        var smallestSubsequence = function (s) {
+            // 创建一个 map 来存储每个字符出现的个数
+            let map = new Map()
+            for (let i = 0; i < s.length; i++) {
+                let item = s[i]
+                if (map.has(item)) {
+                    map.set(item, map.get(item) + 1)
+                } else {
+                    map.set(item, 1)
+                }
+            }
+            // 维护一个栈 stack 来按顺序存储字典序最小的字符
+            let stack = []
+            for (let i = 0; i < s.length; i++) {
+                let char = s[i]
+                map.set(char, map.get(char) - 1) // map 计数减 1
+                // 如果当前栈中没有包含此字符，则需要把 char 加入 satack 中
+                // 但是加入之前需要判断是否栈中存在比 char 字典序更大的元素，存在则需要判断是否要删除（弹出）
+                // 怎么判断是否要删除栈中的元素 stack[j] 呢？
+                // 除了满足比 char 字典序大之外，还要判断后续 s 中还能再遍历到与 stack[j] 相同的字符，不然删了就没了...
+                if (stack.includes(char) === false) {
+                    let j = stack.length
+                    // 遍历栈，判断栈中是否有比 char 更大的字母，并且字符串 s 中还有此相同字符（stack[j]）
+                    // 有则弹出（删除），保证字典序
+                    while (j-- && stack[j] > char && map.get(stack[j])) {
+                        stack.pop()
+                    }
+                    stack.push(char) // 将 char 入栈
+                }
+            }
+            return stack.join('')
+        };
+
+        // 作者：cchroot-liu
+        // 链接：https://leetcode-cn.com/problems/remove-duplicate-letters/solution/kan-wan-bao-hui-chao-ji-xiang-xi-si-lu-y-25bu/
+
+    </script>
+</body>
+
+</html>
