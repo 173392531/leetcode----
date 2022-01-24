@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 还记得童话《卖火柴的小女孩》吗？现在，你知道小女孩有多少根火柴，
+        请找出一种能使用所有火柴拼成一个正方形的方法。不能折断火柴，可以把火柴连接起来，并且每根火柴都要用到。
+
+        输入为小女孩拥有火柴的数目，每根火柴用其长度表示。输出即为是否能用所有的火柴拼成正方形。
+
+        示例 1:
+
+        输入: [1,1,2,2,2]
+        输出: true
+
+        解释: 能拼成一个边长为2的正方形，每边两根火柴。
+        示例 2:
+
+        输入: [3,3,3,3,4]
+        输出: false
+
+        解释: 不能用所有火柴拼成一个正方形。
+
+        来源：力扣（LeetCode）
+        链接：https://leetcode-cn.com/problems/matchsticks-to-square
+        著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 -->
+    <script>
+        var makesquare = function (nums) {
+            if (nums === null || nums.length == 0) return false;
+            // 判断数组是否存在且长度不为0
+            let allLen = 0;
+            for (let item of nums) {
+                allLen += item;     //计算总长度
+            }
+            if (allLen % 4 !== 0) return false;
+            // 判断总长度是否可以刚好围成正方形 
+            const sideLen = allLen / 4;
+            // 计算边长
+            nums.sort((a, b) => b - a);
+            // 可以将火柴数组从大到小排序，方便之后优化
+            let sideList = new Array(4);
+            for (let i = 0; i < sideList.length; i++) {
+                sideList[i] = 0;
+            }
+            // 定义边长数组sideList并赋初值
+            const dfs = (index) => {
+                if (index == nums.length) {
+                    // 结束条件，当index === nums.length时，判断四条边长是否相等；
+                    return (
+                        sideList[0] === sideList[1] &&
+                        sideList[1] === sideList[2] &&
+                        sideList[2] === sideList[3]
+                    );
+                }
+                const targetLen = nums[index];
+                // 当前正处理的火柴；
+                if (targetLen > sideLen) {
+                    return false;
+                }
+                // 因为刚才对火柴进行了排序，所以如果有火柴targetLen大于我们所计算的边长sideLen，则返回
+                for (let i = 0; i < 4; i++) {
+                    if (sideList[i] + targetLen <= sideLen) {
+                        sideList[i] += targetLen;
+                        if (dfs(index + 1)) {
+                            return true;
+                        }
+                        sideList[i] -= targetLen;
+                        // 这一步是回溯，先加上，再去递归判断下一步，如果false，则减去
+                    }
+                }
+                return false;
+                // 最后一定记得返回结束
+            };
+            return dfs(0);
+        };
+
+        // 作者：fantuan_cat
+        // 链接：https://leetcode-cn.com/problems/matchsticks-to-square/solution/473-huo-chai-pin-zheng-fang-xing-dfshui-su-by-gall/
+
+    </script>
+</body>
+
+</html>
