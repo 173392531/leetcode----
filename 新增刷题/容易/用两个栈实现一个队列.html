@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var CQueue = function () {
+            this.stackA = [];
+            this.stackB = [];
+        };
+
+        /** 
+         * @param {number} value
+         * @return {void}
+         */
+        CQueue.prototype.appendTail = function (value) {
+            // stackA 永远负责入栈
+            this.stackA.push(value);
+        };
+
+        /**
+         * @return {number}
+         */
+        CQueue.prototype.deleteHead = function () {
+            // 出栈永远从stackB中出，当stackB中没有时就一次性把stackA中元素倒腾到stackB中
+            if (this.stackB.length) {
+                return this.stackB.pop();
+            } else {
+                while (this.stackA.length) {
+                    this.stackB.push(this.stackA.pop());
+                }
+                if (!this.stackB.length) {
+                    return -1;
+                } else {
+                    return this.stackB.pop();
+                }
+            }
+        };
+
+        // 作者：angela - x
+        // 链接：https://leetcode-cn.com/problems/yong-liang-ge-zhan-shi-xian-dui-lie-lcof/solution/liang-ge-zhan-jin-dui-lie-cong-azhan-zho-eg14/
+
+    </script>
+</body>
+
+</html>
