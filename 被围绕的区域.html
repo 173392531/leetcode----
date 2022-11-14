@@ -95,6 +95,38 @@
     }
     return board
   }
+
+
+  const turnOutInner = (arr) => {
+    const rowlen = arr.length,collen = arr[0].length
+    const dfs = (i,j) => {
+      if(i<0 || i>=rowlen || j<0 || j>= collen)return;
+      if(arr[i][j] === 'O'){
+        arr[i][j]='NO'
+        dfs(i+1,j)
+        dfs(i-1,j)
+        dfs(i,j+1)
+        dfs(i,j-1)
+      }
+    }
+    for(let i=0;i<arr.length;i++){
+      for(let j=0;j<arr[0].length;j++){
+        if(i===0 || j ===0 || i === rowlen-1 || j===collen-1){
+          dfs(i,j)
+        }
+      }
+    }
+    for(let i=0;i<arr.length;i++){
+      for(let j=0;j<arr[0].length;j++){
+        if(arr[i][j]==='NO'){
+          arr[i][j] = 'O'
+        }else if (arr[i][j] === 'O'){
+          arr[i][j]='X'
+        }
+      }
+    }
+    return arr
+  }
   </script>
 </body>
 </html>

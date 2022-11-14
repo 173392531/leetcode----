@@ -60,11 +60,11 @@
       return false
     };
 
-    var find132 = (nums)=>{
-      let stack = [],mid = -Infinity
-      for(let i = nums.length-1;i>=0;i--){
-        if(nums[i]<mid)return true
-        while(stack.length > 0 && stack[stack.length-1]<nums[i]){
+    var find132 = (nums) => {
+      let stack = [], mid = -Infinity
+      for (let i = nums.length - 1; i >= 0; i--) {
+        if (nums[i] < mid) return true
+        while (stack.length > 0 && stack[stack.length - 1] < nums[i]) {
           mid = stack.pop()
         }
         stack.push(nums[i])
@@ -72,11 +72,11 @@
       return false
     }
 
-    var find132 = (nums)=>{
-      let stack  =[],mid = -Infinity
-      for(let i =0;i<nums.length;i++){
-        if(nums[i]<mid)return true
-        while(stack.length && stack[stack.length-1]<nums[i]){
+    var find132 = (nums) => {
+      let stack = [], mid = -Infinity
+      for (let i = 0; i < nums.length; i++) {
+        if (nums[i] < mid) return true
+        while (stack.length && stack[stack.length - 1] < nums[i]) {
           mid = stack.pop()
         }
         stack.push(nums[i])
@@ -84,12 +84,12 @@
       return false
     }
 
-    var find132=(nums)=>{
-      let stack=[],mid=-Infinity
-      for(let i=nums.length-1;i>=0;i--){
-        if(nums[i]<mid)return true
-        while(stack.length>0 && stack[stack.length-1]<nums[i]){
-          mid=stack.pop()
+    var find132 = (nums) => {
+      let stack = [], mid = -Infinity
+      for (let i = nums.length - 1; i >= 0; i--) {
+        if (nums[i] < mid) return true
+        while (stack.length > 0 && stack[stack.length - 1] < nums[i]) {
+          mid = stack.pop()
         }
         stack.push(nums[i])
       }
@@ -119,6 +119,20 @@
 
     // 07-31复习
     // 10-03
+
+    // 22-04-14
+    const get132Func = (arr) => {
+      let stack = [], mid = -Infinity
+      const len = arr.length
+      for (let i = len - 1; i >= 0; i--) {
+        if (arr[i] < mid) return true
+        while (stack.length && stack[stack.length - 1] < arr[i]) {
+          mid = stack.pop()
+        }
+        stack.push(arr[i])
+      }
+    }
+    console.log('!get132Func', get132Func([997, 999, 998, 3, 2]))
   </script>
 </body>
 

@@ -126,6 +126,19 @@
             }
             return dp[n]
         }
+    
+        const transFunc = (num) => {
+            const dp = new Array(num.length+1).fill(1), str = num+''
+            for(let i =1;i<num.length;i++){
+                const numItem = Number(str[i]+str[i+1])
+                if(numItem >= 10 && numItem<=25){
+                    dp[i+1] = dp[i]+dp[i-1]
+                }else{
+                    dp[i+1] = dp[i]
+                }
+            }
+            return dp[num.length+1]
+        }
     </script>
 </body>
 

@@ -9,9 +9,12 @@
 </head>
 
 <body>
-  <!-- 珂珂喜欢吃香蕉。这里有 N 堆香蕉，第 i 堆中有 piles[i] 根香蕉。警卫已经离开了，将在 H 小时后回来。
+  <!-- 珂珂喜欢吃香蕉。这里有 N 堆香蕉，第 i 堆中有 piles[i] 根香蕉。
+    警卫已经离开了，将在 H 小时后回来。
 
-珂珂可以决定她吃香蕉的速度 K （单位：根/小时）。每个小时，她将会选择一堆香蕉，从中吃掉 K 根。如果这堆香蕉少于 K 根，她将吃掉这堆的所有香蕉，然后这一小时内不会再吃更多的香蕉。  
+珂珂可以决定她吃香蕉的速度 K （单位：根/小时）。
+每个小时，她将会选择一堆香蕉，从中吃掉 K 根。
+如果这堆香蕉少于 K 根，她将吃掉这堆的所有香蕉，然后这一小时内不会再吃更多的香蕉。  
 
 珂珂喜欢慢慢吃，但仍然想在警卫回来前吃掉所有的香蕉。
 
@@ -141,6 +144,26 @@
         let mid = Math.floor((right+left)/2)
         if(canEat(piles,mid,H)){
           right = mid 
+        }else{
+          left = mid+1
+        }
+      }
+      return right
+    }
+
+    var minS5 = (piles,H) => {
+      const canEat = (piles,speed,H)=>{
+        let sum = 0
+        for(let pile of piles){
+          sum+= Math.ceil(pile/speed)
+        }
+        return sum<=H
+      }
+      let left =1,right = Math.max(...piles)
+      while(left < right){
+        let mid = Math.floor((left+right)/2)
+        if(canEat(piles,mid,H)){
+          right = mid
         }else{
           left = mid+1
         }
