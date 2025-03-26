@@ -127,6 +127,18 @@ dp[5] = Math.max(dp[3] + nums[3], dp[4]) = Math.max(2 + 1, 4) = 4
 //     return b
 // }
 
+
+  var massageEasy = function (nums) {
+    let prev2 = 0;
+    let prev1 = 0;
+    for (let i = 0; i < nums.length; i++) {
+      let curr = Math.max(prev2 + nums[i], prev1);
+      prev2 = prev1;
+      prev1 = curr;
+    }
+    return prev1;
+  };
+
 // 链接：https://leetcode-cn.com/problems/the-masseuse-lcci/solution/mei-ri-yi-ti-ep24-massagema-sha-ji-javascriptjs-by/
   
   // 08-01复习
